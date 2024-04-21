@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Geoqiao's Page{% endblock %}
+
+{% block content %}
+    <div class="posts">
+        {% for issue in issues %}
+            <article class="post">
+                <h2 class="post__title"><a href="/blog/{{ issue.number }}.html">{{ issue.title }}</a></h2>
+                <div class="post__meta">{{ issue.created_at.strftime('%Y-%m-%d') }}</div>
+                <div class="post__summary">{{ issue.body|truncate(200) }}</div>
+                <div class="read-more"><a href="/blog/{{ issue.number }}.html">Read More</a></div>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
