@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coke Machine Challenge </title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+    <div class="logo"><a href="/">Geoqiao's Page</a></div>
+    <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+</header>
+        <main>
+            
+    <article class="post">
+        <h1 class="post__title">Coke Machine Challenge </h1>
+        <div class="post__meta">2023-09-03</div>
+        <div class="post__content"><h2>什么是 Coke Machine</h2>
+<p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/" rel="nofollow">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
+<blockquote>
+<p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
+<p>In a file called <code class="notranslate">coke.py</code>, implement a program that prompts the user to insert a coin, one at a time, each time informing the user of the amount due. Once the user has inputted at least 50 cents, output how many cents in change the user is owed. Assume that the user will only input integers, and ignore any integer that isn’t an accepted denomination.</p>
+</blockquote>
+<p>实际上，这是一个很简单的实现，但是我在这里被困了 2 个小时，这里重新记录一遍过程，当作<strong>错题集</strong>。</p>
+<h2>任务拆解</h2>
+<ol>
+<li>假设输入只有 25、10、5 几种情况，且只输入整数格式，忽略任何不符合要求的数字</li>
+<li>文件名为 coke.py</li>
+<li>提示用户投入一枚硬币，每次都要通知应付金额</li>
+<li>一旦用户投入的金额大于等于 50，输出找零金额</li>
+</ol>
+<h2>代码实现</h2>
+<h3>初始化</h3>
+<p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
+<p>代码如下：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">amount_due</span> <span class="pl-c1">=</span> <span class="pl-c1">50</span>
+<span class="pl-s1">change</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
+<span class="pl-s1">coin_list</span> <span class="pl-c1">=</span> [<span class="pl-c1">5</span>,<span class="pl-c1">10</span>,<span class="pl-c1">25</span>]
+<span class="pl-en">print</span>(<span class="pl-s">f"Amount Due: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">amount_due</span><span class="pl-kos">}</span></span>"</span>) <span class="pl-c"># 告诉客户coke价格</span></pre></div>
+<h3>付费环节</h3>
+<p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">while</span> <span class="pl-s1">amount_due</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span>: <span class="pl-c"># 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够</span>
+	<span class="pl-s1">coin</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"Insert a coin (25, 10, or 5): "</span>)
+	<span class="pl-c"># 这里用try 语句来避免用户输入一些无法转换为整数的文本内容</span>
+	<span class="pl-k">try</span>:
+		<span class="pl-s1">coin</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-s1">coin</span>)
+	<span class="pl-k">except</span> <span class="pl-v">ValueError</span>:
+		<span class="pl-en">print</span>(<span class="pl-s">"Invalid coin"</span>)
+		<span class="pl-k">continue</span>
+	<span class="pl-c"># if语句用来判断用户投入的硬币是否符合要求</span>
+	<span class="pl-k">if</span> <span class="pl-s1">coin</span> <span class="pl-c1">in</span> <span class="pl-s1">coin_list</span>:
+		<span class="pl-s1">amount_due</span> <span class="pl-c1">-=</span> <span class="pl-s1">coin</span> <span class="pl-c"># 总共需要投入的减去已经投入的就是还需要投入的</span>
+		<span class="pl-s1">change</span> <span class="pl-c1">+=</span> <span class="pl-s1">coin</span> <span class="pl-c"># 这里用来统计用户总共投入的多少</span>
+		<span class="pl-en">print</span>(<span class="pl-s">f"Amount Due: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">amount_due</span><span class="pl-kos">}</span></span>"</span>)
+	<span class="pl-k">else</span>: <span class="pl-c"># 如果用户投入的硬币不符合要求，重新提示可乐价格</span>
+		<span class="pl-en">print</span>(<span class="pl-s">"Amount Due: 50"</span>)</pre></div>
+<h3>付费结束之后</h3>
+<p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 还需要付费金额小于等于0，即付够钱了</span>
+<span class="pl-c"># 仍需付费金额的绝对值，即为需要找零的钱</span>
+<span class="pl-k">if</span> <span class="pl-s1">amount_due</span> <span class="pl-c1">&lt;=</span> <span class="pl-c1">0</span>:
+	<span class="pl-en">print</span>(<span class="pl-s">f"Change Owed: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-en">abs</span>(<span class="pl-s1">amount_due</span>)<span class="pl-kos">}</span></span>"</span>)</pre></div>
+<h2>完整代码</h2>
+<p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">def</span> <span class="pl-en">coke</span>():
+	<span class="pl-s1">amount_due</span> <span class="pl-c1">=</span> <span class="pl-c1">50</span>
+	<span class="pl-s1">change</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
+	<span class="pl-s1">coin_list</span> <span class="pl-c1">=</span> [<span class="pl-c1">5</span>, <span class="pl-c1">10</span>, <span class="pl-c1">25</span>]
+	<span class="pl-en">print</span>(<span class="pl-s">f"Amount Due: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">amount_due</span><span class="pl-kos">}</span></span>"</span>)
+
+	<span class="pl-k">while</span> <span class="pl-s1">amount_due</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span>:
+		<span class="pl-s1">coin</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"Insert a coin (25, 10, or 5): "</span>)
+		<span class="pl-k">try</span>:
+			<span class="pl-s1">coin</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-s1">coin</span>)
+		<span class="pl-k">except</span> <span class="pl-v">ValueError</span>:
+			<span class="pl-en">print</span>(<span class="pl-s">"Invalid coin"</span>)
+			<span class="pl-k">continue</span>
+
+		<span class="pl-k">if</span> <span class="pl-s1">coin</span> <span class="pl-c1">in</span> <span class="pl-s1">coin_list</span>:
+			<span class="pl-s1">amount_due</span> <span class="pl-c1">-=</span> <span class="pl-s1">coin</span>
+			<span class="pl-s1">change</span> <span class="pl-c1">+=</span> <span class="pl-s1">coin</span>
+			<span class="pl-en">print</span>(<span class="pl-s">f"Amount Due: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">amount_due</span><span class="pl-kos">}</span></span>"</span>)
+		<span class="pl-k">else</span>:
+			<span class="pl-en">print</span>(<span class="pl-s">"Amount Due: 50"</span>)
+
+	<span class="pl-k">if</span> <span class="pl-s1">amount_due</span> <span class="pl-c1">&lt;=</span> <span class="pl-c1">0</span>:
+		<span class="pl-en">print</span>(<span class="pl-s">f"Change Owed: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-en">abs</span>(<span class="pl-s1">amount_due</span>)<span class="pl-kos">}</span></span>"</span>)
+
+<span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
+	<span class="pl-en">coke</span>()</pre></div>
+<p>重写一遍才发现，<code class="notranslate">change</code>这个变量好像根本没用。</p>
+<p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
+<p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p></div>
+    </article>
+
+        </main>
+        <footer id="footer">
+    <p>&copy; 2024 Geoqiao's Page</p>
+</footer>
+    </div>
+</body>
+</html>
