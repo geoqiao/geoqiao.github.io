@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rye - 好用的Python包管理工具</title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+    <div class="logo"><a href="/">Geoqiao's Page</a></div>
+    <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+</header>
+        <main>
+            
+    <article class="post">
+        <h1 class="post__title">rye - 好用的Python包管理工具</h1>
+        <div class="post__meta">2024-01-06</div>
+        <div class="post__content"><p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
+<p>作为一个刚开始学习 Python 的新手，它解决了我碰到的两个难题：</p>
+<ol>
+<li>使用<code class="notranslate">pip</code>安装包时，经常某些包无法在当前 python 版本安装</li>
+<li>不会使用 venv 等虚拟环境管理工具</li>
+<li>使用<code class="notranslate">conda</code>时，经常社区还没有适配某些最新版本的包</li>
+</ol>
+<p>这里引出 rye 主要的几个功能：</p>
+<ol>
+<li>管理全局的 Python 版本</li>
+<li>管理虚拟环境中的 Python 版本</li>
+<li>以封装<code class="notranslate">pip</code>和<code class="notranslate">virtualenv</code>的方式，让我不必烦恼如何使用他们</li>
+</ol>
+<h2>安装 rye</h2>
+<p>在 macOS 上，直接运行一下命令即可，同时在 rye 的<a href="https://rye-up.com/guide/installation/#installing-rye" rel="nofollow">文档</a>也给出了其他系统的安装方式。</p>
+<p>例如 macOS：</p>
+<blockquote>
+<p>To install run you can curl a command which will install the right binary for your operating system and CPU architecture and install it:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">curl -sSf https://rye-up.com/get <span class="pl-k">|</span> bash</pre></div>
+</blockquote>
+<p><strong>补充</strong>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">rye self update <span class="pl-c"><span class="pl-c">#</span> 升级rye</span></pre></div>
+<div class="highlight highlight-source-shell"><pre class="notranslate">rye self uninstall <span class="pl-c"><span class="pl-c">#</span> 卸载rye</span></pre></div>
+<h2>开始一个新项目</h2>
+<p>使用  <code class="notranslate">rye init</code>  初始化一个新项目非常容易。在这里，我开始一个名为： <code class="notranslate">"test-rye"</code>的新项目。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">mkdir test-rye  <span class="pl-c"><span class="pl-c">#</span>创建项目文件夹</span>
+<span class="pl-c1">cd</span> test-rye <span class="pl-c"><span class="pl-c">#</span>在终端进入刚才创建的项目文件夹</span>
+rye init <span class="pl-c1">.</span> <span class="pl-c"><span class="pl-c">#</span>使用rye初始化项目</span></pre></div>
+<p>执行初始化之后，rye 会帮我们创建一些默认文件：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">tree
+├── README.md       <span class="pl-c"><span class="pl-c">#</span> 项目的README文件</span>
+├── pyproject.toml  <span class="pl-c"><span class="pl-c">#</span> rye用来管理项目的文件</span>
+└── src
+    └── test_rye
+        └── __init__.py</pre></div>
+<p>现在，我们便可以安装自己想安装的包。假设我这个项目想用来做一些数据分析工作：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 使用rye安装 numpy pandas scikit-learn xgboost</span>
+rye add numpy pandas scikit-learn xgboost <span class="pl-c"><span class="pl-c">#</span> 解析包版本，并添加到pyproject.toml文件中</span>
+rye sync <span class="pl-c"><span class="pl-c">#</span> 开始下载文件对应的包</span></pre></div>
+<p>至此，一个由 rye 管理的项目就创建完成了，我们可以使用 VSCode 打开项目文件夹，并开始写代码了。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">code <span class="pl-c1">.</span>  <span class="pl-c"><span class="pl-c">#</span> 使用VSCode打开项目文件夹</span></pre></div>
+<p>此时，我们的项目文件夹结构如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">tree
+├── README.md
+├── pyproject.toml
+├── requirements-dev.lock
+├── requirements.lock
+└── src
+    └── test_rye
+        ├── __init__.py
+        └── __pycache__
+            └── __init__.cpython-311.pyc</pre></div>
+<p><strong>注意事项</strong>：<br>
+当我们的项目需要添加新的依赖时，可以使用<code class="notranslate">rye add &lt;package name&gt;</code> 和 <code class="notranslate">rye sync</code>来安装对应的包，或者通过<code class="notranslate">rye romove &lt;package name&gt;</code>和<code class="notranslate">rye sync</code>来移除对应的包。</p>
+<p><code class="notranslate">rye add &lt;package name&gt;</code>和<code class="notranslate">rye romove &lt;package name&gt;</code>只修改<code class="notranslate">pyproject.toml</code>文件，<code class="notranslate">rye sync</code>会按照<code class="notranslate">pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
+<h2>修改项目的 Python 版本</h2>
+<p>rye 当前为我们的项目安装 Python@3.11 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">rye pin 3.9
+rye sync <span class="pl-c"><span class="pl-c">#</span> 所有的修改都需要使用sync命令生效</span></pre></div>
+<p>此时，我们的项目的 Python 版本就变为了Python@3.9</p>
+<h2>全局 Python 脚本</h2>
+<p>某些情况下，有些包我们想要全局使用，比如<code class="notranslate">black</code>或者<code class="notranslate">ruff</code>来对我们的代码进行格式化。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">rye install ruff</pre></div>
+<p>安装之后，就可以在终端全局使用<code class="notranslate">ruff</code>命令了</p>
+<p>卸载也很简单：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">rye uninstall ruff</pre></div>
+<h2>最后</h2>
+<p>rye 还支持一些常规的操作，比如接管全局 python、升级项目中某个依赖或者所有依赖的版本、构建/发布包等等功能，可以通过<a href="https://rye-up.com/guide/" rel="nofollow">官方文档</a>查看。</p></div>
+    </article>
+
+        </main>
+        <footer id="footer">
+    <p>&copy; 2024 Geoqiao's Page</p>
+</footer>
+    </div>
+</body>
+</html>

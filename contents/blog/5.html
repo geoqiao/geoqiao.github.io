@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with_sql _as_english</title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+    <div class="logo"><a href="/">Geoqiao's Page</a></div>
+    <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+</header>
+        <main>
+            
+    <article class="post">
+        <h1 class="post__title">with_sql _as_english</h1>
+        <div class="post__meta">2023-07-15</div>
+        <div class="post__content"><h2>描述</h2>
+<ol>
+<li>分享自己学习 SQL 的经验。</li>
+<li><code class="notranslate">WITH 临时表名 AS 子查询</code> 是 SQL 中一个常用的语法，这篇分享会介绍这个语法。</li>
+<li>SQL 很简单，只需要知道一些英文单词什么意思，就可以读懂。</li>
+</ol>
+<h2>英文单词列表</h2>
+<p>select：选择<strong>哪些字段</strong><br>
+from：从<strong>哪个表</strong>选择这段<br>
+where：从某个表中符合<strong>哪些条件的数据</strong>进行选择<br>
+left join：就是excel 中的 vlookup #4</p>
+<h2>用 excel 思维读 SQL 代码</h2>
+<p>理解了以上的几个单词，你就可以读懂 SQL 代码了，比如如下的代码片段：</p>
+<pre class="notranslate"><code class="notranslate">SELECT
+	table1.id
+	,table2.name
+FROM table1
+LEFT JOIN table2
+ON table1.id = table2.id
+WHERE table1.column1 = '1'
+</code></pre>
+<p>在这个示例中，<code class="notranslate">table1</code>  和  <code class="notranslate">table2</code>  是两个不同的表，我们在 <code class="notranslate">table1</code> 中写了一个 <code class="notranslate">vlookup</code> ，这个公式以两张表中的 <code class="notranslate">id</code> 字段为条件关联，把 <code class="notranslate">table2</code>  中的 <code class="notranslate">name</code> 字段匹配到了 <code class="notranslate">table1</code> ，并且匹配完成后进行了一个筛选，只选择 <code class="notranslate">table1</code> 中 <code class="notranslate">column1</code> 字段为 <code class="notranslate">'1'</code> 的行。</p></div>
+    </article>
+
+        </main>
+        <footer id="footer">
+    <p>&copy; 2024 Geoqiao's Page</p>
+</footer>
+    </div>
+</body>
+</html>
