@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Geoqiao's Page{% endblock %}
+
+{% block content %}
+    <div class="content" id="mobile-panel">
+        <div class="posts">
+            {% for issue in issues %}
+                <article class="post">
+                    <h2 class="post__title"><a href="./blog/{{ issue.number }}.html">{{ issue.title }}</a></h2>
+                    <div class="post__meta">
+                        <span class="post__time">
+                            {{ issue.created_at.strftime('%Y-%m-%d') }}
+                        </span>
+                    </div>
+                    <div class="post__summary">
+                        {{ issue.body|truncate(100) }}
+                    </div>
+                    <div class="read-more"><a href="./blog/{{ issue.number }}.html">
+                        Read More...</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+        <nav class="pagination">
+            <a class="next" href="{{ next_page_url }}">Next›</a>
+        </nav>
+    </div>
+{% endblock %}

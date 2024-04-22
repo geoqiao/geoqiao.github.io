@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Geoqiao{% endblock %}</title>
+        <link rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/style.css">
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="mobile-navbar" class="mobile-navbar">
+                <div class="mobile-header-logo">
+                    <a href="/" class="logo">Geoqiao</a>
+                </div>
+                <div class="mobile-navbar-icon icon-out">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <nav id="mobile-menu"
+                class="mobile-menu slideout-menu slideout-menu-left">
+                <ul class="mobile-menu-list">
+
+                    <li class="mobile-menu-item">
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="mobile-menu-item">
+                        <a href="/tags">
+                            Tags
+                        </a>
+                    </li>
+
+                    <li class="mobile-menu-item">
+                        <a href="/about">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            {% include 'includes/header.html' %}
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+            {% include 'includes/footer.html' %}
+        </div>
+        <script type="text/javascript"
+            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    </body>
+</html>
