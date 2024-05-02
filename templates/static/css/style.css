@@ -1023,18 +1023,18 @@ main .pagination a {
     margin: 1rem 0;
     border-radius: 4px;
     background-color: #24292E;
-    overflow: auto; /* 允许水平滚动 */
-  }
-  
-  /* 代码块本身 */
-  pre.notranslate {
+    overflow: auto;   /* 允许水平滚动 */
+}
+
+/* 代码块本身 */
+pre.notranslate {
     margin: 0;
     padding: 1rem;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: 0.9rem;
     line-height: 1.5;
     color: #E2E4E8;
-    white-space: pre; /* 保留空格和换行 */
-    word-wrap: normal; /* 防止长单词换行 */
+    white-space: pre;      /* 保留空格和换行 */
+    word-wrap: normal;     /* 防止长单词换行 */
     overflow-wrap: normal; /* 防止长单词换行 */
-  }  
+}
