@@ -1,0 +1,33 @@
+name: Generate GitHub Pages Static Site
+
+on:
+  issues:
+    types: [opened, edited, closed]
+    repository: geoqiao/gitblog
+
+jobs:
+  generate-static-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Generate static site
+        run: |
+          python main.py ${{ secrets.G_T }} geoqiao/gitblog
+
+      - name: Upload generated content
+        uses: actions/upload-artifact@v3
+        with:
+          name: static-site
+          path: ./contents
