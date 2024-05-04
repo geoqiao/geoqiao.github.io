@@ -241,7 +241,7 @@ img {
     vertical-align: middle
 }
 
-/* pre {
+pre {
     display: block;
     padding: 1rem
 }
@@ -259,37 +259,15 @@ pre>code {
     border: none;
     font-style: normal;
     font-size: 1rem
-} */
-
-pre {
-    margin: 1rem 0;
-    border-radius: 4px;
-    background-color: #000000; /* 设置黑色背景 */
-    overflow: auto; /* 允许水平滚动 */
+    margin: 0;
     padding: 1rem;
-    font-size: 90%;
-    font-family: Consolas, Monaco, Menlo, Consolas, monospace;
-    color: #c9d2dc;
-}
-pre code {
-    margin: 1rem 0;
-    border-radius: 4px;
-    background-color: #000000; /* 设置黑色背景 */
-    overflow: auto; /* 允许水平滚动 */
-    padding: 1rem;
-    font-size: 90%;
-    font-family: Consolas, Monaco, Menlo, Consolas, monospace;
-    color: #c9d2dc;
-    display: block;
-    white-space: pre-wrap; /* 保留空格和换行 */
-    word-wrap: break-word; /* 长单词自动换行 */
-}
-pre, code {
-    font-size: 90%;
-    overflow: auto;
-    font-family: Consolas, Monaco, Menlo, Consolas, monospace;
-    margin-bottom: 0;
-    color: #c9d2dc
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #E2E4E8;
+    white-space: pre;      /* 保留空格和换行 */
+    word-wrap: normal;     /* 防止长单词换行 */
+    overflow-wrap: normal; /* 防止长单词换行 */
 }
 
 iframe {
