@@ -251,6 +251,7 @@ pre:not([class]) {
     border-radius: 4px;
     background-color: #24292E;
     overflow: auto;   /* 允许水平滚动 */
+    padding: 1rem
 }
 
 pre, code {
