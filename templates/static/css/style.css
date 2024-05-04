@@ -246,9 +246,7 @@ img {
     padding: 1rem
 } */
 
-pre {
-    display: block;
-    padding: 1rem
+pre:not([class]) {
     margin: 1rem 0;
     border-radius: 4px;
     background-color: #24292E;
@@ -264,8 +262,8 @@ pre, code {
 }
 
 
-
-pre code {
+/* 代码块本身 */
+pre:not([class]) code {
     margin: 0;
     padding: 1rem;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
