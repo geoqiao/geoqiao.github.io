@@ -271,13 +271,6 @@ pre {
     font-family: Consolas, Monaco, Menlo, Consolas, monospace;
     color: #c9d2dc;
 }
-
-pre,code {
-    display: block;
-    white-space: pre-wrap; /* 保留空格和换行 */
-    word-wrap: break-word; /* 长单词自动换行 */
-    font-size: 1rem;
-}
 pre code {
     margin: 1rem 0;
     border-radius: 4px;
@@ -291,7 +284,13 @@ pre code {
     white-space: pre-wrap; /* 保留空格和换行 */
     word-wrap: break-word; /* 长单词自动换行 */
 }
-
+pre, code {
+    font-size: 90%;
+    overflow: auto;
+    font-family: Consolas, Monaco, Menlo, Consolas, monospace;
+    margin-bottom: 0;
+    color: #c9d2dc
+}
 
 iframe {
     border: 0
