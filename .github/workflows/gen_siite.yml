@@ -1,33 +1,49 @@
-name: Generate GitHub Pages Static Site
+name: Generate Github_blog site
 
 on:
+  workflow_dispatch:
   issues:
-    types: [opened, edited, closed]
-    repository: geoqiao/gitblog
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  push:
+    branches:
+      - main
+    paths:
+      - main.py
 
 jobs:
-  generate-static-site:
+  sync:
+    name: Generate Site
     runs-on: ubuntu-latest
-
+    if: github.repository_owner_id == github.event.issue.user.id || github.event_name == 'push'
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
-
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: 3.11
+          cache: pip
+          cache-dependency-path: "requirements.txt"
 
       - name: Install dependencies
         run: |
+          sed '/^-e/d' requirements.lock > requirements.txt
+          python -m pip install --upgrade pip
+          python -m venv venv
+          source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Generate static site
+      - name: Generate contents
         run: |
-          python main.py ${{ secrets.G_T }} geoqiao/gitblog
+          source venv/bin/activate
+          python main.py ${{ secrets.G_T }} ${{ github.repository }}
 
-      - name: Upload generated content
-        uses: actions/upload-artifact@v3
-        with:
-          name: static-site
-          path: ./contents
+      - name: Push contents
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add contents
+          git commit -a -m 'update new blog' || echo "nothing to commit"
+          git push || echo "nothing to push"
