@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>基于 GitHub issues 的个人 blog 搭建</title>
+        <title>Shottr- 原生、轻巧且功能强大的免费macOS截图工具</title>
         <link rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css">
         <script
@@ -70,37 +70,28 @@
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
-            <h1 class="post__title">基于 GitHub issues 的个人 blog 搭建</h1>
+            <h1 class="post__title">Shottr- 原生、轻巧且功能强大的免费macOS截图工具</h1>
             <div class="post__meta">
-                <span class="post__time">2023-07-18</span>
+                <span class="post__time">2023-07-29</span>
             </div>
         </header>
-        <div class="post__content"><h2>背景</h2>
-<p>我最近碰到了以下问题：</p>
-<ol>
-<li>偶尔想写点东西，想有一个个人 blog</li>
-<li>不懂代码：听到部署、买域名、备案、服务器这些词就头疼想逃避</li>
-<li>不想花钱：买服务器、域名一年好几百甚至可能上千</li>
-</ol>
-<h2>解决方案</h2>
-<p>基于<a href="https://github.com/yihong0618">yihong0618</a>的 gitblog 项目，在 GitHub 上搭建一个基于 issues 的个人博客。</p>
-<p><strong>这个方法有以下几个优点：</strong></p>
-<ol>
-<li>完全免费：不会碰到域名、服务器、备案、一年多少钱这些问题</li>
-<li>非常简单：会下载文件、上传文件、编辑文件就可以完成</li>
-<li>自动化：大佬已经写好了一些函数和脚本，可以自动化完成一些操作</li>
-</ol>
-<p><strong>搭建前需要什么：</strong></p>
-<ol>
-<li>可以登录使用 GitHub </li>
-<li>注册一个 GitHub 账号</li>
-</ol>
-<h2>操作教程</h2>
-<p>操作教程可以参考这个<a href="https://zhuanlan.zhihu.com/p/400962805">知乎链接</a>，教程写的非常详细，部分页面UI因版本问题跟现在有点区别，但是基本不影响操作。</p>
-<p>不过需要补充一点，按教程操作完成后需要把GitHub Action的读写权限打开。操作方式为 Settings - Actions - General - 勾选 Read and write permissions - save，如下图所示：</p>
-<img width="1490" alt="action读写权限开启" src="https://github.com/geoqiao/gitblog/assets/105639506/c8efcada-36d7-42f9-aed6-30b78ce3873e">
-<h2>结语</h2>
-<p>以上就是全部内容，非常感谢 @yihong0618 老师的代码。</p>
+        <div class="post__content"><p>| <a href="https://shottr.cc/">Shottr官网</a></p>
+<ul>
+<li>
+<p><strong>截图</strong>：不得不说，作为截图工具的基础功能，shottr并没有特别出彩的地方，UI也谈不上漂亮。但是基础的区域截图、顺序标记都有，操作起来也非常直觉。而且在其他同类app中要付费的滚动截图功能也是免费的。</p>
+</li>
+<li>
+<p><strong>打码</strong>：把打码功能单独拎出来说，是因为shottr的操作特别直觉。只要框选区域，按下delete键即可。最新出的Blur Text和Erase Text功能可以自动识别图中的文字，在这个模式里按下delete后只给文字打码。唯一的不足就是目前对中文文字识别似乎还不太精确，反馈issue后，开发者回复：“Text recognition is performed by macOS embedded OCR engine and its quality is out of my hands.”。</p>
+</li>
+<li>
+<p><strong>OCR</strong>：不像其他截图app，需要先截图，然后选中图中文字复制。shottr只需要⌥+T框选需识别区域，文字便会自动复制到剪贴板。谁身边还没有一群就喜欢发图片，但从不考虑你需要复制图中手机号/ID的同事呢？</p>
+</li>
+<li>
+<p><strong>另外</strong>：不管截图还是OCR，内容都会保存在剪贴板中。即时使用的内容可以直接粘贴，非即时使用的内容也可以搭配剪贴板工具进行管理。因为我的剪贴板内容管理需求并不高，<a href="https://telegra.ph/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%94%A8raycast%E6%9B%BF%E4%BB%A3%E4%BA%86alfred-07-17">所以使用Raycast的clipboard功能就完全够用了</a>。</p>
+</li>
+</ul>
+<p>-<strong>贴图</strong>。就是把图片钉在屏幕最上层</p>
+<p>整体体验下来，我认为 shottr非常适合经常需要<strong>对截图进行简单编辑</strong>或者经常使用<strong>OCR功能</strong>的朋友，shottr 能轻松满足你的需求。而且，向开发者邮件反馈issue，开发者回复都非常积极。</p>
 </div>
     </article>
 </div>

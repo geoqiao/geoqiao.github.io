@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Python环境安装-Anaconda为例</title>
+        <title>Coke Machine Challenge </title>
         <link rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css">
         <script
@@ -70,47 +70,91 @@
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
-            <h1 class="post__title">Python环境安装-Anaconda为例</h1>
+            <h1 class="post__title">Coke Machine Challenge </h1>
             <div class="post__meta">
-                <span class="post__time">2023-07-30</span>
+                <span class="post__time">2023-09-03</span>
             </div>
         </header>
-        <div class="post__content"><p>学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。</p>
-<h2>安装 Python 环境的几种传统方式</h2>
-<ol>
-<li>系统自带，直接用系统的。比如 macOS 一般自带 Python3。</li>
-<li>终端使用 Homebrew 类似的包管理工具安装。安装后自己修改路径，安装需要使用的 Python 库。一般成功后终端输入<code>python3</code>就可以成功进入 Python 环境了。</li>
-<li><a href="https://www.python.org/">Python 官网</a>最直接的方式，甚至官网也有详细的安装教程。</li>
-</ol>
-<p>以上几种方式，对于已有编程经验或者计算机基础知识的人来说，完全可以，可操作空间极大，完全可以自定义一个个性化的 Python 环境。</p>
-<p>但是对于刚入门的小白，我以重装系统的惨痛教训建议：不要使用以上的方法安装 Python！</p>
-<h3>为什么不推荐？</h3>
-<p>因为终端操作有一定门槛，新手第一次安装遇到报错很容易直接劝退；就算折腾一番安装好了，后续各种后续看不懂的终端命令也够折磨人的了。</p>
+        <div class="post__content"><h2>什么是 Coke Machine</h2>
+<p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
 <blockquote>
-<p>人的焦虑和恐惧来自于没有安全感，对工具的掌控程度越高，安全感越多</p>
+<p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
+<p>In a file called <code>coke.py</code>, implement a program that prompts the user to insert a coin, one at a time, each time informing the user of the amount due. Once the user has inputted at least 50 cents, output how many cents in change the user is owed. Assume that the user will only input integers, and ignore any integer that isn’t an accepted denomination.</p>
 </blockquote>
-<p>我也不知道我怎么就安装了好几个版本的 Python，Google 搜如何解决，随便在某 code 网站复制了一个命令，然后，电脑就什么都没了，重装系统都进行不下去，最后只能求助于天才吧。</p>
-<h2>新手友好的 Python 环境安装-Anaconda</h2>
-<p>作为 95 后，小时候没少玩 DNF、穿越火线、英雄联盟。那时候还不像现在网速这么快，每次更新加载都很慢，每次等待都想踹主机。但我家里穷，只敢心里想想不敢真的踹。那每次大更新我都直接卸载重装。</p>
-<p>对于安装游戏、卸载游戏我相当在行，想安装在 D 盘，绝不会让游戏安装到 C 盘。</p>
-<h3>为什么讲到这个呢？</h3>
-<p>因为<strong>安装 Anaconda 的过程</strong>，就像给电脑安装游戏一样简单。</p>
+<p>实际上，这是一个很简单的实现，但是我在这里被困了 2 个小时，这里重新记录一遍过程，当作<strong>错题集</strong>。</p>
+<h2>任务拆解</h2>
 <ol>
-<li>找到<a href="https://www.anaconda.com/">Anaconda 官网</a></li>
-<li>下载安装包</li>
-<li>安装安装包（就是屏幕上弹出一个框框，就是需要一直点下一步的那个熟悉的框框</li>
-<li>选择喜欢的编辑器，新建<code>.ipynb</code>文件，kernel 选择前面带 base 的就行</li>
-<li>大部分库基本都有，比如 pandas、numpy 等等，不需要二次手动安装</li>
+<li>假设输入只有 25、10、5 几种情况，且只输入整数格式，忽略任何不符合要求的数字</li>
+<li>文件名为 coke.py</li>
+<li>提示用户投入一枚硬币，每次都要通知应付金额</li>
+<li>一旦用户投入的金额大于等于 50，输出找零金额</li>
 </ol>
-<h2>用什么编辑器呢？</h2>
-<p>说实话很多编辑器都很好用，但我们的原则是必须简单、免费。</p>
-<p>那就有两个选择：</p>
-<p>一个是 jupyter notebook ，很适合新手。写一行、运行一行，非常好入门。</p>
-<p>另一个是 VSCode，可以安装 jupyter notebook 插件，以及 Python 的语法高亮插件。我个人感觉要比纯粹的 jupyter notebook 功能更强大，使用体验也更好。</p>
-<p>我自己是在用 VSCode，因为 VSCode 创建文件夹、管理文件夹的方式跟在资源管理器/访达里面创建删除的体验没啥区别，非常直觉。</p>
-<h2>总结</h2>
-<p>以上就是全部内容，其实跟标题相关的就四五行。具体安装教程没有写，是因为真的和小时候下载安装游戏的流程一模一样。</p>
-<p>如果过程中碰到什么问题，可以及时 Google 搜索。当然，如果你愿意的话，可以直接在这个 issue 下面评论，我会尽快回复的。</p>
+<h2>代码实现</h2>
+<h3>初始化</h3>
+<p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
+<p>代码如下：</p>
+<pre><code class="language-python">amount_due = 50
+change = 0
+coin_list = [5,10,25]
+print(f&quot;Amount Due: {amount_due}&quot;) # 告诉客户coke价格
+</code></pre>
+<h3>付费环节</h3>
+<p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
+<pre><code class="language-python">while amount_due &gt; 0: # 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够
+	coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
+	# 这里用try 语句来避免用户输入一些无法转换为整数的文本内容
+	try:
+		coin = int(coin)
+	except ValueError:
+		print(&quot;Invalid coin&quot;)
+		continue
+	# if语句用来判断用户投入的硬币是否符合要求
+	if coin in coin_list:
+		amount_due -= coin # 总共需要投入的减去已经投入的就是还需要投入的
+		change += coin # 这里用来统计用户总共投入的多少
+		print(f&quot;Amount Due: {amount_due}&quot;)
+	else: # 如果用户投入的硬币不符合要求，重新提示可乐价格
+		print(&quot;Amount Due: 50&quot;)
+</code></pre>
+<h3>付费结束之后</h3>
+<p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
+<pre><code class="language-python"># 还需要付费金额小于等于0，即付够钱了
+# 仍需付费金额的绝对值，即为需要找零的钱
+if amount_due &lt;= 0:
+	print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+</code></pre>
+<h2>完整代码</h2>
+<p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
+<pre><code class="language-python">def coke():
+	amount_due = 50
+	change = 0
+	coin_list = [5, 10, 25]
+	print(f&quot;Amount Due: {amount_due}&quot;)
+
+	while amount_due &gt; 0:
+		coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
+		try:
+			coin = int(coin)
+		except ValueError:
+			print(&quot;Invalid coin&quot;)
+			continue
+
+		if coin in coin_list:
+			amount_due -= coin
+			change += coin
+			print(f&quot;Amount Due: {amount_due}&quot;)
+		else:
+			print(&quot;Amount Due: 50&quot;)
+
+	if amount_due &lt;= 0:
+		print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+	coke()
+</code></pre>
+<p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
+<p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
+<p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>
 </div>
     </article>
 </div>

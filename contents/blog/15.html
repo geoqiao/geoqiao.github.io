@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>重器轻用-Obsidian</title>
+        <title>总有一些 app 只能 Windows 用</title>
         <link rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css">
         <script
@@ -70,45 +70,37 @@
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
-            <h1 class="post__title">重器轻用-Obsidian</h1>
+            <h1 class="post__title">总有一些 app 只能 Windows 用</h1>
             <div class="post__meta">
-                <span class="post__time">2023-08-19</span>
+                <span class="post__time">2023-09-24</span>
             </div>
         </header>
-        <div class="post__content"><h2>什么是 Obsidian</h2>
-<p>Obsidian 是一个个人知识管理和笔记应用程序，它使用<strong>Markdown</strong>语法来编写和格式化笔记，帮助用户组织、链接和探索知识。它支持<strong>双向链接</strong>、标签、搜索和<strong>插件扩展</strong>，并且完全本地化存储，让用户轻松构建和管理一个互相关联的知识网络。</p>
-<p>总结下来三个优点：</p>
+        <div class="post__content"><p>总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。</p>
+<h2>结论</h2>
 <ol>
-<li>Markdown 语法：简单排版秒杀 Word、Notes、OneNote 等一众软件</li>
-<li>双向链接：在笔记与笔记之间关联</li>
-<li>插件扩展：是的，甚至可以使用插件搭建一个本地版本的 Notion</li>
+<li>我最终选择了 VMware</li>
+<li>现在体验最好的虚拟机还是 PD，如果有钱可以无脑选择 PD</li>
+<li>VMware 也很强，丝滑感跟 PD 还有差距，但是胜在个人使用免费，且功能够用。</li>
 </ol>
-<h2>为什么使用 Obsidian</h2>
-<p>总结下来有以下几个原因：</p>
+<h2>为什么选择 VMware？</h2>
 <ol>
-<li>有时候脑子里有些奇怪的想法，想记录下来，类似 flomo 那种</li>
-<li>有时候想写一点东西，分享自己的经验、记录自己。</li>
-<li>不想使用在线服务（想法天马行空，不想被审查</li>
+<li>PD 太贵，破解太麻烦，macOS 每出一个大版本基本都要重新购买一次</li>
+<li>VMware 已经支持 M 系列芯片</li>
+<li>VMware 个人版本免费</li>
+<li>VMware tech preview 版本已经支持 macOS 与虚拟机之间互相拖拽文件、复制粘贴</li>
 </ol>
-<p>恰好，Obsidian 完全满足以上需求：</p>
+<h2>安装教程</h2>
+<p>安装教程很简单，但是相比 PD 麻烦一点。这里推荐这个<a href="https://youtu.be/vtck5BVjVHM?si=nsNpgXIZAT-QihfH">教程</a>，基本讲的很详细，需要注意的是，如果有拖拽文件、复制粘贴的需求，需要下载 tech preview 版本。其余操作都一样。</p>
+<p>需要关注以下几个点，大家在安装的时候可以注意一下，会节省很多时间：</p>
 <ol>
-<li>完全本地，想跨设备同步可以使用 iCloud</li>
-<li>有类 flomo 插件，完全可以当作本地版本的 flomo 使用</li>
-<li>玩法花样多，想折腾也有折腾空间</li>
+<li>下载 VMware 的时候需要关闭 clashx pro 的增强模式。否则会导致安装后 VMware 的网络功能失效。其他代理工具没试过，暂不知道是否 surge 等会不会出现同样的问题。</li>
+<li>使用 Google 搜索 VMware tech preview 官网下载。因为关闭增强模式后终端没有代理，Homebrew 等工具无法下载。</li>
+<li>视频中提到的：镜像安装开始的时候一定要 Enter 跳过；无网络链接那一步使用快捷键调出命令行；虚拟机安装完成后安装 VMware tools 为虚拟机安装驱动。</li>
 </ol>
-<h2>我如何使用 Obsidian</h2>
-<p>我使用工具类 app 有个特点，在一开始喜欢折腾，恨不得把所有功能都试一遍、所有主题都换一遍；在熟悉之后，又进行瘦身，把不用的功能都关掉，只保留最常用的几个功能。</p>
-<p>以下是我现在的使用配置：</p>
-<ol>
-<li>不使用模板：因为使用模板需要不定时维护，也许突然想改、优化，这很消耗精力，这让我没办法专心记录</li>
-<li>仅安装 memos、PanGu 插件：memos 插件可以把 Obsidian 变成一个本地版 flomo，随时随地记录灵感；PanGu 插件可以优化排版（使文章中的英文字母单词前后增加空格</li>
-<li>双向链接：不定期更新以写完文章的双向链接</li>
-</ol>
-<p>OK，这就是我的全部用法了。</p>
-<p>Obsidian 很强，如果你想用它替代 Notion、Xmind、白板工具、PPT、稍后读等等，都是可以实现的。但是，这些功能对于普通用户来说都很重，消耗太多精力。</p>
-<p>我认为最重要的是：精力集中在<strong>使用工具</strong>，而不是<strong>如何使用工具</strong>上。</p>
-<p>对比 Notion，想用得好，自己又得做产品经理，又得做开发，搞一个模板可能没用几次可能就有新场景需要满足，又要优化模板，最后成长的架构思维和设计能力，这是我不想从一个<strong>知识管理</strong>软件上体验到的。</p>
-<p>Obsidian 给了我一个可以重器轻用的选择，这非常重要。</p>
+<h2>相关链接</h2>
+<p>VMware tech preview 下载：<a href="https://customerconnect.vmware.com/downloads/get-download?downloadGroup=FUS-TP2023">Download VMware Fusion Public Tech Preview 2023</a>
+VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusion-evaluation.html">下载 VMware Fusion | VMware | CN</a>
+安装教程：<a href="https://youtu.be/vtck5BVjVHM?si=nsNpgXIZAT-QihfH">YouTube</a></p>
 </div>
     </article>
 </div>

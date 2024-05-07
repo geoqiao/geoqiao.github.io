@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Coke Machine Challenge </title>
+        <title>App Defaults 2023</title>
         <link rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css">
         <script
@@ -70,91 +70,36 @@
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
-            <h1 class="post__title">Coke Machine Challenge </h1>
+            <h1 class="post__title">App Defaults 2023</h1>
             <div class="post__meta">
-                <span class="post__time">2023-09-03</span>
+                <span class="post__time">2023-11-11</span>
             </div>
         </header>
-        <div class="post__content"><h2>什么是 Coke Machine</h2>
-<p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
-<blockquote>
-<p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
-<p>In a file called <code>coke.py</code>, implement a program that prompts the user to insert a coin, one at a time, each time informing the user of the amount due. Once the user has inputted at least 50 cents, output how many cents in change the user is owed. Assume that the user will only input integers, and ignore any integer that isn’t an accepted denomination.</p>
-</blockquote>
-<p>实际上，这是一个很简单的实现，但是我在这里被困了 2 个小时，这里重新记录一遍过程，当作<strong>错题集</strong>。</p>
-<h2>任务拆解</h2>
-<ol>
-<li>假设输入只有 25、10、5 几种情况，且只输入整数格式，忽略任何不符合要求的数字</li>
-<li>文件名为 coke.py</li>
-<li>提示用户投入一枚硬币，每次都要通知应付金额</li>
-<li>一旦用户投入的金额大于等于 50，输出找零金额</li>
-</ol>
-<h2>代码实现</h2>
-<h3>初始化</h3>
-<p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
-<p>代码如下：</p>
-<pre><code class="language-python">amount_due = 50
-change = 0
-coin_list = [5,10,25]
-print(f&quot;Amount Due: {amount_due}&quot;) # 告诉客户coke价格
-</code></pre>
-<h3>付费环节</h3>
-<p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
-<pre><code class="language-python">while amount_due &gt; 0: # 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够
-	coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-	# 这里用try 语句来避免用户输入一些无法转换为整数的文本内容
-	try:
-		coin = int(coin)
-	except ValueError:
-		print(&quot;Invalid coin&quot;)
-		continue
-	# if语句用来判断用户投入的硬币是否符合要求
-	if coin in coin_list:
-		amount_due -= coin # 总共需要投入的减去已经投入的就是还需要投入的
-		change += coin # 这里用来统计用户总共投入的多少
-		print(f&quot;Amount Due: {amount_due}&quot;)
-	else: # 如果用户投入的硬币不符合要求，重新提示可乐价格
-		print(&quot;Amount Due: 50&quot;)
-</code></pre>
-<h3>付费结束之后</h3>
-<p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
-<pre><code class="language-python"># 还需要付费金额小于等于0，即付够钱了
-# 仍需付费金额的绝对值，即为需要找零的钱
-if amount_due &lt;= 0:
-	print(f&quot;Change Owed: {abs(amount_due)}&quot;)
-</code></pre>
-<h2>完整代码</h2>
-<p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
-<pre><code class="language-python">def coke():
-	amount_due = 50
-	change = 0
-	coin_list = [5, 10, 25]
-	print(f&quot;Amount Due: {amount_due}&quot;)
-
-	while amount_due &gt; 0:
-		coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-		try:
-			coin = int(coin)
-		except ValueError:
-			print(&quot;Invalid coin&quot;)
-			continue
-
-		if coin in coin_list:
-			amount_due -= coin
-			change += coin
-			print(f&quot;Amount Due: {amount_due}&quot;)
-		else:
-			print(&quot;Amount Due: 50&quot;)
-
-	if amount_due &lt;= 0:
-		print(f&quot;Change Owed: {abs(amount_due)}&quot;)
-
-if __name__ == &quot;__main__&quot;:
-	coke()
-</code></pre>
-<p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
-<p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
-<p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>
+        <div class="post__content"><h1>背景</h1>
+<p>一段时间之前写过一篇<a href="https://github.com/geoqiao/geoqiao.github.io/issues/9">what's on my mac</a>，推荐过一些自己使用的 Mac 应用。</p>
+<p>最近逛 Twitter 刷到<a href="https://defaults.rknight.me/">App Defaults</a>项目，这是一份 RSS 订阅清单，包含了很多播客作者的 App Defaults 文章，可以直接通过 OPML 文件订阅。</p>
+<p>这次一些软件发生了变化，对之前的文章做一个更新。</p>
+<h1>App Defaults 2023</h1>
+<ul>
+<li>💾 <strong>Operating System</strong>: macOS</li>
+<li>📬 <strong>Mail client</strong>: mail.app</li>
+<li>🗒 <strong>Notes</strong>: <a href="https://obsidian.md/">Obsidian</a>,and this is <a href="https://github.com/geoqiao/geoqiao.github.io/issues/12">how i use Obsidian</a></li>
+<li>📅 <strong>Calendar</strong>: Calender.app with <a href="https://github.com/sfsam/Itsycal">ltsycal</a></li>
+<li>📎<strong>TODO list</strong>： Reminders.app</li>
+<li>📰 <strong>RSS reader</strong>: <a href="https://netnewswire.com/">NetNewsWire</a>. It's open source and free and powerful for Mac and iOS.</li>
+<li>🌐 <strong>Browser</strong>: <a href="https://arc.net/">Arc</a>(desktop), Safari(mobile)</li>
+<li>🔖 <strong>Bookmarks</strong>: No more bookmarks , typing websites when need.</li>
+<li>📔 <strong>Reading</strong>:  I use Arc(iOS) as Read It Later app</li>
+<li>🎙 <strong>Podcasts</strong>: <a href="https://www.snipd.com/">Snipd</a>, podcast with AI, free version is enough.</li>
+<li>🔐 <strong>Password Manager</strong>: <a href="https://bitwarden.com/">Bitwarden</a></li>
+<li>📊 <strong>Word processing, Spreadsheet</strong>: Microsoft Excel &amp; Python with pandas</li>
+<li>📝 <strong>Editor</strong>: Obsidian for .md, vim for system files and quick edits, VS Code for coding(Data cleansing and analysis with Python)</li>
+<li>🐍<strong>Python environment management</strong>：<a href="https://rye-up.com/">Rye</a></li>
+<li>🪄 <strong>Launcher:</strong> <a href="https://www.raycast.com/">Raycast</a></li>
+<li>📖 <strong>Translation app:</strong> <a href="https://github.com/tisfeng/Easydict">Easydict</a></li>
+</ul>
+<h1>总结</h1>
+<p>以上就是我目前高频使用的软件了，还有很多没写上去，大家可以参考<a href="https://github.com/geoqiao/geoqiao.github.io/issues/9">what's on my mac</a>。</p>
 </div>
     </article>
 </div>
