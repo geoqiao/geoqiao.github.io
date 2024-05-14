@@ -61,8 +61,6 @@
         </ul>
     </div>
 </header>
-
-
             <main>
 <div class="content" id="mobile-panel">
     <article class="post">
@@ -73,88 +71,6 @@
             </div>
         </header>
         <div class="post__content"><p>VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。</p>
-<pre><code class="language-javascript">function initMobile() {
-  var $mobileNav = document.getElementById(&quot;mobile-navbar&quot;);
-  var $mobileNavIcon = document.querySelector(&quot;.mobile-navbar-icon&quot;);
-
-  var slideout = new Slideout({
-    &quot;panel&quot;: document.getElementById(&quot;mobile-panel&quot;),
-    &quot;menu&quot;: document.getElementById(&quot;mobile-menu&quot;),
-    &quot;padding&quot;: 180,
-    &quot;tolerance&quot;: 70
-  });
-  slideout.disableTouch();
-
-  $mobileNavIcon.addEventListener(&quot;click&quot;, function () {
-    slideout.toggle();
-  });
-
-  slideout.on(&quot;beforeopen&quot;, function () {
-    $mobileNav.classList.add(&quot;fixed-open&quot;);
-    $mobileNavIcon.classList.add(&quot;icon-click&quot;);
-    $mobileNavIcon.classList.remove(&quot;icon-out&quot;);
-  });
-
-  slideout.on(&quot;beforeclose&quot;, function () {
-    $mobileNav.classList.remove(&quot;fixed-open&quot;);
-    $mobileNavIcon.classList.add(&quot;icon-out&quot;);
-    $mobileNavIcon.classList.remove(&quot;icon-click&quot;);
-  });
-
-  document.getElementById(&quot;mobile-panel&quot;).addEventListener(&quot;touchend&quot;, function () {
-    slideout.isOpen() &amp;&amp; $mobileNavIcon.click();
-  })
-}
-function initToc() {
-  var $toclink = document.querySelectorAll(&#x27;.toc-link&#x27;)
-  var $headerlink = document.querySelectorAll(&#x27;.post-content h1 , .post-content h2&#x27;)
-  var $tocLinkLis = document.querySelectorAll(&#x27;.post-toc-content li&#x27;)
-
-  var searchActiveTocIndex = function (array, target) {
-    if (!array.length) {
-      return -1
-    }
-
-    target += 30
-    for (let i = 0; i &lt; array.length - 1; i++) {
-      if (target &gt; array[i].offsetTop &amp;&amp; target &lt;= array[i + 1].offsetTop) return i
-    }
-    if (target &gt; array[array.length - 1].offsetTop) return array.length - 1
-    return -1
-  }
-
-  document.addEventListener(&quot;scroll&quot;, function () {
-    var scrollTop = document.body.scrollTop | document.documentElement.scrollTop
-    var activeTocIndex = searchActiveTocIndex($headerlink, scrollTop)
-
-    $toclink.forEach(function (el) {
-      el.classList.remove(&#x27;active&#x27;)
-    })
-    $tocLinkLis.forEach(function (el) {
-      el.classList.remove(&#x27;has-active&#x27;)
-    })
-
-    if ($toclink.length &amp;&amp; activeTocIndex !== -1) {
-      $toclink[activeTocIndex].classList.add(&#x27;active&#x27;)
-      let ancestor = $toclink[activeTocIndex].parentNode
-      while (ancestor.tagName !== &#x27;NAV&#x27;) {
-        ancestor.classList.add(&#x27;has-active&#x27;)
-        ancestor = ancestor.parentNode.parentNode
-      }
-    }
-  })
-}
-
-if (document.readyState === &quot;complete&quot; ||
-  (document.readyState !== &quot;loading&quot; &amp;&amp; !document.documentElement.doScroll)
-) {
-  initMobile();
-  initToc();
-} else {
-  document.addEventListener(&quot;DOMContentLoaded&quot;, initMobile);
-  document.addEventListener(&quot;DOMContentLoaded&quot;, initToc);
-}
-</code></pre>
 <h2>为什么不是其他编辑器</h2>
 <p>可以编辑 Python 的编辑器很多，但是为什么选择 VSCode 呢？</p>
 <p><strong>PyCharm</strong>：太重了，并且是付费软件。社区版免费，但无法在 PyCharm 中使用 jupyter notebook。并且实话说，我感觉 PyCharm 的学习曲线相对陡峭(下载过一次，感觉配置起来没有 VSCode 简单)。</p>
