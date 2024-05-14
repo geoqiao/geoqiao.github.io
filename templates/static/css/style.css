@@ -223,7 +223,7 @@ img {
     display: inline-block;
     vertical-align: middle;
 }
-pre {
+/* pre {
     display: block;
     background-color: #24292e;
     padding: 1rem;
@@ -241,7 +241,7 @@ pre > code {
     border: none;
     font-style: normal;
     font-size: 1rem;
-}
+} */
 iframe {
     border: 0;
 }
