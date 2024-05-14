@@ -10,7 +10,7 @@ function initMobile() {
   });
   slideout.disableTouch();
 
-  $mobileNavIcon.addEventListener("click", function() {
+  $mobileNavIcon.addEventListener("click", function () {
     slideout.toggle();
   });
 
@@ -26,7 +26,7 @@ function initMobile() {
     $mobileNavIcon.classList.remove("icon-click");
   });
 
-  document.getElementById("mobile-panel").addEventListener("touchend", function() {
+  document.getElementById("mobile-panel").addEventListener("touchend", function () {
     slideout.isOpen() && $mobileNavIcon.click();
   })
 }
@@ -48,7 +48,7 @@ function initToc() {
     return -1
   }
 
-  document.addEventListener("scroll", function() {
+  document.addEventListener("scroll", function () {
     var scrollTop = document.body.scrollTop | document.documentElement.scrollTop
     var activeTocIndex = searchActiveTocIndex($headerlink, scrollTop)
 
@@ -71,7 +71,7 @@ function initToc() {
 }
 
 if (document.readyState === "complete" ||
-    (document.readyState !== "loading" && !document.documentElement.doScroll)
+  (document.readyState !== "loading" && !document.documentElement.doScroll)
 ) {
   initMobile();
   initToc();
