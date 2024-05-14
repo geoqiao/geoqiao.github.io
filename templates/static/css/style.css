@@ -225,6 +225,7 @@ img {
 }
 pre {
     display: block;
+    background-color: #24292e;
     padding: 1rem;
 }
 pre,
