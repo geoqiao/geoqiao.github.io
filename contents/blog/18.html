@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Python编辑器-我的VSCode配置</title>
-        <link rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/style.css">
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+        <link
+            rel="alternate"
+            type="application/atom+xml"
+            title="RSS"
+            href="https://geoqiao.github.io/contents/atom.xml"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/style.css"
+        />
     </head>
     <body>
         <div class="container">
@@ -22,34 +30,26 @@
                 </div>
             </div>
 
-            <nav id="mobile-menu"
-                class="mobile-menu slideout-menu slideout-menu-left">
+            <nav
+                id="mobile-menu"
+                class="mobile-menu slideout-menu slideout-menu-left"
+            >
                 <ul class="mobile-menu-list">
-
                     <li class="mobile-menu-item">
-                        <a href="/">
-                            Home
-                        </a>
+                        <a href="/"> Home </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/tags">
-                            Tags
-                        </a>
+                        <a href="/tags"> Tags </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/about">
-                            About
-                        </a>
+                        <a href="/about"> About </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/contents/atom.xml">
-                            RSS
-                        </a>
+                        <a href="/contents/atom.xml"> RSS </a>
                     </li>
-
                 </ul>
             </nav>
             <header id="header">
@@ -66,7 +66,6 @@
 
 
             <main>
-                
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
@@ -92,22 +91,11 @@
 <p>因为我是一个初学者，并且只会写一些简单的 Python 脚本，这里主要针对 Python 进行 VSCode 配置。</p>
 <p>我的插件列表：</p>
 <ol>
-<li>
-<p><strong>Python&amp;Pylance</strong>：微软官方开发的 Python 插件，可以提供语法高亮、自动补全、类型检查等强大功能。</p>
-</li>
-<li>
-<p><strong>Jupyter</strong>：集成 notebook，可以在 VSCode 中编辑执行<code>.ipynb</code>文件，体验不亚于在网页编辑。并且还享受 VSCode 的 Python 插件提供的功能。通过在 setting 中配置，可以在<code>.py</code>文件中通过<code>shift+enter</code>把代码让代码在 Jupyter 中执行。
-<img width="1624" alt="Pasted image 20231210143040" src="https://github.com/geoqiao/gitblog/assets/105639506/898b715e-cf9a-47fe-94ab-b1329fd08193"></p>
-</li>
-<li>
-<p><strong>Rainbow CSV</strong>：通过不同列的颜色高亮，让在 VSCode 里看 CSV 文件时更不费眼睛。</p>
-</li>
-<li>
-<p><strong>Ayu</strong>：个人最喜欢的 VSCode theme。</p>
-</li>
-<li>
-<p><strong>Ruff</strong>：Python 的 lint&amp;format 工具，有类型检查个人感觉比 black 好用。需要在本地环境安装<code>ruff</code>。</p>
-</li>
+<li><strong>Python&amp;Pylance</strong>：微软官方开发的 Python 插件，可以提供语法高亮、自动补全、类型检查等强大功能。</li>
+<li><strong>Jupyter</strong>：集成 notebook，可以在 VSCode 中编辑执行<code>.ipynb</code>文件，体验不亚于在网页编辑。并且还享受 VSCode 的 Python 插件提供的功能。通过在 setting 中配置，可以在<code>.py</code>文件中通过<code>shift+enter</code>把代码让代码在 Jupyter 中执行。</li>
+<li><strong>Rainbow CSV</strong>：通过不同列的颜色高亮，让在 VSCode 里看 CSV 文件时更不费眼睛。</li>
+<li><strong>Ayu</strong>：个人最喜欢的 VSCode theme。</li>
+<li><strong>Ruff</strong>：Python 的 lint&amp;format 工具，有类型检查个人感觉比 black 好用。需要在本地环境安装<code>ruff</code>。</li>
 </ol>
 <h2>编辑配置</h2>
 <p>在下载好插件之后，插件的有些功能需要在 VSCode 设置中开启，为了方便，我直接把设置的 setting.json 文件放在这里供参考：</p>
@@ -220,13 +208,14 @@
 </div>
     </article>
 </div>
-
-            </main>
+</main>
             <footer id="footer">
     <p>&copy; 2024 Geoqiao's Page</p>
 </footer>
         </div>
-        <script type="text/javascript"
-            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+        <script
+            type="text/javascript"
+            src="https://geoqiao.github.io/templates/static/js/even.js"
+        ></script>
     </body>
 </html>
