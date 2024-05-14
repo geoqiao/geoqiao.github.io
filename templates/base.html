@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}Geoqiao{% endblock %}</title>
-        <link rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/style.css">
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+        <link
+            rel="alternate"
+            type="application/atom+xml"
+            title="RSS"
+            href="https://geoqiao.github.io/contents/atom.xml"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/style.css"
+        />
     </head>
     <body>
         <div class="container">
@@ -22,43 +30,35 @@
                 </div>
             </div>
 
-            <nav id="mobile-menu"
-                class="mobile-menu slideout-menu slideout-menu-left">
+            <nav
+                id="mobile-menu"
+                class="mobile-menu slideout-menu slideout-menu-left"
+            >
                 <ul class="mobile-menu-list">
-
                     <li class="mobile-menu-item">
-                        <a href="/">
-                            Home
-                        </a>
+                        <a href="/"> Home </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/tags">
-                            Tags
-                        </a>
+                        <a href="/tags"> Tags </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/about">
-                            About
-                        </a>
+                        <a href="/about"> About </a>
                     </li>
 
                     <li class="mobile-menu-item">
-                        <a href="/contents/atom.xml">
-                            RSS
-                        </a>
+                        <a href="/contents/atom.xml"> RSS </a>
                     </li>
-
                 </ul>
             </nav>
             {% include 'includes/header.html' %}
-            <main>
-                {% block content %}{% endblock %}
-            </main>
+            <main>{% block content %}{% endblock %}</main>
             {% include 'includes/footer.html' %}
         </div>
-        <script type="text/javascript"
-            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+        <script
+            type="text/javascript"
+            src="https://geoqiao.github.io/templates/static/js/even.js"
+        ></script>
     </body>
 </html>
