@@ -18,7 +18,7 @@ from github.PaginatedList import PaginatedList
 from github.Repository import Repository
 from jinja2 import Environment, FileSystemLoader
 from lxml.etree import CDATA
-from marko.ext.gfm import gfm
+from marko import Markdown
 
 CONTENTS_DIR: str = "./contents/"
 BACKUP_DIR: str = "./backup/"
@@ -110,7 +110,6 @@ def save_blog_index_as_html(content: str):
     path = CONTENTS_DIR + "index.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-        f.close()
 
 
 # def markdown2html(mdstr: str):
@@ -135,8 +134,14 @@ def save_blog_index_as_html(content: str):
 #         raise Exception(f"markdown2html error: {e}")
 
 
+# def markdown2html(mdstr: str):
+#     html = gfm.convert(mdstr)
+#     return html
+
+
 def markdown2html(mdstr: str):
-    html = gfm.convert(mdstr)
+    markdown = Markdown(extensions=["codehilite"])
+    html = markdown.convert(mdstr)
     return html
 
 
@@ -160,7 +165,6 @@ def save_articles_to_content_dir(issue: Issue, content: str):
     path = CONTENTS_DIR + f"blog/{issue.number}.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-        f.close()
 
 
 def gen_rss_feed(issues: PaginatedList[Issue]):

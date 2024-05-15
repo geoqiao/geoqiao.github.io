@@ -32,10 +32,10 @@ hr {
     overflow: visible;
 }
 
-/* pre {
+pre {
     font-family: monospace, monospace;
     font-size: 1em;
-} */
+}
 
 a {
     background-color: rgba(0, 0, 0, 0);
@@ -241,25 +241,26 @@ img {
     vertical-align: middle
 }
 
-/* pre {
+pre {
     display: block;
-    background-color: #24292e;
-    padding: 1rem;
+    background-color:  #24292e;
+    padding: 1rem
 }
-pre,
-code {
+
+pre, code {
     font-size: 90%;
     overflow: auto;
     font-family: Consolas, Monaco, Menlo, Consolas, monospace;
     margin-bottom: 0;
-    color: #c9d2dc;
+    color: #c9d2dc
 }
-pre > code {
+
+pre>code {
     display: block;
     border: none;
     font-style: normal;
-    font-size: 1rem;
-} */
+    font-size: 1rem
+}
 
 iframe {
     border: 0
@@ -377,12 +378,12 @@ main .about h2, main .about h3, main .about h4, main .about h5, main .about h6, 
     font-weight: 400
 }
 
-/* main .about :not(pre)>code, main .post :not(pre)>code {
+main .about :not(pre)>code, main .post :not(pre)>code {
     padding: 3px 5px;
     border-radius: 4px;
     color: #c7254e;
     background: #f8f5ec
-} */
+}
 
 main .about p>a, main .post p>a {
     color: #bb5649
