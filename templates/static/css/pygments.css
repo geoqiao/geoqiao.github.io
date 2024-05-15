@@ -333,7 +333,7 @@ span.linenos.special {
 
 /* Literal.String.Doc */
 .highlight .s2 {
-    background-color: #fff0f0
+    color: #C41A16
 }
 
 /* Literal.String.Double */
@@ -367,7 +367,7 @@ span.linenos.special {
 
 /* Literal.String.Regex */
 .highlight .s1 {
-    background-color: #24292e
+    color: #C41A16
 }
 
 /* Literal.String.Single */
