@@ -18,14 +18,14 @@ span.linenos {
 }
 
 td.linenos .special {
-    color: #000000;
+    color: #c9d2dc;
     background-color: #ffffc0;
     padding-left: 5px;
     padding-right: 5px;
 }
 
 span.linenos.special {
-    color: #000000;
+    color: #c9d2dc;
     background-color: #ffffc0;
     padding-left: 5px;
     padding-right: 5px;
@@ -267,7 +267,7 @@ span.linenos.special {
 
 /* Name.Variable */
 .highlight .ow {
-    color: #000000;
+    color: #c9d2dc;
     font-weight: bold
 }
 
@@ -361,7 +361,7 @@ span.linenos.special {
 
 /* Literal.String.Other */
 .highlight .sr {
-    color: #000000;
+    color: #c9d2dc;
     background-color: #fff0ff
 }
 
