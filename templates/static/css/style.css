@@ -32,10 +32,10 @@ hr {
     overflow: visible;
 }
 
-pre {
+/* pre {
     font-family: monospace, monospace;
     font-size: 1em;
-}
+} */
 
 a {
     background-color: rgba(0, 0, 0, 0);
@@ -377,12 +377,12 @@ main .about h2, main .about h3, main .about h4, main .about h5, main .about h6, 
     font-weight: 400
 }
 
-main .about :not(pre)>code, main .post :not(pre)>code {
+/* main .about :not(pre)>code, main .post :not(pre)>code {
     padding: 3px 5px;
     border-radius: 4px;
     color: #c7254e;
     background: #f8f5ec
-}
+} */
 
 main .about p>a, main .post p>a {
     color: #bb5649
