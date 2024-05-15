@@ -15,6 +15,9 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
     </head>
     <body>
         <div class="container">
@@ -88,65 +91,65 @@
 <h3>初始化</h3>
 <p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
 <p>代码如下：</p>
-<pre><code class="language-python">amount_due = 50
-change = 0
-coin_list = [5,10,25]
-print(f&quot;Amount Due: {amount_due}&quot;) # 告诉客户coke价格
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">amount_due</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">change</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">coin_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># 告诉客户coke价格</span>
+</pre></div>
 <h3>付费环节</h3>
 <p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
-<pre><code class="language-python">while amount_due &gt; 0: # 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够
-	coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-	# 这里用try 语句来避免用户输入一些无法转换为整数的文本内容
-	try:
-		coin = int(coin)
-	except ValueError:
-		print(&quot;Invalid coin&quot;)
-		continue
-	# if语句用来判断用户投入的硬币是否符合要求
-	if coin in coin_list:
-		amount_due -= coin # 总共需要投入的减去已经投入的就是还需要投入的
-		change += coin # 这里用来统计用户总共投入的多少
-		print(f&quot;Amount Due: {amount_due}&quot;)
-	else: # 如果用户投入的硬币不符合要求，重新提示可乐价格
-		print(&quot;Amount Due: 50&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">amount_due</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够</span>
+	<span class="n">coin</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Insert a coin (25, 10, or 5): &quot;</span><span class="p">)</span>
+	<span class="c1"># 这里用try 语句来避免用户输入一些无法转换为整数的文本内容</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">coin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+	<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid coin&quot;</span><span class="p">)</span>
+		<span class="k">continue</span>
+	<span class="c1"># if语句用来判断用户投入的硬币是否符合要求</span>
+	<span class="k">if</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coin_list</span><span class="p">:</span>
+		<span class="n">amount_due</span> <span class="o">-=</span> <span class="n">coin</span> <span class="c1"># 总共需要投入的减去已经投入的就是还需要投入的</span>
+		<span class="n">change</span> <span class="o">+=</span> <span class="n">coin</span> <span class="c1"># 这里用来统计用户总共投入的多少</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span> <span class="c1"># 如果用户投入的硬币不符合要求，重新提示可乐价格</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Amount Due: 50&quot;</span><span class="p">)</span>
+</pre></div>
 <h3>付费结束之后</h3>
 <p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
-<pre><code class="language-python"># 还需要付费金额小于等于0，即付够钱了
-# 仍需付费金额的绝对值，即为需要找零的钱
-if amount_due &lt;= 0:
-	print(f&quot;Change Owed: {abs(amount_due)}&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># 还需要付费金额小于等于0，即付够钱了</span>
+<span class="c1"># 仍需付费金额的绝对值，即为需要找零的钱</span>
+<span class="k">if</span> <span class="n">amount_due</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Change Owed: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">amount_due</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
 <h2>完整代码</h2>
 <p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
-<pre><code class="language-python">def coke():
-	amount_due = 50
-	change = 0
-	coin_list = [5, 10, 25]
-	print(f&quot;Amount Due: {amount_due}&quot;)
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coke</span><span class="p">():</span>
+	<span class="n">amount_due</span> <span class="o">=</span> <span class="mi">50</span>
+	<span class="n">change</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">coin_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-	while amount_due &gt; 0:
-		coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-		try:
-			coin = int(coin)
-		except ValueError:
-			print(&quot;Invalid coin&quot;)
-			continue
+	<span class="k">while</span> <span class="n">amount_due</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="n">coin</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Insert a coin (25, 10, or 5): &quot;</span><span class="p">)</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">coin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+		<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid coin&quot;</span><span class="p">)</span>
+			<span class="k">continue</span>
 
-		if coin in coin_list:
-			amount_due -= coin
-			change += coin
-			print(f&quot;Amount Due: {amount_due}&quot;)
-		else:
-			print(&quot;Amount Due: 50&quot;)
+		<span class="k">if</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coin_list</span><span class="p">:</span>
+			<span class="n">amount_due</span> <span class="o">-=</span> <span class="n">coin</span>
+			<span class="n">change</span> <span class="o">+=</span> <span class="n">coin</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Amount Due: 50&quot;</span><span class="p">)</span>
 
-	if amount_due &lt;= 0:
-		print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+	<span class="k">if</span> <span class="n">amount_due</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Change Owed: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">amount_due</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-if __name__ == &quot;__main__&quot;:
-	coke()
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+	<span class="n">coke</span><span class="p">()</span>
+</pre></div>
 <p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
 <p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
 <p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>

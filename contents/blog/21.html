@@ -15,6 +15,9 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
     </head>
     <body>
         <div class="container">
@@ -72,7 +75,7 @@
         </header>
         <div class="post__content"><h1>背景</h1>
 <p>我偶尔有写点什么的欲望，加上 yihong 老师 <a href="https://github.com/yihong0618/gitblog">gitblog</a> 项目的激励，于是产生了写一个个人博客页面的想法。</p>
-<p>因为工作上数据分析需要，我在 2022 年开始接触 Python。作为一名曾经试图考艺术硕士的文科生，我意外的很喜欢写 Python 的体验。很长一段时间以来，我只使用 Python 做一些数据分析工作。但随着使用时间的增长，我发现自己的 Python 代码代码虽然可以运行，但是很难读、很多代码重复使用率不高、维护起来很费力。</p>
+<p>因为工作上数据分析需要，我在 2022 年开始接触 Python。作为一名曾经试图考艺术硕士的商科生，我意外的很喜欢写 Python 的体验。很长一段时间以来，我只使用 Python 做一些数据分析工作。但随着使用时间的增长，我发现自己的 Python 代码代码虽然可以运行，但是很难读、很多代码重复使用率不高、维护起来很费力。</p>
 <p>于是我尝试学习 Python 的基本概念，而不仅仅局限于 Pandas 和 sklearn。这个项目便是我目前学习的成果。</p>
 <h2>why GitHub Pages</h2>
 <ol>
@@ -94,32 +97,32 @@
 <h1>马上开干</h1>
 <h2>读取 GitHub Issues</h2>
 <p>这个环节非常简单，GitHub 提供了一个非常简单使用的 Python 库：PyGithub。只需要设置好 GitHub Token，便可以很轻易的读取到 issues 的内容</p>
-<pre><code class="language-python">def get_all_issues(repo: Repository, me: str) -&gt; PaginatedList[Issue]:
-    &quot;&quot;&quot;Get all issues for a given GitHub repository.
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_issues</span><span class="p">(</span><span class="n">repo</span><span class="p">:</span> <span class="n">Repository</span><span class="p">,</span> <span class="n">me</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaginatedList</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all issues for a given GitHub repository.</span>
 
-    Args:
-        github_repo: GitHub repository name in the format &quot;owner/name&quot;.
+<span class="sd">    Args:</span>
+<span class="sd">        github_repo: GitHub repository name in the format &quot;owner/name&quot;.</span>
 
-    Returns:
-        List of GitHub issue objects.
-    &quot;&quot;&quot;
-    issues = repo.get_issues(creator=me)
-    return issues
-</code></pre>
+<span class="sd">    Returns:</span>
+<span class="sd">        List of GitHub issue objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">issues</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get_issues</span><span class="p">(</span><span class="n">creator</span><span class="o">=</span><span class="n">me</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">issues</span>
+</pre></div>
 <p>返回的 issues 是一个包含所有 issue 的列表。通过<code>for循环</code>可以遍历这个列表，可以通过<code>issue.title</code>等方法获取 issue 的标题、创建时间、内容、tag 等信息。比如：</p>
-<pre><code class="language-python">issue.title # 获取标题
-issue.updated_at # 获取创建时间
-issue.body # 获取正文内容
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">issue</span><span class="o">.</span><span class="n">title</span> <span class="c1"># 获取标题</span>
+<span class="n">issue</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1"># 获取创建时间</span>
+<span class="n">issue</span><span class="o">.</span><span class="n">body</span> <span class="c1"># 获取正文内容</span>
+</pre></div>
 <h2>将 issue 转换为 HTML</h2>
 <p>GitHub 有使用一个官方接口，可以将 markdown 格式的文本转换为 HTML，但是每次转换请求这个 API 的速度很慢，所以我使用了<code>marko</code>库。</p>
 <p><code>marko</code> 提供了 GitHub 风格的转换方法，只需要传入我们读取到的 issue.body 即可：</p>
-<pre><code class="language-python">from marko.ext.gfm import gfm
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marko.ext.gfm</span> <span class="kn">import</span> <span class="n">gfm</span>
 
-def markdown2html(mdstr: str):
-    html = gfm.convert(mdstr)
-    return html
-</code></pre>
+<span class="k">def</span> <span class="nf">markdown2html</span><span class="p">(</span><span class="n">mdstr</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">gfm</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mdstr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span>
+</pre></div>
 <h2>HTML 模板</h2>
 <p>我对于 CSS 和 JavaScript 一窍不通，所以这部分内容我是参考了 yihong 老师的<a href="https://yihong0618.github.io/gitblog/">GitHub Pages</a>，从页面的 HTML 源码中发现了可用的 CSS 和 JavaScript 代码，并且模仿页面的 HTML，这样拼凑出来的一个页面。</p>
 <p>这个页面满足了我对于一个不太丑的前端页面的需求，并且因为过程中自己拼凑了模板，对于一些 CSS、JavaScript 的作用也有了一点点理解。</p>
@@ -127,8 +130,8 @@ def markdown2html(mdstr: str):
 <h2>GitHub Actions 自动化</h2>
 <p>在主体代码全部实现后，接下来就是将整个过程自动化。这一步可以交给强大的 GitHub Actions 完成。它会帮我监控 issue 的变化：一旦有 issue 添加、编辑等动作，actions 会帮我自动执行我的 Python 代码，并将输出的 HTML 文件上传至 GitHub Pages 仓库。</p>
 <p>这一步也主要参考 yihong 老师<code>gitblog</code>项目的 action 实现。因为我是用<a href="https://github.com/astral-sh/rye">rye</a>管理 Python 项目，但<code>rye</code>并不支持输出<code>requirements.txt</code>，所以我增加了一条将<code>requirements.lock</code>文件转换为<code>requirements.txt</code>的命令：</p>
-<pre><code class="language-shell">sed &#x27;/^-e/d&#x27; requirements.lock &gt; requirements.txt
-</code></pre>
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">&#39;/^-e/d&#39;</span><span class="w"> </span>requirements.lock<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</pre></div>
 <h2>总结</h2>
 <p>因为白天上班比较忙，所以每天晚上下班都会花一个小时来看这个项目。花了将近一个月的时间，我终于实现了自己搭建博客页面的想法。</p>
 <p>现在我已经开始使用自己的项目来写博客，这种体验真的很美妙。</p>

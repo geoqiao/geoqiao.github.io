@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents</id><title>GeoQiao's Blog</title><updated>2024-05-15T13:22:16.315674+00:00</updated><author><name>GeoQiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>This is GeoQiao's Blog</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-15T13:22:16.394421+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents</id><title>GeoQiao's Blog</title><updated>2024-05-15T15:21:03.156081+00:00</updated><author><name>GeoQiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>This is GeoQiao's Blog</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-15T15:21:03.241058+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
 <ol>
 <li>
 <p>这是一个分享个人 excel 经验的文档。</p>
@@ -49,7 +49,7 @@
 <p>更新数据：当需要更新数据时，只需右键单击数据透视表并选择“刷新”即可。</p>
 </li>
 </ol>
-]]></content><link href="https://geoqiao.github.io/contents/blog/2.html"/><published>2023-07-15T02:54:59+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/3.html</id><title>with_sql _as_english</title><updated>2024-05-15T13:22:16.392359+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/2.html"/><published>2023-07-15T02:54:59+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/3.html</id><title>with_sql _as_english</title><updated>2024-05-15T15:21:03.238604+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
 <ol>
 <li>分享自己学习 SQL 的经验。</li>
 <li><code>WITH 临时表名 AS 子查询</code> 是 SQL 中一个常用的语法，这篇分享会介绍这个语法。</li>
@@ -62,19 +62,19 @@ where：从某个表中符合<strong>哪些条件的数据</strong>进行选择
 left join：就是excel 中的 vlookup geoqiao/geoqiao.github.io#2 </p>
 <h2>用 excel 思维读 SQL 代码</h2>
 <p>理解了以上的几个单词，你就可以读懂 SQL 代码了，比如如下的代码片段：</p>
-<pre><code class="language-sql">SELECT
-	table1.id
-	,table2.name
-FROM table1
-LEFT JOIN table2
-ON table1.id = table2.id
-WHERE table1.column1 = &#x27;1&#x27;
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span>
+<span class="w">	</span><span class="n">table1</span><span class="p">.</span><span class="n">id</span>
+<span class="w">	</span><span class="p">,</span><span class="n">table2</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="n">column1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span>
+</pre></div>
 <p>在这个示例中，<code>table1</code>  和  <code>table2</code>  是两个不同的表，我们在 <code>table1</code> 中写了一个 <code>vlookup</code> ，这个公式以两张表中的 <code>id</code> 字段为条件关联，把 <code>table2</code>  中的 <code>name</code> 字段匹配到了 <code>table1</code> ，并且匹配完成后进行了一个筛选，只选择 <code>table1</code> 中 <code>column1</code> 字段为 <code>&#x27;1&#x27;</code> 的行。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/3.html"/><published>2023-07-15T03:09:11+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/4.html</id><title>关于历史</title><updated>2024-05-15T13:22:16.391875+00:00</updated><content type="html"><![CDATA[<p>吃饭的时候突然想到，把历史比喻成一个车轮真的是生动形象且具体。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/3.html"/><published>2023-07-15T03:09:11+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/4.html</id><title>关于历史</title><updated>2024-05-15T15:21:03.238109+00:00</updated><content type="html"><![CDATA[<p>吃饭的时候突然想到，把历史比喻成一个车轮真的是生动形象且具体。</p>
 <p>在某种角度上来看，这个车轮一直在向前滚动；另一种种角度上，车轮又在不断循环，车轮的材质变化，滚动的速度也不一样。</p>
 <p>一些东西一直再改变，但一些东西一直没变。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/4.html"/><published>2023-07-15T03:17:05+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/5.html</id><title>空调剥削理论的提出</title><updated>2024-05-15T13:22:16.387544+00:00</updated><content type="html"><![CDATA[<h2>两大基本原理</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/4.html"/><published>2023-07-15T03:17:05+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/5.html</id><title>空调剥削理论的提出</title><updated>2024-05-15T15:21:03.234335+00:00</updated><content type="html"><![CDATA[<h2>两大基本原理</h2>
 <p><strong>首先</strong>，在开始阐述空调剥削理论之前，先来了解一下这个理论成立的两大基本原理：</p>
 <p><strong>空调制冷原理</strong>和<strong>能量守恒</strong></p>
 <h3>空调制冷原理</h3>
@@ -107,7 +107,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <h2>这个理论有两层含义：</h2>
 <p><strong>第一层是，技术的进步没能克服43摄氏度的气温，空调没用了。也就是空调作为一个没有生命，没有意识的机器，剥削了包括人类在内的地球全体。</strong></p>
 <p><strong>第二层是，技术的进步克服了43摄氏度的气温，空调依然有作用，但使用成本大大增加。即能够使用空调的少数人类剥削包括用不上空调的其余人类在内的地球全体。</strong></p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/5.html"/><published>2023-07-15T03:25:05+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/6.html</id><title>Out of the depth of misfortune comes bliss</title><updated>2024-05-15T13:22:16.385396+00:00</updated><content type="html"><![CDATA[<p>大方无隅</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/5.html"/><published>2023-07-15T03:25:05+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/6.html</id><title>Out of the depth of misfortune comes bliss</title><updated>2024-05-15T15:21:03.232261+00:00</updated><content type="html"><![CDATA[<p>大方无隅</p>
 <p>大器晚成</p>
 <p>大音希声</p>
 <p>大象无形</p>
@@ -126,7 +126,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <p>否极泰来</p>
 <p>否极泰来</p>
 <p>否极泰来</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/6.html"/><published>2023-07-15T03:34:29+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/7.html</id><title>总得活着吧？</title><updated>2024-05-15T13:22:16.383644+00:00</updated><content type="html"><![CDATA[<p>世俗价值都是禁不起推敲的，推敲下去觉得活着没意义。  </p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/6.html"/><published>2023-07-15T03:34:29+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/7.html</id><title>总得活着吧？</title><updated>2024-05-15T15:21:03.230632+00:00</updated><content type="html"><![CDATA[<p>世俗价值都是禁不起推敲的，推敲下去觉得活着没意义。  </p>
 <p>你越想意义就越痛苦。所以人们只能有两个选择，肉体自杀和哲学自杀。</p>
 <h2>哲学自杀</h2>
 <p>哲学自杀就是不再想这个问题了，老子选择信仰个宗教，伊斯兰或者马克思，或者世俗主义，或者纯粹享乐比谁啪的多，比谁赚得多…总之信个世俗价值的东西。你可以随便吃饭时候问一下同桌人，生活的意义是啥，别人不是笑你就是说想这干嘛，但他们是无法给出答案的。这就是所谓哲学自杀。人如果不愿放弃，继续思考，结果必然面对找不到意义的尴尬，也就是加缪的名词‘荒谬’，很可能走向虚无。</p>
@@ -139,7 +139,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <h2>知其不可为而为之</h2>
 <p>就比如，生活给了你一巴掌，让你去死；你不仅不能听它的，还得回它一巴掌，再加一句：操！生命的意义就在这句粗口里。</p>
 <p>知道人终有一死，但现在，我选择活。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/7.html"/><published>2023-07-15T14:40:01+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/8.html</id><title>基于 GitHub issues 的个人 blog 搭建</title><updated>2024-05-15T13:22:16.380156+00:00</updated><content type="html"><![CDATA[<h2>背景</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/7.html"/><published>2023-07-15T14:40:01+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/8.html</id><title>基于 GitHub issues 的个人 blog 搭建</title><updated>2024-05-15T15:21:03.227417+00:00</updated><content type="html"><![CDATA[<h2>背景</h2>
 <p>我最近碰到了以下问题：</p>
 <ol>
 <li>偶尔想写点东西，想有一个个人 blog</li>
@@ -165,7 +165,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <img width="1490" alt="action读写权限开启" src="https://github.com/geoqiao/gitblog/assets/105639506/c8efcada-36d7-42f9-aed6-30b78ce3873e">
 <h2>结语</h2>
 <p>以上就是全部内容，非常感谢 @yihong0618 老师的代码。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/8.html"/><published>2023-07-18T13:10:40+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/9.html</id><title>What's on my Mac</title><updated>2024-05-15T13:22:16.376608+00:00</updated><content type="html"><![CDATA[<p>和大多数人一样，拿到一台MacBook第一件事就是找各种软件，以下是我目前在用的一些。它们的整体使用体验都很不错，且部分软件可以联动形成 workflow ，供大家参考。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/8.html"/><published>2023-07-18T13:10:40+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/9.html</id><title>What's on my Mac</title><updated>2024-05-15T15:21:03.224194+00:00</updated><content type="html"><![CDATA[<p>和大多数人一样，拿到一台MacBook第一件事就是找各种软件，以下是我目前在用的一些。它们的整体使用体验都很不错，且部分软件可以联动形成 workflow ，供大家参考。</p>
 <h2>启动器类- Raycast</h2>
 <p>目前免费的启动器类app，可以启动、替代很多软件。自带的窗口管理功能替代 magnet、rectangle 等等窗口管理软件；自带的文件搜索功能替代了访达；还有一系列提升工作效率的插件。不了解的人可以<a href="https://telegra.ph/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%94%A8raycast%E6%9B%BF%E4%BB%A3%E4%BA%86alfred-07-17">参考这里</a>。</p>
 <h2>自动切换输入法- Input Source Pro</h2>
@@ -196,7 +196,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <p>微信、telegram、VSCode、Chrome。。。</p>
 <p>office 被我卸载了，因为想学 pandas，强迫自己用 pandas 读表</p>
 <p>Report content on this page</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/9.html"/><published>2023-07-29T06:20:29+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/10.html</id><title>Shottr- 原生、轻巧且功能强大的免费macOS截图工具</title><updated>2024-05-15T13:22:16.374360+00:00</updated><content type="html"><![CDATA[<p>| <a href="https://shottr.cc/">Shottr官网</a></p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/9.html"/><published>2023-07-29T06:20:29+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/10.html</id><title>Shottr- 原生、轻巧且功能强大的免费macOS截图工具</title><updated>2024-05-15T15:21:03.222187+00:00</updated><content type="html"><![CDATA[<p>| <a href="https://shottr.cc/">Shottr官网</a></p>
 <ul>
 <li>
 <p><strong>截图</strong>：不得不说，作为截图工具的基础功能，shottr并没有特别出彩的地方，UI也谈不上漂亮。但是基础的区域截图、顺序标记都有，操作起来也非常直觉。而且在其他同类app中要付费的滚动截图功能也是免费的。</p>
@@ -213,7 +213,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 </ul>
 <p>-<strong>贴图</strong>。就是把图片钉在屏幕最上层</p>
 <p>整体体验下来，我认为 shottr非常适合经常需要<strong>对截图进行简单编辑</strong>或者经常使用<strong>OCR功能</strong>的朋友，shottr 能轻松满足你的需求。而且，向开发者邮件反馈issue，开发者回复都非常积极。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/10.html"/><published>2023-07-29T06:28:23+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/11.html</id><title>Python环境安装-Anaconda为例</title><updated>2024-05-15T13:22:16.368943+00:00</updated><content type="html"><![CDATA[<p>学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/10.html"/><published>2023-07-29T06:28:23+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/11.html</id><title>Python环境安装-Anaconda为例</title><updated>2024-05-15T15:21:03.217426+00:00</updated><content type="html"><![CDATA[<p>学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。</p>
 <h2>安装 Python 环境的几种传统方式</h2>
 <ol>
 <li>系统自带，直接用系统的。比如 macOS 一般自带 Python3。</li>
@@ -249,7 +249,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <h2>总结</h2>
 <p>以上就是全部内容，其实跟标题相关的就四五行。具体安装教程没有写，是因为真的和小时候下载安装游戏的流程一模一样。</p>
 <p>如果过程中碰到什么问题，可以及时 Google 搜索。当然，如果你愿意的话，可以直接在这个 issue 下面评论，我会尽快回复的。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/11.html"/><published>2023-07-30T11:09:46+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/12.html</id><title>重器轻用-Obsidian</title><updated>2024-05-15T13:22:16.363727+00:00</updated><content type="html"><![CDATA[<h2>什么是 Obsidian</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/11.html"/><published>2023-07-30T11:09:46+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/12.html</id><title>重器轻用-Obsidian</title><updated>2024-05-15T15:21:03.212769+00:00</updated><content type="html"><![CDATA[<h2>什么是 Obsidian</h2>
 <p>Obsidian 是一个个人知识管理和笔记应用程序，它使用<strong>Markdown</strong>语法来编写和格式化笔记，帮助用户组织、链接和探索知识。它支持<strong>双向链接</strong>、标签、搜索和<strong>插件扩展</strong>，并且完全本地化存储，让用户轻松构建和管理一个互相关联的知识网络。</p>
 <p>总结下来三个优点：</p>
 <ol>
@@ -283,7 +283,7 @@ WHERE table1.column1 = &#x27;1&#x27;
 <p>我认为最重要的是：精力集中在<strong>使用工具</strong>，而不是<strong>如何使用工具</strong>上。</p>
 <p>对比 Notion，想用得好，自己又得做产品经理，又得做开发，搞一个模板可能没用几次可能就有新场景需要满足，又要优化模板，最后成长的架构思维和设计能力，这是我不想从一个<strong>知识管理</strong>软件上体验到的。</p>
 <p>Obsidian 给了我一个可以重器轻用的选择，这非常重要。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/12.html"/><published>2023-08-19T07:57:20+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/13.html</id><title>我的第一个完整的机器学习项目-Titanic总结</title><updated>2024-05-15T13:22:16.357719+00:00</updated><content type="html"><![CDATA[<h2>背景</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/12.html"/><published>2023-08-19T07:57:20+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/13.html</id><title>我的第一个完整的机器学习项目-Titanic总结</title><updated>2024-05-15T15:21:03.207056+00:00</updated><content type="html"><![CDATA[<h2>背景</h2>
 <p>最近一直在学习Python，尝试使用Python解决一些工作上的问题。这里记录参加这次比赛的心得总结，并会给出我的<a href="https://github.com/geoqiao/Python_DA_100_day/blob/main/kaggle_competition/titanic.py">代码示例(rank：top16%)</a></p>
 <p>Titanic是一个机器学习的入门级分类问题的比赛，数据集记录了titanic乘客的一些信息如性别、票价、船舱等级等信息。数据集被分成train_data 和 test_data两部分。参赛者需要根据train_data的数据信息，利用模型对数据集进行学习，并且预测test_data中乘客是否最终幸存。</p>
 <p>titanic数据集的优势是：</p>
@@ -333,7 +333,7 @@ b.快且效果好，相对与其他模型需要适当调整参数来说，xgboos
 <li>Python基础：写干净的代码真的很重要，比如这个代码示例，第二次看我已经优点头疼了，函数为什么要那么定义。</li>
 <li>写一篇机器学习相关概念的解释blog，例如：kmeans、SVM、随机森林、决策数、XGBoost、</li>
 </ol>
-]]></content><link href="https://geoqiao.github.io/contents/blog/13.html"/><published>2023-08-31T13:47:47+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/14.html</id><title>Coke Machine Challenge </title><updated>2024-05-15T13:22:16.353287+00:00</updated><content type="html"><![CDATA[<h2>什么是 Coke Machine</h2>
+]]></content><link href="https://geoqiao.github.io/contents/blog/13.html"/><published>2023-08-31T13:47:47+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/14.html</id><title>Coke Machine Challenge </title><updated>2024-05-15T15:21:03.199509+00:00</updated><content type="html"><![CDATA[<h2>什么是 Coke Machine</h2>
 <p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
 <blockquote>
 <p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
@@ -351,69 +351,69 @@ b.快且效果好，相对与其他模型需要适当调整参数来说，xgboos
 <h3>初始化</h3>
 <p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
 <p>代码如下：</p>
-<pre><code class="language-python">amount_due = 50
-change = 0
-coin_list = [5,10,25]
-print(f&quot;Amount Due: {amount_due}&quot;) # 告诉客户coke价格
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">amount_due</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">change</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">coin_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># 告诉客户coke价格</span>
+</pre></div>
 <h3>付费环节</h3>
 <p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
-<pre><code class="language-python">while amount_due &gt; 0: # 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够
-	coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-	# 这里用try 语句来避免用户输入一些无法转换为整数的文本内容
-	try:
-		coin = int(coin)
-	except ValueError:
-		print(&quot;Invalid coin&quot;)
-		continue
-	# if语句用来判断用户投入的硬币是否符合要求
-	if coin in coin_list:
-		amount_due -= coin # 总共需要投入的减去已经投入的就是还需要投入的
-		change += coin # 这里用来统计用户总共投入的多少
-		print(f&quot;Amount Due: {amount_due}&quot;)
-	else: # 如果用户投入的硬币不符合要求，重新提示可乐价格
-		print(&quot;Amount Due: 50&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">amount_due</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够</span>
+	<span class="n">coin</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Insert a coin (25, 10, or 5): &quot;</span><span class="p">)</span>
+	<span class="c1"># 这里用try 语句来避免用户输入一些无法转换为整数的文本内容</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">coin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+	<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid coin&quot;</span><span class="p">)</span>
+		<span class="k">continue</span>
+	<span class="c1"># if语句用来判断用户投入的硬币是否符合要求</span>
+	<span class="k">if</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coin_list</span><span class="p">:</span>
+		<span class="n">amount_due</span> <span class="o">-=</span> <span class="n">coin</span> <span class="c1"># 总共需要投入的减去已经投入的就是还需要投入的</span>
+		<span class="n">change</span> <span class="o">+=</span> <span class="n">coin</span> <span class="c1"># 这里用来统计用户总共投入的多少</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span> <span class="c1"># 如果用户投入的硬币不符合要求，重新提示可乐价格</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Amount Due: 50&quot;</span><span class="p">)</span>
+</pre></div>
 <h3>付费结束之后</h3>
 <p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
-<pre><code class="language-python"># 还需要付费金额小于等于0，即付够钱了
-# 仍需付费金额的绝对值，即为需要找零的钱
-if amount_due &lt;= 0:
-	print(f&quot;Change Owed: {abs(amount_due)}&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># 还需要付费金额小于等于0，即付够钱了</span>
+<span class="c1"># 仍需付费金额的绝对值，即为需要找零的钱</span>
+<span class="k">if</span> <span class="n">amount_due</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Change Owed: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">amount_due</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
 <h2>完整代码</h2>
 <p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
-<pre><code class="language-python">def coke():
-	amount_due = 50
-	change = 0
-	coin_list = [5, 10, 25]
-	print(f&quot;Amount Due: {amount_due}&quot;)
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coke</span><span class="p">():</span>
+	<span class="n">amount_due</span> <span class="o">=</span> <span class="mi">50</span>
+	<span class="n">change</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">coin_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-	while amount_due &gt; 0:
-		coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
-		try:
-			coin = int(coin)
-		except ValueError:
-			print(&quot;Invalid coin&quot;)
-			continue
+	<span class="k">while</span> <span class="n">amount_due</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="n">coin</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Insert a coin (25, 10, or 5): &quot;</span><span class="p">)</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">coin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+		<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid coin&quot;</span><span class="p">)</span>
+			<span class="k">continue</span>
 
-		if coin in coin_list:
-			amount_due -= coin
-			change += coin
-			print(f&quot;Amount Due: {amount_due}&quot;)
-		else:
-			print(&quot;Amount Due: 50&quot;)
+		<span class="k">if</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coin_list</span><span class="p">:</span>
+			<span class="n">amount_due</span> <span class="o">-=</span> <span class="n">coin</span>
+			<span class="n">change</span> <span class="o">+=</span> <span class="n">coin</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Amount Due: </span><span class="si">{</span><span class="n">amount_due</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Amount Due: 50&quot;</span><span class="p">)</span>
 
-	if amount_due &lt;= 0:
-		print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+	<span class="k">if</span> <span class="n">amount_due</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Change Owed: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">amount_due</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-if __name__ == &quot;__main__&quot;:
-	coke()
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+	<span class="n">coke</span><span class="p">()</span>
+</pre></div>
 <p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
 <p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
 <p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/14.html"/><published>2023-09-03T13:02:25+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/15.html</id><title>总有一些 app 只能 Windows 用</title><updated>2024-05-15T13:22:16.349312+00:00</updated><content type="html"><![CDATA[<p>总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/14.html"/><published>2023-09-03T13:02:25+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/15.html</id><title>总有一些 app 只能 Windows 用</title><updated>2024-05-15T15:21:03.195913+00:00</updated><content type="html"><![CDATA[<p>总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。</p>
 <h2>结论</h2>
 <ol>
 <li>我最终选择了 VMware</li>
@@ -439,7 +439,7 @@ if __name__ == &quot;__main__&quot;:
 <p>VMware tech preview 下载：<a href="https://customerconnect.vmware.com/downloads/get-download?downloadGroup=FUS-TP2023">Download VMware Fusion Public Tech Preview 2023</a>
 VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusion-evaluation.html">下载 VMware Fusion | VMware | CN</a>
 安装教程：<a href="https://youtu.be/vtck5BVjVHM?si=nsNpgXIZAT-QihfH">YouTube</a></p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/15.html"/><published>2023-09-24T14:02:41+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/16.html</id><title>Vim？ Don't be afraid ！</title><updated>2024-05-15T13:22:16.345959+00:00</updated><content type="html"><![CDATA[<p>作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/15.html"/><published>2023-09-24T14:02:41+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/16.html</id><title>Vim？ Don't be afraid ！</title><updated>2024-05-15T15:21:03.193057+00:00</updated><content type="html"><![CDATA[<p>作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。</p>
 <p><code>vim ~/.zshrc</code> 一旦<code>ENTER</code>按下去，就完蛋了。这他妈什么界面？我的终端怎么变成这样，什么命令都无法输入？我该怎么返回上一步？直接退出的话教程就跟不上了怎么办？</p>
 <p>真的是太难了，刚开始不了解终端，不了解每条命令的原理，碰见 Vim 真的让人慌张。</p>
 <p>这个 issue 用来帮助读者克服 Vim 恐惧，再也不用担心搜到的教程含有 Vim 命令。</p>
@@ -465,7 +465,7 @@ VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusi
 <blockquote>
 <p>tips: 如果你安装了 VSCode，也可以在终端中输入<code>code &lt;file path&gt;</code>使用 VSCode 打开并修改对应文件</p>
 </blockquote>
-]]></content><link href="https://geoqiao.github.io/contents/blog/16.html"/><published>2023-10-22T06:52:44+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/17.html</id><title>App Defaults 2023</title><updated>2024-05-15T13:22:16.339659+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
+]]></content><link href="https://geoqiao.github.io/contents/blog/16.html"/><published>2023-10-22T06:52:44+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/17.html</id><title>App Defaults 2023</title><updated>2024-05-15T15:21:03.187269+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
 <p>一段时间之前写过一篇<a href="https://github.com/geoqiao/geoqiao.github.io/issues/9">what's on my mac</a>，推荐过一些自己使用的 Mac 应用。</p>
 <p>最近逛 Twitter 刷到<a href="https://defaults.rknight.me/">App Defaults</a>项目，这是一份 RSS 订阅清单，包含了很多播客作者的 App Defaults 文章，可以直接通过 OPML 文件订阅。</p>
 <p>这次一些软件发生了变化，对之前的文章做一个更新。</p>
@@ -490,7 +490,7 @@ VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusi
 </ul>
 <h1>总结</h1>
 <p>以上就是我目前高频使用的软件了，还有很多没写上去，大家可以参考<a href="https://github.com/geoqiao/geoqiao.github.io/issues/9">what's on my mac</a>。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/17.html"/><published>2023-11-11T09:01:56+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/18.html</id><title>Python编辑器-我的VSCode配置</title><updated>2024-05-15T13:22:16.334952+00:00</updated><content type="html"><![CDATA[<p>VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/17.html"/><published>2023-11-11T09:01:56+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/18.html</id><title>Python编辑器-我的VSCode配置</title><updated>2024-05-15T15:21:03.181870+00:00</updated><content type="html"><![CDATA[<p>VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。</p>
 <h2>为什么不是其他编辑器</h2>
 <p>可以编辑 Python 的编辑器很多，但是为什么选择 VSCode 呢？</p>
 <p><strong>PyCharm</strong>：太重了，并且是付费软件。社区版免费，但无法在 PyCharm 中使用 jupyter notebook。并且实话说，我感觉 PyCharm 的学习曲线相对陡峭(下载过一次，感觉配置起来没有 VSCode 简单)。</p>
@@ -500,8 +500,8 @@ VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusi
 <h2>安装 VSCode</h2>
 <p>安装 VSCode 非常简单，可以直接在<a href="https://code.visualstudio.com/download">官网</a>安装，跟大多数下载软件一样，直接下载就行。</p>
 <p>如果你是 macOS、并且已经安装了 Homebrew，可以通过以下命令安装：</p>
-<pre><code class="language-shell">brew install visual-studio-code
-</code></pre>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>visual-studio-code
+</pre></div>
 <h2>安装插件</h2>
 <p>实际上 VSCode 本身只是一个文本编辑器，使它强大且流行的主要原因是强大的插件系统。通过不同的插件组合，可以把 VSCode 配置成几乎任何想要的集成开发环境。</p>
 <p>因为我是一个初学者，并且只会写一些简单的 Python 脚本，这里主要针对 Python 进行 VSCode 配置。</p>
@@ -515,113 +515,113 @@ VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusi
 </ol>
 <h2>编辑配置</h2>
 <p>在下载好插件之后，插件的有些功能需要在 VSCode 设置中开启，为了方便，我直接把设置的 setting.json 文件放在这里供参考：</p>
-<pre><code class="language-json">{
+<div class="highlight"><pre><span></span><span class="p">{</span>
 
-// editor basics
+<span class="c1">// editor basics</span>
 
-&quot;editor.accessibilitySupport&quot;: &quot;on&quot;,
+<span class="nt">&quot;editor.accessibilitySupport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
 
-&quot;editor.fontFamily&quot;: &quot;JetBrains Mono NL, MesloLGS NF&quot;, //字体部分需要下载相关字体
+<span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JetBrains Mono NL, MesloLGS NF&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//字体部分需要下载相关字体</span>
 
-&quot;editor.cursorBlinking&quot;: &quot;solid&quot;,
+<span class="nt">&quot;editor.cursorBlinking&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solid&quot;</span><span class="p">,</span>
 
-&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;, // ruff插件的配置项
+<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// ruff插件的配置项</span>
 
-&quot;editor.mouseWheelScrollSensitivity&quot;: 1,
+<span class="nt">&quot;editor.mouseWheelScrollSensitivity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 
-&quot;editor.mouseWheelZoom&quot;: true,
+<span class="nt">&quot;editor.mouseWheelZoom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-&quot;editor.semanticHighlighting.enabled&quot;: true, //语义高亮
+<span class="nt">&quot;editor.semanticHighlighting.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">//语义高亮</span>
 
-&quot;editor.wordWrap&quot;: &quot;on&quot;,
+<span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
 
-&quot;editor.autoClosingBrackets&quot;: &quot;languageDefined&quot;,
-
-
-
-// python
-
-&quot;[python]&quot;: {
-
-&quot;editor.formatOnSave&quot;: true,
-
-&quot;editor.codeActionsOnSave&quot;: {
-
-&quot;source.fixAll&quot;: &quot;explicit&quot;,
-
-&quot;source.organizeImports&quot;: &quot;explicit&quot;
-
-},
-
-&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;
-
-},
-
-&quot;python.languageServer&quot;: &quot;Pylance&quot;,
-
-&quot;python.analysis.typeCheckingMode&quot;: &quot;basic&quot;, //类型检查
+<span class="nt">&quot;editor.autoClosingBrackets&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;languageDefined&quot;</span><span class="p">,</span>
 
 
 
-// theme
+<span class="c1">// python</span>
 
-&quot;workbench.colorTheme&quot;: &quot;Ayu Mirage&quot;,
+<span class="nt">&quot;[python]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-// audio
+<span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-&quot;audioCues.chatRequestSent&quot;: &quot;off&quot;,
+<span class="nt">&quot;editor.codeActionsOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-&quot;audioCues.chatResponseReceived&quot;: &quot;off&quot;,
+<span class="nt">&quot;source.fixAll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span><span class="p">,</span>
 
-&quot;audioCues.chatResponsePending&quot;: &quot;off&quot;,
+<span class="nt">&quot;source.organizeImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span>
 
-&quot;audioCues.clear&quot;: &quot;off&quot;,
+<span class="p">},</span>
 
-&quot;audioCues.diffLineDeleted&quot;: &quot;off&quot;,
+<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span>
 
-&quot;audioCues.diffLineInserted&quot;: &quot;off&quot;,
+<span class="p">},</span>
 
-&quot;audioCues.diffLineModified&quot;: &quot;off&quot;,
+<span class="nt">&quot;python.languageServer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pylance&quot;</span><span class="p">,</span>
 
-&quot;audioCues.lineHasBreakpoint&quot;: &quot;off&quot;,
+<span class="nt">&quot;python.analysis.typeCheckingMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//类型检查</span>
 
-&quot;audioCues.lineHasError&quot;: &quot;off&quot;,
 
-&quot;audioCues.lineHasFoldedArea&quot;: &quot;off&quot;,
 
-&quot;audioCues.lineHasInlineSuggestion&quot;: &quot;off&quot;,
+<span class="c1">// theme</span>
 
-&quot;audioCues.noInlayHints&quot;: &quot;off&quot;,
+<span class="nt">&quot;workbench.colorTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ayu Mirage&quot;</span><span class="p">,</span>
 
-&quot;audioCues.notebookCellCompleted&quot;: &quot;off&quot;,
+<span class="c1">// audio</span>
 
-&quot;audioCues.notebookCellFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatRequestSent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.onDebugBreak&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatResponseReceived&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.taskCompleted&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatResponsePending&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.taskFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.terminalCommandFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.diffLineDeleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.terminalQuickFix&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.diffLineInserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.volume&quot;: 40,
+<span class="nt">&quot;audioCues.diffLineModified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+<span class="nt">&quot;audioCues.lineHasBreakpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;: true,
+<span class="nt">&quot;audioCues.lineHasError&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;debug.console.fontSize&quot;: 15,
+<span class="nt">&quot;audioCues.lineHasFoldedArea&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;editor.fontSize&quot;: 15,
+<span class="nt">&quot;audioCues.lineHasInlineSuggestion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;window.zoomLevel&quot;: 1,
+<span class="nt">&quot;audioCues.noInlayHints&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-}
-</code></pre>
-]]></content><link href="https://geoqiao.github.io/contents/blog/18.html"/><published>2023-12-10T07:14:08+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/1.html</id><title>rye - 好用的Python包管理工具</title><updated>2024-05-15T13:22:16.328608+00:00</updated><content type="html"><![CDATA[<p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
+<span class="nt">&quot;audioCues.notebookCellCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.notebookCellFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.onDebugBreak&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.taskCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.taskFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.terminalCommandFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.terminalQuickFix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.volume&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+
+<span class="nt">&quot;workbench.iconTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;material-icon-theme&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="nt">&quot;debug.console.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+
+<span class="nt">&quot;editor.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+
+<span class="nt">&quot;window.zoomLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="p">}</span>
+</pre></div>
+]]></content><link href="https://geoqiao.github.io/contents/blog/18.html"/><published>2023-12-10T07:14:08+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/1.html</id><title>rye - 好用的Python包管理工具</title><updated>2024-05-15T15:21:03.172836+00:00</updated><content type="html"><![CDATA[<p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
 <p>作为一个刚开始学习 Python 的新手，它解决了我碰到的两个难题：</p>
 <ol>
 <li>使用<code>pip</code>安装包时，经常某些包无法在当前 python 版本安装</li>
@@ -639,68 +639,68 @@ VMware 正式版下载：<a href="https://www.vmware.com/cn/products/fusion/fusi
 <p>例如 macOS：</p>
 <blockquote>
 <p>To install run you can curl a command which will install the right binary for your operating system and CPU architecture and install it:</p>
-<pre><code class="language-shell">curl -sSf https://rye-up.com/get | bash
-</code></pre>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-sSf<span class="w"> </span>https://rye-up.com/get<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</pre></div>
 </blockquote>
 <p><strong>补充</strong>：</p>
-<pre><code class="language-shell">rye self update # 升级rye
-</code></pre>
-<pre><code class="language-shell">rye self uninstall # 卸载rye
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>self<span class="w"> </span>update<span class="w"> </span><span class="c1"># 升级rye</span>
+</pre></div>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>self<span class="w"> </span>uninstall<span class="w"> </span><span class="c1"># 卸载rye</span>
+</pre></div>
 <h2>开始一个新项目</h2>
 <p>使用  <code>rye init</code>  初始化一个新项目非常容易。在这里，我开始一个名为： <code>&quot;test-rye&quot;</code>的新项目。</p>
-<pre><code class="language-shell">mkdir test-rye  #创建项目文件夹
-cd test-rye #在终端进入刚才创建的项目文件夹
-rye init . #使用rye初始化项目
-</code></pre>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>test-rye<span class="w">  </span><span class="c1">#创建项目文件夹</span>
+<span class="nb">cd</span><span class="w"> </span>test-rye<span class="w"> </span><span class="c1">#在终端进入刚才创建的项目文件夹</span>
+rye<span class="w"> </span>init<span class="w"> </span>.<span class="w"> </span><span class="c1">#使用rye初始化项目</span>
+</pre></div>
 <p>执行初始化之后，rye 会帮我们创建一些默认文件：</p>
-<pre><code class="language-shell">tree
-├── README.md       # 项目的README文件
-├── pyproject.toml  # rye用来管理项目的文件
-└── src
-    └── test_rye
-        └── __init__.py
-</code></pre>
+<div class="highlight"><pre><span></span>tree
+├──<span class="w"> </span>README.md<span class="w">       </span><span class="c1"># 项目的README文件</span>
+├──<span class="w"> </span>pyproject.toml<span class="w">  </span><span class="c1"># rye用来管理项目的文件</span>
+└──<span class="w"> </span>src
+<span class="w">    </span>└──<span class="w"> </span>test_rye
+<span class="w">        </span>└──<span class="w"> </span>__init__.py
+</pre></div>
 <p>现在，我们便可以安装自己想安装的包。假设我这个项目想用来做一些数据分析工作：</p>
-<pre><code class="language-shell"># 使用rye安装 numpy pandas scikit-learn xgboost
-rye add numpy pandas scikit-learn xgboost # 解析包版本，并添加到pyproject.toml文件中
-rye sync # 开始下载文件对应的包
-</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># 使用rye安装 numpy pandas scikit-learn xgboost</span>
+rye<span class="w"> </span>add<span class="w"> </span>numpy<span class="w"> </span>pandas<span class="w"> </span>scikit-learn<span class="w"> </span>xgboost<span class="w"> </span><span class="c1"># 解析包版本，并添加到pyproject.toml文件中</span>
+rye<span class="w"> </span>sync<span class="w"> </span><span class="c1"># 开始下载文件对应的包</span>
+</pre></div>
 <p>至此，一个由 rye 管理的项目就创建完成了，我们可以使用 VSCode 打开项目文件夹，并开始写代码了。</p>
-<pre><code class="language-shell">code .  # 使用VSCode打开项目文件夹
-</code></pre>
+<div class="highlight"><pre><span></span>code<span class="w"> </span>.<span class="w">  </span><span class="c1"># 使用VSCode打开项目文件夹</span>
+</pre></div>
 <p>此时，我们的项目文件夹结构如下：</p>
-<pre><code class="language-shell">tree
-├── README.md
-├── pyproject.toml
-├── requirements-dev.lock
-├── requirements.lock
-└── src
-    └── test_rye
-        ├── __init__.py
-        └── __pycache__
-            └── __init__.cpython-311.pyc
-</code></pre>
+<div class="highlight"><pre><span></span>tree
+├──<span class="w"> </span>README.md
+├──<span class="w"> </span>pyproject.toml
+├──<span class="w"> </span>requirements-dev.lock
+├──<span class="w"> </span>requirements.lock
+└──<span class="w"> </span>src
+<span class="w">    </span>└──<span class="w"> </span>test_rye
+<span class="w">        </span>├──<span class="w"> </span>__init__.py
+<span class="w">        </span>└──<span class="w"> </span>__pycache__
+<span class="w">            </span>└──<span class="w"> </span>__init__.cpython-311.pyc
+</pre></div>
 <p><strong>注意事项</strong>：
 当我们的项目需要添加新的依赖时，可以使用<code>rye add &lt;package name&gt;</code> 和 <code>rye sync</code>来安装对应的包，或者通过<code>rye romove &lt;package name&gt;</code>和<code>rye sync</code>来移除对应的包。</p>
 <p><code>rye add &lt;package name&gt;</code>和<code>rye romove &lt;package name&gt;</code>只修改<code>pyproject.toml</code>文件，<code>rye sync</code>会按照<code>pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
 <h2>修改项目的 Python 版本</h2>
-<p>rye 当前为我们的项目安装 <a href="mailto:Python@3.11">Python@3.11</a> 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
-<pre><code class="language-shell">rye pin 3.9
-rye sync # 所有的修改都需要使用sync命令生效
-</code></pre>
-<p>此时，我们的项目的 Python <a href="%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%98%E4%B8%BA%E4%BA%86Python@3.9">版本就变为了Python@3.9</a></p>
+<p>rye 当前为我们的项目安装 Python@3.11 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>pin<span class="w"> </span><span class="m">3</span>.9
+rye<span class="w"> </span>sync<span class="w"> </span><span class="c1"># 所有的修改都需要使用sync命令生效</span>
+</pre></div>
+<p>此时，我们的项目的 Python 版本就变为了Python@3.9</p>
 <h2>全局 Python 脚本</h2>
 <p>某些情况下，有些包我们想要全局使用，比如<code>black</code>或者<code>ruff</code>来对我们的代码进行格式化。</p>
-<pre><code class="language-shell">rye install ruff
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>install<span class="w"> </span>ruff
+</pre></div>
 <p>安装之后，就可以在终端全局使用<code>ruff</code>命令了</p>
 <p>卸载也很简单：</p>
-<pre><code class="language-shell">rye uninstall ruff
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>uninstall<span class="w"> </span>ruff
+</pre></div>
 <h2>最后</h2>
 <p>rye 还支持一些常规的操作，比如接管全局 python、升级项目中某个依赖或者所有依赖的版本、构建/发布包等等功能，可以通过<a href="https://rye-up.com/guide/">官方文档</a>查看。</p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/1.html"/><published>2024-01-06T07:38:36+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/20.html</id><title>基于 fastAPI 的 CRUD 练习- RSS 订阅管理</title><updated>2024-05-15T13:22:16.322293+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
+]]></content><link href="https://geoqiao.github.io/contents/blog/1.html"/><published>2024-01-06T07:38:36+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/20.html</id><title>基于 fastAPI 的 CRUD 练习- RSS 订阅管理</title><updated>2024-05-15T15:21:03.163961+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
 <p>最近两三年，我逐渐卸载了抖音、微博等社交媒体，主要从RSS订阅获取信息。卸载部分社交媒体让我有了一点时间做其他事情，比如听播客、学Python、阅读......</p>
 <p>这个练习是我的<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>final project的延续，主要目的是学习一些web的开发框架、使用Python操作数据库。</p>
 <h2>why fastAPI</h2>
@@ -726,23 +726,23 @@ rye sync # 所有的修改都需要使用sync命令生效
 <p>ORM：指的是对象关系映射(Object-Relational Mapping)，主要作用是将数据库中的表结构映射到对象上,使开发者可以使用面向对象的方式来操作数据库,而不需要直接编写SQL语句。</p>
 </blockquote>
 <p>使用SQLAlchemy创建SQLite数据库，设计<code>feeds</code>表的字段，并为字段添加类型要求</p>
-<pre><code class="language-python">class Base(DeclarativeBase):
-	pass
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+	<span class="k">pass</span>
 
 
-class Subscription(Base):
-	__tablename__ = &quot;feeds&quot;
+<span class="k">class</span> <span class="nc">Subscription</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;feeds&quot;</span>
 
-	id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-	url: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
-	title: Mapped[str] = mapped_column(nullable=False)
-	tag: Mapped[Optional[str]]
-	link: Mapped[str] = mapped_column(nullable=False)
-	updated_at: Mapped[datetime] = mapped_column(nullable=False, default=datetime.now)
+	<span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="n">url</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+	<span class="n">tag</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+	<span class="n">link</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+	<span class="n">updated_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
 	
-	def __repr__(self) -&gt; str:
-		return f&quot;Feed(id={self.id!r}, url={self.url!r},title={self.title},tag={self.tag!r},link={self.link!r})&quot;
-</code></pre>
+	<span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+		<span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Feed(id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">!r}</span><span class="s2">, url=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">!r}</span><span class="s2">,title=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">,tag=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="si">!r}</span><span class="s2">,link=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+</pre></div>
 <h2>定义CRUD函数</h2>
 <p>这里主要学习了SQLAlchemy的ORM查询方法。</p>
 <p>一开始觉得直接写SQL语句更好，只用掌握一种SQL语法就行了；后来查询后，好像直接写SQL语句有安全风险，比如SQL注入。</p>
@@ -751,35 +751,34 @@ class Subscription(Base):
 </blockquote>
 <p><strong>ORM语法示例</strong>：</p>
 <p>以下代码通过数据库中的ID字段查询对应的订阅链接。我感觉这种写法还能接受，不过还是感觉直接写SQL语句的话心智负担更小一点，因为可以少学一种语法。</p>
-<pre><code class="language-python">def get_feed_by_id(feed_id: int):
-	with Session(engine) as session:
-		feed = session.query(Subscription).filter(Subscription.id == feed_id).first()
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_feed_by_id</span><span class="p">(</span><span class="n">feed_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+	<span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+		<span class="n">feed</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subscription</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Subscription</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">feed_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
-	return feed
-</code></pre>
+	<span class="k">return</span> <span class="n">feed</span>
+</pre></div>
 <h2>fastAPI接口</h2>
 <p>其实fastAPI部分很好写，只要我们获取到返回值，并且传给前端页面就好了</p>
 <p>Django框架中需要配置的视图函数、URL路径等等都不在一个文件中，但是fastAPI通过一个简单的装饰器将这些工作都做好了</p>
-<pre><code class="language-python">@app.get(&quot;/feeds_list&quot;)
-async def get_rss_feeds(request: Request):
-	feeds = get_all_feeds()
+<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/feeds_list&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_rss_feeds</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+	<span class="n">feeds</span> <span class="o">=</span> <span class="n">get_all_feeds</span><span class="p">()</span>
 
-	return template_dir.TemplateResponse(&quot;feeds_list.html&quot;, {&quot;request&quot;: request, &quot;feeds&quot;: feeds})
-
-</code></pre>
+	<span class="k">return</span> <span class="n">template_dir</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;feeds_list.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;feeds&quot;</span><span class="p">:</span> <span class="n">feeds</span><span class="p">})</span>
+</pre></div>
 <h2>命令行运行程序</h2>
-<p>通过命令行运行，在 <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> 预览程序</p>
-<pre><code class="language-shell">uvicorn main:app --reload 
-</code></pre>
+<p>通过命令行运行，在 http://127.0.0.1:8000 预览程序</p>
+<div class="highlight"><pre><span></span>uvicorn<span class="w"> </span>main:app<span class="w"> </span>--reload
+</pre></div>
 <p><a href="https://github.com/geoqiao/RSS_db">项目地址</a></p>
 <blockquote>
 <p>纯属兴趣驱动，如有不准确的地方欢迎交流</p>
 </blockquote>
 <p><strong>预览效果如下</strong>
 <img width="1336" alt="image" src="https://github.com/geoqiao/geoqiao.github.io/assets/105639506/869f0d88-fdb0-4f7a-911c-6c8e39b260df"></p>
-]]></content><link href="https://geoqiao.github.io/contents/blog/20.html"/><published>2024-05-10T15:41:01+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/21.html</id><title>使用 Python 和 GitHub Pages 搭建个人博客</title><updated>2024-05-15T13:22:16.315712+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
+]]></content><link href="https://geoqiao.github.io/contents/blog/20.html"/><published>2024-05-10T15:41:01+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/21.html</id><title>使用 Python 和 GitHub Pages 搭建个人博客</title><updated>2024-05-15T15:21:03.156117+00:00</updated><content type="html"><![CDATA[<h1>背景</h1>
 <p>我偶尔有写点什么的欲望，加上 yihong 老师 <a href="https://github.com/yihong0618/gitblog">gitblog</a> 项目的激励，于是产生了写一个个人博客页面的想法。</p>
-<p>因为工作上数据分析需要，我在 2022 年开始接触 Python。作为一名曾经试图考艺术硕士的文科生，我意外的很喜欢写 Python 的体验。很长一段时间以来，我只使用 Python 做一些数据分析工作。但随着使用时间的增长，我发现自己的 Python 代码代码虽然可以运行，但是很难读、很多代码重复使用率不高、维护起来很费力。</p>
+<p>因为工作上数据分析需要，我在 2022 年开始接触 Python。作为一名曾经试图考艺术硕士的商科生，我意外的很喜欢写 Python 的体验。很长一段时间以来，我只使用 Python 做一些数据分析工作。但随着使用时间的增长，我发现自己的 Python 代码代码虽然可以运行，但是很难读、很多代码重复使用率不高、维护起来很费力。</p>
 <p>于是我尝试学习 Python 的基本概念，而不仅仅局限于 Pandas 和 sklearn。这个项目便是我目前学习的成果。</p>
 <h2>why GitHub Pages</h2>
 <ol>
@@ -801,32 +800,32 @@ async def get_rss_feeds(request: Request):
 <h1>马上开干</h1>
 <h2>读取 GitHub Issues</h2>
 <p>这个环节非常简单，GitHub 提供了一个非常简单使用的 Python 库：PyGithub。只需要设置好 GitHub Token，便可以很轻易的读取到 issues 的内容</p>
-<pre><code class="language-python">def get_all_issues(repo: Repository, me: str) -&gt; PaginatedList[Issue]:
-    &quot;&quot;&quot;Get all issues for a given GitHub repository.
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_issues</span><span class="p">(</span><span class="n">repo</span><span class="p">:</span> <span class="n">Repository</span><span class="p">,</span> <span class="n">me</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaginatedList</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all issues for a given GitHub repository.</span>
 
-    Args:
-        github_repo: GitHub repository name in the format &quot;owner/name&quot;.
+<span class="sd">    Args:</span>
+<span class="sd">        github_repo: GitHub repository name in the format &quot;owner/name&quot;.</span>
 
-    Returns:
-        List of GitHub issue objects.
-    &quot;&quot;&quot;
-    issues = repo.get_issues(creator=me)
-    return issues
-</code></pre>
+<span class="sd">    Returns:</span>
+<span class="sd">        List of GitHub issue objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">issues</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get_issues</span><span class="p">(</span><span class="n">creator</span><span class="o">=</span><span class="n">me</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">issues</span>
+</pre></div>
 <p>返回的 issues 是一个包含所有 issue 的列表。通过<code>for循环</code>可以遍历这个列表，可以通过<code>issue.title</code>等方法获取 issue 的标题、创建时间、内容、tag 等信息。比如：</p>
-<pre><code class="language-python">issue.title # 获取标题
-issue.updated_at # 获取创建时间
-issue.body # 获取正文内容
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">issue</span><span class="o">.</span><span class="n">title</span> <span class="c1"># 获取标题</span>
+<span class="n">issue</span><span class="o">.</span><span class="n">updated_at</span> <span class="c1"># 获取创建时间</span>
+<span class="n">issue</span><span class="o">.</span><span class="n">body</span> <span class="c1"># 获取正文内容</span>
+</pre></div>
 <h2>将 issue 转换为 HTML</h2>
 <p>GitHub 有使用一个官方接口，可以将 markdown 格式的文本转换为 HTML，但是每次转换请求这个 API 的速度很慢，所以我使用了<code>marko</code>库。</p>
 <p><code>marko</code> 提供了 GitHub 风格的转换方法，只需要传入我们读取到的 issue.body 即可：</p>
-<pre><code class="language-python">from marko.ext.gfm import gfm
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marko.ext.gfm</span> <span class="kn">import</span> <span class="n">gfm</span>
 
-def markdown2html(mdstr: str):
-    html = gfm.convert(mdstr)
-    return html
-</code></pre>
+<span class="k">def</span> <span class="nf">markdown2html</span><span class="p">(</span><span class="n">mdstr</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">gfm</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mdstr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span>
+</pre></div>
 <h2>HTML 模板</h2>
 <p>我对于 CSS 和 JavaScript 一窍不通，所以这部分内容我是参考了 yihong 老师的<a href="https://yihong0618.github.io/gitblog/">GitHub Pages</a>，从页面的 HTML 源码中发现了可用的 CSS 和 JavaScript 代码，并且模仿页面的 HTML，这样拼凑出来的一个页面。</p>
 <p>这个页面满足了我对于一个不太丑的前端页面的需求，并且因为过程中自己拼凑了模板，对于一些 CSS、JavaScript 的作用也有了一点点理解。</p>
@@ -834,8 +833,8 @@ def markdown2html(mdstr: str):
 <h2>GitHub Actions 自动化</h2>
 <p>在主体代码全部实现后，接下来就是将整个过程自动化。这一步可以交给强大的 GitHub Actions 完成。它会帮我监控 issue 的变化：一旦有 issue 添加、编辑等动作，actions 会帮我自动执行我的 Python 代码，并将输出的 HTML 文件上传至 GitHub Pages 仓库。</p>
 <p>这一步也主要参考 yihong 老师<code>gitblog</code>项目的 action 实现。因为我是用<a href="https://github.com/astral-sh/rye">rye</a>管理 Python 项目，但<code>rye</code>并不支持输出<code>requirements.txt</code>，所以我增加了一条将<code>requirements.lock</code>文件转换为<code>requirements.txt</code>的命令：</p>
-<pre><code class="language-shell">sed &#x27;/^-e/d&#x27; requirements.lock &gt; requirements.txt
-</code></pre>
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">&#39;/^-e/d&#39;</span><span class="w"> </span>requirements.lock<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</pre></div>
 <h2>总结</h2>
 <p>因为白天上班比较忙，所以每天晚上下班都会花一个小时来看这个项目。花了将近一个月的时间，我终于实现了自己搭建博客页面的想法。</p>
 <p>现在我已经开始使用自己的项目来写博客，这种体验真的很美妙。</p>

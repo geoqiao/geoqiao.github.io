@@ -15,6 +15,9 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
     </head>
     <body>
         <div class="container">
@@ -80,8 +83,8 @@
 <h2>安装 VSCode</h2>
 <p>安装 VSCode 非常简单，可以直接在<a href="https://code.visualstudio.com/download">官网</a>安装，跟大多数下载软件一样，直接下载就行。</p>
 <p>如果你是 macOS、并且已经安装了 Homebrew，可以通过以下命令安装：</p>
-<pre><code class="language-shell">brew install visual-studio-code
-</code></pre>
+<div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>visual-studio-code
+</pre></div>
 <h2>安装插件</h2>
 <p>实际上 VSCode 本身只是一个文本编辑器，使它强大且流行的主要原因是强大的插件系统。通过不同的插件组合，可以把 VSCode 配置成几乎任何想要的集成开发环境。</p>
 <p>因为我是一个初学者，并且只会写一些简单的 Python 脚本，这里主要针对 Python 进行 VSCode 配置。</p>
@@ -95,112 +98,112 @@
 </ol>
 <h2>编辑配置</h2>
 <p>在下载好插件之后，插件的有些功能需要在 VSCode 设置中开启，为了方便，我直接把设置的 setting.json 文件放在这里供参考：</p>
-<pre><code class="language-json">{
+<div class="highlight"><pre><span></span><span class="p">{</span>
 
-// editor basics
+<span class="c1">// editor basics</span>
 
-&quot;editor.accessibilitySupport&quot;: &quot;on&quot;,
+<span class="nt">&quot;editor.accessibilitySupport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
 
-&quot;editor.fontFamily&quot;: &quot;JetBrains Mono NL, MesloLGS NF&quot;, //字体部分需要下载相关字体
+<span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JetBrains Mono NL, MesloLGS NF&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//字体部分需要下载相关字体</span>
 
-&quot;editor.cursorBlinking&quot;: &quot;solid&quot;,
+<span class="nt">&quot;editor.cursorBlinking&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solid&quot;</span><span class="p">,</span>
 
-&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;, // ruff插件的配置项
+<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// ruff插件的配置项</span>
 
-&quot;editor.mouseWheelScrollSensitivity&quot;: 1,
+<span class="nt">&quot;editor.mouseWheelScrollSensitivity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 
-&quot;editor.mouseWheelZoom&quot;: true,
+<span class="nt">&quot;editor.mouseWheelZoom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-&quot;editor.semanticHighlighting.enabled&quot;: true, //语义高亮
+<span class="nt">&quot;editor.semanticHighlighting.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">//语义高亮</span>
 
-&quot;editor.wordWrap&quot;: &quot;on&quot;,
+<span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
 
-&quot;editor.autoClosingBrackets&quot;: &quot;languageDefined&quot;,
-
-
-
-// python
-
-&quot;[python]&quot;: {
-
-&quot;editor.formatOnSave&quot;: true,
-
-&quot;editor.codeActionsOnSave&quot;: {
-
-&quot;source.fixAll&quot;: &quot;explicit&quot;,
-
-&quot;source.organizeImports&quot;: &quot;explicit&quot;
-
-},
-
-&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;
-
-},
-
-&quot;python.languageServer&quot;: &quot;Pylance&quot;,
-
-&quot;python.analysis.typeCheckingMode&quot;: &quot;basic&quot;, //类型检查
+<span class="nt">&quot;editor.autoClosingBrackets&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;languageDefined&quot;</span><span class="p">,</span>
 
 
 
-// theme
+<span class="c1">// python</span>
 
-&quot;workbench.colorTheme&quot;: &quot;Ayu Mirage&quot;,
+<span class="nt">&quot;[python]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-// audio
+<span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-&quot;audioCues.chatRequestSent&quot;: &quot;off&quot;,
+<span class="nt">&quot;editor.codeActionsOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 
-&quot;audioCues.chatResponseReceived&quot;: &quot;off&quot;,
+<span class="nt">&quot;source.fixAll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span><span class="p">,</span>
 
-&quot;audioCues.chatResponsePending&quot;: &quot;off&quot;,
+<span class="nt">&quot;source.organizeImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span>
 
-&quot;audioCues.clear&quot;: &quot;off&quot;,
+<span class="p">},</span>
 
-&quot;audioCues.diffLineDeleted&quot;: &quot;off&quot;,
+<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span>
 
-&quot;audioCues.diffLineInserted&quot;: &quot;off&quot;,
+<span class="p">},</span>
 
-&quot;audioCues.diffLineModified&quot;: &quot;off&quot;,
+<span class="nt">&quot;python.languageServer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pylance&quot;</span><span class="p">,</span>
 
-&quot;audioCues.lineHasBreakpoint&quot;: &quot;off&quot;,
+<span class="nt">&quot;python.analysis.typeCheckingMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//类型检查</span>
 
-&quot;audioCues.lineHasError&quot;: &quot;off&quot;,
 
-&quot;audioCues.lineHasFoldedArea&quot;: &quot;off&quot;,
 
-&quot;audioCues.lineHasInlineSuggestion&quot;: &quot;off&quot;,
+<span class="c1">// theme</span>
 
-&quot;audioCues.noInlayHints&quot;: &quot;off&quot;,
+<span class="nt">&quot;workbench.colorTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ayu Mirage&quot;</span><span class="p">,</span>
 
-&quot;audioCues.notebookCellCompleted&quot;: &quot;off&quot;,
+<span class="c1">// audio</span>
 
-&quot;audioCues.notebookCellFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatRequestSent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.onDebugBreak&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatResponseReceived&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.taskCompleted&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.chatResponsePending&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.taskFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.terminalCommandFailed&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.diffLineDeleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.terminalQuickFix&quot;: &quot;off&quot;,
+<span class="nt">&quot;audioCues.diffLineInserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;audioCues.volume&quot;: 40,
+<span class="nt">&quot;audioCues.diffLineModified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+<span class="nt">&quot;audioCues.lineHasBreakpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;: true,
+<span class="nt">&quot;audioCues.lineHasError&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;debug.console.fontSize&quot;: 15,
+<span class="nt">&quot;audioCues.lineHasFoldedArea&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;editor.fontSize&quot;: 15,
+<span class="nt">&quot;audioCues.lineHasInlineSuggestion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-&quot;window.zoomLevel&quot;: 1,
+<span class="nt">&quot;audioCues.noInlayHints&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-}
-</code></pre>
+<span class="nt">&quot;audioCues.notebookCellCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.notebookCellFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.onDebugBreak&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.taskCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.taskFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.terminalCommandFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.terminalQuickFix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;audioCues.volume&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+
+<span class="nt">&quot;workbench.iconTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;material-icon-theme&quot;</span><span class="p">,</span>
+
+<span class="nt">&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="nt">&quot;debug.console.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+
+<span class="nt">&quot;editor.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+
+<span class="nt">&quot;window.zoomLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="p">}</span>
+</pre></div>
 </div>
     </article>
 </div>

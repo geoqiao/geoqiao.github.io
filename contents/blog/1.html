@@ -15,6 +15,9 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
     </head>
     <body>
         <div class="container">
@@ -88,65 +91,65 @@
 <p>例如 macOS：</p>
 <blockquote>
 <p>To install run you can curl a command which will install the right binary for your operating system and CPU architecture and install it:</p>
-<pre><code class="language-shell">curl -sSf https://rye-up.com/get | bash
-</code></pre>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-sSf<span class="w"> </span>https://rye-up.com/get<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</pre></div>
 </blockquote>
 <p><strong>补充</strong>：</p>
-<pre><code class="language-shell">rye self update # 升级rye
-</code></pre>
-<pre><code class="language-shell">rye self uninstall # 卸载rye
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>self<span class="w"> </span>update<span class="w"> </span><span class="c1"># 升级rye</span>
+</pre></div>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>self<span class="w"> </span>uninstall<span class="w"> </span><span class="c1"># 卸载rye</span>
+</pre></div>
 <h2>开始一个新项目</h2>
 <p>使用  <code>rye init</code>  初始化一个新项目非常容易。在这里，我开始一个名为： <code>&quot;test-rye&quot;</code>的新项目。</p>
-<pre><code class="language-shell">mkdir test-rye  #创建项目文件夹
-cd test-rye #在终端进入刚才创建的项目文件夹
-rye init . #使用rye初始化项目
-</code></pre>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>test-rye<span class="w">  </span><span class="c1">#创建项目文件夹</span>
+<span class="nb">cd</span><span class="w"> </span>test-rye<span class="w"> </span><span class="c1">#在终端进入刚才创建的项目文件夹</span>
+rye<span class="w"> </span>init<span class="w"> </span>.<span class="w"> </span><span class="c1">#使用rye初始化项目</span>
+</pre></div>
 <p>执行初始化之后，rye 会帮我们创建一些默认文件：</p>
-<pre><code class="language-shell">tree
-├── README.md       # 项目的README文件
-├── pyproject.toml  # rye用来管理项目的文件
-└── src
-    └── test_rye
-        └── __init__.py
-</code></pre>
+<div class="highlight"><pre><span></span>tree
+├──<span class="w"> </span>README.md<span class="w">       </span><span class="c1"># 项目的README文件</span>
+├──<span class="w"> </span>pyproject.toml<span class="w">  </span><span class="c1"># rye用来管理项目的文件</span>
+└──<span class="w"> </span>src
+<span class="w">    </span>└──<span class="w"> </span>test_rye
+<span class="w">        </span>└──<span class="w"> </span>__init__.py
+</pre></div>
 <p>现在，我们便可以安装自己想安装的包。假设我这个项目想用来做一些数据分析工作：</p>
-<pre><code class="language-shell"># 使用rye安装 numpy pandas scikit-learn xgboost
-rye add numpy pandas scikit-learn xgboost # 解析包版本，并添加到pyproject.toml文件中
-rye sync # 开始下载文件对应的包
-</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># 使用rye安装 numpy pandas scikit-learn xgboost</span>
+rye<span class="w"> </span>add<span class="w"> </span>numpy<span class="w"> </span>pandas<span class="w"> </span>scikit-learn<span class="w"> </span>xgboost<span class="w"> </span><span class="c1"># 解析包版本，并添加到pyproject.toml文件中</span>
+rye<span class="w"> </span>sync<span class="w"> </span><span class="c1"># 开始下载文件对应的包</span>
+</pre></div>
 <p>至此，一个由 rye 管理的项目就创建完成了，我们可以使用 VSCode 打开项目文件夹，并开始写代码了。</p>
-<pre><code class="language-shell">code .  # 使用VSCode打开项目文件夹
-</code></pre>
+<div class="highlight"><pre><span></span>code<span class="w"> </span>.<span class="w">  </span><span class="c1"># 使用VSCode打开项目文件夹</span>
+</pre></div>
 <p>此时，我们的项目文件夹结构如下：</p>
-<pre><code class="language-shell">tree
-├── README.md
-├── pyproject.toml
-├── requirements-dev.lock
-├── requirements.lock
-└── src
-    └── test_rye
-        ├── __init__.py
-        └── __pycache__
-            └── __init__.cpython-311.pyc
-</code></pre>
+<div class="highlight"><pre><span></span>tree
+├──<span class="w"> </span>README.md
+├──<span class="w"> </span>pyproject.toml
+├──<span class="w"> </span>requirements-dev.lock
+├──<span class="w"> </span>requirements.lock
+└──<span class="w"> </span>src
+<span class="w">    </span>└──<span class="w"> </span>test_rye
+<span class="w">        </span>├──<span class="w"> </span>__init__.py
+<span class="w">        </span>└──<span class="w"> </span>__pycache__
+<span class="w">            </span>└──<span class="w"> </span>__init__.cpython-311.pyc
+</pre></div>
 <p><strong>注意事项</strong>：
 当我们的项目需要添加新的依赖时，可以使用<code>rye add &lt;package name&gt;</code> 和 <code>rye sync</code>来安装对应的包，或者通过<code>rye romove &lt;package name&gt;</code>和<code>rye sync</code>来移除对应的包。</p>
 <p><code>rye add &lt;package name&gt;</code>和<code>rye romove &lt;package name&gt;</code>只修改<code>pyproject.toml</code>文件，<code>rye sync</code>会按照<code>pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
 <h2>修改项目的 Python 版本</h2>
-<p>rye 当前为我们的项目安装 <a href="mailto:Python@3.11">Python@3.11</a> 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
-<pre><code class="language-shell">rye pin 3.9
-rye sync # 所有的修改都需要使用sync命令生效
-</code></pre>
-<p>此时，我们的项目的 Python <a href="%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%98%E4%B8%BA%E4%BA%86Python@3.9">版本就变为了Python@3.9</a></p>
+<p>rye 当前为我们的项目安装 Python@3.11 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>pin<span class="w"> </span><span class="m">3</span>.9
+rye<span class="w"> </span>sync<span class="w"> </span><span class="c1"># 所有的修改都需要使用sync命令生效</span>
+</pre></div>
+<p>此时，我们的项目的 Python 版本就变为了Python@3.9</p>
 <h2>全局 Python 脚本</h2>
 <p>某些情况下，有些包我们想要全局使用，比如<code>black</code>或者<code>ruff</code>来对我们的代码进行格式化。</p>
-<pre><code class="language-shell">rye install ruff
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>install<span class="w"> </span>ruff
+</pre></div>
 <p>安装之后，就可以在终端全局使用<code>ruff</code>命令了</p>
 <p>卸载也很简单：</p>
-<pre><code class="language-shell">rye uninstall ruff
-</code></pre>
+<div class="highlight"><pre><span></span>rye<span class="w"> </span>uninstall<span class="w"> </span>ruff
+</pre></div>
 <h2>最后</h2>
 <p>rye 还支持一些常规的操作，比如接管全局 python、升级项目中某个依赖或者所有依赖的版本、构建/发布包等等功能，可以通过<a href="https://rye-up.com/guide/">官方文档</a>查看。</p>
 </div>

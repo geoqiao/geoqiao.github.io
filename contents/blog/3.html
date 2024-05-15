@@ -15,6 +15,9 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
     </head>
     <body>
         <div class="container">
@@ -83,14 +86,14 @@ where：从某个表中符合<strong>哪些条件的数据</strong>进行选择
 left join：就是excel 中的 vlookup geoqiao/geoqiao.github.io#2 </p>
 <h2>用 excel 思维读 SQL 代码</h2>
 <p>理解了以上的几个单词，你就可以读懂 SQL 代码了，比如如下的代码片段：</p>
-<pre><code class="language-sql">SELECT
-	table1.id
-	,table2.name
-FROM table1
-LEFT JOIN table2
-ON table1.id = table2.id
-WHERE table1.column1 = &#x27;1&#x27;
-</code></pre>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span>
+<span class="w">	</span><span class="n">table1</span><span class="p">.</span><span class="n">id</span>
+<span class="w">	</span><span class="p">,</span><span class="n">table2</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="n">column1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span>
+</pre></div>
 <p>在这个示例中，<code>table1</code>  和  <code>table2</code>  是两个不同的表，我们在 <code>table1</code> 中写了一个 <code>vlookup</code> ，这个公式以两张表中的 <code>id</code> 字段为条件关联，把 <code>table2</code>  中的 <code>name</code> 字段匹配到了 <code>table1</code> ，并且匹配完成后进行了一个筛选，只选择 <code>table1</code> 中 <code>column1</code> 字段为 <code>&#x27;1&#x27;</code> 的行。</p>
 </div>
     </article>
