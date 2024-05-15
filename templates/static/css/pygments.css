@@ -308,12 +308,12 @@ span.linenos.special {
 
 /* Literal.Number.Oct */
 .highlight .sa {
-    background-color: #fff0f0
+    color: #C41A16
 }
 
 /* Literal.String.Affix */
 .highlight .sb {
-    background-color: #fff0f0
+    color: #C41A16
 }
 
 /* Literal.String.Backtick */
@@ -323,7 +323,7 @@ span.linenos.special {
 
 /* Literal.String.Char */
 .highlight .dl {
-    background-color: #fff0f0
+    color: #C41A16
 }
 
 /* Literal.String.Delimiter */
@@ -340,29 +340,29 @@ span.linenos.special {
 .highlight .se {
     color: #666666;
     font-weight: bold;
-    background-color: #fff0f0
+    /* background-color: #fff0f0 */
 }
 
 /* Literal.String.Escape */
 .highlight .sh {
-    background-color: #fff0f0
+    color: #C41A16
 }
 
 /* Literal.String.Heredoc */
 .highlight .si {
-    background-color: #eeeeee
+    color: #C41A16
 }
 
 /* Literal.String.Interpol */
 .highlight .sx {
     color: #DD2200;
-    background-color: #fff0f0
+    /* background-color: #fff0f0 */
 }
 
 /* Literal.String.Other */
 .highlight .sr {
     color: #c9d2dc;
-    background-color: #fff0ff
+    /* background-color: #fff0ff */
 }
 
 /* Literal.String.Regex */
