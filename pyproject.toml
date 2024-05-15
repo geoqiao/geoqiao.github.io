@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "jinja2>=3.1.3",
-    "marko>=2.0.3",
+    "marko[codehilite]>=2.0.3",
     "feedgen>=1.0.0",
     "pygithub>=2.3.0",
 ]
