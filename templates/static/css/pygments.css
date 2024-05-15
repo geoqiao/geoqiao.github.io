@@ -273,7 +273,7 @@ span.linenos.special {
 
 /* Operator.Word */
 .highlight .w {
-    color: #c9d2dc
+    color: #bbbbbb
 }
 
 /* Text.Whitespace */
@@ -367,7 +367,7 @@ span.linenos.special {
 
 /* Literal.String.Regex */
 .highlight .s1 {
-    background-color: #fff0f0
+    background-color: #24292e
 }
 
 /* Literal.String.Single */
