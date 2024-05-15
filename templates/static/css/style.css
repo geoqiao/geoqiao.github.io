@@ -244,22 +244,21 @@ img {
 pre {
     display: block;
     background-color: #24292e;
-    padding: 1rem
+    padding: 1rem;
 }
-
-pre, code {
+pre,
+code {
     font-size: 90%;
     overflow: auto;
     font-family: Consolas, Monaco, Menlo, Consolas, monospace;
     margin-bottom: 0;
-    color: #c9d2dc
+    color: #c9d2dc;
 }
-
-pre>code {
+pre > code {
     display: block;
     border: none;
     font-style: normal;
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 iframe {
