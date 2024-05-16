@@ -244,7 +244,8 @@ img {
 pre {
     display: block;
     background-color:  #24292e;
-    padding: 1rem
+    padding: 1rem;
+    border-radius: 8px;
 }
 
 pre, code {
