@@ -57,9 +57,9 @@
             </nav>
             {% include 'includes/header.html' %}
             <main>{% block content %}{% endblock %}</main>
-            {% block script %}{% endblock %}
             {% include 'includes/footer.html' %}
         </div>
+        {% block script %}{% endblock %}
         <script
             type="text/javascript"
             src="https://geoqiao.github.io/templates/static/js/even.js"></script>
