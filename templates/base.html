@@ -57,6 +57,7 @@
             </nav>
             {% include 'includes/header.html' %}
             <main>{% block content %}{% endblock %}</main>
+            {% block script %}{% endblock %}
             {% include 'includes/footer.html' %}
         </div>
         <script
