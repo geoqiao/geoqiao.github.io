@@ -14,6 +14,10 @@
         </header>
         <div class="post__content">{{ html_body|safe }}</div>
     </article>
+</div>
+{% endblock %}
+
+{% block script %}
     <script src="https://utteranc.es/client.js"
         repo="geoqiao/geoqiao.github.io"
         issue-number="{{ issue.number }}"
@@ -21,5 +25,4 @@
         crossorigin="anonymous"
         async>
     </script>
-</div>
 {% endblock %}
