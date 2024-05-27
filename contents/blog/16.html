@@ -104,19 +104,27 @@
 </div>
     </article>
 </div>
+
+<div class="comments" id="comments"><div id="utterances-container"></div>
 </main>
             <footer id="footer">
     <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
 </footer>
         </div>
         
-<script src="https://utteranc.es/client.js"
-        repo="geoqiao/geoqiao.github.io"
-        issue-number="16"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
+    <script>
+    var container = document.getElementById('utterances-container')
+    var script = document.createElement('script')
+    script.src = 'https://utteranc.es/client.js'
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io')
+    script.setAttribute('issue-number', '16')
+    script.setAttribute('theme', 'github-light')
+    script.setAttribute('label', 'utterances')
+    script.crossorigin = 'anonymous'
+    script.async = true
+
+    container.appendChild(script)
+    </script>
 
         <script
             type="text/javascript"
