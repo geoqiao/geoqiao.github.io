@@ -29,7 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sed '/^-e/d' requirements.lock > requirements.txt
           python -m pip install --upgrade pip
           python -m venv venv
           source venv/bin/activate
