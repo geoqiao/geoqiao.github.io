@@ -18,44 +18,46 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="icon" type="image/png"
-            href="https://geoqiao.github.io/favicon.png">
-    </head>
-    <body>
-        <div class="container">
-            <div id="mobile-navbar" class="mobile-navbar">
-                <div class="mobile-header-logo">
-                    <a href="/" class="logo">Geoqiao</a>
-                </div>
-                <div class="mobile-navbar-icon icon-out">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+        <link rel="stylesheet" type="text/css"
+            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
+    <link rel="icon" type="image/png"
+        href="https://geoqiao.github.io/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Geoqiao</a>
             </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-            <nav
-                id="mobile-menu"
-                class="mobile-menu slideout-menu slideout-menu-left">
-                <ul class="mobile-menu-list">
-                    <li class="mobile-menu-item">
-                        <a href="/"> Home </a>
-                    </li>
+        <nav
+            id="mobile-menu"
+            class="mobile-menu slideout-menu slideout-menu-left">
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-item">
+                    <a href="/"> Home </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/tags"> Tags </a>
-                    </li>
+                <li class="mobile-menu-item">
+                    <a href="/tags"> Tags </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/about"> About </a>
-                    </li>
+                <li class="mobile-menu-item">
+                    <a href="/about"> About </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/contents/atom.xml"> RSS </a>
-                    </li>
-                </ul>
-            </nav>
-            <header id="header">
+                <li class="mobile-menu-item">
+                    <a href="/contents/atom.xml"> RSS </a>
+                </li>
+            </ul>
+        </nav>
+        <header id="header">
     <div class="logo"><a href="/">Geoqiao's Page</a></div>
     <div class="menu">
         <ul>
@@ -66,7 +68,7 @@
         </ul>
     </div>
 </header>
-            <main>
+        <main>
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
@@ -85,8 +87,8 @@
 <h2>安装 VSCode</h2>
 <p>安装 VSCode 非常简单，可以直接在<a href="https://code.visualstudio.com/download">官网</a>安装，跟大多数下载软件一样，直接下载就行。</p>
 <p>如果你是 macOS、并且已经安装了 Homebrew，可以通过以下命令安装：</p>
-<div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>visual-studio-code
-</pre></div>
+<pre><code class="language-shell">brew install visual-studio-code
+</code></pre>
 <h2>安装插件</h2>
 <p>实际上 VSCode 本身只是一个文本编辑器，使它强大且流行的主要原因是强大的插件系统。通过不同的插件组合，可以把 VSCode 配置成几乎任何想要的集成开发环境。</p>
 <p>因为我是一个初学者，并且只会写一些简单的 Python 脚本，这里主要针对 Python 进行 VSCode 配置。</p>
@@ -100,123 +102,123 @@
 </ol>
 <h2>编辑配置</h2>
 <p>在下载好插件之后，插件的有些功能需要在 VSCode 设置中开启，为了方便，我直接把设置的 setting.json 文件放在这里供参考：</p>
-<div class="highlight"><pre><span></span><span class="p">{</span>
+<pre><code class="language-json">{
 
-<span class="c1">// editor basics</span>
+// editor basics
 
-<span class="nt">&quot;editor.accessibilitySupport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+&quot;editor.accessibilitySupport&quot;: &quot;on&quot;,
 
-<span class="nt">&quot;editor.fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JetBrains Mono NL, MesloLGS NF&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//字体部分需要下载相关字体</span>
+&quot;editor.fontFamily&quot;: &quot;JetBrains Mono NL, MesloLGS NF&quot;, //字体部分需要下载相关字体
 
-<span class="nt">&quot;editor.cursorBlinking&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+&quot;editor.cursorBlinking&quot;: &quot;solid&quot;,
 
-<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// ruff插件的配置项</span>
+&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;, // ruff插件的配置项
 
-<span class="nt">&quot;editor.mouseWheelScrollSensitivity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+&quot;editor.mouseWheelScrollSensitivity&quot;: 1,
 
-<span class="nt">&quot;editor.mouseWheelZoom&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+&quot;editor.mouseWheelZoom&quot;: true,
 
-<span class="nt">&quot;editor.semanticHighlighting.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">//语义高亮</span>
+&quot;editor.semanticHighlighting.enabled&quot;: true, //语义高亮
 
-<span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+&quot;editor.wordWrap&quot;: &quot;on&quot;,
 
-<span class="nt">&quot;editor.autoClosingBrackets&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;languageDefined&quot;</span><span class="p">,</span>
-
-
-
-<span class="c1">// python</span>
-
-<span class="nt">&quot;[python]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-
-<span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-
-<span class="nt">&quot;editor.codeActionsOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-
-<span class="nt">&quot;source.fixAll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span><span class="p">,</span>
-
-<span class="nt">&quot;source.organizeImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;explicit&quot;</span>
-
-<span class="p">},</span>
-
-<span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;charliermarsh.ruff&quot;</span>
-
-<span class="p">},</span>
-
-<span class="nt">&quot;python.languageServer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pylance&quot;</span><span class="p">,</span>
-
-<span class="nt">&quot;python.analysis.typeCheckingMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//类型检查</span>
+&quot;editor.autoClosingBrackets&quot;: &quot;languageDefined&quot;,
 
 
 
-<span class="c1">// theme</span>
+// python
 
-<span class="nt">&quot;workbench.colorTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Best Themes - Xcode Catalina Bold&quot;</span><span class="p">,</span>
+&quot;[python]&quot;: {
 
-<span class="c1">// audio</span>
+&quot;editor.formatOnSave&quot;: true,
 
-<span class="nt">&quot;audioCues.chatRequestSent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;editor.codeActionsOnSave&quot;: {
 
-<span class="nt">&quot;audioCues.chatResponseReceived&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;source.fixAll&quot;: &quot;explicit&quot;,
 
-<span class="nt">&quot;audioCues.chatResponsePending&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;source.organizeImports&quot;: &quot;explicit&quot;
 
-<span class="nt">&quot;audioCues.clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+},
 
-<span class="nt">&quot;audioCues.diffLineDeleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;
 
-<span class="nt">&quot;audioCues.diffLineInserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+},
 
-<span class="nt">&quot;audioCues.diffLineModified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;python.languageServer&quot;: &quot;Pylance&quot;,
 
-<span class="nt">&quot;audioCues.lineHasBreakpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;python.analysis.typeCheckingMode&quot;: &quot;basic&quot;, //类型检查
 
-<span class="nt">&quot;audioCues.lineHasError&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-<span class="nt">&quot;audioCues.lineHasFoldedArea&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
 
-<span class="nt">&quot;audioCues.lineHasInlineSuggestion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+// theme
 
-<span class="nt">&quot;audioCues.noInlayHints&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;workbench.colorTheme&quot;: &quot;Best Themes - Xcode Catalina Bold&quot;,
 
-<span class="nt">&quot;audioCues.notebookCellCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+// audio
 
-<span class="nt">&quot;audioCues.notebookCellFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.chatRequestSent&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.onDebugBreak&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.chatResponseReceived&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.taskCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.chatResponsePending&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.taskFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.clear&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.terminalCommandFailed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.diffLineDeleted&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.terminalQuickFix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span><span class="p">,</span>
+&quot;audioCues.diffLineInserted&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;audioCues.volume&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+&quot;audioCues.diffLineModified&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;workbench.iconTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;material-icon-theme&quot;</span><span class="p">,</span>
+&quot;audioCues.lineHasBreakpoint&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+&quot;audioCues.lineHasError&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;debug.console.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+&quot;audioCues.lineHasFoldedArea&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;editor.fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+&quot;audioCues.lineHasInlineSuggestion&quot;: &quot;off&quot;,
 
-<span class="nt">&quot;window.zoomLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+&quot;audioCues.noInlayHints&quot;: &quot;off&quot;,
 
-<span class="p">}</span>
-</pre></div>
+&quot;audioCues.notebookCellCompleted&quot;: &quot;off&quot;,
+
+&quot;audioCues.notebookCellFailed&quot;: &quot;off&quot;,
+
+&quot;audioCues.onDebugBreak&quot;: &quot;off&quot;,
+
+&quot;audioCues.taskCompleted&quot;: &quot;off&quot;,
+
+&quot;audioCues.taskFailed&quot;: &quot;off&quot;,
+
+&quot;audioCues.terminalCommandFailed&quot;: &quot;off&quot;,
+
+&quot;audioCues.terminalQuickFix&quot;: &quot;off&quot;,
+
+&quot;audioCues.volume&quot;: 40,
+
+&quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+
+&quot;jupyter.interactiveWindow.textEditor.executeSelection&quot;: true,
+
+&quot;debug.console.fontSize&quot;: 15,
+
+&quot;editor.fontSize&quot;: 15,
+
+&quot;window.zoomLevel&quot;: 1,
+
+}
+</code></pre>
 </div>
     </article>
 </div>
 
 <div class="comments" id="comments"><div id="utterances-container"></div>
 </main>
-            <footer id="footer">
+        <footer id="footer">
     <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
 </footer>
-        </div>
-        
+    </div>
+    
     <script>
     var container = document.getElementById('utterances-container')
     var script = document.createElement('script')
@@ -231,8 +233,12 @@
     container.appendChild(script)
     </script>
 
-        <script
-            type="text/javascript"
-            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    <script
+        type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    <script type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
+    <script
+        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
     </body>
 </html>

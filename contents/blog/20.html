@@ -18,44 +18,46 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="icon" type="image/png"
-            href="https://geoqiao.github.io/favicon.png">
-    </head>
-    <body>
-        <div class="container">
-            <div id="mobile-navbar" class="mobile-navbar">
-                <div class="mobile-header-logo">
-                    <a href="/" class="logo">Geoqiao</a>
-                </div>
-                <div class="mobile-navbar-icon icon-out">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+        <link rel="stylesheet" type="text/css"
+            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
+    <link rel="icon" type="image/png"
+        href="https://geoqiao.github.io/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Geoqiao</a>
             </div>
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-            <nav
-                id="mobile-menu"
-                class="mobile-menu slideout-menu slideout-menu-left">
-                <ul class="mobile-menu-list">
-                    <li class="mobile-menu-item">
-                        <a href="/"> Home </a>
-                    </li>
+        <nav
+            id="mobile-menu"
+            class="mobile-menu slideout-menu slideout-menu-left">
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-item">
+                    <a href="/"> Home </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/tags"> Tags </a>
-                    </li>
+                <li class="mobile-menu-item">
+                    <a href="/tags"> Tags </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/about"> About </a>
-                    </li>
+                <li class="mobile-menu-item">
+                    <a href="/about"> About </a>
+                </li>
 
-                    <li class="mobile-menu-item">
-                        <a href="/contents/atom.xml"> RSS </a>
-                    </li>
-                </ul>
-            </nav>
-            <header id="header">
+                <li class="mobile-menu-item">
+                    <a href="/contents/atom.xml"> RSS </a>
+                </li>
+            </ul>
+        </nav>
+        <header id="header">
     <div class="logo"><a href="/">Geoqiao's Page</a></div>
     <div class="menu">
         <ul>
@@ -66,7 +68,7 @@
         </ul>
     </div>
 </header>
-            <main>
+        <main>
 <div class="content" id="mobile-panel">
     <article class="post">
         <header class="post__header">
@@ -76,74 +78,75 @@
             </div>
         </header>
         <div class="post__content"><h1>背景</h1>
-<p>最近两三年，我逐渐卸载了抖音、微博等社交媒体，主要从RSS订阅获取信息。卸载部分社交媒体让我有了一点时间做其他事情，比如听播客、学Python、阅读......</p>
-<p>这个练习是我的<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>final project的延续，主要目的是学习一些web的开发框架、使用Python操作数据库。</p>
+<p>最近两三年，我逐渐卸载了抖音、微博等社交媒体，主要从<span class="pangu"></span>RSS<span class="pangu"></span>订阅获取信息。卸载部分社交媒体让我有了一点时间做其他事情，比如听播客、学<span class="pangu"></span>Python、阅读......</p>
+<p>这个练习是我的<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>final project<span class="pangu"></span>的延续，主要目的是学习一些<span class="pangu"></span>web<span class="pangu"></span>的开发框架、使用<span class="pangu"></span>Python<span class="pangu"></span>操作数据库。</p>
 <h2>why fastAPI</h2>
-<p>对比了Django 还有 Flask：</p>
+<p>对比了<span class="pangu"></span>Django 还有 Flask：</p>
 <ol>
-<li>感觉Django太重了，没有方便的装饰器，不适合新手</li>
-<li>Flask感觉有点乱，主要命令行我没有弄明白</li>
-<li>fastAPI对type hints的支持很好，感觉也更简单</li>
+<li>感觉<span class="pangu"></span>Django<span class="pangu"></span>太重了，没有方便的装饰器，不适合新手</li>
+<li>Flask<span class="pangu"></span>感觉有点乱，主要命令行我没有弄明白</li>
+<li>fastAPI<span class="pangu"></span>对<span class="pangu"></span>type hints<span class="pangu"></span>的支持很好，感觉也更简单</li>
 </ol>
 <h2>why SQLite</h2>
-<p>SQLite只有一个文件，操作起来很简单，也不用配置什么环境</p>
+<p>SQLite<span class="pangu"></span>只有一个文件，操作起来很简单，也不用配置什么环境</p>
 <h1>思路</h1>
-<p>我想实现对RSS订阅源的添加、查询、删除功能，所以思路很简单</p>
+<p>我想实现对<span class="pangu"></span>RSS<span class="pangu"></span>订阅源的添加、查询、删除功能，所以思路很简单</p>
 <ol>
-<li>创建一个SQLite数据库，要包含<code>订阅链接</code>、<code>标题</code>、<code>tag</code>、<code>网址</code>、<code>添加时间</code>等字段</li>
-<li>定义CRUD函数</li>
-<li>将函数返回值给到fastAPI，并渲染前端页面</li>
+<li>创建一个<span class="pangu"></span>SQLite<span class="pangu"></span>数据库，要包含<code>订阅链接</code>、<code>标题</code>、<code>tag</code>、<code>网址</code>、<code>添加时间</code>等字段</li>
+<li>定义<span class="pangu"></span>CRUD<span class="pangu"></span>函数</li>
+<li>将函数返回值给到<span class="pangu"></span>fastAPI，并渲染前端页面</li>
 </ol>
 <h1>上手开干</h1>
 <h2>创建数据库</h2>
-<p>这里我使用SQLAlchemy库来实现，搜索中推荐这个库的文章很多，ORM支持很不错</p>
+<p>这里我使用<span class="pangu"></span>SQLAlchemy<span class="pangu"></span>库来实现，搜索中推荐这个库的文章很多，ORM<span class="pangu"></span>支持很不错</p>
 <blockquote>
-<p>ORM：指的是对象关系映射(Object-Relational Mapping)，主要作用是将数据库中的表结构映射到对象上,使开发者可以使用面向对象的方式来操作数据库,而不需要直接编写SQL语句。</p>
+<p>ORM：指的是对象关系映射(Object-Relational Mapping)，主要作用是将数据库中的表结构映射到对象上,使开发者可以使用面向对象的方式来操作数据库,而不需要直接编写<span class="pangu"></span>SQL<span class="pangu"></span>语句。</p>
 </blockquote>
-<p>使用SQLAlchemy创建SQLite数据库，设计<code>feeds</code>表的字段，并为字段添加类型要求</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
-    <span class="k">pass</span>
+<p>使用<span class="pangu"></span>SQLAlchemy<span class="pangu"></span>创建<span class="pangu"></span>SQLite<span class="pangu"></span>数据库，设计<code>feeds</code>表的字段，并为字段添加类型要求</p>
+<pre><code class="language-python">class Base(DeclarativeBase):
+    pass
 
 
-<span class="k">class</span> <span class="nc">Subscription</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;feeds&quot;</span>
+class Subscription(Base):
+    __tablename__ = &quot;feeds&quot;
     
-    <span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">url</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">tag</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
-    <span class="n">link</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">updated_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    url: Mapped[str] = mapped_column(nullable=False, unique=True, index=True)
+    title: Mapped[str] = mapped_column(nullable=False)
+    tag: Mapped[Optional[str]]
+    link: Mapped[str] = mapped_column(nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(nullable=False, default=datetime.now)
     
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Feed(id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">!r}</span><span class="s2">, url=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">!r}</span><span class="s2">,title=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">,tag=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="si">!r}</span><span class="s2">,link=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="si">!r}</span><span class="s2">)&quot;</span>
-</pre></div>
-<h2>定义CRUD函数</h2>
-<p>这里主要学习了SQLAlchemy的ORM查询方法。</p>
-<p>一开始觉得直接写SQL语句更好，只用掌握一种SQL语法就行了；后来查询后，好像直接写SQL语句有安全风险，比如SQL注入。</p>
+    def __repr__(self) -&gt; str:
+        return f&quot;Feed(id={self.id!r}, url={self.url!r},title={self.title},tag={self.tag!r},link={self.link!r})&quot;
+</code></pre>
+<h2>定义<span class="pangu"></span>CRUD<span class="pangu"></span>函数</h2>
+<p>这里主要学习了<span class="pangu"></span>SQLAlchemy<span class="pangu"></span>的<span class="pangu"></span>ORM<span class="pangu"></span>查询方法。</p>
+<p>一开始觉得直接写<span class="pangu"></span>SQL<span class="pangu"></span>语句更好，只用掌握一种<span class="pangu"></span>SQL<span class="pangu"></span>语法就行了；后来查询后，好像直接写<span class="pangu"></span>SQL<span class="pangu"></span>语句有安全风险，比如<span class="pangu"></span>SQL<span class="pangu"></span>注入。</p>
 <blockquote>
-<p>SQL注入：用户前端输入框填写SQL语句，导致后端数据泄露、篡改等等问题</p>
+<p>SQL<span class="pangu"></span>注入：用户前端输入框填写<span class="pangu"></span>SQL<span class="pangu"></span>语句，导致后端数据泄露、篡改等等问题</p>
 </blockquote>
-<p><strong>ORM语法示例</strong>：</p>
-<p>以下代码通过数据库中的ID字段查询对应的订阅链接。我感觉这种写法还能接受，不过还是感觉直接写SQL语句的话心智负担更小一点，因为可以少学一种语法。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_feed_by_id</span><span class="p">(</span><span class="n">feed_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="n">feed</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subscription</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Subscription</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">feed_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<p><strong>ORM<span class="pangu"></span>语法示例</strong>：</p>
+<p>以下代码通过数据库中的<span class="pangu"></span>ID<span class="pangu"></span>字段查询对应的订阅链接。我感觉这种写法还能接受，不过还是感觉直接写<span class="pangu"></span>SQL<span class="pangu"></span>语句的话心智负担更小一点，因为可以少学一种语法。</p>
+<pre><code class="language-python">def get_feed_by_id(feed_id: int):
+    with Session(engine) as session:
+        feed = session.query(Subscription).filter(Subscription.id == feed_id).first()
     
-    <span class="k">return</span> <span class="n">feed</span>
-</pre></div>
-<h2>fastAPI接口</h2>
-<p>其实fastAPI部分很好写，只要我们获取到返回值，并且传给前端页面就好了</p>
-<p>Django框架中需要配置的视图函数、URL路径等等都不在一个文件中，但是fastAPI通过一个简单的装饰器将这些工作都做好了</p>
-<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/feeds_list&quot;</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_rss_feeds</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
-    <span class="n">feeds</span> <span class="o">=</span> <span class="n">get_all_feeds</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">template_dir</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;feeds_list.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;feeds&quot;</span><span class="p">:</span> <span class="n">feeds</span><span class="p">})</span>
-</pre></div>
+    return feed
+</code></pre>
+<h2>fastAPI<span class="pangu"></span>接口</h2>
+<p>其实<span class="pangu"></span>fastAPI<span class="pangu"></span>部分很好写，只要我们获取到返回值，并且传给前端页面就好了</p>
+<p>Django<span class="pangu"></span>框架中需要配置的视图函数、URL<span class="pangu"></span>路径等等都不在一个文件中，但是<span class="pangu"></span>fastAPI<span class="pangu"></span>通过一个简单的装饰器将这些工作都做好了</p>
+<pre><code class="language-python">@app.get(&quot;/feeds_list&quot;)
+async def get_rss_feeds(request: Request):
+    feeds = get_all_feeds()
+    return template_dir.TemplateResponse(&quot;feeds_list.html&quot;, {&quot;request&quot;: request, &quot;feeds&quot;: feeds})
+
+</code></pre>
 <h2>命令行运行程序</h2>
 <p>通过命令行运行，在 http://127.0.0.1:8000 预览程序</p>
-<div class="highlight"><pre><span></span>uvicorn<span class="w"> </span>main:app<span class="w"> </span>--reload
-</pre></div>
+<pre><code class="language-shell">uvicorn main:app --reload 
+</code></pre>
 <p><a href="https://github.com/geoqiao/RSS_db">项目地址</a></p>
 <blockquote>
 <p>纯属兴趣驱动，如有不准确的地方欢迎交流</p>
@@ -156,11 +159,11 @@
 
 <div class="comments" id="comments"><div id="utterances-container"></div>
 </main>
-            <footer id="footer">
+        <footer id="footer">
     <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
 </footer>
-        </div>
-        
+    </div>
+    
     <script>
     var container = document.getElementById('utterances-container')
     var script = document.createElement('script')
@@ -175,8 +178,12 @@
     container.appendChild(script)
     </script>
 
-        <script
-            type="text/javascript"
-            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    <script
+        type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    <script type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
+    <script
+        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
     </body>
 </html>
