@@ -140,7 +140,7 @@ def save_blog_index_as_html(content: str):
 
 
 def markdown2html(mdstr: str):
-    markdown = Markdown(extensions=["codehilite"])
+    markdown = Markdown(extensions=["pangu"])
     html = markdown.convert(mdstr)
     return html
 

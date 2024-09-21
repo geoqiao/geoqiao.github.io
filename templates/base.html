@@ -18,50 +18,56 @@
         <link
             rel="stylesheet"
             href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="icon" type="image/png"
-            href="https://geoqiao.github.io/favicon.png">
-    </head>
-    <body>
-        <div class="container">
-            <div id="mobile-navbar" class="mobile-navbar">
-                <div class="mobile-header-logo">
-                    <a href="/" class="logo">Geoqiao</a>
-                </div>
-                <div class="mobile-navbar-icon icon-out">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+        <link rel="stylesheet" type="text/css"
+            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
+    <link rel="icon" type="image/png"
+        href="https://geoqiao.github.io/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div id="mobile-navbar" class="mobile-navbar">
+            <div class="mobile-header-logo">
+                <a href="/" class="logo">Geoqiao</a>
             </div>
-
-            <nav
-                id="mobile-menu"
-                class="mobile-menu slideout-menu slideout-menu-left">
-                <ul class="mobile-menu-list">
-                    <li class="mobile-menu-item">
-                        <a href="/"> Home </a>
-                    </li>
-
-                    <li class="mobile-menu-item">
-                        <a href="/tags"> Tags </a>
-                    </li>
-
-                    <li class="mobile-menu-item">
-                        <a href="/about"> About </a>
-                    </li>
-
-                    <li class="mobile-menu-item">
-                        <a href="/contents/atom.xml"> RSS </a>
-                    </li>
-                </ul>
-            </nav>
-            {% include 'includes/header.html' %}
-            <main>{% block content %}{% endblock %}</main>
-            {% include 'includes/footer.html' %}
+            <div class="mobile-navbar-icon icon-out">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        {% block script %}{% endblock %}
-        <script
-            type="text/javascript"
-            src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+
+        <nav
+            id="mobile-menu"
+            class="mobile-menu slideout-menu slideout-menu-left">
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-item">
+                    <a href="/"> Home </a>
+                </li>
+
+                <li class="mobile-menu-item">
+                    <a href="/tags"> Tags </a>
+                </li>
+
+                <li class="mobile-menu-item">
+                    <a href="/about"> About </a>
+                </li>
+
+                <li class="mobile-menu-item">
+                    <a href="/contents/atom.xml"> RSS </a>
+                </li>
+            </ul>
+        </nav>
+        {% include 'includes/header.html' %}
+        <main>{% block content %}{% endblock %}</main>
+        {% include 'includes/footer.html' %}
+    </div>
+    {% block script %}{% endblock %}
+    <script
+        type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
+    <script type="text/javascript"
+        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
+    <script
+        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
     </body>
 </html>
