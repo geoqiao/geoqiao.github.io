@@ -96,7 +96,7 @@ def markdown2html(mdstr: str):
 <h2>HTML 模板</h2>
 <p>我对于 CSS 和 JavaScript 一窍不通，所以这部分内容我是参考了 yihong 老师的<a href="https://yihong0618.github.io/gitblog/">GitHub Pages</a>，从页面的 HTML 源码中发现了可用的 CSS 和 JavaScript 代码，并且模仿页面的 HTML，这样拼凑出来的一个页面。</p>
 <p>这个页面满足了我对于一个不太丑的前端页面的需求，并且因为过程中自己拼凑了模板，对于一些 CSS、JavaScript 的作用也有了一点点理解。</p>
-<p>当然，这个模板的搭建过程中<a href="https://www.perplexity.ai">perplexity</a>帮了我非常多的忙。<code>perplexity</code>非常强大，可以将我得到的前端代码作为文件上传，ai 帮我解读每个 CSS 和 JavaScript 的作用。免费版本已经足够我的使用，非常推荐！</p>
+<p>当然，这个模板的搭建过程中 <a href="https://www.perplexity.ai">perplexity</a> 帮了我非常多的忙。<code>perplexity</code>非常强大，可以将我得到的前端代码作为文件上传，ai 帮我解读每个 CSS 和 JavaScript 的作用。免费版本已经足够我的使用，非常推荐！</p>
 <h2>GitHub Actions 自动化</h2>
 <p>在主体代码全部实现后，接下来就是将整个过程自动化。这一步可以交给强大的 GitHub Actions 完成。它会帮我监控 issue 的变化：一旦有 issue 添加、编辑等动作，actions 会帮我自动执行我的 Python 代码，并将输出的 HTML 文件上传至 GitHub Pages 仓库。</p>
 <p>这一步也主要参考 yihong 老师<code>gitblog</code>项目的 action 实现。因为我是用 <a href="https://github.com/astral-sh/rye">rye</a> 管理 Python 项目，但<code>rye</code>并不支持输出<code>requirements.txt</code>，所以我增加了一条将<code>requirements.lock</code>文件转换为<code>requirements.txt</code>的命令：</p>
