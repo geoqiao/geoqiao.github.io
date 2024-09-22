@@ -1,83 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Coke Machine Challenge </title>
-        <link
-            rel="alternate"
-            type="application/atom+xml"
-            title="RSS"
-            href="https://geoqiao.github.io/contents/atom.xml" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/style.css" />
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="stylesheet" type="text/css"
-            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
-    <link rel="icon" type="image/png"
-        href="https://geoqiao.github.io/favicon.png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coke Machine Challenge  - Geoqiao的博客</title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="https://geoqiao.github.io/templates/static/images/favicon.png">
 </head>
 <body>
-    <div class="container">
-        <div id="mobile-navbar" class="mobile-navbar">
-            <div class="mobile-header-logo">
-                <a href="/" class="logo">Geoqiao</a>
-            </div>
-            <div class="mobile-navbar-icon icon-out">
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Geoqiao的博客</a>
+            <button class="menu-toggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-        </div>
-
-        <nav
-            id="mobile-menu"
-            class="mobile-menu slideout-menu slideout-menu-left">
-            <ul class="mobile-menu-list">
-                <li class="mobile-menu-item">
-                    <a href="/"> Home </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/tags"> Tags </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/about"> About </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/contents/atom.xml"> RSS </a>
-                </li>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/tags">标签</a></li>
+                <li><a href="/about">关于</a></li>
+                <li><a href="/atom.xml">RSS</a></li>
             </ul>
         </nav>
-        <header id="header">
-    <div class="logo"><a href="/">Geoqiao's Page</a></div>
-    <div class="menu">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/tags">Tags</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contents/atom.xml">RSS</a></li>
-        </ul>
-    </div>
-</header>
-        <main>
-<div class="content" id="mobile-panel">
-    <article class="post">
-        <header class="post__header">
-            <h1 class="post__title">Coke Machine Challenge </h1>
-            <div class="post__meta">
-                <span class="post__time">2023-09-03</span>
-            </div>
-        </header>
-        <div class="post__content"><h2>什么是 Coke Machine</h2>
+    </header>
+
+    <main class="container">
+        
+    <article class="post full-post">
+        <h1 class="post-title">Coke Machine Challenge </h1>
+        <div class="post-meta">
+            发布于 2023-09-03
+            
+                | 标签:
+                
+                    <a href="/tag/python.html" class="tag">python</a>
+                
+                    <a href="/tag/cs50p.html" class="tag">cs50p</a>
+                
+            
+        </div>
+        <div class="post-content">
+            <h2>什么是 Coke Machine</h2>
 <p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
 <blockquote>
 <p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
@@ -157,37 +123,29 @@ if __name__ == &quot;__main__&quot;:
 <p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
 <p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
 <p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>
-</div>
+
+        </div>
     </article>
-</div>
 
-<div class="comments" id="comments"><div id="utterances-container"></div>
-</main>
-        <footer id="footer">
-    <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
-</footer>
+    <div id="comments">
+        <script src="https://utteranc.es/client.js"
+                repo="geoqiao/geoqiao.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
     </div>
-    
-    <script>
-    var container = document.getElementById('utterances-container')
-    var script = document.createElement('script')
-    script.src = 'https://utteranc.es/client.js'
-    script.setAttribute('repo', 'geoqiao/geoqiao.github.io')
-    script.setAttribute('issue-number', '14')
-    script.setAttribute('theme', 'github-light')
-    script.setAttribute('label', 'utterances')
-    script.crossorigin = 'anonymous'
-    script.async = true
 
-    container.appendChild(script)
-    </script>
+    </main>
 
-    <script
-        type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
-    <script type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
-    <script
-        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
-    </body>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Geoqiao的博客</p>
+        </div>
+    </footer>
+
+    <script src="https://geoqiao.github.io/templates/static/js/prism.js"></script>
+    <script src="https://geoqiao.github.io/templates/static/js/main.js"></script>
+</body>
 </html>

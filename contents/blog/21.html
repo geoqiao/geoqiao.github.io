@@ -1,83 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>使用 Python 和 GitHub Pages 搭建个人博客</title>
-        <link
-            rel="alternate"
-            type="application/atom+xml"
-            title="RSS"
-            href="https://geoqiao.github.io/contents/atom.xml" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/style.css" />
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="stylesheet" type="text/css"
-            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
-    <link rel="icon" type="image/png"
-        href="https://geoqiao.github.io/favicon.png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用 Python 和 GitHub Pages 搭建个人博客 - Geoqiao的博客</title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="https://geoqiao.github.io/templates/static/images/favicon.png">
 </head>
 <body>
-    <div class="container">
-        <div id="mobile-navbar" class="mobile-navbar">
-            <div class="mobile-header-logo">
-                <a href="/" class="logo">Geoqiao</a>
-            </div>
-            <div class="mobile-navbar-icon icon-out">
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Geoqiao的博客</a>
+            <button class="menu-toggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-        </div>
-
-        <nav
-            id="mobile-menu"
-            class="mobile-menu slideout-menu slideout-menu-left">
-            <ul class="mobile-menu-list">
-                <li class="mobile-menu-item">
-                    <a href="/"> Home </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/tags"> Tags </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/about"> About </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/contents/atom.xml"> RSS </a>
-                </li>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/tags">标签</a></li>
+                <li><a href="/about">关于</a></li>
+                <li><a href="/atom.xml">RSS</a></li>
             </ul>
         </nav>
-        <header id="header">
-    <div class="logo"><a href="/">Geoqiao's Page</a></div>
-    <div class="menu">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/tags">Tags</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contents/atom.xml">RSS</a></li>
-        </ul>
-    </div>
-</header>
-        <main>
-<div class="content" id="mobile-panel">
-    <article class="post">
-        <header class="post__header">
-            <h1 class="post__title">使用 Python 和 GitHub Pages 搭建个人博客</h1>
-            <div class="post__meta">
-                <span class="post__time">2024-05-12</span>
-            </div>
-        </header>
-        <div class="post__content"><h1>背景</h1>
+    </header>
+
+    <main class="container">
+        
+    <article class="post full-post">
+        <h1 class="post-title">使用 Python 和 GitHub Pages 搭建个人博客</h1>
+        <div class="post-meta">
+            发布于 2024-05-12
+            
+                | 标签:
+                
+                    <a href="/tag/python.html" class="tag">python</a>
+                
+                    <a href="/tag/blog.html" class="tag">blog</a>
+                
+            
+        </div>
+        <div class="post-content">
+            <h1>背景</h1>
 <p>我偶尔有写点什么的欲望，加上 yihong 老师 <a href="https://github.com/yihong0618/gitblog">gitblog</a> 项目的激励，于是产生了写一个个人博客页面的想法。</p>
 <p>因为工作上数据分析需要，我在 2022 年开始接触 Python。作为一名曾经试图考艺术硕士的商科生，我意外的很喜欢写 Python 的体验。很长一段时间以来，我只使用 Python 做一些数据分析工作。但随着使用时间的增长，我发现自己的 Python 代码代码虽然可以运行，但是很难读、很多代码重复使用率不高、维护起来很费力。</p>
 <p>于是我尝试学习 Python 的基本概念，而不仅仅局限于 Pandas 和 sklearn。这个项目便是我目前学习的成果。</p>
@@ -140,37 +106,29 @@ def markdown2html(mdstr: str):
 <p>因为白天上班比较忙，所以每天晚上下班都会花一个小时来看这个项目。花了将近一个月的时间，我终于实现了自己搭建博客页面的想法。</p>
 <p>现在我已经开始使用自己的项目来写博客，这种体验真的很美妙。</p>
 <p>这是我的<a href="https://github.com/geoqiao/github_blog">源代码仓库</a>和<a href="https://geoqiao.github.io/contents/">GitHub Pages</a>页面</p>
-</div>
+
+        </div>
     </article>
-</div>
 
-<div class="comments" id="comments"><div id="utterances-container"></div>
-</main>
-        <footer id="footer">
-    <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
-</footer>
+    <div id="comments">
+        <script src="https://utteranc.es/client.js"
+                repo="geoqiao/geoqiao.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
     </div>
-    
-    <script>
-    var container = document.getElementById('utterances-container')
-    var script = document.createElement('script')
-    script.src = 'https://utteranc.es/client.js'
-    script.setAttribute('repo', 'geoqiao/geoqiao.github.io')
-    script.setAttribute('issue-number', '21')
-    script.setAttribute('theme', 'github-light')
-    script.setAttribute('label', 'utterances')
-    script.crossorigin = 'anonymous'
-    script.async = true
 
-    container.appendChild(script)
-    </script>
+    </main>
 
-    <script
-        type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
-    <script type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
-    <script
-        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
-    </body>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Geoqiao的博客</p>
+        </div>
+    </footer>
+
+    <script src="https://geoqiao.github.io/templates/static/js/prism.js"></script>
+    <script src="https://geoqiao.github.io/templates/static/js/main.js"></script>
+</body>
 </html>

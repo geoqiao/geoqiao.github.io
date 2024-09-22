@@ -1,83 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Python编辑器-我的VSCode配置</title>
-        <link
-            rel="alternate"
-            type="application/atom+xml"
-            title="RSS"
-            href="https://geoqiao.github.io/contents/atom.xml" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/style.css" />
-        <link
-            rel="stylesheet"
-            href="https://geoqiao.github.io/templates/static/css/pygments.css" />
-        <link rel="stylesheet" type="text/css"
-            href="https://www.codesky.me/usr/plugins/GoogleCodePrettify/src/github.css" /></head>
-    <link rel="icon" type="image/png"
-        href="https://geoqiao.github.io/favicon.png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python编辑器-我的VSCode配置 - Geoqiao的博客</title>
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/style.css">
+    <link rel="stylesheet" href="https://geoqiao.github.io/templates/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="https://geoqiao.github.io/templates/static/images/favicon.png">
 </head>
 <body>
-    <div class="container">
-        <div id="mobile-navbar" class="mobile-navbar">
-            <div class="mobile-header-logo">
-                <a href="/" class="logo">Geoqiao</a>
-            </div>
-            <div class="mobile-navbar-icon icon-out">
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Geoqiao的博客</a>
+            <button class="menu-toggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-        </div>
-
-        <nav
-            id="mobile-menu"
-            class="mobile-menu slideout-menu slideout-menu-left">
-            <ul class="mobile-menu-list">
-                <li class="mobile-menu-item">
-                    <a href="/"> Home </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/tags"> Tags </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/about"> About </a>
-                </li>
-
-                <li class="mobile-menu-item">
-                    <a href="/contents/atom.xml"> RSS </a>
-                </li>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/tags">标签</a></li>
+                <li><a href="/about">关于</a></li>
+                <li><a href="/atom.xml">RSS</a></li>
             </ul>
         </nav>
-        <header id="header">
-    <div class="logo"><a href="/">Geoqiao's Page</a></div>
-    <div class="menu">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/tags">Tags</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contents/atom.xml">RSS</a></li>
-        </ul>
-    </div>
-</header>
-        <main>
-<div class="content" id="mobile-panel">
-    <article class="post">
-        <header class="post__header">
-            <h1 class="post__title">Python编辑器-我的VSCode配置</h1>
-            <div class="post__meta">
-                <span class="post__time">2023-12-10</span>
-            </div>
-        </header>
-        <div class="post__content"><p>VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。</p>
+    </header>
+
+    <main class="container">
+        
+    <article class="post full-post">
+        <h1 class="post-title">Python编辑器-我的VSCode配置</h1>
+        <div class="post-meta">
+            发布于 2023-12-10
+            
+                | 标签:
+                
+                    <a href="/tag/python.html" class="tag">python</a>
+                
+            
+        </div>
+        <div class="post-content">
+            <p>VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。</p>
 <h2>为什么不是其他编辑器</h2>
 <p>可以编辑 Python 的编辑器很多，但是为什么选择 VSCode 呢？</p>
 <p><strong>PyCharm</strong>：太重了，并且是付费软件。社区版免费，但无法在 PyCharm 中使用 jupyter notebook。并且实话说，我感觉 PyCharm 的学习曲线相对陡峭(下载过一次，感觉配置起来没有 VSCode 简单)。</p>
@@ -208,37 +172,29 @@
 
 }
 </code></pre>
-</div>
+
+        </div>
     </article>
-</div>
 
-<div class="comments" id="comments"><div id="utterances-container"></div>
-</main>
-        <footer id="footer">
-    <p style="text-align: center;">&copy; 2024 Geoqiao's Page</p>
-</footer>
+    <div id="comments">
+        <script src="https://utteranc.es/client.js"
+                repo="geoqiao/geoqiao.github.io"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
     </div>
-    
-    <script>
-    var container = document.getElementById('utterances-container')
-    var script = document.createElement('script')
-    script.src = 'https://utteranc.es/client.js'
-    script.setAttribute('repo', 'geoqiao/geoqiao.github.io')
-    script.setAttribute('issue-number', '18')
-    script.setAttribute('theme', 'github-light')
-    script.setAttribute('label', 'utterances')
-    script.crossorigin = 'anonymous'
-    script.async = true
 
-    container.appendChild(script)
-    </script>
+    </main>
 
-    <script
-        type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/even.js"></script>
-    <script type="text/javascript"
-        src="https://geoqiao.github.io/templates/static/js/prettify.js"></script>
-    <script
-        type="text/javascript">window.onload = function () {var pre = document.getElementsByTagName('pre');for(i=0,l=pre.length;i<l;i++) pre[i].className += " prettyprint linenums";prettyPrint();}</script>
-    </body>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Geoqiao的博客</p>
+        </div>
+    </footer>
+
+    <script src="https://geoqiao.github.io/templates/static/js/prism.js"></script>
+    <script src="https://geoqiao.github.io/templates/static/js/main.js"></script>
+</body>
 </html>
