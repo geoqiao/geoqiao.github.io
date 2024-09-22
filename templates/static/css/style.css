@@ -154,6 +154,7 @@ footer {
         left: 0;
         background-color: var(--header-background);
         padding: 1rem;
+        z-index: 1000;
     }
 
     .nav-links.active {
@@ -177,13 +178,31 @@ footer {
         height: 3px;
         background-color: #fff;
         margin: 5px 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .post {
+        padding: 1rem;
     }
 }
 
 /* 基础样式 */
 .post-content {
-    line-height: 1.6;
+    line-height: 1.8;
     color: #333;
+    font-size: 16px;
 }
 
 /* 标题样式 */
@@ -362,4 +381,11 @@ footer {
     padding: 0;
     font-size: 1em;
     white-space: pre;
+}
+
+@media (max-width: 768px) {
+    .post-content pre {
+        font-size: 12px;
+        padding: 0.5em;
+    }
 }
