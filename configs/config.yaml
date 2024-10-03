@@ -12,6 +12,11 @@ github:
   name: geoqiao # GitHub 用户名
   repo: geoqiao/geoqiao.github.io # GitHub 仓库名称
 
+# Google Search Console
+GoogleSearchConsole:
+  content: DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y # Google Search Console ID
+  verify: true # 是否验证
+
 ## 以下配置目前没用，可以暂时忽视
 # 目录配置
 dirs:
