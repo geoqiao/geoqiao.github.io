@@ -20,8 +20,12 @@ from jinja2 import Environment, FileSystemLoader
 from lxml.etree import CDATA
 from marko import Markdown
 
+from configs.config_utils import load_config
+
 CONTENTS_DIR: str = "./contents/"
 BACKUP_DIR: str = "./backup/"
+# CONFIG_YAML: str = "./config.yaml"
+CONFIG = load_config()
 
 
 def main(token: str, repo_name: str):
@@ -97,7 +101,15 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     """
     env = Environment(loader=FileSystemLoader("templates"))
     template = env.get_template("index.html")
-    return template.render(issues=issues)
+    blog_title = CONFIG["blog"]["title"]
+    github_name = CONFIG["github"]["name"]
+    meta_description = CONFIG["blog"]["description"]
+    return template.render(
+        issues=issues,
+        blog_title=blog_title,
+        github_name=github_name,
+        meta_description=meta_description,
+    )
 
 
 def save_blog_index_as_html(content: str):
@@ -156,9 +168,18 @@ def render_issue_body(issue: Issue):
     str: The rendered HTML body of the issue.
     """
     html_body = markdown2html(issue.body)
+    blog_title = CONFIG["blog"]["title"]
+    github_name = CONFIG["github"]["name"]
+    meta_description = CONFIG["blog"]["description"]
     env = Environment(loader=FileSystemLoader("templates"))
     template = env.get_template("post.html")
-    return template.render(issue=issue, html_body=html_body)
+    return template.render(
+        issue=issue,
+        html_body=html_body,
+        blog_title=blog_title,
+        github_name=github_name,
+        meta_description=meta_description,
+    )
 
 
 def save_articles_to_content_dir(issue: Issue, content: str):
@@ -173,7 +194,7 @@ def gen_rss_feed(issues: PaginatedList[Issue]):
     fg.title("GeoQiao's Blog")
     fg.author({"name": "GeoQiao", "email": "geoqiao@example.com"})
     fg.link(href="https://geoqiao.github.io/contents", rel="alternate")
-    fg.description("This is GeoQiao's Blog")
+    fg.description(f"""{CONFIG["blog"]["description"]}""")
 
     for issue in issues:
         fe = fg.add_entry()

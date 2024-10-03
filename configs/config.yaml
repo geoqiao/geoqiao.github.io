@@ -1,0 +1,42 @@
+# 博客信息
+blog:
+  title: GeoQiao's Blog
+  description: 探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。
+  url: https://geoqiao.github.io/contents
+  author:
+    name: geoqiao
+    email: geoqiao@example.com
+
+# GitHub 相关配置
+github:
+  name: geoqiao # GitHub 用户名
+  repo: geoqiao/geoqiao.github.io # GitHub 仓库名称
+
+## 以下配置目前没用，可以暂时忽视
+# 目录配置
+dirs:
+  contents: ./contents
+  backup: ./backup
+  templates: templates
+
+# 模板文件配置
+templates:
+  index: index.html
+  post: post.html
+  base: base.html
+  tag: tag.html
+
+# Markdown 渲染配置
+markdown:
+  extensions:
+    - pangu # 用于自动在中英文之间添加空格
+
+# 评论系统配置
+comments:
+  provider: utterances
+  repo: geoqiao/geoqiao.github.io # 用于存储评论的 GitHub 仓库
+
+# 其他配置
+other:
+  rss_file: atom.xml
+  rss_description: This is GeoQiao's Blog
