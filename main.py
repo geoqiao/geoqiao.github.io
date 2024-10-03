@@ -104,11 +104,13 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     blog_title = CONFIG["blog"]["title"]
     github_name = CONFIG["github"]["name"]
     meta_description = CONFIG["blog"]["description"]
+    google_search_verification = CONFIG["GoogleSearchConsole"]["content"]
     return template.render(
         issues=issues,
         blog_title=blog_title,
         github_name=github_name,
         meta_description=meta_description,
+        google_search_verification=google_search_verification,
     )
 
 
