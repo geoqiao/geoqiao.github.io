@@ -374,6 +374,8 @@ footer {
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-family: 'Courier New', Courier, monospace;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 /* 确保 Prism.js 的样式不被覆盖 */
