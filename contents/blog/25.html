@@ -77,7 +77,7 @@ df = pd.DataFrame(data)
 </code></pre>
 <p><strong>主要理由如下</strong>：</p>
 <ol>
-<li>支持同时筛选 rows 和 columns，<code>.loc</code>支持以逗号隔开的两个参数，第一个参数对 rows 进行操作，第二参数对 columns 进行操作</li>
+<li>支持同时筛选 rows 和 columns，<code>.loc</code>支持以逗号隔开的两个参数：第一个参数对 rows 进行操作，第二参数对 columns 进行操作</li>
 </ol>
 <pre><code class="language-python">df.loc[:,:] # 取所有行和所有列
 df.loc[df[&quot;age&quot;]&gt;30] # 取age &gt; 30 的行 和 所有列
@@ -122,7 +122,7 @@ df.loc[(df[&quot;Age&quot;] &gt; n) &amp; (df[&quot;Gender&quot;] == &quot;Male&
 
 <div id="comments">
     <script src="https://utteranc.es/client.js" repo="geoqiao/geoqiao.github.io"
-        issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+        issue-number="25" theme="github-light" crossorigin="anonymous" async>
         </script>
 </div>
 
