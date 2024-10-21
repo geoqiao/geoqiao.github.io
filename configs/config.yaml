@@ -17,31 +17,5 @@ GoogleSearchConsole:
   content: DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y # Google Search Console ID
   verify: true # 是否验证
 
-## 以下配置目前没用，可以暂时忽视
-# 目录配置
-dirs:
-  contents: ./contents
-  backup: ./backup
-  templates: templates
-
-# 模板文件配置
-templates:
-  index: index.html
-  post: post.html
-  base: base.html
-  tag: tag.html
-
-# Markdown 渲染配置
-markdown:
-  extensions:
-    - pangu # 用于自动在中英文之间添加空格
-
-# 评论系统配置
-comments:
-  provider: utterances
-  repo: geoqiao/geoqiao.github.io # 用于存储评论的 GitHub 仓库
-
-# 其他配置
-other:
-  rss_file: atom.xml
-  rss_description: This is GeoQiao's Blog
+theme:
+  path: "templates/default_theme"
