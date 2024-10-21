@@ -76,14 +76,14 @@ def is_me(issue: Issue, me: str):
 
 
 def get_all_issues(repo: Repository, me: str) -> PaginatedList[Issue]:
-    """Get all issues for a given GitHub repository.
+    """Get all issues for a given GitHub repository created by a specific user.
 
     Args:
-        github_token: GitHub personal access token.
-        github_repo: GitHub repository name in the format "owner/name".
+        repo: The GitHub repository object to retrieve issues from.
+        me: The username of the user whose issues to retrieve.
 
     Returns:
-        List of GitHub issue objects.
+        A PaginatedList of GitHub issue objects created by the specified user.
     """
     issues = repo.get_issues(creator=me)
     return issues
@@ -99,12 +99,14 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     Returns:
     - str, the rendered article list HTML content.
     """
-    env = Environment(loader=FileSystemLoader("templates"))
-    template = env.get_template("index.html")
     blog_title = CONFIG["blog"]["title"]
     github_name = CONFIG["github"]["name"]
     meta_description = CONFIG["blog"]["description"]
+    theme_path = CONFIG["theme"]["path"]
     google_search_verification = CONFIG["GoogleSearchConsole"]["content"]
+    env = Environment(loader=FileSystemLoader(theme_path))
+    template = env.get_template("index.html")
+
     return template.render(
         issues=issues,
         blog_title=blog_title,
@@ -173,7 +175,8 @@ def render_issue_body(issue: Issue):
     blog_title = CONFIG["blog"]["title"]
     github_name = CONFIG["github"]["name"]
     meta_description = CONFIG["blog"]["description"]
-    env = Environment(loader=FileSystemLoader("templates"))
+    theme_path = CONFIG["theme"]["path"]
+    env = Environment(loader=FileSystemLoader(theme_path))
     template = env.get_template("post.html")
     return template.render(
         issue=issue,
