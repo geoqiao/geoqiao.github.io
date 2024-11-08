@@ -1,31 +1,30 @@
+from pathlib import Path
+
 import yaml
 
-CONFIG_FILE = "./configs/config.yaml"
 
+class Config:
+    CONFIG_FILE = Path("./configs/config.yaml")
 
-def load_config():
-    with open(CONFIG_FILE, "r") as file:
-        config = yaml.safe_load(file)
-    return config
+    def __init__(self):
+        config_loaded = Config.load_config()
+        self.blog_title = config_loaded["blog"]["title"]
+        self.github_name = config_loaded["github"]["name"]
+        self.meta_description = config_loaded["blog"]["description"]
+        self.theme_path = config_loaded["theme"]["path"]
+        self.google_search_verification = config_loaded["GoogleSearchConsole"][
+            "content"
+        ]
 
-
-# def get_config_value(key, default=None):
-#     """
-#     Get a configuration value by key, supporting nested keys.
-
-#     Args:
-#         key (str): Configuration key, e.g. 'blog.title' or 'github.token'.
-#         default (any, optional): Default value if the key is not found.
-
-#     Returns:
-#         any: Configuration value or default value if the key is not found.
-#     """
-#     config = load_config()
-#     keys = key.split(".")
-#     value = config
-#     for k in keys:
-#         if isinstance(value, dict) and k in value:
-#             value = value[k]
-#         else:
-#             return default
-#     return value
+    @classmethod
+    def load_config(cls) -> dict:
+        try:
+            with open(cls.CONFIG_FILE, "r") as file:
+                config = yaml.safe_load(file)
+            return config
+        except yaml.YAMLError as e:
+            print(f"Error reading YAML file: {e}")
+            raise
+        except FileNotFoundError:
+            print(f"Config file not found: {cls.CONFIG_FILE}")
+            raise
