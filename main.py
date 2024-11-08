@@ -10,6 +10,9 @@ Powered by Jinja2 and PyGithub
 import argparse
 import os
 import shutil
+import time
+from contextlib import contextmanager
+from pathlib import Path
 
 from feedgen.feed import FeedGenerator
 from github import Github
@@ -20,12 +23,12 @@ from jinja2 import Environment, FileSystemLoader
 from lxml.etree import CDATA
 from marko import Markdown
 
-from configs.config_utils import load_config
+from configs.config_utils import Config
 
-CONTENTS_DIR: str = "./contents/"
-BACKUP_DIR: str = "./backup/"
-# CONFIG_YAML: str = "./config.yaml"
-CONFIG = load_config()
+CONTENTS_DIR: Path = Path("./contents/")
+BACKUP_DIR: Path = Path("./backup/")
+
+config = Config()
 
 
 def main(token: str, repo_name: str):
@@ -45,7 +48,7 @@ def main(token: str, repo_name: str):
     gen_rss_feed(issues)
 
 
-def dir_init(content_dir: str, backup_dir: str):
+def dir_init(content_dir: Path, backup_dir: Path):
     """
     A function to initialize directories by removing existing ones and creating new ones.
     """
@@ -55,7 +58,7 @@ def dir_init(content_dir: str, backup_dir: str):
         shutil.rmtree(backup_dir)
 
     os.mkdir(content_dir)
-    os.mkdir(content_dir + "blog/")
+    os.mkdir(content_dir / "blog/")
     os.mkdir(backup_dir)
 
 
@@ -85,7 +88,7 @@ def get_all_issues(repo: Repository, me: str) -> PaginatedList[Issue]:
     Returns:
         A PaginatedList of GitHub issue objects created by the specified user.
     """
-    issues = repo.get_issues(creator=me)
+    issues = repo.get_issues(creator=me)  # type: ignore
     return issues
 
 
@@ -99,11 +102,11 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     Returns:
     - str, the rendered article list HTML content.
     """
-    blog_title = CONFIG["blog"]["title"]
-    github_name = CONFIG["github"]["name"]
-    meta_description = CONFIG["blog"]["description"]
-    theme_path = CONFIG["theme"]["path"]
-    google_search_verification = CONFIG["GoogleSearchConsole"]["content"]
+    blog_title = config.blog_title
+    github_name = config.github_name
+    meta_description = config.meta_description
+    theme_path = config.theme_path
+    google_search_verification = config.google_search_verification
     env = Environment(loader=FileSystemLoader(theme_path))
     template = env.get_template("index.html")
 
@@ -123,39 +126,12 @@ def save_blog_index_as_html(content: str):
     Parameters:
     content (str): The content to be written to the HTML file.
     """
-    path = CONTENTS_DIR + "index.html"
+    path = CONTENTS_DIR / "index.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
-# def markdown2html(mdstr: str):
-#     """
-#     Convert markdown text to HTML using the GitHub API.
-
-#     Args:
-#         mdstr (str): The markdown text to be converted to HTML.
-
-#     Returns:
-#         str: The HTML representation of the input markdown text.
-#     """
-#     payload = {"text": mdstr, "mode": "gfm"}
-#     headers = {"Authorization": f"token {options.github_token}"}
-#     try:
-#         response = requests.post(
-#             "https://api.github.com/markdown", json=payload, headers=headers
-#         )
-#         response.raise_for_status()  # Raises an exception if status code is not 200
-#         return response.text
-#     except requests.RequestException as e:
-#         raise Exception(f"markdown2html error: {e}")
-
-
-# def markdown2html(mdstr: str):
-#     html = gfm.convert(mdstr)
-#     return html
-
-
-def markdown2html(mdstr: str):
+def markdown2html(mdstr: str) -> str:
     markdown = Markdown(extensions=["pangu"])
     html = markdown.convert(mdstr)
     return html
@@ -172,10 +148,10 @@ def render_issue_body(issue: Issue):
     str: The rendered HTML body of the issue.
     """
     html_body = markdown2html(issue.body)
-    blog_title = CONFIG["blog"]["title"]
-    github_name = CONFIG["github"]["name"]
-    meta_description = CONFIG["blog"]["description"]
-    theme_path = CONFIG["theme"]["path"]
+    blog_title = config.blog_title
+    github_name = config.github_name
+    meta_description = config.meta_description
+    theme_path = config.theme_path
     env = Environment(loader=FileSystemLoader(theme_path))
     template = env.get_template("post.html")
     return template.render(
@@ -188,7 +164,7 @@ def render_issue_body(issue: Issue):
 
 
 def save_articles_to_content_dir(issue: Issue, content: str):
-    path = CONTENTS_DIR + f"blog/{issue.number}.html"
+    path = CONTENTS_DIR / f"blog/{issue.number}.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
@@ -199,7 +175,7 @@ def gen_rss_feed(issues: PaginatedList[Issue]):
     fg.title("GeoQiao's Blog")
     fg.author({"name": "GeoQiao", "email": "geoqiao@example.com"})
     fg.link(href="https://geoqiao.github.io/contents", rel="alternate")
-    fg.description(f"""{CONFIG["blog"]["description"]}""")
+    fg.description(f"""{config.meta_description}""")
 
     for issue in issues:
         fe = fg.add_entry()
@@ -214,10 +190,19 @@ def gen_rss_feed(issues: PaginatedList[Issue]):
     fg.atom_file("./contents/atom.xml")
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("github_token", help="<github_token>")
-    parser.add_argument("github_repo", help="<github_repo>")
-    options = parser.parse_args()
+@contextmanager
+def timer_context():
+    start_time = time.time()
+    yield
+    end_time = time.time()
+    print(f"The script has finished running, and it took {end_time - start_time} s。")
 
-    main(options.github_token, options.github_repo)
+
+if __name__ == "__main__":
+    with timer_context():
+        parser = argparse.ArgumentParser()
+        parser.add_argument("github_token", help="<github_token>")
+        parser.add_argument("github_repo", help="<github_repo>")
+        options = parser.parse_args()
+
+        main(options.github_token, options.github_repo)
