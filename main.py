@@ -14,25 +14,22 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 
-from feedgen.feed import FeedGenerator
+from feedgen.feed import FeedGenerator  # type: ignore
 from github import Github
 from github.Issue import Issue
 from github.PaginatedList import PaginatedList
 from github.Repository import Repository
 from jinja2 import Environment, FileSystemLoader
-from lxml.etree import CDATA
+from lxml.etree import CDATA  # type: ignore
 from marko import Markdown
 
 from configs.config_utils import Config
-
-CONTENTS_DIR: Path = Path("./contents/")
-BACKUP_DIR: Path = Path("./backup/")
 
 config = Config()
 
 
 def main(token: str, repo_name: str):
-    dir_init(content_dir=CONTENTS_DIR, backup_dir=BACKUP_DIR)
+    dir_init(content_dir=config.content_dir, blog_dir=config.blog_dir)
     user = login(token)
     me = get_me(user)
     repo = get_repo(user, repo_name)
@@ -48,33 +45,68 @@ def main(token: str, repo_name: str):
     gen_rss_feed(issues)
 
 
-def dir_init(content_dir: Path, backup_dir: Path):
+def dir_init(content_dir: Path, blog_dir: Path):
     """
     A function to initialize directories by removing existing ones and creating new ones.
     """
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
-    if os.path.exists(backup_dir):
-        shutil.rmtree(backup_dir)
 
     os.mkdir(content_dir)
-    os.mkdir(content_dir / "blog/")
-    os.mkdir(backup_dir)
+    os.mkdir(content_dir / blog_dir)
 
 
-def login(token: str):
+def login(token: str) -> Github:
+    """
+    Authenticate with GitHub using a token and return a Github instance.
+
+    Args:
+        token (str): A GitHub personal access token.
+
+    Returns:
+        Github: An authenticated Github instance.
+    """
     return Github(token)
 
 
-def get_me(user: Github):
+def get_me(user: Github) -> str:
+    """
+    Get the login name of the authenticated user.
+
+    Args:
+        user (Github): An authenticated Github instance.
+
+    Returns:
+        str: The login name of the authenticated user.
+    """
     return user.get_user().login
 
 
-def get_repo(user: Github, repo: str):
-    return user.get_repo(repo)
+def get_repo(user: Github, repo_name: str) -> Repository:
+    """
+    Get a repository by name for a given authenticated user.
+
+    Args:
+        user (Github): An authenticated Github instance.
+        repo_name (str): The name of the repository to retrieve.
+
+    Returns:
+        Repository: A Github repository object.
+    """
+    return user.get_repo(repo_name)
 
 
-def is_me(issue: Issue, me: str):
+def is_me(issue: Issue, me: str) -> bool:
+    """
+    Check if an issue was created by the authenticated user.
+
+    Args:
+        issue (Issue): The issue to check.
+        me (str): The login name of the authenticated user.
+
+    Returns:
+        bool: True if the issue was created by the authenticated user, False otherwise.
+    """
     return issue.user.login == me
 
 
@@ -126,7 +158,7 @@ def save_blog_index_as_html(content: str):
     Parameters:
     content (str): The content to be written to the HTML file.
     """
-    path = CONTENTS_DIR / "index.html"
+    path = config.content_dir / "index.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
@@ -137,7 +169,7 @@ def markdown2html(mdstr: str) -> str:
     return html
 
 
-def render_issue_body(issue: Issue):
+def render_issue_body(issue: Issue) -> str:
     """
     Render the body of an issue by converting markdown to HTML and injecting it into a template.
 
@@ -164,37 +196,54 @@ def render_issue_body(issue: Issue):
 
 
 def save_articles_to_content_dir(issue: Issue, content: str):
-    path = CONTENTS_DIR / f"blog/{issue.number}.html"
+    path = config.content_dir / config.blog_dir / f"{issue.number}.html"
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
 def gen_rss_feed(issues: PaginatedList[Issue]):
+    """Generate an RSS feed for the given issues.
+
+    Args:
+        issues (PaginatedList): A paginated list of GitHub issue objects.
+
+    Returns:
+        None
+    """
     fg = FeedGenerator()
-    fg.id("https://geoqiao.github.io/contents")
-    fg.title("GeoQiao's Blog")
-    fg.author({"name": "GeoQiao", "email": "geoqiao@example.com"})
-    fg.link(href="https://geoqiao.github.io/contents", rel="alternate")
-    fg.description(f"""{config.meta_description}""")
+    fg.id(config.blog_url)  # type: ignore
+    fg.title(config.blog_title)  # type: ignore
+    fg.author({"name": config.author_name, "email": config.author_email})  # type: ignore
+    fg.link(href=config.blog_url, rel="alternate")  # type: ignore
+    fg.description(f"""{config.meta_description}""")  # type: ignore
 
     for issue in issues:
-        fe = fg.add_entry()
-        fe.id(f"https://geoqiao.github.io/contents/blog/{issue.number}.html")
-        fe.title(issue.title)
-        fe.link(href=f"https://geoqiao.github.io/contents/blog/{issue.number}.html")
-        fe.description(issue.body[:100])
-        fe.published(issue.created_at)
-        # fe.content(markdown2html(issue.body), type="html")
-        fe.content(CDATA(markdown2html(issue.body)), type="html")
+        fe = fg.add_entry()  # type: ignore
+        fe.id(f"{config.blog_url}{config.blog_dir}/{issue.number}.html")  # type: ignore
+        fe.title(issue.title)  # type: ignore
+        fe.link(href=f"{config.blog_url}{config.blog_dir}/{issue.number}.html")  # type: ignore
+        fe.description(issue.body[:100])  # type: ignore
+        fe.published(issue.created_at)  # type: ignore
+        fe.updated(issue.updated_at)  # type: ignore
+        fe.content(CDATA(markdown2html(issue.body)), type="html")  # type: ignore
 
-    fg.atom_file("./contents/atom.xml")
+    fg.atom_file(config.content_dir / config.rss_atom_path)  # type: ignore
 
 
 @contextmanager
 def timer_context():
-    start_time = time.time()
+    """
+    A context manager that measures the execution time of the code within its scope.
+
+    This context manager starts a timer when entering the context and stops the timer when exiting the context. It then prints the elapsed time in seconds.
+
+    Usage:
+    with timer_context():
+        # Code to measure execution time
+    """
+    start_time = time.perf_counter()
     yield
-    end_time = time.time()
+    end_time = time.perf_counter()
     print(f"The script has finished running, and it took {end_time - start_time} s。")
 
 
