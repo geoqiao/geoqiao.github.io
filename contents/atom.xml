@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents/</id><title>GeoQiao's Blog</title><updated>2025-01-02T13:01:21.279938+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents/</id><title>GeoQiao's Blog</title><updated>2025-01-02T14:31:29.720469+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
 <ol>
 <li>
 <p>这是一个分享个人 excel 经验的文档。</p>
@@ -1234,7 +1234,7 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <h2>结论</h2>
 <p>现在给自己配置一个免费的编程助手真的不要太简单，虽然能力上还不如 Claude，但是日常使用已经非常够用了</p>
 <img width="1988" alt="image" src="https://github.com/user-attachments/assets/b257d01e-3c16-4a38-b75e-413d0ce500f8">
-]]></content><link href="https://geoqiao.github.io/contents/blog/28.html"/><published>2024-11-16T08:53:27+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/29.html</id><title>2024年终总结：控制预期，坚持下去</title><updated>2025-01-02T13:00:57+00:00</updated><content type="html"><![CDATA[<p>好久不见!</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/28.html"/><published>2024-11-16T08:53:27+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/29.html</id><title>2024年终总结：控制预期，坚持下去</title><updated>2025-01-02T14:31:04+00:00</updated><content type="html"><![CDATA[<p>好久不见!</p>
 <p>已经好久没有更新博客了，甚至很久没有优化博客的代码实现。</p>
 <p>2024 年发生了很多事情，我很感谢它。</p>
 <blockquote>
