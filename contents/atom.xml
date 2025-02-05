@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents/</id><title>GeoQiao's Blog</title><updated>2025-01-02T14:31:29.720469+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/contents/</id><title>GeoQiao's Blog</title><updated>2025-02-05T12:39:58.131676+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/contents/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/contents/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
 <ol>
 <li>
 <p>这是一个分享个人 excel 经验的文档。</p>
@@ -1269,4 +1269,19 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <li>[ ] 带妈妈出去走走</li>
 <li>[ ] 要回去看看姥姥，我很想她，但我不能经常想</li>
 </ul>
-]]></content><link href="https://geoqiao.github.io/contents/blog/29.html"/><published>2024-12-31T15:42:13+00:00</published></entry></feed>
+]]></content><link href="https://geoqiao.github.io/contents/blog/29.html"/><published>2024-12-31T15:42:13+00:00</published></entry><entry><id>https://geoqiao.github.io/contents/blog/30.html</id><title>我喜欢冬天的下午走路去成都的茶馆喝茶</title><updated>2025-02-05T12:39:28+00:00</updated><content type="html"><![CDATA[<h2>记录一下</h2>
+<p>今年的计划完成了一大项：带妈妈出去走走。</p>
+<p>正好赶上春节期间表妹结婚，要去成都，所以回家也待不了几天，于是邀请妈妈来上海。</p>
+<p>去了杭州、苏州，也再次逛了一下上海，最后去成都。</p>
+<h2>收获</h2>
+<p>玩的过程其实也没啥好讲的，但是有很多收获</p>
+<h3>1. 我也可以旅游规划</h3>
+<p>我是一个喜欢懒散的人，不想把每天的行程安排太满。这次完全按照自己的节奏规划，很轻松也很快乐！当然也离不开老妈的情绪支持，她也没有怨言去的地方太少。</p>
+<p>相信接下来一个人旅行的时候也可以很快乐，这件事给了我很多自信。</p>
+<h3>2. 很喜欢成都的喝茶文化</h3>
+<p>加上婚礼在成都待了<span class="pangu"></span>4<span class="pangu"></span>天，其中<span class="pangu"></span>3<span class="pangu"></span>天下午都在茶馆喝茶。成都真的没什么好逛的，ifs、春熙路、天府广场、人民公园、宽窄巷子、锦里都几乎在一条路上，前后不过几公里。哪里都是饭馆、哪里都是人，其实挺千篇一律的。</p>
+<p>喝茶就不一样了，便宜点<span class="pangu"></span>10<span class="pangu"></span>块钱就能坐一下午，几乎每个茶馆都做满了人。下棋的人沉默不语，看棋的人面红耳赤，真的太有意思了。我不会打麻将，感觉还有一些快乐没有体会到，但也不遗憾，我没办法从麻将里面体验到快乐。</p>
+<p>成都冬天的气温也非常加分，昼夜温差很小，白天坐在室外的茶馆也不觉得冷。</p>
+<h3>3. 相比历史文化景点，我更喜欢自然景点</h3>
+<p>虽然历史文化有其独特魅力，但自然景观带来的宁静与放松让我感到更加舒适。</p>
+]]></content><link href="https://geoqiao.github.io/contents/blog/30.html"/><published>2025-02-05T12:39:28+00:00</published></entry></feed>
