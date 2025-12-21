@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="{{ google_search_verification }}" />
+    <title>{% block title %}{{ blog_title }}{% endblock %}</title>
+    <meta name="description" content="{{ meta_description }}">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ blog_url }}/templates/PaperMod/static/css/papermod.css">
+    <link rel="stylesheet" href="{{ blog_url }}/templates/default_theme/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ blog_url }}{{ rss_atom_path }}">
+    <link rel="icon" type="image/png" href="{{ blog_url }}/templates/PaperMod/static/images/favicon.png">
+</head>
+
+<body>
+    <header class="pm-header">
+        <nav class="container nav">
+            <a href="/" class="logo">{{ blog_title }}</a>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="/contents/">Blog</a></li>
+                <li><a href="/contents/tags">Tag</a></li>
+                <li><a href="/contents/about.html">About</a></li>
+                <li><a href="{{ blog_url }}{{ rss_atom_path }}">RSS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="pm-footer">
+        <div class="container">
+            <p id="site-year">&copy; <span id="year"></span> {{ blog_title }}</p>
+        </div>
+    </footer>
+
+    <script src="{{ blog_url }}/templates/PaperMod/static/js/papermod.js"></script>
+    <!-- prism is reused from default theme -->
+    <script src="{{ blog_url }}/templates/default_theme/static/js/prism.js"></script>
+</body>
+
+</html>

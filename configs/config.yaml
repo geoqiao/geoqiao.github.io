@@ -1,8 +1,8 @@
 # 博客信息
 blog:
-  title: GeoQiao's Blog
+  title: geoqiao's Blog
   description: 探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。
-  url: https://geoqiao.github.io/contents/
+  url: https://geoqiao.github.io/
   content_dir: "./contents/"
   blog_dir: "blog/"
   rss_atom_path: "atom.xml"
@@ -21,4 +21,4 @@ GoogleSearchConsole:
   verify: true # 是否验证
 
 theme:
-  path: "templates/default_theme"
+  path: "templates/PaperMod"

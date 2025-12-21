@@ -15,7 +15,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from feedgen.feed import FeedGenerator  # type: ignore
-from github import Github
+from github import Auth, Github
 from github.Issue import Issue
 from github.PaginatedList import PaginatedList
 from github.Repository import Repository
@@ -30,16 +30,16 @@ config = Config()
 
 def main(token: str, repo_name: str):
     dir_init(content_dir=config.content_dir, blog_dir=config.blog_dir)
-    user = login(token)
-    me = get_me(user)
-    repo = get_repo(user, repo_name)
-    issues = get_all_issues(repo, me)
+    user: Github = login(token)
+    me: str = get_me(user)
+    repo: Repository = get_repo(user, repo_name)
+    issues: PaginatedList[Issue] = get_all_issues(repo, me)
 
-    index_blog = render_blog_index(issues)
+    index_blog: str = render_blog_index(issues)
     save_blog_index_as_html(content=index_blog)
 
     for issue in issues:
-        content = render_issue_body(issue)
+        content: str = render_issue_body(issue)
         save_articles_to_content_dir(issue, content=content)
 
     gen_rss_feed(issues)
@@ -60,12 +60,14 @@ def login(token: str) -> Github:
     """
     Authenticate with GitHub using a token and return a Github instance.
 
-    Args:
-        token (str): A GitHub personal access token.
-
-    Returns:
-        Github: An authenticated Github instance.
+    Uses the new `Auth.Token` API when available (avoids DeprecationWarning),
+    and falls back to the older constructor for older PyGithub versions.
     """
+
+    if Auth is not None and hasattr(Auth, "Token"):
+        # New PyGithub (>=2.x) style
+        return Github(auth=Auth.Token(token))
+    # Fallback for older PyGithub
     return Github(token)
 
 
@@ -120,7 +122,9 @@ def get_all_issues(repo: Repository, me: str) -> PaginatedList[Issue]:
     Returns:
         A PaginatedList of GitHub issue objects created by the specified user.
     """
-    issues = repo.get_issues(creator=me)  # type: ignore
+    issues: PaginatedList[Issue] = repo.get_issues(
+        creator=me  # ty:ignore[invalid-argument-type]
+    )
     return issues
 
 
@@ -142,10 +146,27 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     env = Environment(loader=FileSystemLoader(theme_path))
     template = env.get_template("index.html")
 
+    # collect unique labels (tags) across issues
+    tags = []
+    try:
+        tagset = set()
+        for issue in issues:
+            if issue.labels:
+                for label in issue.labels:
+                    tagset.add(label.name)
+        tags = sorted(list(tagset))
+    except Exception:
+        tags = []
+
     return template.render(
         issues=issues,
+        tags=tags,
         blog_title=blog_title,
         github_name=github_name,
+        github_repo=config.github_repo,
+        blog_url=config.blog_url,
+        rss_atom_path=config.rss_atom_path,
+        author_name=config.author_name,
         meta_description=meta_description,
         google_search_verification=google_search_verification,
     )
@@ -191,6 +212,11 @@ def render_issue_body(issue: Issue) -> str:
         html_body=html_body,
         blog_title=blog_title,
         github_name=github_name,
+        github_repo=config.github_repo,
+        author_name=config.author_name,
+        author_email=config.author_email,
+        blog_url=config.blog_url,
+        rss_atom_path=config.rss_atom_path,
         meta_description=meta_description,
     )
 
