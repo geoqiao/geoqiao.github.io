@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - {{ blog_title }}</title>
+    <link rel="stylesheet" href="{{ blog_url }}/templates/PaperMod/static/css/papermod.css">
+</head>.
+
+<body>
+    <main class="page-content">
+        <div class="w">
+            <header>
+                <h1>About</h1>
+            </header>
+
+            <div class="about-content">
+                <img src="{{ blog_url }}/templates/PaperMod/static/images/favicon.png" alt="profile photo"
+                    style="width:120px;border-radius:50%">
+                <h2>{{ author_name }}</h2>
+                <p>{{ meta_description }}</p>
+
+                <p>
+                    <a href="https://github.com/{{ github_name }}">GitHub</a>
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
