@@ -1,4 +1,5 @@
-"""github-blog generator:
+"""
+github-blog generator:
 
 `python main.py <github_token> <github_repo>`
 
@@ -14,7 +15,7 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 
-from feedgen.feed import FeedGenerator  # type: ignore
+from feedgen.feed import FeedGenerator
 from github import Auth, Github
 from github.Issue import Issue
 from github.PaginatedList import PaginatedList
@@ -237,23 +238,23 @@ def gen_rss_feed(issues: PaginatedList[Issue]):
         None
     """
     fg = FeedGenerator()
-    fg.id(config.blog_url)  # type: ignore
-    fg.title(config.blog_title)  # type: ignore
-    fg.author({"name": config.author_name, "email": config.author_email})  # type: ignore
-    fg.link(href=config.blog_url, rel="alternate")  # type: ignore
-    fg.description(f"""{config.meta_description}""")  # type: ignore
+    fg.id(config.blog_url)
+    fg.title(config.blog_title)
+    fg.author({"name": config.author_name, "email": config.author_email})
+    fg.link(href=config.blog_url, rel="alternate")
+    fg.description(f"""{config.meta_description}""")
 
     for issue in issues:
-        fe = fg.add_entry()  # type: ignore
-        fe.id(f"{config.blog_url}{config.blog_dir}/{issue.number}.html")  # type: ignore
-        fe.title(issue.title)  # type: ignore
-        fe.link(href=f"{config.blog_url}{config.blog_dir}/{issue.number}.html")  # type: ignore
-        fe.description(issue.body[:100])  # type: ignore
-        fe.published(issue.created_at)  # type: ignore
-        fe.updated(issue.updated_at)  # type: ignore
-        fe.content(CDATA(markdown2html(issue.body)), type="html")  # type: ignore
+        fe = fg.add_entry()
+        fe.id(f"{config.blog_url}{config.blog_dir}/{issue.number}.html")
+        fe.title(issue.title)
+        fe.link(href=f"{config.blog_url}{config.blog_dir}/{issue.number}.html")
+        fe.description(issue.body[:100])
+        fe.published(issue.created_at)
+        fe.updated(issue.updated_at)
+        fe.content(CDATA(markdown2html(issue.body)), type="html")
 
-    fg.atom_file(config.content_dir / config.rss_atom_path)  # type: ignore
+    fg.atom_file(config.content_dir / config.rss_atom_path)
 
 
 @contextmanager

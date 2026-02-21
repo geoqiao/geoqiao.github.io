@@ -11,10 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ blog_url }}/templates/PaperMod/static/css/papermod.css">
-    <link rel="stylesheet" href="{{ blog_url }}/templates/default_theme/static/css/prism.css">
-    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ blog_url }}{{ rss_atom_path }}">
-    <link rel="icon" type="image/png" href="{{ blog_url }}/templates/PaperMod/static/images/favicon.png">
+    <link rel="stylesheet" href="/templates/PaperMod/static/css/papermod.css">
+    <link rel="stylesheet" href="/templates/default_theme/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/contents/{{ rss_atom_path }}">
+    <link rel="icon" type="image/png" href="/templates/PaperMod/static/images/favicon.png">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
                 <li><a href="/contents/">Blog</a></li>
                 <li><a href="/contents/tags">Tag</a></li>
                 <li><a href="/contents/about.html">About</a></li>
-                <li><a href="{{ blog_url }}{{ rss_atom_path }}">RSS</a></li>
+                <li><a href="/contents/{{ rss_atom_path }}">RSS</a></li>
             </ul>
         </nav>
     </header>
@@ -48,9 +48,9 @@
         </div>
     </footer>
 
-    <script src="{{ blog_url }}/templates/PaperMod/static/js/papermod.js"></script>
+    <script src="/templates/PaperMod/static/js/papermod.js"></script>
     <!-- prism is reused from default theme -->
-    <script src="{{ blog_url }}/templates/default_theme/static/js/prism.js"></script>
+    <script src="/templates/default_theme/static/js/prism.js"></script>
 </body>
 
 </html>
