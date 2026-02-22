@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-22T13:27:43.103777+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>1. 目前是一名金融行业贷后策略分析师；这里是我的个人空间，记录一些想记录的。
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-22T13:31:17.888666+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>1. 目前是一名金融行业贷后策略分析师；这里是我的个人空间，记录一些想记录的。
 2. 这个网页基于GitHub Pages &amp; GitHub Actions 自动部署。
 3. 主体 main.py 自己完成，前端主题由AI生成。
 </subtitle><entry><id>https://geoqiao.github.io/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
@@ -1287,7 +1287,7 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <p>成都冬天的气温也非常加分，昼夜温差很小，白天坐在室外的茶馆也不觉得冷。</p>
 <h3>3. 相比历史文化景点，我更喜欢自然景点</h3>
 <p>虽然历史文化有其独特魅力，但自然景观带来的宁静与放松让我感到更加舒适。</p>
-]]></content><link href="https://geoqiao.github.io/blog/30.html"/><published>2025-02-05T12:39:28+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/31.html</id><title>2025年终总结：关注自己</title><updated>2026-02-22T13:27:22+00:00</updated><content type="html"><![CDATA[<p>是时候回顾一下了。26<span class="pangu"></span>年已经到来，祝有缘读到这篇的朋友新年快乐！</p>
+]]></content><link href="https://geoqiao.github.io/blog/30.html"/><published>2025-02-05T12:39:28+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/31.html</id><title>2025年终总结：关注自己</title><updated>2026-02-22T13:30:59+00:00</updated><content type="html"><![CDATA[<p>是时候回顾一下了。26<span class="pangu"></span>年已经到来，祝有缘读到这篇的朋友新年快乐！</p>
 <h1>25<span class="pangu"></span>年待办进度</h1>
 <p>25<span class="pangu"></span>年的待办事项基本完成</p>
 <ul>
@@ -1352,6 +1352,8 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <h2>阅读</h2>
 <p>今年读的书不多，在高铁上读完了《克莱因壶》，有一次在<span class="pangu"></span>yihong<span class="pangu"></span>大佬的<span class="pangu"></span>Twitter<span class="pangu"></span>上看到，于是就读了。还不错，什么是真的，什么是假的？</p>
 <p>看了一些理财入门书：《穷爸爸富爸爸》、《跟银行螺丝钉玩定投》、《穷查理宝典》、《如何选择成长股》、《经济学原理》读了一半。学到的东西有限，更多的是种下了资产和消费的观念、定投的习惯。现在买股票还停留在感觉、觉得价格合适就买、觉得不合适就卖。幸运的是整体上没有亏损，但是其中有几笔交易，买了之后一直亏，越加越亏。</p>
+<h2>一些其他</h2>
+<p>发现自己在做事情的时候，还是很在意别人的看法，总是得等到自己觉得完美才敢做。这样其实很不好。我想再次告诉自己，完美主义害人害己，一定要开始做。</p>
 <h1>26 年待办</h1>
 <ul>
 <li>[ ] 理财：熟悉常看的一些技术指标、学会看公司财报，26<span class="pangu"></span>年收益率<span class="pangu"></span>4%+</li>
