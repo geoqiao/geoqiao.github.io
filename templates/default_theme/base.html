@@ -9,7 +9,7 @@
     <meta name="description" content="{{ meta_description }}">
     <link rel="stylesheet" href="https://{{ github_name }}.github.io/templates/default_theme/static/css/style.css">
     <link rel="stylesheet" href="https://{{ github_name }}.github.io/templates/default_theme/static/css/prism.css">
-    <link rel="alternate" type="application/atom+xml" title="RSS" href="/contents/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/contents/{{ rss_atom_path }}">
     <link rel="icon" type="image/png"
         href="https://{{ github_name }}.github.io/templates/default_theme/static/images/favicon.png">
 </head>
@@ -27,7 +27,7 @@
                 <li><a href="/contents/">Blog</a></li>
                 <li><a href="/contents/tags">Tag</a></li>
                 <li><a href="/">About</a></li>
-                <li><a href="/contents/atom.xml">RSS</a></li>
+                <li><a href="/contents/{{ rss_atom_path }}">RSS</a></li>
             </ul>
         </nav>
     </header>
@@ -42,8 +42,8 @@
         </div>
     </footer>
 
-    <script src="https://{{ github_name }}.github.io/templates/static/js/prism.js"></script>
-    <script src="https://{{ github_name }}.github.io/templates/static/js/main.js"></script>
+    <script src="https://{{ github_name }}.github.io/templates/default_theme/static/js/prism.js"></script>
+    <script src="https://{{ github_name }}.github.io/templates/default_theme/static/js/main.js"></script>
 </body>
 
 </html>
