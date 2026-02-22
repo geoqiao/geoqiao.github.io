@@ -9,7 +9,7 @@
 2. 利用 GitHub API 将第一步得到的 markdown 格式的 issue 内容转换为 HTML
 3. 使用 Jinja2 写一个 HTML 模板，并将第一步得到的内容渲染
 
-**demo**: [geoqiao's pages](https://geoqiao.github.io/)
+**demo**: [geoqiao's pages](https://geoqiao.github.io/contents/)
 
 ## 使用方法
 
