@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-21T14:47:24.380599+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-22T06:26:49.665057+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。</subtitle><entry><id>https://geoqiao.github.io/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
 <ol>
 <li>
 <p>这是一个分享个人 excel 经验的文档。</p>
@@ -1284,5 +1284,5 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <p>成都冬天的气温也非常加分，昼夜温差很小，白天坐在室外的茶馆也不觉得冷。</p>
 <h3>3. 相比历史文化景点，我更喜欢自然景点</h3>
 <p>虽然历史文化有其独特魅力，但自然景观带来的宁静与放松让我感到更加舒适。</p>
-]]></content><link href="https://geoqiao.github.io/blog/30.html"/><published>2025-02-05T12:39:28+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/31.html</id><title>2025年终总结</title><updated>2026-02-21T14:47:02+00:00</updated><content type="html"><![CDATA[<p>是时候总结一下了</p>
+]]></content><link href="https://geoqiao.github.io/blog/30.html"/><published>2025-02-05T12:39:28+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/31.html</id><title>2025年终总结</title><updated>2026-02-22T06:26:30+00:00</updated><content type="html"><![CDATA[<p>是时候总结一下了，新主题测试</p>
 ]]></content><link href="https://geoqiao.github.io/blog/31.html"/><published>2026-02-21T14:35:26+00:00</published></entry></feed>
