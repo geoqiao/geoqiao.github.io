@@ -20,7 +20,10 @@
 <body>
     <header class="pm-header">
         <nav class="container nav">
-            <a href="/" class="logo">{{ blog_title }}</a>
+            <a href="/" class="logo">
+                <img class="logo-avatar" src="/templates/PaperMod/static/images/favicon.png" alt="{{ blog_title }}">
+                <span>{{ blog_title }}</span>
+            </a>
 
             <div class="nav-actions">
                 <button class="theme-toggle" aria-label="Toggle theme">🌙</button>

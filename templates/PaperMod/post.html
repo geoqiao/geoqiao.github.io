@@ -4,6 +4,10 @@
 
 {% block content %}
 <article class="post full-post">
+    <aside class="toc">
+        <h4>目录</h4>
+        <nav id="toc"></nav>
+    </aside>
     <main>
         <h1 class="post-title">{{ issue.title }}</h1>
         <div class="post-meta">发布于 {{ issue.created_at.strftime('%Y-%m-%d') }}
@@ -20,14 +24,5 @@
                 issue-number="{{ issue.number }}" theme="github-light" crossorigin="anonymous" async></script>
         </div>
     </main>
-
-    <aside class="sidebar">
-        <section class="author-card">
-            <img src="/templates/PaperMod/static/images/favicon.png" alt="{{ blog_title }}"
-                style="width:80px;border-radius:50%">
-            <h3>{{ author_name }}</h3>
-            <p style="font-size:0.95rem;color:#666">{{ meta_description }}</p>
-        </section>
-    </aside>
 </article>
 {% endblock %}

@@ -13,13 +13,22 @@
         if (content) {
             const headings = content.querySelectorAll('h2,h3');
             if (headings.length) {
-                const ul = document.createElement('ul'); ul.style.listStyle = 'none'; ul.style.padding = 0; ul.style.margin = 0;
-                headings.forEach(h => {
-                    if (!h.id) { h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
-                    const li = document.createElement('li'); li.style.marginBottom = '0.45rem';
-                    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.textContent; a.style.color = '#111'; a.style.textDecoration = 'none'; a.style.fontSize = '0.95rem';
-                    li.appendChild(a); ul.appendChild(li);
-                })
+                const ul = document.createElement('ul');
+                ul.className = 'toc-list';
+                headings.forEach((h, index) => {
+                    if (!h.id) {
+                        const base = h.textContent.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '');
+                        h.id = base || `section-${index + 1}`;
+                    }
+                    const li = document.createElement('li');
+                    li.className = 'toc-item';
+                    const a = document.createElement('a');
+                    a.className = 'toc-link';
+                    a.href = '#' + h.id;
+                    a.textContent = h.textContent;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
                 toc.appendChild(ul);
             }
         }

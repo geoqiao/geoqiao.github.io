@@ -1,7 +1,10 @@
 # 博客信息
 blog:
   title: geoqiao's Blog
-  description: 探索学习 Python 的数据分析师，包括 Python教程、学习路径、常用工具、 VSCode 配置及数据分析等领域的相关知识。
+  description: |
+    1. 目前是一名金融行业贷后策略分析师；这里是我的个人空间，记录一些想记录的。
+    2. 这个网页基于GitHub Pages & GitHub Actions 自动部署。
+    3. 主体 main.py 自己完成，前端主题由AI生成。
   url: https://geoqiao.github.io/
   content_dir: "./contents/"
   blog_dir: "blog/"

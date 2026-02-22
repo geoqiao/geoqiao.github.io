@@ -27,6 +27,7 @@ from marko import Markdown
 from configs.config_utils import Config
 
 config = Config()
+PAGE_SIZE = 10
 
 
 def main(token: str, repo_name: str):
@@ -35,15 +36,21 @@ def main(token: str, repo_name: str):
     me: str = get_me(user)
     repo: Repository = get_repo(user, repo_name)
     issues: PaginatedList[Issue] = get_all_issues(repo, me)
+    issues_list = list(issues)
+    tags = collect_tags(issues_list)
+    pages = paginate_issues(issues_list, PAGE_SIZE)
+    total_pages = max(1, len(pages))
 
-    index_blog: str = render_blog_index(issues)
-    save_blog_index_as_html(content=index_blog)
+    for page, page_issues in enumerate(pages, start=1):
+        pagination = build_pagination(page, total_pages)
+        index_blog: str = render_blog_index(page_issues, tags, pagination)
+        save_blog_index_as_html(content=index_blog, page=page)
 
-    for issue in issues:
+    for issue in issues_list:
         content: str = render_issue_body(issue)
         save_articles_to_content_dir(issue, content=content)
 
-    gen_rss_feed(issues)
+    gen_rss_feed(issues_list)
 
 
 def dir_init(content_dir: Path, blog_dir: Path):
@@ -129,7 +136,38 @@ def get_all_issues(repo: Repository, me: str) -> PaginatedList[Issue]:
     return issues
 
 
-def render_blog_index(issues: PaginatedList[Issue]) -> str:
+def paginate_issues(issues: list[Issue], page_size: int) -> list[list[Issue]]:
+    if not issues:
+        return [[]]
+    return [issues[i : i + page_size] for i in range(0, len(issues), page_size)]
+
+
+def collect_tags(issues: list[Issue]) -> list[str]:
+    tags = []
+    try:
+        tagset = set()
+        for issue in issues:
+            if issue.labels:
+                for label in issue.labels:
+                    tagset.add(label.name)
+        tags = sorted(list(tagset))
+    except Exception:
+        tags = []
+    return tags
+
+
+def build_pagination(page: int, total_pages: int) -> dict:
+    return {
+        "page": page,
+        "pages": total_pages,
+        "has_prev": page > 1,
+        "has_next": page < total_pages,
+        "prev_num": page - 1,
+        "next_num": page + 1,
+    }
+
+
+def render_blog_index(issues: list[Issue], tags: list[str], pagination: dict) -> str:
     """
     A function that renders an article list using a provided list of issues.
 
@@ -147,21 +185,10 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     env = Environment(loader=FileSystemLoader(theme_path))
     template = env.get_template("index.html")
 
-    # collect unique labels (tags) across issues
-    tags = []
-    try:
-        tagset = set()
-        for issue in issues:
-            if issue.labels:
-                for label in issue.labels:
-                    tagset.add(label.name)
-        tags = sorted(list(tagset))
-    except Exception:
-        tags = []
-
     return template.render(
         issues=issues,
         tags=tags,
+        pagination=pagination,
         blog_title=blog_title,
         github_name=github_name,
         github_repo=config.github_repo,
@@ -173,15 +200,21 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
     )
 
 
-def save_blog_index_as_html(content: str):
+def save_blog_index_as_html(content: str, page: int):
     """
     Save the provided content as an HTML file at the specified path.
 
     Parameters:
     content (str): The content to be written to the HTML file.
     """
-    path = config.content_dir / "index.html"
-    with open(path, "w", encoding="utf-8") as f:
+    if page == 1:
+        path = config.content_dir / "index.html"
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+    page_dir = config.content_dir / "page"
+    page_dir.mkdir(parents=True, exist_ok=True)
+    page_path = page_dir / f"{page}.html"
+    with open(page_path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
@@ -228,11 +261,11 @@ def save_articles_to_content_dir(issue: Issue, content: str):
         f.write(content)
 
 
-def gen_rss_feed(issues: PaginatedList[Issue]):
+def gen_rss_feed(issues: list[Issue]):
     """Generate an RSS feed for the given issues.
 
     Args:
-        issues (PaginatedList): A paginated list of GitHub issue objects.
+        issues (list): A list of GitHub issue objects.
 
     Returns:
         None

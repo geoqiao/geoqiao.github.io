@@ -3,37 +3,7 @@
 {% block title %}{{ blog_title }}{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-inner">
-        <h1 class="hero-title">{{ blog_title }}</h1>
-        <p class="hero-subtitle">{{ meta_description }}</p>
-        <div class="hero-actions">
-            <input id="site-search" type="search" placeholder="搜索文章..." />
-        </div>
-    </div>
-</section>
-
 <section class="content-grid">
-    <main class="posts-list">
-        {% for issue in issues %}
-        <article class="post">
-            <h2 class="post-title"><a href="/contents/blog/{{ issue.number }}.html">{{ issue.title }}</a></h2>
-            <div class="post-meta">发布于 {{ issue.created_at.strftime('%Y-%m-%d') }}
-                {% if issue.labels %}
-                | 标签: {% for label in issue.labels %}<a href="/tag/{{ label.name }}.html" class="tag">{{ label.name
-                    }}</a>{% endfor %}
-                {% endif %}
-            </div>
-            <div class="post-summary">{{ issue.body|truncate(160)|safe }}</div>
-            <a href="/contents/blog/{{ issue.number }}.html" class="read-more">阅读全文</a>
-        </article>
-        {% endfor %}
-
-        {% if pagination %}
-        <nav class="pagination"> ... </nav>
-        {% endif %}
-    </main>
-
     <aside class="sidebar">
         <section class="author-card">
             <img src="/templates/PaperMod/static/images/favicon.png" alt="{{ blog_title }}"
@@ -59,6 +29,37 @@
             <a href="/contents/about.html">关于作者 →</a>
         </section>
     </aside>
+
+    <main class="posts-list">
+        {% for issue in issues %}
+        <article class="post">
+            <h2 class="post-title"><a href="/contents/blog/{{ issue.number }}.html">{{ issue.title }}</a></h2>
+            <div class="post-meta">发布于 {{ issue.created_at.strftime('%Y-%m-%d') }}
+                {% if issue.labels %}
+                | 标签: {% for label in issue.labels %}<a href="/tag/{{ label.name }}.html" class="tag">{{ label.name
+                    }}</a>{% endfor %}
+                {% endif %}
+            </div>
+            <div class="post-summary">{{ issue.body|truncate(160)|safe }}</div>
+        </article>
+        {% endfor %}
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination">
+            {% if pagination.has_prev %}
+            <a class="pagination-prev" href="/contents/page/{{ pagination.prev_num }}.html">← Prev</a>
+            {% else %}
+            <span class="pagination-prev disabled">← Prev</span>
+            {% endif %}
+            <span class="pagination-status">{{ pagination.page }} / {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a class="pagination-next" href="/contents/page/{{ pagination.next_num }}.html">Next →</a>
+            {% else %}
+            <span class="pagination-next disabled">Next →</span>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </main>
 </section>
 
 {% endblock %}
