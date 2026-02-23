@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}标签 - {{ blog_title }}{% endblock %}
+
+{% block content %}
+<section class="content-grid">
+    <aside class="sidebar">
+        <section class="author-card">
+            <img src="/templates/PaperMod/static/images/favicon.png" alt="{{ blog_title }}"
+                style="width:80px;border-radius:50%">
+            <h3>{{ author_name }}</h3>
+            <p class="author-desc">{{ meta_description }}</p>
+        </section>
+
+        <section class="tags">
+            <h4>标签</h4>
+            {% if tags %}
+            <div class="tag-list">
+                {% for tag in tags %}
+                <a class="tag" href="/contents/tag/{{ tag }}.html">{{ tag }}</a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>暂无标签</p>
+            {% endif %}
+        </section>
+
+        <section class="about-link">
+            <a href="/contents/about.html">关于作者 →</a>
+        </section>
+    </aside>
+
+    <main class="posts-list">
+        <h1 class="post-title">所有标签</h1>
+        {% if tag_items %}
+        <div class="tag-list">
+            {% for item in tag_items %}
+            <a class="tag" href="/contents/tag/{{ item.name }}.html">
+                {{ item.name }} ({{ item.count }})
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="post-summary">当前没有任何标签。</p>
+        {% endif %}
+    </main>
+</section>
+
+{% endblock %}

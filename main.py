@@ -53,6 +53,17 @@ def main(token: str, repo_name: str):
 
     gen_rss_feed(issues_list)
 
+    tag_index = build_tag_index(issues_list)
+    if tags:
+        for tag in tags:
+            tag_issues = tag_index.get(tag, [])
+            if not tag_issues:
+                continue
+            tag_content = render_tag_page(tag, tag_issues, tags)
+            save_tag_page(tag, tag_content)
+        tags_index_content = render_tags_index(tags, tag_index)
+        save_tags_index(tags_index_content)
+
 
 def dir_init(content_dir: Path, blog_dir: Path):
     """
@@ -157,6 +168,19 @@ def collect_tags(issues: list[Issue]) -> list[str]:
     return tags
 
 
+def build_tag_index(issues: list[Issue]) -> dict[str, list[Issue]]:
+    tag_index: dict[str, list[Issue]] = {}
+    for issue in issues:
+        if not issue.labels:
+            continue
+        for label in issue.labels:
+            name = label.name
+            if name not in tag_index:
+                tag_index[name] = []
+            tag_index[name].append(issue)
+    return tag_index
+
+
 def build_pagination(page: int, total_pages: int) -> dict:
     return {
         "page": page,
@@ -216,6 +240,64 @@ def save_blog_index_as_html(content: str, page: int):
     page_dir.mkdir(parents=True, exist_ok=True)
     page_path = page_dir / f"{page}.html"
     with open(page_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
+def render_tag_page(tag: str, issues: list[Issue], tags: list[str]) -> str:
+    blog_title = config.blog_title
+    github_name = config.github_name
+    meta_description = config.meta_description
+    theme_path = config.theme_path
+    env = Environment(loader=FileSystemLoader(theme_path))
+    template = env.get_template("tag.html")
+    return template.render(
+        tag_name=tag,
+        issues=issues,
+        tags=tags,
+        blog_title=blog_title,
+        github_name=github_name,
+        github_repo=config.github_repo,
+        blog_url=config.blog_url,
+        rss_atom_path=config.rss_atom_path,
+        author_name=config.author_name,
+        meta_description=meta_description,
+    )
+
+
+def save_tag_page(tag: str, content: str):
+    tag_dir = config.content_dir / "tag"
+    tag_dir.mkdir(parents=True, exist_ok=True)
+    path = tag_dir / f"{tag}.html"
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
+def render_tags_index(tags: list[str], tag_index: dict[str, list[Issue]]) -> str:
+    blog_title = config.blog_title
+    github_name = config.github_name
+    meta_description = config.meta_description
+    theme_path = config.theme_path
+    env = Environment(loader=FileSystemLoader(theme_path))
+    template = env.get_template("tags.html")
+    tag_items = [{"name": tag, "count": len(tag_index.get(tag, []))} for tag in tags]
+    return template.render(
+        tag_items=tag_items,
+        tags=tags,
+        blog_title=blog_title,
+        github_name=github_name,
+        github_repo=config.github_repo,
+        blog_url=config.blog_url,
+        rss_atom_path=config.rss_atom_path,
+        author_name=config.author_name,
+        meta_description=meta_description,
+    )
+
+
+def save_tags_index(content: str):
+    tags_dir = config.content_dir / "tags"
+    tags_dir.mkdir(parents=True, exist_ok=True)
+    path = tags_dir / "index.html"
+    with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
