@@ -123,11 +123,11 @@ rye sync # 开始下载文件对应的包
 当我们的项目需要添加新的依赖时，可以使用<code>rye add &lt;package name&gt;</code> 和 <code>rye sync</code>来安装对应的包，或者通过<code>rye romove &lt;package name&gt;</code>和<code>rye sync</code>来移除对应的包。</p>
 <p><code>rye add &lt;package name&gt;</code>和<code>rye romove &lt;package name&gt;</code>只修改<code>pyproject.toml</code>文件，<code>rye sync</code>会按照<code>pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
 <h2>修改项目的 Python 版本</h2>
-<p>rye 当前为我们的项目安装 Python@3.11 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<p>rye 当前为我们的项目安装 <a href="mailto:Python@3.11">Python@3.11</a> 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
 <pre><code class="language-shell">rye pin 3.9
 rye sync # 所有的修改都需要使用sync命令生效
 </code></pre>
-<p>此时，我们的项目的 Python 版本就变为了<span class="pangu"></span>Python@3.9</p>
+<p>此时，我们的项目的 Python <a href="%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%98%E4%B8%BA%E4%BA%86Python@3.9">版本就变为了<span class="pangu"></span>Python@3.9</a></p>
 <h2>全局 Python 脚本</h2>
 <p>某些情况下，有些包我们想要全局使用，比如<code>black</code>或者<code>ruff</code>来对我们的代码进行格式化。</p>
 <pre><code class="language-shell">rye install ruff

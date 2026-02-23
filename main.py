@@ -23,11 +23,11 @@ from github.Repository import Repository
 from jinja2 import Environment, FileSystemLoader
 from lxml.etree import CDATA  # type: ignore
 from marko import Markdown
+from marko.ext.gfm import GFM
 
 from configs.config_utils import Config
 
 config = Config()
-PAGE_SIZE = 10
 
 
 def main(token: str, repo_name: str):
@@ -38,7 +38,8 @@ def main(token: str, repo_name: str):
     issues: PaginatedList[Issue] = get_all_issues(repo, me)
     issues_list = list(issues)
     tags = collect_tags(issues_list)
-    pages = paginate_issues(issues_list, PAGE_SIZE)
+    page_size = config.page_size
+    pages = paginate_issues(issues_list, page_size)
     total_pages = max(1, len(pages))
 
     for page, page_issues in enumerate(pages, start=1):
@@ -219,7 +220,7 @@ def save_blog_index_as_html(content: str, page: int):
 
 
 def markdown2html(mdstr: str) -> str:
-    markdown = Markdown(extensions=["pangu"])
+    markdown = Markdown(extensions=[GFM, "pangu"])
     html = markdown.convert(mdstr)
     return html
 

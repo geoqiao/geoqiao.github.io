@@ -12,6 +12,7 @@ blog:
   author:
     name: geoqiao
     email: geoqiao@example.com
+  page_size: 10
 
 # GitHub 相关配置
 github:

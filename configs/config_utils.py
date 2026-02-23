@@ -19,6 +19,7 @@ class Config:
         self.content_dir = Path(config_loaded["blog"]["content_dir"])
         self.blog_dir = Path(config_loaded["blog"]["blog_dir"])
         self.rss_atom_path = config_loaded["blog"]["rss_atom_path"]
+        self.page_size = config_loaded["blog"]["page_size"]
         # config about github
         self.github_name = config_loaded["github"]["name"]
         self.github_repo = config_loaded["github"]["repo"]

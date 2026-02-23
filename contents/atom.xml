@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-23T02:34:03.082447+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>1. 目前是一名金融行业贷后策略分析师；这里是我的个人空间，记录一些想记录的。
+<feed xmlns="http://www.w3.org/2005/Atom"><id>https://geoqiao.github.io/</id><title>geoqiao's Blog</title><updated>2026-02-23T03:13:32.009618+00:00</updated><author><name>geoqiao</name><email>geoqiao@example.com</email></author><link href="https://geoqiao.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator><subtitle>1. 目前是一名金融行业贷后策略分析师；这里是我的个人空间，记录一些想记录的。
 2. 这个网页基于GitHub Pages &amp; GitHub Actions 自动部署。
 3. 主体 main.py 自己完成，前端主题由AI生成。
 </subtitle><entry><id>https://geoqiao.github.io/blog/2.html</id><title>excel 学习经验分享</title><updated>2024-05-07T15:03:36+00:00</updated><content type="html"><![CDATA[<h2>描述</h2>
@@ -689,11 +689,11 @@ rye sync # 开始下载文件对应的包
 当我们的项目需要添加新的依赖时，可以使用<code>rye add &lt;package name&gt;</code> 和 <code>rye sync</code>来安装对应的包，或者通过<code>rye romove &lt;package name&gt;</code>和<code>rye sync</code>来移除对应的包。</p>
 <p><code>rye add &lt;package name&gt;</code>和<code>rye romove &lt;package name&gt;</code>只修改<code>pyproject.toml</code>文件，<code>rye sync</code>会按照<code>pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
 <h2>修改项目的 Python 版本</h2>
-<p>rye 当前为我们的项目安装 Python@3.11 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<p>rye 当前为我们的项目安装 <a href="mailto:Python@3.11">Python@3.11</a> 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
 <pre><code class="language-shell">rye pin 3.9
 rye sync # 所有的修改都需要使用sync命令生效
 </code></pre>
-<p>此时，我们的项目的 Python 版本就变为了<span class="pangu"></span>Python@3.9</p>
+<p>此时，我们的项目的 Python <a href="%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%98%E4%B8%BA%E4%BA%86Python@3.9">版本就变为了<span class="pangu"></span>Python@3.9</a></p>
 <h2>全局 Python 脚本</h2>
 <p>某些情况下，有些包我们想要全局使用，比如<code>black</code>或者<code>ruff</code>来对我们的代码进行格式化。</p>
 <pre><code class="language-shell">rye install ruff
@@ -771,7 +771,7 @@ async def get_rss_feeds(request: Request):
 
 </code></pre>
 <h2>命令行运行程序</h2>
-<p>通过命令行运行，在 http://127.0.0.1:8000 预览程序</p>
+<p>通过命令行运行，在 <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> 预览程序</p>
 <pre><code class="language-shell">uvicorn main:app --reload 
 </code></pre>
 <p><a href="https://github.com/geoqiao/RSS_db">项目地址</a></p>
@@ -843,7 +843,7 @@ def markdown2html(mdstr: str):
 <p>因为白天上班比较忙，所以每天晚上下班都会花一个小时来看这个项目。花了将近一个月的时间，我终于实现了自己搭建博客页面的想法。</p>
 <p>现在我已经开始使用自己的项目来写博客，这种体验真的很美妙。</p>
 <p>这是我的<a href="https://github.com/geoqiao/github_blog">源代码仓库</a>和<a href="https://geoqiao.github.io/contents/">GitHub Pages</a>页面</p>
-]]></content><link href="https://geoqiao.github.io/blog/21.html"/><published>2024-05-12T09:14:39+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/22.html</id><title>Claim my RSS feed on Follow ,a amazing RSS reader</title><updated>2024-09-08T02:01:25+00:00</updated><content type="html"><![CDATA[<p>This message is used to verify that this feed (feedId:53066833315102724) belongs to me (userId:53065838481510400). Join me in enjoying RSS on the next generation information browser https://follow.is.</p>
+]]></content><link href="https://geoqiao.github.io/blog/21.html"/><published>2024-05-12T09:14:39+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/22.html</id><title>Claim my RSS feed on Follow ,a amazing RSS reader</title><updated>2024-09-08T02:01:25+00:00</updated><content type="html"><![CDATA[<p>This message is used to verify that this feed (feedId:53066833315102724) belongs to me (userId:53065838481510400). Join me in enjoying RSS on the next generation information browser <a href="https://follow.is">https://follow.is</a>.</p>
 ]]></content><link href="https://geoqiao.github.io/blog/22.html"/><published>2024-09-08T02:01:25+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/23.html</id><title>uv - GitHub 20k star 的终极 Python 项目管理工具</title><updated>2024-09-22T09:38:47+00:00</updated><content type="html"><![CDATA[<h2>uv 是什么</h2>
 <p><a href="https://docs.astral.sh/uv/">uv</a> 是一个 Python 项目管理和包管理的工具，由 Astral 开发（他们的另一个明星产品是 <a href="https://docs.astral.sh/ruff/">ruff</a> ）。</p>
 <p>在我刚接触 Python 的时候，阻止我动手写代码的问题主要有 2 个：</p>
@@ -1183,8 +1183,8 @@ uv 和 pdm 有什么区别：<ul>
 </li>
 <li>
 文档：<ul>
-<li>uv：https://docs.astral.sh/uv/</li>
-<li>pdm：https://pdm-project.org/en/latest/</li>
+<li>uv：<a href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a></li>
+<li>pdm：<a href="https://pdm-project.org/en/latest/">https://pdm-project.org/en/latest/</a></li>
 </ul>
 </li>
 </ol>
@@ -1264,13 +1264,13 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <p>很幸运，我从这些正向社交里学到好多东西！</p>
 <h2>还有好多事情没做</h2>
 <ul>
-<li>[ ] 独自旅行一次，独自规划，独自出行</li>
-<li>[ ] 继续学习 Python，我要继续维护这个 Python 博客，让搭建更加简单！</li>
-<li>[ ] 继续学习英语，最近发现一个免费的口语交流网站，很不错，要坚持练习。国外出差机会之前要可以基本的口语交流</li>
-<li>[ ] 工作也要积极向上，很多同事都有可以学习的点。要主动沟通，主动同步想法。</li>
-<li>[x] 要对自己更加坦诚，要对朋友真诚。就像局外人中的一个句子，人生在世，永远不要弄虚作假。</li>
-<li>[x] 带妈妈出去走走</li>
-<li>[x] 要回去看看姥姥，我很想她，但我不能经常想</li>
+<li><input disabled="" type="checkbox"> 独自旅行一次，独自规划，独自出行</li>
+<li><input disabled="" type="checkbox"> 继续学习 Python，我要继续维护这个 Python 博客，让搭建更加简单！</li>
+<li><input disabled="" type="checkbox"> 继续学习英语，最近发现一个免费的口语交流网站，很不错，要坚持练习。国外出差机会之前要可以基本的口语交流</li>
+<li><input disabled="" type="checkbox"> 工作也要积极向上，很多同事都有可以学习的点。要主动沟通，主动同步想法。</li>
+<li><input checked="" disabled="" type="checkbox"> 要对自己更加坦诚，要对朋友真诚。就像局外人中的一个句子，人生在世，永远不要弄虚作假。</li>
+<li><input checked="" disabled="" type="checkbox"> 带妈妈出去走走</li>
+<li><input checked="" disabled="" type="checkbox"> 要回去看看姥姥，我很想她，但我不能经常想</li>
 </ul>
 ]]></content><link href="https://geoqiao.github.io/blog/29.html"/><published>2024-12-31T15:42:13+00:00</published></entry><entry><id>https://geoqiao.github.io/blog/30.html</id><title>我喜欢冬天的下午走路去成都的茶馆喝茶</title><updated>2025-02-05T12:39:28+00:00</updated><content type="html"><![CDATA[<h2>记录一下</h2>
 <p>今年的计划完成了一大项：带妈妈出去走走。</p>
@@ -1291,43 +1291,43 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <h2>25<span class="pangu"></span>年待办进度</h2>
 <p>25<span class="pangu"></span>年的待办事项基本完成</p>
 <ul>
-<li>[x] 独自旅行一次，独自规划，独自出行</li>
+<li><input checked="" disabled="" type="checkbox"> 独自旅行一次，独自规划，独自出行</li>
 </ul>
 <blockquote>
 <p>新加坡 citywalk 一日游</p>
 </blockquote>
 <ul>
-<li>[x] 继续学习 Python，我要继续维护这个 Python 博客，让搭建更加简单！</li>
+<li><input checked="" disabled="" type="checkbox"> 继续学习 Python，我要继续维护这个 Python 博客，让搭建更加简单！</li>
 </ul>
 <blockquote>
 <p>说来惭愧，这一年没怎么维护，blog 也写的很少</p>
 </blockquote>
 <ul>
-<li>[x] 继续学习英语，最近发现一个免费的口语交流网站，很不错，要坚持练习。国外出差机会之前要可以基本的口语交流</li>
+<li><input checked="" disabled="" type="checkbox"> 继续学习英语，最近发现一个免费的口语交流网站，很不错，要坚持练习。国外出差机会之前要可以基本的口语交流</li>
 </ul>
 <blockquote>
 <p>得益于工作的关系，这一年还是有不少锻炼口语的机会</p>
 </blockquote>
 <ul>
-<li>[x] 工作也要积极向上，很多同事都有可以学习的点。要主动沟通，主动同步想法。</li>
+<li><input checked="" disabled="" type="checkbox"> 工作也要积极向上，很多同事都有可以学习的点。要主动沟通，主动同步想法。</li>
 </ul>
 <blockquote>
 <p>今年工作很充实，获得一个小升职，感谢领导同事的支持和帮助</p>
 </blockquote>
 <ul>
-<li>[x] 要对自己更加坦诚，要对朋友真诚。就像局外人中的一个句子，人生在世，永远不要弄虚作假。</li>
+<li><input checked="" disabled="" type="checkbox"> 要对自己更加坦诚，要对朋友真诚。就像局外人中的一个句子，人生在世，永远不要弄虚作假。</li>
 </ul>
 <blockquote>
 <p>主观感觉做到了</p>
 </blockquote>
 <ul>
-<li>[x] 带妈妈出去走走</li>
+<li><input checked="" disabled="" type="checkbox"> 带妈妈出去走走</li>
 </ul>
 <blockquote>
 <p>上海 - 杭州 - 苏州 - 成都</p>
 </blockquote>
 <ul>
-<li>[x] 要回去看看姥姥，我很想她，但我不能经常想</li>
+<li><input checked="" disabled="" type="checkbox"> 要回去看看姥姥，我很想她，但我不能经常想</li>
 </ul>
 <blockquote>
 <p>回去了，姥爷今年也去世了</p>
@@ -1356,13 +1356,13 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 <p>发现自己在做事情的时候，还是很在意别人的看法，总是得等到自己觉得完美才敢做。这样其实很不好。我想再次告诉自己，完美主义害人害己，一定要开始做。</p>
 <h2>26 年待办</h2>
 <ul>
-<li>[ ] 理财：熟悉常看的一些技术指标、学会看公司财报，26<span class="pangu"></span>年收益率<span class="pangu"></span>4%+</li>
-<li>[ ] 健康：坚持骑自行车和偶尔慢跑</li>
-<li>[ ] 社交：与为数不多的朋友多见面，上海的同事一年<span class="pangu"></span>3<span class="pangu"></span>次以上、杭州的好友一年<span class="pangu"></span>4<span class="pangu"></span>次以上、老家的发小至少一年<span class="pangu"></span>1<span class="pangu"></span>次</li>
-<li>[ ] 阅读：读更多的理财相关书籍，偏向技术指标学习</li>
-<li>[ ] 旅游：一次<span class="pangu"></span>3<span class="pangu"></span>天以上的一人行</li>
-<li>[ ] 学习：尝试报一个线上硕士课程或者读一个非全日制硕士</li>
-<li>[ ] 多拍照片，制作一个实体相册</li>
+<li><input disabled="" type="checkbox"> 理财：熟悉常看的一些技术指标、学会看公司财报，26<span class="pangu"></span>年收益率<span class="pangu"></span>4%+</li>
+<li><input disabled="" type="checkbox"> 健康：坚持骑自行车和偶尔慢跑</li>
+<li><input disabled="" type="checkbox"> 社交：与为数不多的朋友多见面，上海的同事一年<span class="pangu"></span>3<span class="pangu"></span>次以上、杭州的好友一年<span class="pangu"></span>4<span class="pangu"></span>次以上、老家的发小至少一年<span class="pangu"></span>1<span class="pangu"></span>次</li>
+<li><input disabled="" type="checkbox"> 阅读：读更多的理财相关书籍，偏向技术指标学习</li>
+<li><input disabled="" type="checkbox"> 旅游：一次<span class="pangu"></span>3<span class="pangu"></span>天以上的一人行</li>
+<li><input disabled="" type="checkbox"> 学习：尝试报一个线上硕士课程或者读一个非全日制硕士</li>
+<li><input disabled="" type="checkbox"> 多拍照片，制作一个实体相册</li>
 </ul>
 <h2>总结</h2>
 <p>2025<span class="pangu"></span>年过去了，30<span class="pangu"></span>岁到了，很多事情都已发生。愿我可以永远策马扬鞭、坦诚对待自己。</p>
