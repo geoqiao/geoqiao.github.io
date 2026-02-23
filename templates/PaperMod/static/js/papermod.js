@@ -21,7 +21,8 @@
                         h.id = base || `section-${index + 1}`;
                     }
                     const li = document.createElement('li');
-                    li.className = 'toc-item';
+                    const levelClass = h.tagName === 'H3' ? 'toc-level-2' : 'toc-level-1';
+                    li.className = 'toc-item ' + levelClass;
                     const a = document.createElement('a');
                     a.className = 'toc-link';
                     a.href = '#' + h.id;

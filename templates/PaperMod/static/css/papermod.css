@@ -215,6 +215,15 @@ html[data-theme='dark'] .pm-header {
     text-align: left
 }
 
+.sidebar .author-card p {
+    font-size: 0.95rem;
+    color: #4b5563
+}
+
+html[data-theme='dark'] .sidebar .author-card p {
+    color: #cbd5e1
+}
+
 .tag {
     display: inline-block;
     background: rgba(32, 148, 96, 0.08);
@@ -334,14 +343,27 @@ html[data-theme='dark'] .tag {
     margin-bottom: 0.5rem
 }
 
+.toc-item.toc-level-2 {
+    padding-left: 1rem
+}
+
 .toc-link {
-    color: var(--accent);
+    color: #6b7280;
     text-decoration: none;
     font-weight: 600
 }
 
 .toc-link:hover {
-    color: #1b7f52
+    color: #4b5563
+}
+
+html[data-theme='dark'] .toc-link {
+    color: #e5e7eb
+}
+
+.toc-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px
 }
 
 /* Sticky sidebar */
@@ -460,5 +482,9 @@ html[data-theme='dark'] .pm-footer {
         position: static;
         margin-top: 0;
         margin-bottom: 1.5rem
+    }
+
+    .toc {
+        display: none
     }
 }
