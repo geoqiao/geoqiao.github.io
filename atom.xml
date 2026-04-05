@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-04-05T08:01:13.804343+00:00</updated>
+  <updated>2026-04-05T10:05:28.576420+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -1676,5 +1676,110 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 ]]></content>
     <link href="https://geoqiao.github.io/blog/33-claude-code-with-chrom-devtools-mcp.html"/>
     <published>2026-04-05T06:25:49+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html</id>
+    <title>不懂Git、不会前端，一个文科生的GitHub Blog</title>
+    <updated>2026-04-05T09:48:06+00:00</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>“<strong>People Die, but Long Live GitHub</strong>” -- [<a href="https://github.com/yihong0618/gitblog">gitblog</a>](https://github.com/yihong0618/gitblog)</p>
+</blockquote>
+<h1>Escaping 🚀</h1>
+<p><code>Escaping</code> (<a href="https://github.com/geoqiao/escaping">https://github.com/geoqiao/escaping</a>) 是一个极致简洁、自动化程度极高的个人博客框架。它将 GitHub Issues 作为后端编辑器，利用 GitHub Actions 自动触发构建，并最终通过 GitHub Pages 进行分发。</p>
+<p><strong>核心特性</strong>：</p>
+<ul>
+<li>📝 <strong>以 Issue 为博文</strong>：直接在 GitHub Issues 中写作，支持标签分类。</li>
+<li>🤖 <strong>全自动化流</strong>：无需本地部署，Issue 更新即刻触发自动构建。</li>
+<li>🎨 <strong>优雅 UI</strong>：内置精美的 BearMinimal 主题，支持暗色模式。</li>
+<li>🔍 <strong>SEO 友好</strong>：自动生成 <code>sitemap.xml</code>、<code>robots.txt</code> 以及语义化的 URL (Slugs)。</li>
+<li>⚡ <strong>性能卓越</strong>：基于 Python 3.11 和 <code>uv</code> 构建，生成速度极快。</li>
+</ul>
+<hr />
+<h2>工作原理</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│ escaping (代码仓库 - 所有源码在这里维护)                      │
+│                                                             │
+│ ├── src/                  # Python 源代码                   │
+│ ├── templates/            # 主题模板 (BearMinimal)           │
+│ ├── .github/workflows/    # CI/CD 工作流                    │
+│ └── config.yaml           # 博客配置                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              │ gen_site.yml
+                              │ (生成网站并推送)
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│ geoqiao.github.io (内容仓库 - 仅存放 Issues)                  │
+│                                                             │
+│ ├── Issues              # 博客文章                          │
+│ └── .github/workflows/  │                                   │
+│     └── trigger.yml     │ 监听 Issues 事件                  │
+└─────────────────────────────────────────────────────────────┘
+                              ▲
+                              │ trigger.yml
+                              │ (Issue 更新时触发)
+                              │
+                     ┌────────┴────────┐
+                     │   GitHub Issues  │
+                     │  (你的编辑器)    │
+                     └─────────────────┘
+</code></pre>
+<hr />
+<h2>如何使用</h2>
+<pre><code>创建 Issue (添加标签)
+        │
+        ▼
+┌─────────────────┐     dispatch      ┌─────────────────┐
+│ geoqiao.github.io│ ──────────────→  │  escaping       │
+│ trigger.yml     │                  │  gen_site.yml   │
+└─────────────────┘                  └────────┬────────┘
+                                               │
+                                               │ git push
+                                               ▼
+                                      ┌─────────────────┐
+                                      │ geoqiao.github.io│
+                                      │ main 分支        │
+                                      └────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │  GitHub Pages   │
+                                      │  自动部署 ✓      │
+                                      └─────────────────┘
+</code></pre>
+<ol>
+<li><strong>Fork 仓库</strong>：Fork <code>escaping</code> 到你的 GitHub 账号</li>
+<li>
+<strong>配置 GitHub Pages</strong>：<ul>
+<li>进入 <code>Settings -&gt; Pages</code></li>
+<li>Source 选择 <strong>Deploy from a branch</strong></li>
+<li>Branch 选择 <strong>main</strong>，Folder 选择 <strong>/ (root)</strong></li>
+</ul>
+</li>
+<li>
+<strong>添加 Secret</strong>：<ul>
+<li>在 <code>Settings -&gt; Secrets and variables -&gt; Actions</code> 中添加 <code>G_T</code></li>
+<li>值为你的 [<a href="https://github.com/settings/tokens">GitHub Personal Access Token</a>](https://github.com/settings/tokens)（需要 <code>repo</code> 和 <code>workflow</code> 权限）</li>
+</ul>
+</li>
+<li><strong>修改配置</strong>：编辑 <code>config.yaml</code> 中的博客信息</li>
+<li><strong>开始写作</strong>：在仓库的 Issues 中创建文章，添加标签，稍等片刻博客就上线了</li>
+</ol>
+<hr />
+<h2>致谢</h2>
+<p>本项目深受以下优秀项目的启发：</p>
+<ul>
+<li>[<a href="https://github.com/yihong0618/gitblog">gitblog</a>](https://github.com/yihong0618/gitblog) - 开启了 Issue 写作的先河。</li>
+<li>[<a href="https://github.com/Meekdai/Gmeek">Gmeek</a>](https://github.com/Meekdai/Gmeek) - 提供了极简的构建思路。</li>
+</ul>
+<h2>最后</h2>
+<p>去年 11 月搬家，新出租屋离地铁站远了不少。电瓶车充电麻烦，于是买了辆二手自行车代步。</p>
+<p>提车第二天早上，本来只想骑到地铁站。结果手脚不受控制，满脑子兴奋，直接骑到公司了——真的很解压。</p>
+<p>这辆二手自行车是捷安特的 Escape 1 ，也是项目名字 Escaping 的由来。</p>
+<hr />
+<p><em>Tags: <a href="https://github.com/geoqiao/geoqiao.github.io/issues/new#blog">#blog</a> <a href="https://github.com/geoqiao/geoqiao.github.io/issues/new#github">#github</a> <a href="https://github.com/geoqiao/geoqiao.github.io/issues/new#python">#python</a> <a href="https://github.com/geoqiao/geoqiao.github.io/issues/new#escaping">#escaping</a> <a href="https://github.com/geoqiao/geoqiao.github.io/issues/new#escape">#escape</a></em></p>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html"/>
+    <published>2026-04-05T09:48:06+00:00</published>
   </entry>
 </feed>
