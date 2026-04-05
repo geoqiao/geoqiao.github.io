@@ -212,7 +212,6 @@ uv 和 pdm 有什么区别：<ul>
     script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
     script.setAttribute('issue-number', '27');
     script.setAttribute('theme', getUtterancesTheme());
-    script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
 
     // Monitor iframe creation
@@ -240,8 +239,8 @@ uv 和 pdm 有什么区别：<ul>
             return true;
         }
 
-        // Give up after 8 seconds
-        if (checkCount > 40) {
+        // Give up after 15 seconds (mobile networks need more time)
+        if (checkCount > 75) {
             clearInterval(checkInterval);
             showError();
             return false;
@@ -253,7 +252,7 @@ uv 和 pdm 有什么区别：<ul>
         if (loadingMsg) {
             var msg = 'Comments may not be available.';
             if (isIOS && isSafari) {
-                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try turning off "Prevent Cross-Site Tracking" in Settings → Safari</small>';
             }
             loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/27" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
             loadingMsg.className = 'comments-error';
@@ -272,13 +271,13 @@ uv 和 pdm 有什么区别：<ul>
 
     container.appendChild(script);
 
-    // Absolute fallback after 12 seconds
+    // Absolute fallback after 15 seconds
     setTimeout(function() {
         clearInterval(checkInterval);
         if (loadingMsg && loadingMsg.style.display !== 'none') {
             showError();
         }
-    }, 12000);
+    }, 15000);
 })();
 </script>
 
