@@ -19,11 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ secrets.G_T }}
-          run-id: ${{ github.event.client_payload.run_id }}
-          path: ./_site
+        env:
+          G_T: ${{ secrets.G_T }}
+        run: |
+          mkdir -p _site
+          curl -L -o artifact.zip \
+            -H "Authorization: Bearer $G_T" \
+            -H "Accept: application/vnd.github+json" \
+            "${{ github.event.client_payload.artifact_url }}"
+          unzip -q artifact.zip -d _site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
