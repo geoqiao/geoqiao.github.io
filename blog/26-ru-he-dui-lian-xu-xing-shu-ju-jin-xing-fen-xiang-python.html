@@ -149,6 +149,17 @@ optb.fit(x, y)  #分箱
 <script>
 (function() {
     'use strict';
+
+    // Fix Safari lazy-loading bug: utterances iframe may never load
+    // because IntersectionObserver sees zero-height parent container.
+    var originalInsertAdjacentHTML = Element.prototype.insertAdjacentHTML;
+    Element.prototype.insertAdjacentHTML = function(position, text) {
+        if (typeof text === 'string' && text.indexOf('<iframe') !== -1 && text.indexOf('loading="lazy"') !== -1) {
+            text = text.replace(/loading="lazy"/g, '');
+        }
+        return originalInsertAdjacentHTML.call(this, position, text);
+    };
+
     var container = document.getElementById('comments-container');
     var loadingMsg = container.querySelector('.comments-loading');
 
@@ -246,6 +257,14 @@ optb.fit(x, y)  #分箱
         clearInterval(checkInterval);
         showError();
     };
+
+    // Listen for actual Utterances resize message (most reliable signal)
+    window.addEventListener('message', function(e) {
+        if (e.origin === 'https://utteranc.es' && e.data && e.data.type === 'resize' && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+        }
+    });
 
     container.appendChild(script);
 
