@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-04-05T10:09:54.530286+00:00</updated>
+  <updated>2026-04-05T10:15:31.436883+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -1680,9 +1680,9 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html</id>
     <title>不懂Git、不会前端，一个文科生的GitHub Blog</title>
-    <updated>2026-04-05T09:48:06+00:00</updated>
+    <updated>2026-04-05T10:15:07+00:00</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>“<strong>People Die, but Long Live GitHub</strong>” -- [<a href="https://github.com/yihong0618/gitblog">gitblog</a>](https://github.com/yihong0618/gitblog)</p>
+<p>“<strong>People Die, but Long Live GitHub</strong>” -- [<a href="https://github.com/yihong0618/gitblog">gitblog</a>]</p>
 </blockquote>
 <h1>Escaping 🚀</h1>
 <p><code>Escaping</code> (<a href="https://github.com/geoqiao/escaping">https://github.com/geoqiao/escaping</a>) 是一个极致简洁、自动化程度极高的个人博客框架。它将 GitHub Issues 作为后端编辑器，利用 GitHub Actions 自动触发构建，并最终通过 GitHub Pages 进行分发。</p>
