@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>rye - 好用的Python包管理工具 - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/1-rye-hao-yong-de-python-bao-guan-li-gong-ju.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/1-rye-hao-yong-de-python-bao-guan-li-gong-ju.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="rye - 好用的Python包管理工具">
+    <meta property="og:description" content="Tags: python">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/1-rye-hao-yong-de-python-bao-guan-li-gong-ju.html">
+    <meta name="twitter:title" content="rye - 好用的Python包管理工具">
+    <meta name="twitter:description" content="Tags: python">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">geoqiao&#39;s Blog</a>
+                <ul class="nav-links">
+                    
+                    <li><a href="/blog/">Blog</a></li>
+                    
+                    <li><a href="/tag/">Tags</a></li>
+                    
+                    <li><a href="/about.html">About</a></li>
+                    
+                    <li><a href="/atom.xml">RSS</a></li>
+                    
+                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <h1>rye - 好用的Python包管理工具</h1>
+
+    <div class="post-meta">
+        <time>2024-01-06</time>
+        
+        ·
+        
+        <a href="/tag/python.html">#python</a>
+        
+        
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        <p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
+<p>作为一个刚开始学习 Python 的新手，它解决了我碰到的两个难题：</p>
+<ol>
+<li>使用<code>pip</code>安装包时，经常某些包无法在当前 python 版本安装</li>
+<li>不会使用 venv 等虚拟环境管理工具</li>
+<li>使用<code>conda</code>时，经常社区还没有适配某些最新版本的包</li>
+</ol>
+<p>这里引出 rye 主要的几个功能：</p>
+<ol>
+<li>管理全局的 Python 版本</li>
+<li>管理虚拟环境中的 Python 版本</li>
+<li>以封装<code>pip</code>和<code>virtualenv</code>的方式，让我不必烦恼如何使用他们</li>
+</ol>
+<h2>安装 rye</h2>
+<p>在 macOS 上，直接运行一下命令即可，同时在 rye 的<a href="https://rye-up.com/guide/installation/#installing-rye">文档</a>也给出了其他系统的安装方式。</p>
+<p>例如 macOS：</p>
+<blockquote>
+<p>To install run you can curl a command which will install the right binary for your operating system and CPU architecture and install it:</p>
+<pre><code class="language-shell">curl -sSf https://rye-up.com/get | bash
+</code></pre>
+</blockquote>
+<p><strong>补充</strong>：</p>
+<pre><code class="language-shell">rye self update # 升级rye
+</code></pre>
+<pre><code class="language-shell">rye self uninstall # 卸载rye
+</code></pre>
+<h2>开始一个新项目</h2>
+<p>使用  <code>rye init</code>  初始化一个新项目非常容易。在这里，我开始一个名为： <code>&quot;test-rye&quot;</code>的新项目。</p>
+<pre><code class="language-shell">mkdir test-rye  #创建项目文件夹
+cd test-rye #在终端进入刚才创建的项目文件夹
+rye init . #使用rye初始化项目
+</code></pre>
+<p>执行初始化之后，rye 会帮我们创建一些默认文件：</p>
+<pre><code class="language-shell">tree
+├── README.md       # 项目的README文件
+├── pyproject.toml  # rye用来管理项目的文件
+└── src
+    └── test_rye
+        └── __init__.py
+</code></pre>
+<p>现在，我们便可以安装自己想安装的包。假设我这个项目想用来做一些数据分析工作：</p>
+<pre><code class="language-shell"># 使用rye安装 numpy pandas scikit-learn xgboost
+rye add numpy pandas scikit-learn xgboost # 解析包版本，并添加到pyproject.toml文件中
+rye sync # 开始下载文件对应的包
+</code></pre>
+<p>至此，一个由 rye 管理的项目就创建完成了，我们可以使用 VSCode 打开项目文件夹，并开始写代码了。</p>
+<pre><code class="language-shell">code .  # 使用VSCode打开项目文件夹
+</code></pre>
+<p>此时，我们的项目文件夹结构如下：</p>
+<pre><code class="language-shell">tree
+├── README.md
+├── pyproject.toml
+├── requirements-dev.lock
+├── requirements.lock
+└── src
+    └── test_rye
+        ├── __init__.py
+        └── __pycache__
+            └── __init__.cpython-311.pyc
+</code></pre>
+<p><strong>注意事项</strong>：
+当我们的项目需要添加新的依赖时，可以使用<code>rye add &lt;package name&gt;</code> 和 <code>rye sync</code>来安装对应的包，或者通过<code>rye romove &lt;package name&gt;</code>和<code>rye sync</code>来移除对应的包。</p>
+<p><code>rye add &lt;package name&gt;</code>和<code>rye romove &lt;package name&gt;</code>只修改<code>pyproject.toml</code>文件，<code>rye sync</code>会按照<code>pyproject.toml</code>文件实际对项目的依赖进行操作。</p>
+<h2>修改项目的 Python 版本</h2>
+<p>rye 当前为我们的项目安装 <a href="mailto:Python@3.11">Python@3.11</a> 版本，但不必担心，rye 为我们提供了修改项目 Python 版本的命令</p>
+<pre><code class="language-shell">rye pin 3.9
+rye sync # 所有的修改都需要使用sync命令生效
+</code></pre>
+<p>此时，我们的项目的 Python <a href="%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%98%E4%B8%BA%E4%BA%86Python@3.9">版本就变为了<span class="pangu"></span>Python@3.9</a></p>
+<h2>全局 Python 脚本</h2>
+<p>某些情况下，有些包我们想要全局使用，比如<code>black</code>或者<code>ruff</code>来对我们的代码进行格式化。</p>
+<pre><code class="language-shell">rye install ruff
+</code></pre>
+<p>安装之后，就可以在终端全局使用<code>ruff</code>命令了</p>
+<p>卸载也很简单：</p>
+<pre><code class="language-shell">rye uninstall ruff
+</code></pre>
+<h2>最后</h2>
+<p>rye 还支持一些常规的操作，比如接管全局 python、升级项目中某个依赖或者所有依赖的版本、构建/发布包等等功能，可以通过<a href="https://rye-up.com/guide/">官方文档</a>查看。</p>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = 'github-light';
+    var commentsThemeMode = 'auto';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '1');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/1" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+
+        </div>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/github-blog">github_blog</a></p>
+        </div>
+    </footer>
+    
+
+    <script src="/templates/BearMinimal/static/js/prism.js"></script>
+    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+</body>
+</html>

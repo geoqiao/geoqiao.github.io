@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ issue.title }} - {{ blog_title }}{% endblock %}
+
+{% block canonical %}
+<link rel="canonical" href="{{ blog_url.rstrip('/') }}/blog/{{ slug }}.html" />
+{% endblock %}
+
+{% block og_type %}article{% endblock %}
+{% block og_url %}{{ blog_url.rstrip('/') }}/blog/{{ slug }}.html{% endblock %}
+{% block og_title %}{{ issue.title }}{% endblock %}
+{% block og_description %}{% if issue.labels %}Tags: {% for label in issue.labels %}{{ label.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}{{ blog_title }}{% endif %}{% endblock %}
+
+{% block twitter_url %}{{ blog_url.rstrip('/') }}/blog/{{ slug }}.html{% endblock %}
+{% block twitter_title %}{{ issue.title }}{% endblock %}
+{% block twitter_description %}{% if issue.labels %}Tags: {% for label in issue.labels %}{{ label.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}{{ blog_title }}{% endif %}{% endblock %}
+
+{% block content %}
+<article>
+    <h1>{{ issue.title }}</h1>
+
+    <div class="post-meta">
+        <time>{{ issue.created_at.strftime('%Y-%m-%d') }}</time>
+        {% if issue.labels %}
+        ·
+        {% for label in issue.labels %}
+        <a href="/tag/{{ label.name }}.html">#{{ label.name }}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        {{ html_body|safe }}
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = '{{ comments.theme }}';
+    var commentsThemeMode = '{{ comments.theme_mode }}';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', '{{ comments.repo }}');
+    script.setAttribute('issue-number', '{{ issue.number }}');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/{{ github_repo }}/issues/{{ issue.number }}" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+{% endblock %}

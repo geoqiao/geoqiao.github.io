@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>Coke Machine Challenge  - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/14-coke-machine-challenge.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/14-coke-machine-challenge.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="Coke Machine Challenge ">
+    <meta property="og:description" content="Tags: python, cs50p">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/14-coke-machine-challenge.html">
+    <meta name="twitter:title" content="Coke Machine Challenge ">
+    <meta name="twitter:description" content="Tags: python, cs50p">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">geoqiao&#39;s Blog</a>
+                <ul class="nav-links">
+                    
+                    <li><a href="/blog/">Blog</a></li>
+                    
+                    <li><a href="/tag/">Tags</a></li>
+                    
+                    <li><a href="/about.html">About</a></li>
+                    
+                    <li><a href="/atom.xml">RSS</a></li>
+                    
+                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <h1>Coke Machine Challenge </h1>
+
+    <div class="post-meta">
+        <time>2023-09-03</time>
+        
+        ·
+        
+        <a href="/tag/python.html">#python</a>, 
+        
+        <a href="/tag/cs50p.html">#cs50p</a>
+        
+        
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        <h2>什么是 Coke Machine</h2>
+<p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
+<blockquote>
+<p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
+<p>In a file called <code>coke.py</code>, implement a program that prompts the user to insert a coin, one at a time, each time informing the user of the amount due. Once the user has inputted at least 50 cents, output how many cents in change the user is owed. Assume that the user will only input integers, and ignore any integer that isn’t an accepted denomination.</p>
+</blockquote>
+<p>实际上，这是一个很简单的实现，但是我在这里被困了 2 个小时，这里重新记录一遍过程，当作<strong>错题集</strong>。</p>
+<h2>任务拆解</h2>
+<ol>
+<li>假设输入只有 25、10、5 几种情况，且只输入整数格式，忽略任何不符合要求的数字</li>
+<li>文件名为 coke.py</li>
+<li>提示用户投入一枚硬币，每次都要通知应付金额</li>
+<li>一旦用户投入的金额大于等于 50，输出找零金额</li>
+</ol>
+<h2>代码实现</h2>
+<h3>初始化</h3>
+<p>可乐需要 50 美分；一开始没有任何硬币投入；投入的硬币只有三种情况；提示用户可乐的价格。</p>
+<p>代码如下：</p>
+<pre><code class="language-python">amount_due = 50
+change = 0
+coin_list = [5,10,25]
+print(f&quot;Amount Due: {amount_due}&quot;) # 告诉客户coke价格
+</code></pre>
+<h3>付费环节</h3>
+<p>由于条件限制，用户无法一次投入 50 美分，需要多次投入（循环），每次都要提醒用户还要投多少钱。</p>
+<pre><code class="language-python">while amount_due &gt; 0: # 循环开始的条件，如果用户还需要投的钱大于0，则说明钱还不够
+    coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
+    # 这里用try 语句来避免用户输入一些无法转换为整数的文本内容
+    try:
+        coin = int(coin)
+    except ValueError:
+        print(&quot;Invalid coin&quot;)
+        continue
+    # if语句用来判断用户投入的硬币是否符合要求
+    if coin in coin_list:
+        amount_due -= coin # 总共需要投入的减去已经投入的就是还需要投入的
+        change += coin # 这里用来统计用户总共投入的多少
+        print(f&quot;Amount Due: {amount_due}&quot;)
+    else: # 如果用户投入的硬币不符合要求，重新提示可乐价格
+        print(&quot;Amount Due: 50&quot;)
+</code></pre>
+<h3>付费结束之后</h3>
+<p>付费结束之后，有可能刚好投入了 50 美分，但也有可能客户给多了，需要给用户找零，代码如下：</p>
+<pre><code class="language-python"># 还需要付费金额小于等于0，即付够钱了
+# 仍需付费金额的绝对值，即为需要找零的钱
+if amount_due &lt;= 0:
+    print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+</code></pre>
+<h2>完整代码</h2>
+<p>把以上代码优化一下，当 coke.py 当作脚本运行是可以处罚，但是当 import 到其他 Python 文件中则不会触发：</p>
+<pre><code class="language-python">def coke():
+    amount_due = 50
+    change = 0
+    coin_list = [5, 10, 25]
+    print(f&quot;Amount Due: {amount_due}&quot;)
+
+    while amount_due &gt; 0:
+        coin = input(&quot;Insert a coin (25, 10, or 5): &quot;)
+        try:
+            coin = int(coin)
+        except ValueError:
+            print(&quot;Invalid coin&quot;)
+            continue
+
+        if coin in coin_list:
+            amount_due -= coin
+            change += coin
+            print(f&quot;Amount Due: {amount_due}&quot;)
+        else:
+            print(&quot;Amount Due: 50&quot;)
+
+    if amount_due &lt;= 0:
+        print(f&quot;Change Owed: {abs(amount_due)}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    coke()
+</code></pre>
+<p>重写一遍才发现，<code>change</code>这个变量好像根本没用。</p>
+<p>本来是想记录一下用户投入了多少美分，然后用总共投入的钱减去可乐的价格，就是需要找零的钱。现在看来这个变量完全可以去掉，从而使代码更加简洁。</p>
+<p>我就不删了，希望之后重看的时候还能发现这个不完美的地方。</p>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = 'github-light';
+    var commentsThemeMode = 'auto';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '14');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/14" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+
+        </div>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/github-blog">github_blog</a></p>
+        </div>
+    </footer>
+    
+
+    <script src="/templates/BearMinimal/static/js/prism.js"></script>
+    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+</body>
+</html>

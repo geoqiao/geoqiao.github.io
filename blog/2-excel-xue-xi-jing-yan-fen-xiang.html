@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>excel 学习经验分享 - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/2-excel-xue-xi-jing-yan-fen-xiang.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/2-excel-xue-xi-jing-yan-fen-xiang.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="excel 学习经验分享">
+    <meta property="og:description" content="Tags: DataAnalysis, office-excel">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/2-excel-xue-xi-jing-yan-fen-xiang.html">
+    <meta name="twitter:title" content="excel 学习经验分享">
+    <meta name="twitter:description" content="Tags: DataAnalysis, office-excel">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">geoqiao&#39;s Blog</a>
+                <ul class="nav-links">
+                    
+                    <li><a href="/blog/">Blog</a></li>
+                    
+                    <li><a href="/tag/">Tags</a></li>
+                    
+                    <li><a href="/about.html">About</a></li>
+                    
+                    <li><a href="/atom.xml">RSS</a></li>
+                    
+                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <h1>excel 学习经验分享</h1>
+
+    <div class="post-meta">
+        <time>2023-07-15</time>
+        
+        ·
+        
+        <a href="/tag/DataAnalysis.html">#DataAnalysis</a>, 
+        
+        <a href="/tag/office-excel.html">#office-excel</a>
+        
+        
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        <h2>描述</h2>
+<ol>
+<li>
+<p>这是一个分享个人 excel 经验的文档。</p>
+</li>
+<li>
+<p>不分享特定函数的使用方法；实际上，你可以在百度/谷歌轻松搜索到答案。</p>
+</li>
+<li>
+<p>分享一些思路，这些思路可以用在 SQL 和 Python 的学习中。</p>
+</li>
+</ol>
+<h2>函数与 <code>y=x+2</code></h2>
+<p><code>y=x+2</code> 是一个非常简单的数学方程，如果我们给定符合格式的 X 的值，代入这个方程式，就可以得到期望的 Y 值。</p>
+<p>例如：假设 <code>x=2</code>，则 Y = 2+2，即 Y = 4；但是，假设 <code>x=假设</code>，却得不到任何值。</p>
+<p>这是因为，在这里变量 X 只能为一个数字格式，方程式才能被正确计算。</p>
+<p>同理，excel<span class="pangu"></span>的函数也是如此，例如常用的<span class="pangu"></span>vlookup、xlookup、sumifs、if<span class="pangu"></span>等等，只要在单元格内输入 <code>=vlookup(函数要求的参数格式)</code>，即可得到期望的结果。你可以在<span class="pangu"></span>Google<span class="pangu"></span>或者百度搜索到函数的用法。
+以此类推，excel<span class="pangu"></span>的任一函数都可以这样看待。当使用次数多了之后，便不用每次都去搜索参数格式。</p>
+<h2>数据透视表</h2>
+<p>数据透视表是一个数据分析工作中非常实用的工具。</p>
+<h3>数据透视表优势</h3>
+<ol>
+<li>很多时候数据透视表的性能（运行速度）要好于使用函数的方式。</li>
+<li>使用上不需要手动输入参数，只需要会使用鼠标<code>拖、拉、拽</code>三招就可以。</li>
+<li>会了<code>拖、拉、拽</code>，就会了一半的<span class="pangu"></span>BI<span class="pangu"></span>工具，操作方式真的很像市面上所有的主流 BI 工具如<span class="pangu"></span>tableau、powerbi、finebi。</li>
+</ol>
+<h3>数据透视表操作流程</h3>
+<ol>
+<li>
+<p>准备数据：首先需要准备好需要进行分析的数据，并将其放入 Excel 中。</p>
+</li>
+<li>
+<p>选择数据透视表：在 Excel 中，选择需要进行分析的数据区域，然后在菜单栏中选择“插入”选项卡中的“数据透视表”。</p>
+</li>
+<li>
+<p>设定数据源：在弹出的“数据透视表创建向导”中，选择“选择多个合适的数据源”选项，并将数据源区域的范围填入。</p>
+</li>
+<li>
+<p>设定行、列及值：在“数据透视表字段列表”中，将需要分析的数据字段拖动到“行”、“列”、“值”区域中。</p>
+</li>
+<li>
+<p>设定筛选器：可以在“数据透视表字段列表”中，将需要进行筛选的数据字段拖动到“筛选器”区域中，并进行筛选。</p>
+</li>
+<li>
+<p>设定样式：根据需要，可以在“设计”选项卡中设定数据透视表的样式。</p>
+</li>
+<li>
+<p>更新数据：当需要更新数据时，只需右键单击数据透视表并选择“刷新”即可。</p>
+</li>
+</ol>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = 'github-light';
+    var commentsThemeMode = 'auto';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '2');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/2" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+
+        </div>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/github-blog">github_blog</a></p>
+        </div>
+    </footer>
+    
+
+    <script src="/templates/BearMinimal/static/js/prism.js"></script>
+    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+</body>
+</html>

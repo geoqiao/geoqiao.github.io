@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>with_sql _as_english - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/3-with-sql-as-english.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/3-with-sql-as-english.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="with_sql _as_english">
+    <meta property="og:description" content="Tags: DataAnalysis, SQL">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/3-with-sql-as-english.html">
+    <meta name="twitter:title" content="with_sql _as_english">
+    <meta name="twitter:description" content="Tags: DataAnalysis, SQL">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">geoqiao&#39;s Blog</a>
+                <ul class="nav-links">
+                    
+                    <li><a href="/blog/">Blog</a></li>
+                    
+                    <li><a href="/tag/">Tags</a></li>
+                    
+                    <li><a href="/about.html">About</a></li>
+                    
+                    <li><a href="/atom.xml">RSS</a></li>
+                    
+                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <h1>with_sql _as_english</h1>
+
+    <div class="post-meta">
+        <time>2023-07-15</time>
+        
+        ·
+        
+        <a href="/tag/DataAnalysis.html">#DataAnalysis</a>, 
+        
+        <a href="/tag/SQL.html">#SQL</a>
+        
+        
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        <h2>描述</h2>
+<ol>
+<li>分享自己学习 SQL 的经验。</li>
+<li><code>WITH 临时表名 AS 子查询</code> 是 SQL 中一个常用的语法，这篇分享会介绍这个语法。</li>
+<li>SQL 很简单，只需要知道一些英文单词什么意思，就可以读懂。</li>
+</ol>
+<h2>英文单词列表</h2>
+<p>select：选择<strong>哪些字段</strong>
+from：从<strong>哪个表</strong>选择这段
+where：从某个表中符合<strong>哪些条件的数据</strong>进行选择
+left join：就是 excel 中的 vlookup</p>
+<h2>用 excel 思维读 SQL 代码</h2>
+<p>理解了以上的几个单词，你就可以读懂 SQL 代码了，比如如下的代码片段：</p>
+<pre><code class="language-sql">SELECT
+	table1.id
+	,table2.name
+FROM table1
+LEFT JOIN table2
+ON table1.id = table2.id
+WHERE table1.column1 = &#x27;1&#x27;
+</code></pre>
+<p>在这个示例中，<code>table1</code>  和  <code>table2</code>  是两个不同的表，我们在 <code>table1</code> 中写了一个 <code>vlookup</code> ，这个公式以两张表中的 <code>id</code> 字段为条件关联，把 <code>table2</code>  中的 <code>name</code> 字段匹配到了 <code>table1</code> ，并且匹配完成后进行了一个筛选，只选择 <code>table1</code> 中 <code>column1</code> 字段为 <code>&#x27;1&#x27;</code> 的行。</p>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = 'github-light';
+    var commentsThemeMode = 'auto';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '3');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/3" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+
+        </div>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/github-blog">github_blog</a></p>
+        </div>
+    </footer>
+    
+
+    <script src="/templates/BearMinimal/static/js/prism.js"></script>
+    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+</body>
+</html>

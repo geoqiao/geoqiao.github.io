@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>基于 GitHub issues 的个人 blog 搭建 - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/8-ji-yu-github-issues-de-ge-ren-blog-da-jian.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/8-ji-yu-github-issues-de-ge-ren-blog-da-jian.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="基于 GitHub issues 的个人 blog 搭建">
+    <meta property="og:description" content="Tags: python">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/8-ji-yu-github-issues-de-ge-ren-blog-da-jian.html">
+    <meta name="twitter:title" content="基于 GitHub issues 的个人 blog 搭建">
+    <meta name="twitter:description" content="Tags: python">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
+    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">geoqiao&#39;s Blog</a>
+                <ul class="nav-links">
+                    
+                    <li><a href="/blog/">Blog</a></li>
+                    
+                    <li><a href="/tag/">Tags</a></li>
+                    
+                    <li><a href="/about.html">About</a></li>
+                    
+                    <li><a href="/atom.xml">RSS</a></li>
+                    
+                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article>
+    <h1>基于 GitHub issues 的个人 blog 搭建</h1>
+
+    <div class="post-meta">
+        <time>2023-07-18</time>
+        
+        ·
+        
+        <a href="/tag/python.html">#python</a>
+        
+        
+    </div>
+
+    <div id="toc"></div>
+
+    <div class="post-content">
+        <h2>背景</h2>
+<p>我最近碰到了以下问题：</p>
+<ol>
+<li>偶尔想写点东西，想有一个个人 blog</li>
+<li>不懂代码：听到部署、买域名、备案、服务器这些词就头疼想逃避</li>
+<li>不想花钱：买服务器、域名一年好几百甚至可能上千</li>
+</ol>
+<h2>解决方案</h2>
+<p>基于<a href="https://github.com/yihong0618">yihong0618</a>的 gitblog 项目，在 GitHub 上搭建一个基于 issues 的个人博客。</p>
+<p><strong>这个方法有以下几个优点：</strong></p>
+<ol>
+<li>完全免费：不会碰到域名、服务器、备案、一年多少钱这些问题</li>
+<li>非常简单：会下载文件、上传文件、编辑文件就可以完成</li>
+<li>自动化：大佬已经写好了一些函数和脚本，可以自动化完成一些操作</li>
+</ol>
+<p><strong>搭建前需要什么：</strong></p>
+<ol>
+<li>可以登录使用 GitHub </li>
+<li>注册一个 GitHub 账号</li>
+</ol>
+<h2>操作教程</h2>
+<p>操作教程可以参考这个<a href="https://zhuanlan.zhihu.com/p/400962805">知乎链接</a>，教程写的非常详细，部分页面<span class="pangu"></span>UI<span class="pangu"></span>因版本问题跟现在有点区别，但是基本不影响操作。</p>
+<p>不过需要补充一点，按教程操作完成后需要把 GitHub Action 的读写权限打开。操作方式为 Settings - Actions - General - 勾选 Read and write permissions - save，如下图所示：</p>
+<h2>结语</h2>
+<p>以上就是全部内容，非常感谢 @yihong0618 老师的代码。</p>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Theme configuration
+    var commentsTheme = 'github-light';
+    var commentsThemeMode = 'auto';
+    var LIGHT_THEME = 'github-light';
+    var DARK_THEME = 'photon-dark';
+
+    function getCurrentBlogTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+
+    function getUtterancesTheme() {
+        if (commentsThemeMode === 'auto') {
+            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
+        }
+        return commentsTheme;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '8');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Monitor iframe creation
+    var checkInterval;
+    var checkCount = 0;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        if (iframe && loadingMsg) {
+            loadingMsg.style.display = 'none';
+            clearInterval(checkInterval);
+            // Listen for theme changes if in auto mode
+            if (commentsThemeMode === 'auto') {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'data-theme') {
+                            updateUtterancesTheme();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+            }
+            return true;
+        }
+
+        // Give up after 8 seconds
+        if (checkCount > 40) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (loadingMsg) {
+            var msg = 'Comments may not be available.';
+            if (isIOS && isSafari) {
+                msg += '<br><small>iOS Safari may block third-party content.<br>Try "Settings → Safari → Disable Cross-Site Tracking"</small>';
+            }
+            loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/8" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+            loadingMsg.className = 'comments-error';
+        }
+    }
+
+    script.onload = function() {
+        // Start checking for iframe
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    container.appendChild(script);
+
+    // Absolute fallback after 12 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (loadingMsg && loadingMsg.style.display !== 'none') {
+            showError();
+        }
+    }, 12000);
+})();
+</script>
+
+        </div>
+    </main>
+
+    
+    <footer>
+        <div class="container">
+            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/github-blog">github_blog</a></p>
+        </div>
+    </footer>
+    
+
+    <script src="/templates/BearMinimal/static/js/prism.js"></script>
+    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+</body>
+</html>
