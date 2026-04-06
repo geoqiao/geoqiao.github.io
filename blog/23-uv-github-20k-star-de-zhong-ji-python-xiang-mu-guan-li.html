@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,59 +16,71 @@
     <meta property="og:site_name" content="geoqiao&#39;s Blog">
     <meta property="og:title" content="uv - GitHub 20k star 的终极 Python 项目管理工具">
     <meta property="og:description" content="Tags: python">
-    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://geoqiao.github.io/blog/23-uv-github-20k-star-de-zhong-ji-python-xiang-mu-guan-li.html">
     <meta name="twitter:title" content="uv - GitHub 20k star 的终极 Python 项目管理工具">
     <meta name="twitter:description" content="Tags: python">
-    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/templates/Escape2/static/css/style.css">
+    <link rel="stylesheet" href="/templates/Escape2/static/css/prism-nord.css">
     <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
-    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    <link rel="icon" type="image/png" href="/templates/Escape2/static/images/favicon.png">
     
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="/" class="logo">geoqiao&#39;s Blog</a>
-                <ul class="nav-links">
-                    
-                    <li><a href="/blog/">Blog</a></li>
-                    
-                    <li><a href="/tag/">Tags</a></li>
-                    
-                    <li><a href="/about.html">About</a></li>
-                    
-                    <li><a href="/atom.xml">RSS</a></li>
-                    
-                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+            <div class="header">
+                <a href="/" class="terminal">
+                    <span>geoqiao@escaping ~ $</span><span class="cursor">_</span>
+                </a>
+                <input class="side-menu" type="checkbox" id="side-menu">
+                <label class="hamb" for="side-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav"><span class="hamb-line"></span></label>
+                <nav class="headerLinks" id="header-nav">
+                    <ul>
+                        
+                        <li><a href="/blog/">~/Blog</a></li>
+                        
+                        <li><a href="/tag/">~/Tags</a></li>
+                        
+                        <li><a href="/about.html">~/About</a></li>
+                        
+                        <li><a href="/atom.xml">~/RSS</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <main>
-        <div class="container">
-            
-<article>
+        <div class="content">
+            <main class="main" id="main-content">
+                
+<article class="postWrapper">
     <h1>uv - GitHub 20k star 的终极 Python 项目管理工具</h1>
 
-    <div class="post-meta">
-        <time>2024-09-08</time>
-        
-        ·
-        
-        <a href="/tag/python.html">#python</a>
-        
-        
-    </div>
-
-    <div id="toc"></div>
+    <section class="postMetadata">
+        <dl>
+            
+            <dt>tags</dt>
+            <dd>
+                
+                <a href="/tag/python.html" class="tag">#python</a>
+                
+            </dd>
+            
+            <dt>published</dt>
+            <dd><time datetime="2024-09-08">2024-09-08</time></dd>
+        </dl>
+    </section>
 
     <div class="post-content">
         <h2>uv 是什么</h2>
@@ -141,21 +153,10 @@ uv remove pandas # 移除pandas库
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-    // Theme configuration
-    var commentsTheme = 'github-light';
-    var commentsThemeMode = 'auto';
-    var LIGHT_THEME = 'github-light';
     var DARK_THEME = 'photon-dark';
 
-    function getCurrentBlogTheme() {
-        return document.documentElement.getAttribute('data-theme') || 'light';
-    }
-
     function getUtterancesTheme() {
-        if (commentsThemeMode === 'auto') {
-            return getCurrentBlogTheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
-        }
-        return commentsTheme;
+        return DARK_THEME;
     }
 
     function updateUtterancesTheme() {
@@ -188,17 +189,6 @@ uv remove pandas # 移除pandas库
         if (iframe && loadingMsg) {
             loadingMsg.style.display = 'none';
             clearInterval(checkInterval);
-            // Listen for theme changes if in auto mode
-            if (commentsThemeMode === 'auto') {
-                var observer = new MutationObserver(function(mutations) {
-                    mutations.forEach(function(mutation) {
-                        if (mutation.attributeName === 'data-theme') {
-                            updateUtterancesTheme();
-                        }
-                    });
-                });
-                observer.observe(document.documentElement, { attributes: true });
-            }
             return true;
         }
 
@@ -252,18 +242,29 @@ uv remove pandas # 移除pandas库
 })();
 </script>
 
+            </main>
         </div>
-    </main>
 
-    
-    <footer>
-        <div class="container">
-            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/escaping">github_blog</a></p>
-        </div>
-    </footer>
-    
+        
+        <footer class="footer">
+            <p>
+                &copy; geoqiao · <a href="https://github.com/geoqiao/escaping" class="footerLink">github_blog</a>
+            </p>
+        </footer>
+        
+    </div>
 
-    <script src="/templates/BearMinimal/static/js/prism.js"></script>
-    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+    <script src="/templates/Escape2/static/js/prism.js"></script>
+    <script>
+    (function() {
+        var checkbox = document.getElementById('side-menu');
+        var label = document.querySelector('.hamb');
+        if (checkbox && label) {
+            checkbox.addEventListener('change', function() {
+                label.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false');
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,45 +14,54 @@
     <meta property="og:site_name" content="geoqiao&#39;s Blog">
     <meta property="og:title" content="geoqiao&#39;s Blog">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://geoqiao.github.io/">
     <meta name="twitter:title" content="geoqiao&#39;s Blog">
     <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/templates/Escape2/static/css/style.css">
+    <link rel="stylesheet" href="/templates/Escape2/static/css/prism-nord.css">
     <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
-    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    <link rel="icon" type="image/png" href="/templates/Escape2/static/images/favicon.png">
     
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="/" class="logo">geoqiao&#39;s Blog</a>
-                <ul class="nav-links">
-                    
-                    <li><a href="/blog/">Blog</a></li>
-                    
-                    <li><a href="/tag/">Tags</a></li>
-                    
-                    <li><a href="/about.html">About</a></li>
-                    
-                    <li><a href="/atom.xml">RSS</a></li>
-                    
-                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+            <div class="header">
+                <a href="/" class="terminal">
+                    <span>geoqiao@escaping ~ $</span><span class="cursor">_</span>
+                </a>
+                <input class="side-menu" type="checkbox" id="side-menu">
+                <label class="hamb" for="side-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav"><span class="hamb-line"></span></label>
+                <nav class="headerLinks" id="header-nav">
+                    <ul>
+                        
+                        <li><a href="/blog/">~/Blog</a></li>
+                        
+                        <li><a href="/tag/">~/Tags</a></li>
+                        
+                        <li><a href="/about.html">~/About</a></li>
+                        
+                        <li><a href="/atom.xml">~/RSS</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <main>
-        <div class="container">
-            
+        <div class="content">
+            <main class="main" id="main-content">
+                
 
 <div class="home-intro">
     <p class="intro-line">Escaping is a static blog system based on GitHub Issues.</p>
@@ -68,13 +77,13 @@
     <h2>Recent Posts</h2>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2026-04-05</time>
-            <h3 class="post-title"><a href="/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html">不懂Git、不会前端，一个文科生的GitHub Blog</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2026-04-05">2026-04-05</time>
+            <h3 class="home-post-title"><a href="/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html">不懂Git、不会前端，一个文科生的GitHub Blog</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/python.html" class="tag">python</a>
             
@@ -87,22 +96,22 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2026-04-05</time>
-            <h3 class="post-title"><a href="/blog/33-claude-code-with-chrom-devtools-mcp.html">Claude-Code with chrom-devtools-mcp</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2026-04-05">2026-04-05</time>
+            <h3 class="home-post-title"><a href="/blog/33-claude-code-with-chrom-devtools-mcp.html">Claude-Code with chrom-devtools-mcp</a></h3>
         </div>
         
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2026-03-21</time>
-            <h3 class="post-title"><a href="/blog/32-vibe-coding-shi-zhan-hou-gan-github-blog-with-trae.html">Vibe Coding 实战后感 - github_blog with Trae</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2026-03-21">2026-03-21</time>
+            <h3 class="home-post-title"><a href="/blog/32-vibe-coding-shi-zhan-hou-gan-github-blog-with-trae.html">Vibe Coding 实战后感 - github_blog with Trae</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/python.html" class="tag">python</a>
             
@@ -115,13 +124,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2026-02-21</time>
-            <h3 class="post-title"><a href="/blog/31-2025-nian-zhong-zong-jie-guan-zhu-zi-ji.html">2025年终总结：关注自己</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2026-02-21">2026-02-21</time>
+            <h3 class="home-post-title"><a href="/blog/31-2025-nian-zhong-zong-jie-guan-zhu-zi-ji.html">2025年终总结：关注自己</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/summary.html" class="tag">summary</a>
             
@@ -130,13 +139,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2025-02-05</time>
-            <h3 class="post-title"><a href="/blog/30-wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha.html">我喜欢冬天的下午走路去成都的茶馆喝茶</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2025-02-05">2025-02-05</time>
+            <h3 class="home-post-title"><a href="/blog/30-wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha.html">我喜欢冬天的下午走路去成都的茶馆喝茶</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/travel.html" class="tag">travel</a>
             
@@ -145,13 +154,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-12-31</time>
-            <h3 class="post-title"><a href="/blog/29-2024-nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu.html">2024年终总结：控制预期，坚持下去</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2024-12-31">2024-12-31</time>
+            <h3 class="home-post-title"><a href="/blog/29-2024-nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu.html">2024年终总结：控制预期，坚持下去</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/summary.html" class="tag">summary</a>
             
@@ -160,13 +169,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-11-16</time>
-            <h3 class="post-title"><a href="/blog/28-pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama.html">配置 VSCode 的免费 AI 编程助手：Ollama 、Groq和 Continue 扩展</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2024-11-16">2024-11-16</time>
+            <h3 class="home-post-title"><a href="/blog/28-pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama.html">配置 VSCode 的免费 AI 编程助手：Ollama 、Groq和 Continue 扩展</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/VSCode.html" class="tag">VSCode</a>
             
@@ -177,13 +186,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-11-03</time>
-            <h3 class="post-title"><a href="/blog/27-python-huan-jing-pei-zhi-cong-ling-kai-shi-uv-pdm-he.html">Python 环境配置从零开始： uv、pdm 和 VSCode 的最佳实践</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2024-11-03">2024-11-03</time>
+            <h3 class="home-post-title"><a href="/blog/27-python-huan-jing-pei-zhi-cong-ling-kai-shi-uv-pdm-he.html">Python 环境配置从零开始： uv、pdm 和 VSCode 的最佳实践</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/python.html" class="tag">python</a>
             
@@ -192,13 +201,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-10-26</time>
-            <h3 class="post-title"><a href="/blog/26-ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python.html">如何对连续型数据进行分箱 - Python</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2024-10-26">2024-10-26</time>
+            <h3 class="home-post-title"><a href="/blog/26-ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python.html">如何对连续型数据进行分箱 - Python</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/python.html" class="tag">python</a>
             
@@ -209,13 +218,13 @@
     </article>
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-10-07</time>
-            <h3 class="post-title"><a href="/blog/25-bu-yao-jiu-jie-le-zai-pandas-zhong-shu-ju-shai-xuan-jiu.html">不要纠结了！在Pandas中数据筛选就用它 - Python</a></h3>
+    <article class="home-post-item">
+        <div class="home-post-header">
+            <time class="home-post-date" datetime="2024-10-07">2024-10-07</time>
+            <h3 class="home-post-title"><a href="/blog/25-bu-yao-jiu-jie-le-zai-pandas-zhong-shu-ju-shai-xuan-jiu.html">不要纠结了！在Pandas中数据筛选就用它 - Python</a></h3>
         </div>
         
-        <div class="post-tags">
+        <div class="home-post-tags">
             
             <a href="/tag/python.html" class="tag">python</a>
             
@@ -226,22 +235,33 @@
     </article>
     
 
-    <p><a href="/blog/">View all posts →</a></p>
+    <p class="all-posts-link"><a href="/blog/">View all posts →</a></p>
 </section>
 
 
+            </main>
         </div>
-    </main>
 
-    
-    <footer>
-        <div class="container">
-            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/escaping">github_blog</a></p>
-        </div>
-    </footer>
-    
+        
+        <footer class="footer">
+            <p>
+                &copy; geoqiao · <a href="https://github.com/geoqiao/escaping" class="footerLink">github_blog</a>
+            </p>
+        </footer>
+        
+    </div>
 
-    <script src="/templates/BearMinimal/static/js/prism.js"></script>
-    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+    <script src="/templates/Escape2/static/js/prism.js"></script>
+    <script>
+    (function() {
+        var checkbox = document.getElementById('side-menu');
+        var label = document.querySelector('.hamb');
+        if (checkbox && label) {
+            checkbox.addEventListener('change', function() {
+                label.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false');
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

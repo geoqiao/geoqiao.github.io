@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,57 +16,70 @@
     <meta property="og:site_name" content="geoqiao&#39;s Blog">
     <meta property="og:title" content="copilot - geoqiao&#39;s Blog">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://geoqiao.github.io/">
     <meta name="twitter:title" content="geoqiao&#39;s Blog">
     <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="https://geoqiao.github.io/templates/BearMinimal/static/images/favicon.png">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/style.css">
-    <link rel="stylesheet" href="/templates/BearMinimal/static/css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/templates/Escape2/static/css/style.css">
+    <link rel="stylesheet" href="/templates/Escape2/static/css/prism-nord.css">
     <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
-    <link rel="icon" type="image/png" href="/templates/BearMinimal/static/images/favicon.png">
+    <link rel="icon" type="image/png" href="/templates/Escape2/static/images/favicon.png">
     
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="/" class="logo">geoqiao&#39;s Blog</a>
-                <ul class="nav-links">
-                    
-                    <li><a href="/blog/">Blog</a></li>
-                    
-                    <li><a href="/tag/">Tags</a></li>
-                    
-                    <li><a href="/about.html">About</a></li>
-                    
-                    <li><a href="/atom.xml">RSS</a></li>
-                    
-                    <li><button class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+            <div class="header">
+                <a href="/" class="terminal">
+                    <span>geoqiao@escaping ~ $</span><span class="cursor">_</span>
+                </a>
+                <input class="side-menu" type="checkbox" id="side-menu">
+                <label class="hamb" for="side-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav"><span class="hamb-line"></span></label>
+                <nav class="headerLinks" id="header-nav">
+                    <ul>
+                        
+                        <li><a href="/blog/">~/Blog</a></li>
+                        
+                        <li><a href="/tag/">~/Tags</a></li>
+                        
+                        <li><a href="/about.html">~/About</a></li>
+                        
+                        <li><a href="/atom.xml">~/RSS</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <main>
-        <div class="container">
-            
-<h1>#copilot</h1>
+        <div class="content">
+            <main class="main" id="main-content">
+                
+<div class="listHeader">
+    <h1>#copilot</h1>
+</div>
 
-<section class="post-list">
+<div class="postsList" role="list">
     
     
-    <article class="post-item">
-        <div class="post-header">
-            <time class="post-date">2024-11-16</time>
-            <h2 class="post-title"><a href="/blog/28-pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama.html">配置 VSCode 的免费 AI 编程助手：Ollama 、Groq和 Continue 扩展</a></h2>
-        </div>
+    <article class="postListItem" role="listitem">
+        <a class="postListLink" href="/blog/28-pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama.html">
+            <div class="postHeader">
+                <span class="postTitle">配置 VSCode 的免费 AI 编程助手：Ollama 、Groq和 Continue 扩展</span>
+                <time class="postDate" datetime="2024-11-16">2024-11-16</time>
+            </div>
+        </a>
         
-        <div class="post-tags">
+        <div class="postTags">
             
             <a href="/tag/VSCode.html" class="tag">VSCode</a>
             
@@ -76,20 +89,31 @@
         
     </article>
     
-</section>
+</div>
 
+            </main>
         </div>
-    </main>
 
-    
-    <footer>
-        <div class="container">
-            <p>&copy; geoqiao · powered by <a href="https://github.com/geoqiao/escaping">github_blog</a></p>
-        </div>
-    </footer>
-    
+        
+        <footer class="footer">
+            <p>
+                &copy; geoqiao · <a href="https://github.com/geoqiao/escaping" class="footerLink">github_blog</a>
+            </p>
+        </footer>
+        
+    </div>
 
-    <script src="/templates/BearMinimal/static/js/prism.js"></script>
-    <script src="/templates/BearMinimal/static/js/theme.js"></script>
+    <script src="/templates/Escape2/static/js/prism.js"></script>
+    <script>
+    (function() {
+        var checkbox = document.getElementById('side-menu');
+        var label = document.querySelector('.hamb');
+        if (checkbox && label) {
+            checkbox.addEventListener('change', function() {
+                label.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false');
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
