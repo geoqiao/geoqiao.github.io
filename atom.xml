@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-04-13T16:32:49.932583+00:00</updated>
+  <updated>2026-04-18T12:10:04.800868+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -1781,5 +1781,360 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
 ]]></content>
     <link href="https://geoqiao.github.io/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html"/>
     <published>2026-04-05T09:48:06+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/35-cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen.html</id>
+    <title>从 Superpowers 学习高质量 AI 协作：一份给策略分析师的 Claude Code 指南</title>
+    <updated>2026-04-18T12:09:41+00:00</updated>
+    <content type="html"><![CDATA[<h2>一、Superpowers 简介</h2>
+<p><strong><a href="https://github.com/obra/superpowers">obra/superpowers</a></strong> 是由 Jesse Vincent 与 Prime Radiant 开发的 <strong>agentic skills framework</strong>。它不是传统代码库，而是一套嵌入 Claude Code、Cursor、Codex、Gemini CLI 等工具的<strong>软件开发方法论</strong>。</p>
+<p>核心机制：<strong>14 个可组合 skill</strong>，在任务启动时按关键词自动触发，强制 AI 遵循&quot;先思考、再规划、后执行、最后验证&quot;的完整闭环。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>思考与规划</td>
+<td><code>brainstorming</code>, <code>writing-plans</code>, <code>using-git-worktrees</code></td>
+</tr>
+<tr>
+<td>执行与开发</td>
+<td><code>subagent-driven-development</code>, <code>executing-plans</code>, <code>test-driven-development</code></td>
+</tr>
+<tr>
+<td>调试与验证</td>
+<td><code>systematic-debugging</code>, <code>verification-before-completion</code></td>
+</tr>
+<tr>
+<td>协作与收尾</td>
+<td><code>requesting-code-review</code>, <code>receiving-code-review</code>, <code>finishing-a-development-branch</code></td>
+</tr>
+</tbody></table><p>你可以把它理解为<strong>给 AI 配备了一套标准化作业程序（SOP）</strong>——每个任务从启动到交付，都要经过特定的检查点和技能触发。</p>
+<hr />
+<h2>二、设计哲学：为什么输出质量高</h2>
+<p>Superpowers 的核心不是&quot;写更好的代码&quot;，而是**&quot;用流程约束对抗认知捷径&quot;**。四条铁律：</p>
+<ol>
+<li><strong>Evidence over claims</strong> — 声称完成前，必须先运行测试、读取完整输出、确认一致</li>
+<li><strong>Systematic over ad-hoc</strong> — 任何任务开始前，必须先调用对应 skill</li>
+<li><strong>Test-Driven Development</strong> — 没有&quot;先看到测试失败&quot;，就不允许写生产代码</li>
+<li><strong>Complexity reduction</strong> — 每个任务拆到 2-5 分钟，禁止占位符和过度设计</li>
+</ol>
+<p>这个流程的精妙之处：<strong>把质量控制嵌入到每一个环节</strong>，而不是只在最后检查一次。</p>
+<hr />
+<h2>三、Superpowers 工作流：从想法到交付</h2>
+<pre><code>+---------------------+     +---------------------+     +---------------------+
+|   brainstorming     | --&gt; |  using-git-worktrees| --&gt; |   writing-plans     |
+|   明确需求与方案       |     |   创建隔离工作空间     |     |   拆成2-5分钟小任务   |
++---------------------+     +---------------------+     +---------------------+
+           |                                                    |
+           v                                                    v
++---------------------+     +---------------------+     +---------------------+
+| subagent-driven-dev | --&gt; | test-driven-develop | --&gt; | requesting-code-review
+|   分配子代理执行       |     |   红-绿-重构循环      |     |   每任务完成后评审    |
++---------------------+     +---------------------+     +---------------------+
+           |                                                    |
+           v                                                    v
++---------------------+     +---------------------+
+|verification-before- | --&gt; |finishing-a-dev-     |
+| completion          |     | branch              |
+| 声称完成前必须验证    |     | 整理合并             |
++---------------------+     +---------------------+
+</code></pre>
+<p><strong>对分析师的启示</strong>：数据分析也可以建立同样的<strong>分段质量控制流水线</strong>——在拉数据、做模型、写结论的每一步都设置检查点。</p>
+<hr />
+<h2>四、数据分析人员的 5 个落地实践</h2>
+<h3>实践 1：Brainstorming = 第二大脑</h3>
+<p>在 Superpowers 里，<code>brainstorming</code> 是<strong>硬门槛</strong>。分析师可以要求 Claude 扮演三种角色：</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>作用</th>
+<th>示例 prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>盲区探测者</td>
+<td>列出没想到的维度</td>
+<td>&quot;基于我的想法，列出 3-5 个我可能忽略的变量或风险&quot;</td>
+</tr>
+<tr>
+<td>细节确认者</td>
+<td>追问假设前提</td>
+<td>&quot;对每个假设追问一层——它成立的前提条件是什么？&quot;</td>
+</tr>
+<tr>
+<td>反面论证者</td>
+<td>挑战分析框架</td>
+<td>&quot;如果我是 CEO，我会怎么质疑这个结论？&quot;</td>
+</tr>
+</tbody></table><blockquote>
+<p>示例：当你说&quot;分析降价促销对新用户转化的影响&quot;，AI 应该反问：你如何控制季节性？竞品是否也在促销？&quot;新用户&quot;是注册还是首单？你看的是短期转化还是 LTV？</p>
+</blockquote>
+<p><strong>分析师最大的风险往往不是算错数，而是问错了问题。</strong></p>
+<h3>实践 2：TDD = 假设先行</h3>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务问题</td>
+<td>我们要回答什么？</td>
+</tr>
+<tr>
+<td>分析假设</td>
+<td>我预计结果是什么？</td>
+</tr>
+<tr>
+<td>验收标准</td>
+<td>什么数据能证实/证伪这个假设？</td>
+</tr>
+</tbody></table><blockquote>
+<p>业务问题：新用户首月留存是否因渠道不同有显著差异？
+分析假设：organic 渠道留存率高于 paid 至少 10 个百分点。
+验收标准：按 channel 分组后，30 天留存率的置信区间不重叠。</p>
+</blockquote>
+<h3>实践 3：Writing-plans = 分阶段交付</h3>
+<p>不要一次性交付 50 页&quot;终极报告&quot;：</p>
+<pre><code>Phase 1: 数据清洗 + 基础指标  (今天)
+    |
+    v
+Phase 2: 分维度对比分析        (明天)
+    |
+    v
+Phase 3: 洞察提炼 + 策略建议    (后天)
+</code></pre>
+<p>每一阶段都有明确的验收标准。</p>
+<h3>实践 4：Code-review = 自检检查点</h3>
+<table>
+<thead>
+<tr>
+<th>检查点</th>
+<th>自检问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据完整性</td>
+<td>时间范围完整？有无异常缺失？</td>
+</tr>
+<tr>
+<td>口径一致性</td>
+<td>指标定义与历史报告一致？</td>
+</tr>
+<tr>
+<td>逻辑一致性</td>
+<td>细分加总等于总体？百分比约为 100%？</td>
+</tr>
+<tr>
+<td>归因合理性</td>
+<td>相关关系是否被当成因果关系？</td>
+</tr>
+<tr>
+<td>可执行性</td>
+<td>建议是否足够具体，业务方能直接落地？</td>
+</tr>
+</tbody></table><h3>实践 5：Verification = 验证附录</h3>
+<p>Superpowers 的 Iron Law：</p>
+<blockquote>
+<p><strong>NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE</strong></p>
+</blockquote>
+<p>具体操作：</p>
+<ul>
+<li>在报告最后一页附上&quot;验证附录&quot;</li>
+<li>核心数字用至少两道口径交叉验证</li>
+<li>例如：&quot;GMV 同比增长 15%&quot; 同时通过订单表和财务表验证</li>
+</ul>
+<hr />
+<h2>五、省钱技巧：把 MCP-SQL 查询与分析解耦</h2>
+<p>Superpowers 的 workflow 虽然能显著提升质量，但每一步都走完整技能链（brainstorming → planning → subagent → review），<strong>非常消耗 token</strong>。对数据分析师来说，最大的 token 杀手通常是 <strong>MCP SQL 返回的大量原始查询结果</strong>——如果把几千行数据 inline 在对话里，上下文会迅速膨胀，分析阶段还没开始 token 就烧光了。</p>
+<h3>核心思路：查询落盘，分析读盘</h3>
+<p>把&quot;取数&quot;和&quot;分析&quot;拆成两个独立阶段，让 Superpowers 的后续流程只在&quot;数据摘要/洞察&quot;层面运行。</p>
+<pre><code>【阶段 A：Query → Export】                  【阶段 B：Analysis → Read Local】
++---------------------+                     +---------------------+
+|  MCP SQL 提交查询    |                     |  pandas 读取本地文件  |
+|  poll 到 FINISHED   |  ---------------&gt;   |  描述性统计 / 可视化   |
+|  结果写入 data/     |   保存为 .xlsx      |  假设验证 / 洞察提炼   |
++---------------------+                     +---------------------+
+        ^                                              |
+        |                                              v
+        +---------------------+              +---------------------+
+                              |              |  Superpowers 后续流程  |
+                              |              |  (brainstorming       |
+                              |              |   /writing-plans      |
+                              |              |   /review)            |
+                              |              +---------------------+
+</code></pre>
+<h3>推荐目录结构</h3>
+<pre><code>analysis_project/
+├── code/
+│   ├── fetch_data.py          # 封装 MCP SQL 查询
+│   ├── analyze_*.py           # 后续分析脚本
+│   └── query_*.sql            # SQL 模板（可选）
+├── data/
+│   └── raw_20250413.xlsx      # 查询结果落盘（gitignored）
+└── report.md
+</code></pre>
+<h3>脚本模板：<code>code/fetch_data.py</code></h3>
+<pre><code class="language-python">import os
+import time
+import pandas as pd
+
+# 1. 提交 MCP SQL 查询
+# （在 Claude Code 中通过 MCP tool 执行，或把 queryId 传入脚本）
+
+# 2. 等待结果
+query_id = &quot;your-query-id-from-mcp&quot;
+# status = mcp_get_query_status(query_id)
+# while status == &quot;RUNNING&quot;:
+#     time.sleep(3)
+#     status = mcp_get_query_status(query_id)
+
+# 3. 获取结果并落盘
+# result = mcp_get_query_result(query_id)
+# df = pd.DataFrame(result[&#x27;rows&#x27;], columns=[c[&#x27;name&#x27;] for c in result[&#x27;columns&#x27;]])
+
+# 4. 保存
+output_path = &quot;data/raw_20250413.xlsx&quot;
+df.to_excel(output_path, index=False)
+print(f&quot;✓ 已保存 {len(df)} 行到 {output_path}&quot;)
+</code></pre>
+<h3>在 Superpowers workflow 中的位置</h3>
+<table>
+<thead>
+<tr>
+<th>Superpowers 步骤</th>
+<th>操作对象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>brainstorming</code></td>
+<td>业务问题 + 假设</td>
+<td>不涉及 SQL 数据</td>
+</tr>
+<tr>
+<td><code>writing-plans</code></td>
+<td>阶段 A 和阶段 B 的计划</td>
+<td>明确 &quot;先 query 落盘，再读盘分析&quot;</td>
+</tr>
+<tr>
+<td><code>subagent-driven-dev</code></td>
+<td>阶段 A</td>
+<td>只跑 <code>fetch_data.py</code>，目标是把数据写进 <code>data/</code></td>
+</tr>
+<tr>
+<td><strong>Checkpoint</strong></td>
+<td>本地文件</td>
+<td>确认 <code>data/</code> 里有文件且行数合理</td>
+</tr>
+<tr>
+<td><code>subagent-driven-dev</code></td>
+<td>阶段 B</td>
+<td>读取本地文件，做统计分析</td>
+</tr>
+<tr>
+<td><code>verification</code></td>
+<td>数据 + 结论</td>
+<td>检查文件完整性 + 数字交叉验证</td>
+</tr>
+</tbody></table><h3>关键注意事项</h3>
+<ol>
+<li>
+<strong><code>data/</code> 必须加入 <code>.gitignore</code></strong><pre><code>data/
+</code></pre>
+</li>
+<li><strong>每次 query 前确认 <code>truncated</code> 字段为 false</strong>。如果为 true，说明结果超过 10,000 行，需要加聚合或分区过滤。</li>
+<li><strong>保存一个 <code>data_summary.txt</code></strong>（行数、时间范围、核心指标），方便后续 subagent<span class="pangu"></span>快速了解情况，而不必打开整个 Excel。</li>
+<li><strong>如果 query 可能超时或失败，采用 checkpoint/resume 模式</strong>：先检查本地是否已有文件，有则跳过 query 直接读盘。</li>
+</ol>
+<hr />
+<h2>六、在 Claude Code 中使用</h2>
+<h3>安装</h3>
+<pre><code>/plugin install superpowers@claude-plugins-official
+</code></pre>
+<p>或：</p>
+<pre><code>/plugin marketplace add obra/superpowers-marketplace
+/plugin install superpowers@superpowers-marketplace
+</code></pre>
+<h3>触发词</h3>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tdd</code></td>
+<td>进入 TDD 模式</td>
+</tr>
+<tr>
+<td><code>autopilot</code></td>
+<td>全自动模式</td>
+</tr>
+<tr>
+<td><code>deep interview</code></td>
+<td>深度访谈模式</td>
+</tr>
+<tr>
+<td><code>brainstorming</code> / <code>writing-plans</code></td>
+<td>规划模式</td>
+</tr>
+</tbody></table><h3>非程序员 Prompt 模板</h3>
+<pre><code>我要做一个关于 [主题] 的数据分析。
+请遵循以下流程：
+1. 先 brainstorming，明确目标、假设、验收标准，并挑战我可能遗漏的维度
+2. 然后 writing-plans，拆成 2-3 个可交付阶段
+3. 每个阶段完成后 verification，检查数据完整性和逻辑一致性
+4. 最后输出带&quot;验证附录&quot;的分析报告
+</code></pre>
+<hr />
+<h2>七、总结</h2>
+<table>
+<thead>
+<tr>
+<th>Superpowers 原则</th>
+<th>分析师版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brainstorming</td>
+<td>AI 反诘式头脑风暴，补全盲区</td>
+</tr>
+<tr>
+<td>TDD</td>
+<td>假设先行，验证驱动</td>
+</tr>
+<tr>
+<td>Writing-plans</td>
+<td>分阶段交付</td>
+</tr>
+<tr>
+<td>Code-review</td>
+<td>每阶段自检清单</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>报告附验证附录</td>
+</tr>
+</tbody></table><p>Superpowers 的本质是<strong>用结构化流程对抗认知惰性</strong>。对策略分析师的价值，不在于写代码更快，而在于让每一次分析都有<strong>清晰的问题定义、可追溯的逻辑链条、以及经得起检验的结论</strong>。</p>
+<hr />
+<p><em>撰写时间：2026-04-13</em></p>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/35-cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen.html"/>
+    <published>2026-04-18T12:09:41+00:00</published>
   </entry>
 </feed>
