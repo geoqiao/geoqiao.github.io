@@ -106,7 +106,7 @@
     &quot;messages&quot;: [...],
 }
 </code></pre>
-<p><strong>为什么重要</strong>：如果让<span class="pangu"></span>LLM<span class="pangu"></span>自己&quot;记住&quot;金额，它会幻觉。把<span class="pangu"></span>facts<span class="pangu"></span>放在独立字段，并在<span class="pangu"></span>prompt<span class="pangu"></span>中明确要求&quot;只能使用<span class="pangu"></span>facts<span class="pangu"></span>中的金额&quot;，可以显著降低幻觉率。</p>
+<p><strong>为什么重要</strong>：如果让<span class="pangu"></span>LLM<span class="pangu"></span>自己&quot;记住&quot;金额，它会幻觉。把<span class="pangu"></span>facts<span class="pangu"></span>放在独立字段，并在<span class="pangu"></span>prompt<span class="pangu"></span>中明确要求&quot;只能使用<span class="pangu"></span>facts<span class="pangu"></span>中的金额&quot;，可以显著降低幻觉概率。</p>
 <h3>1.2 信息压缩（Compaction）</h3>
 <p>简单丢弃旧消息（FIFO）会丢失关键信息。比如用户上周承诺&quot;周五还&quot;，如果被新的对话挤掉，Agent<span class="pangu"></span>就不知道这个承诺了。</p>
 <p><strong>做法</strong>：当对话历史超过<span class="pangu"></span>30<span class="pangu"></span>条时，保留最近<span class="pangu"></span>5<span class="pangu"></span>轮完整对话，更早的内容用<span class="pangu"></span>LLM<span class="pangu"></span>压缩为&quot;关键事实摘要&quot;。</p>
