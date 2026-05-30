@@ -300,6 +300,19 @@ df.loc[(df[&quot;Age&quot;] &gt; n) &amp; (df[&quot;Gender&quot;] == &quot;Male&
 })();
 </script>
 
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  document.querySelectorAll("pre code.language-mermaid").forEach((code) => {
+    const pre = code.parentElement;
+    pre.className = "mermaid";
+    pre.textContent = code.textContent;
+  });
+
+  mermaid.initialize({ startOnLoad: false });
+  mermaid.run();
+</script>
+
             </main>
         </div>
 
