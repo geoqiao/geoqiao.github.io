@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-05-30T15:40:10.015774+00:00</updated>
+  <updated>2026-05-30T15:40:31.651775+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -2550,5 +2550,263 @@ status: draft
 ]]></content>
     <link href="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html"/>
     <published>2026-05-30T15:40:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/39-shou-cuo-yi-ge-cui-shou-agent-san-jia-gou-she-ji-yu-wei.html</id>
+    <title>手搓一个催收Agent（三）：架构设计与伪代码</title>
+    <updated>2026-05-30T15:40:12+00:00</updated>
+    <content type="html"><![CDATA[<h1>催收<span class="pangu"></span>Agent<span class="pangu"></span>架构设计与实现</h1>
+<blockquote>
+<p><strong>一句话结论</strong>:催收<span class="pangu"></span>Agent<span class="pangu"></span>就是一个按照固定流程执行任务的<span class="pangu"></span>Agent:查看用户→检查合规→触达→识别意图→加载策略→调用工具。四个组件(Context/Permissions/Decider/Skills/Tools)各负责一个环节。</p>
+</blockquote>
+<h2>二、Context:查看用户列表</h2>
+<p>Agent<span class="pangu"></span>的第一步:加载所有需要的信息。</p>
+<pre><code class="language-python"># core/models.py
+class UserState:
+    user_id: str
+    profile: UserProfile      # 金额、逾期天数、职业
+    conversation: ConversationContext  # 最近50条对话
+    intent_history: list[str]  # 历史意图
+    dnc: bool                  # 是否要求停止
+
+class Context:
+    user_message: str | None
+    facts: dict                # 系统注入的事实
+    messages: list[Message]    # 对话历史
+    session_state: str         # idle/interacting/stopped
+</code></pre>
+<pre><code class="language-python"># 伪代码:构建Context
+def build_context(user_id):
+    state = db.load(user_id)
+    return Context(
+        facts={
+            &quot;due_amount&quot;: state.profile.amount_due,
+            &quot;overdue_days&quot;: state.profile.overdue_days,
+        },
+        messages=state.conversation.messages[-50:],
+    )
+</code></pre>
+<p><strong>关键设计</strong>:金额和逾期天数从系统读取,作为<code>facts</code>注入,LLM<span class="pangu"></span>不能编造。</p>
+<h2>四、Decider：触达+识别意图</h2>
+<p>Agent<span class="pangu"></span>的第三步：执行触达，识别用户意图。</p>
+<h3>意图来源不只是用户说了什么</h3>
+<p>在催收场景中，意图识别的输入<strong>不局限于用户的文本回复</strong>。以下都是意图识别的来源：</p>
+<table>
+<thead>
+<tr>
+<th>输入类型</th>
+<th>示例</th>
+<th>对应的意图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>用户文本</strong></td>
+<td>&quot;我现在没钱&quot;</td>
+<td>NEGOTIATION</td>
+</tr>
+<tr>
+<td><strong>用户不输入</strong></td>
+<td>电话未接、短信不回</td>
+<td>UNREACHABLE</td>
+</tr>
+<tr>
+<td><strong>用户行为</strong></td>
+<td>点击了还款链接但没支付</td>
+<td>AVOIDANCE</td>
+</tr>
+<tr>
+<td><strong>用户信息</strong></td>
+<td>职业=律师（敏感职业）</td>
+<td>强制标准话术</td>
+</tr>
+<tr>
+<td><strong>用户状态</strong></td>
+<td>已还清、已加入<span class="pangu"></span>DNC</td>
+<td>STOP</td>
+</tr>
+<tr>
+<td><strong>系统事件</strong></td>
+<td>承诺还款时间到期未还</td>
+<td>NEGOTIATION（违约跟进）</td>
+</tr>
+</tbody></table><p>这意味着 Decider 的输入是整个 Context，而不仅是 <code>user_message</code>。</p>
+<pre><code class="language-python"># decider.py
+class Decider:
+    async def decide(self, context: Context) -&gt; Decision:
+        prompt = f&quot;&quot;&quot;
+        用户消息：{context.user_message or &quot;（无输入）&quot;}
+        系统facts：{context.facts}
+        历史意图：{context.intent_history}
+        用户状态：{context.session_state}
+        触达结果：{context.last_outreach_result}
+
+        基于以上全部信息识别用户意图，从以下8种中选择：
+        COOPERATION, NEGOTIATION, AVOIDANCE, DISPUTE,
+        STOP, CRISIS, REFUSE, UNREACHABLE
+
+        注意：
+        - 用户未回复（last_outreach_result=UNREACHABLE）→ UNREACHABLE
+        - 承诺到期未还（overdue_promise=True）→ NEGOTIATION（违约跟进）
+        - 用户状态=stopped → STOP
+
+        输出JSON：{{&quot;intent&quot;: &quot;...&quot;, &quot;confidence&quot;: 0.95}}
+        &quot;&quot;&quot;
+        response = await llm.chat(prompt)
+        return parse_intent(response)
+</code></pre>
+<p>意图映射到<span class="pangu"></span>Skill:</p>
+<table>
+<thead>
+<tr>
+<th>意图</th>
+<th>Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COOPERATION</td>
+<td>payment_guidance</td>
+</tr>
+<tr>
+<td>NEGOTIATION</td>
+<td>negotiation</td>
+</tr>
+<tr>
+<td>AVOIDANCE</td>
+<td>reengage</td>
+</tr>
+<tr>
+<td>DISPUTE</td>
+<td>dispute</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>CRISIS</td>
+<td>crisis</td>
+</tr>
+<tr>
+<td>REFUSE</td>
+<td>troubleshoot</td>
+</tr>
+<tr>
+<td>UNKNOWN</td>
+<td>troubleshoot</td>
+</tr>
+</tbody></table><p>name: negotiation
+description: 用户表示困难，希望延期或分期
+tools: [query_bill, record_promise, send_payment_link]
+max_steps: 5</p>
+<h2>六、完整串联:AgentSession</h2>
+<pre><code class="language-python"># agent/session.py
+class AgentSession:
+    async def handle_event(self, event: Event) -&gt; SkillResult:
+        # 1. 构建Context(查看用户列表)
+        context = build_context(event.user_id)
+
+        # 2. Permissions检查(选择触达方式前的合规检查)
+        harness_result = self.harness.check(event, self.user_state)
+        if harness_result.block:
+            return blocked_result(harness_result.reason)
+
+        # 3. Decider：识别意图
+        decision = await self.decider.decide(context)
+
+        # 4. 根据意图选择 Skill
+        skill = self.skill_registry.get(decision.selected_skill)
+
+        # 5. 执行 Skill（ReAct循环，内部调用Tools）
+        result = await self.skill_executor.execute(
+            skill, context, self.storage
+        )
+
+        # 6. 输出审核
+        if not self.compliance.audit_content(result.response_text):
+            result.response_text = fallback_message()
+
+        # 7. 保存状态
+        self.save_state()
+        return result
+</code></pre>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/39-shou-cuo-yi-ge-cui-shou-agent-san-jia-gou-she-ji-yu-wei.html"/>
+    <published>2026-05-30T15:40:12+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/40-shou-cuo-yi-ge-cui-shou-agent-si-ti-shi-ci-gong-cheng-de.html</id>
+    <title>手搓一个催收Agent（四）：提示词工程的7个实践</title>
+    <updated>2026-05-30T15:40:25+00:00</updated>
+    <content type="html"><![CDATA[<h1>手搓一个催收<span class="pangu"></span>Agent（四）：提示词工程的<span class="pangu"></span>7<span class="pangu"></span>个实践</h1>
+<blockquote>
+<p><strong>一句话结论</strong>：提示词工程不是&quot;调措辞&quot;，而是信息架构——把正确的信息放在正确的位置，让模型在约束条件下做出可预期的决策。</p>
+</blockquote>
+<h2>二、职责分离：不要让一个<span class="pangu"></span>prompt<span class="pangu"></span>做所有事</h2>
+<p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>200+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
+<ul>
+<li>意图识别准确率受<span class="pangu"></span>Skill<span class="pangu"></span>描述干扰</li>
+<li>改一句<span class="pangu"></span>Skill<span class="pangu"></span>描述，意图识别也受影响</li>
+<li>无法单独测试和迭代</li>
+</ul>
+<p><strong>拆分后的结构</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>Prompt<span class="pangu"></span>职责</th>
+<th>为什么独立</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Decider</strong></td>
+<td>只做意图识别</td>
+<td>意图分类是基础，不能被策略描述污染</td>
+</tr>
+<tr>
+<td><strong>Skill</strong></td>
+<td>只做策略执行</td>
+<td>策略可以频繁更新，不触碰分类逻辑</td>
+</tr>
+<tr>
+<td><strong>Compliance</strong></td>
+<td>只做输出审核</td>
+<td>安全审查是独立关注点</td>
+</tr>
+</tbody></table><p><strong>好处</strong>：隔离故障、独立迭代、降低长度（减少<span class="pangu"></span>Lost in the Middle）。</p>
+<h2>四、安全兜底：说错话怎么办</h2>
+<p>催收场景对安全性要求极高。我们采用了三层防御：</p>
+<p><strong>第一层：Harness（代码层，不在<span class="pangu"></span>prompt<span class="pangu"></span>中）</strong></p>
+<p>时间窗口、频次限制、DNC<span class="pangu"></span>检查——这些不通过<span class="pangu"></span>prompt<span class="pangu"></span>实现，而是代码硬拦截。因为&quot;请在白天联系用户&quot;这种<span class="pangu"></span>prompt，LLM<span class="pangu"></span>可能会忽略。</p>
+<p><strong>第二层：Prompt<span class="pangu"></span>中的明确约束</strong></p>
+<p>每个<span class="pangu"></span>Skill<span class="pangu"></span>的<span class="pangu"></span>prompt<span class="pangu"></span>中都有&quot;禁止&quot;列表：</p>
+<pre><code>禁止：
+- 施压或威胁
+- 承诺超出权限的减免
+- 用户已明确拒绝后继续纠缠
+</code></pre>
+<p><strong>第三层：输出审核（LLM Self-critique）</strong></p>
+<p>生成回复后，再用一个独立的审核<span class="pangu"></span>prompt<span class="pangu"></span>检查：</p>
+<pre><code>你是一个严格的催收合规审核员。
+请审查以下回复草稿是否包含威胁/羞辱性语言？
+输出JSON：{&quot;passed&quot;: true/false, &quot;violations&quot;: [...]}
+</code></pre>
+<p>三层的关系：代码层拦截确定性违规，prompt<span class="pangu"></span>层约束行为边界，审核层捕获语义违规。</p>
+<p>name: negotiation
+description: 用户表示困难，希望延期或分期
+tools: [query_bill, record_promise]
+max_steps: 5</p>
+<h2>关联</h2>
+<ul>
+<li>[[03-agent-architecture]] — Agent<span class="pangu"></span>架构设计与实现</li>
+<li>[[ai-engineering-book-notes]] — <em>AI Engineering: Building Applications with Foundation Models</em> 章节笔记</li>
+</ul>
+<h2>Tags</h2>
+<p>#collection-agent #ai-engineering #prompt-engineering</p>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/40-shou-cuo-yi-ge-cui-shou-agent-si-ti-shi-ci-gong-cheng-de.html"/>
+    <published>2026-05-30T15:40:25+00:00</published>
   </entry>
 </feed>
