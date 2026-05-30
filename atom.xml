@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-04-18T12:41:57.838253+00:00</updated>
+  <updated>2026-05-30T15:40:10.015774+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -2303,5 +2303,252 @@ status: draft
 ]]></content>
     <link href="https://geoqiao.github.io/blog/36-cong-obsidian-dao-bo-ke-wo-ru-he-yong-yi-tiao-ming-ling.html"/>
     <published>2026-04-18T12:41:36+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/37-shou-cuo-yi-ge-cui-shou-agent-yi-bi-coding-agent-nan-zai.html</id>
+    <title>手搓一个催收Agent（一）：比Coding Agent难在哪？</title>
+    <updated>2026-05-30T15:39:47+00:00</updated>
+    <content type="html"><![CDATA[<h1>手搓一个催收<span class="pangu"></span>Agent（一）：比<span class="pangu"></span>Coding Agent<span class="pangu"></span>难在哪？</h1>
+<blockquote>
+<p><strong>一句话结论</strong>：催收<span class="pangu"></span>Agent<span class="pangu"></span>比<span class="pangu"></span>Coding Agent<span class="pangu"></span>更难做，因为它面对的不是编译器，而是有情绪、会反抗、会说谎的人——而且说错一句话就是合规事故。</p>
+</blockquote>
+<h2>二、难在哪里：四个组件缺一不可</h2>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>的架构可以抽象为四个核心组件：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>催收员的对应能力</th>
+<th>为什么难</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Context</strong></td>
+<td>记住用户是谁、欠多少钱、上次说了什么</td>
+<td>金额不能编造，必须从系统读取；历史对话长了会丢信息</td>
+</tr>
+<tr>
+<td><strong>Permissions</strong></td>
+<td>不能晚上打电话、不能威胁用户、不能说错金额</td>
+<td>不是<span class="pangu"></span>prompt<span class="pangu"></span>里写&quot;请温柔&quot;就行，需要代码层硬拦截</td>
+</tr>
+<tr>
+<td><strong>Decider</strong></td>
+<td>判断用户是&quot;真没钱&quot;还是&quot;不想还&quot;</td>
+<td>意图不只来自文字，用户不回复、点击链接不支付、承诺到期不还，都是意图</td>
+</tr>
+<tr>
+<td><strong>Skill + Tool</strong></td>
+<td>协商方案、安抚情绪、记录承诺、发送链接</td>
+<td>Skill<span class="pangu"></span>是策略，Tool<span class="pangu"></span>是动作，两者不是并列关系而是&quot;策略决定调用什么动作&quot;</td>
+</tr>
+</tbody></table><p>这四个组件共同解决一个问题：<strong>在严格约束下，与不可预测的人进行有效交互</strong>。</p>
+<h2>四、技术来源</h2>
+<p>这个系列不是闭门造车，而是基于一本好书、一个好项目：</p>
+<p><strong>书</strong>：Chip Huyen 的 <em>AI Engineering: Building Applications with Foundation Models</em></p>
+<ul>
+<li>提示词拆分：不要把所有规则塞进一个巨型<span class="pangu"></span>prompt</li>
+<li>CoT + 自我校验：让模型先写出推理过程，再审查自己的输出</li>
+<li>防御性提示：系统<span class="pangu"></span>prompt<span class="pangu"></span>会被提取，不能把敏感策略<span class="pangu"></span>hard-code<span class="pangu"></span>进去</li>
+</ul>
+<p><strong>项目</strong>：我自己写的 collect-agent</p>
+<ul>
+<li>意图分类准确率≥90%</li>
+<li>STOP/CRISIS<span class="pangu"></span>关键词<span class="pangu"></span>100%拦截</li>
+<li>金额硬校验</li>
+<li>敏感职业特殊处理</li>
+<li>完整的状态机</li>
+</ul>
+<p>所有文章都有对应的可运行代码。</p>
+<h2>关联</h2>
+<ul>
+<li>[[chatbot-exploration]] — 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>
+</ul>
+<h2>Tags</h2>
+<p>#collection-agent #ai-engineering #agent #series</p>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/37-shou-cuo-yi-ge-cui-shou-agent-yi-bi-coding-agent-nan-zai.html"/>
+    <published>2026-05-30T15:39:47+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html</id>
+    <title>手搓一个催收Agent（二）：催收员每天都在做什么</title>
+    <updated>2026-05-30T15:40:00+00:00</updated>
+    <content type="html"><![CDATA[<h1>催收员的真实工作流程</h1>
+<blockquote>
+<p><strong>一句话结论</strong>：催收员的日常工作流程可以抽象为一个 collection-agent。</p>
+</blockquote>
+<h2>二、五个步骤详解</h2>
+<h3>第一步：查看逾期用户列表</h3>
+<p>系统每天生成一份逾期用户名单，按照风险评级排序。小李看到的列表长这样：</p>
+<pre><code>用户ID：U-8842    逾期15天    金额2580元    风险B    上次联系：3天前未接
+用户ID：U-2156    逾期8天     金额1200元    风险A    上次联系：已承诺周五还
+用户ID：U-7391    逾期32天    金额5000元    风险C    上次联系：7天前
+</code></pre>
+<p>每个用户都有完整的画像：逾期天数、金额、历史还款记录、上次联系结果、职业信息。这些信息决定了小李今天要优先联系谁、用什么方式联系。</p>
+<h3>第二步：选择触达方式</h3>
+<p>同一个用户，小李不会只打一次电话就放弃。触达渠道有优先级：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>渠道</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>电话</td>
+<td>首选，直接沟通效率最高</td>
+</tr>
+<tr>
+<td>2</td>
+<td>短信/企微/WhatsApp</td>
+<td>电话未接时，或作为辅助提醒</td>
+</tr>
+<tr>
+<td>3</td>
+<td>App Push</td>
+<td>用户活跃时使用</td>
+</tr>
+</tbody></table><p>如果电话没打通，小李会在冷却期后换短信；短信没回复，再换企微。不同渠道的冷却期不同（1<span class="pangu"></span>小时、4<span class="pangu"></span>小时、24<span class="pangu"></span>小时）。</p>
+<h3>第三步：触达用户</h3>
+<p>电话拨出去不等于用户收到了。小李需要确认：</p>
+<ul>
+<li>电话接通了吗？（忙线/未接/接通）</li>
+<li>短信送达了吗？（送达回执）</li>
+<li>企微消息已读了吗？</li>
+</ul>
+<p>如果<strong>未送达</strong>，标记为 UNREACHABLE，进入冷却期，下次换渠道重试。</p>
+<p>如果<strong>已送达</strong>（电话接通、用户回复了消息），进入最关键的一步——分析用户意图。</p>
+<h3>第四步：分析用户意图</h3>
+<p>用户回应后，小李需要快速判断用户的意图。催收业务里有<span class="pangu"></span>8<span class="pangu"></span>种典型的用户回应：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>用户表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>愿意还款</strong></td>
+<td>&quot;好的，我现在就还&quot;</td>
+</tr>
+<tr>
+<td><strong>协商</strong></td>
+<td>&quot;我现在没钱，能延期吗&quot;</td>
+</tr>
+<tr>
+<td><strong>回避</strong></td>
+<td>&quot;知道了&quot;（敷衍）</td>
+</tr>
+<tr>
+<td><strong>争议</strong></td>
+<td>&quot;金额不对，我没借这么多&quot;</td>
+</tr>
+<tr>
+<td><strong>要求停止</strong></td>
+<td>&quot;别再联系我了&quot;</td>
+</tr>
+<tr>
+<td><strong>危机</strong></td>
+<td>&quot;我不想活了&quot;</td>
+</tr>
+<tr>
+<td><strong>拒绝</strong></td>
+<td>&quot;我就是不还&quot;</td>
+</tr>
+<tr>
+<td><strong>联系不上</strong></td>
+<td>电话未接、消息不回</td>
+</tr>
+</tbody></table><p>这<span class="pangu"></span>8<span class="pangu"></span>个意图决定了下一步的行动策略。</p>
+<h3>第五步：根据意图谈判</h3>
+<p>不同意图，不同的谈判策略：</p>
+<p><strong>愿意还款</strong> → 确认方式，发送链接，等待还款，隔<span class="pangu"></span>2<span class="pangu"></span>小时查询状态</p>
+<p><strong>协商</strong> → 询问困难原因，提供方案（延期/分期），记录承诺，审批后执行</p>
+<p><strong>回避</strong> → 简短确认，标记静默，沉默追踪，一段时间后重新触达</p>
+<p><strong>争议</strong> → 核实身份和账单，无误则解释明细继续催，有问题则生成工单</p>
+<p><strong>要求停止</strong> → 确认本人，立即停止，加入<span class="pangu"></span>DNC（Do Not Contact，停止联系）名单</p>
+<p><strong>危机</strong> → 停止催收，安慰用户，提供援助热线，福利告警</p>
+<p><strong>拒绝</strong> → 强化告知，尝试协商，持续拒绝则升级</p>
+<p><strong>联系不上</strong> → 换渠道重试，多次失败后升级委外</p>
+<h2>四、完整工作流程图</h2>
+<p>以下是催收业务的完整工作流程，包含触达前的系统判断、触达后的用户意图分支、以及每个分支的详细处理路径：</p>
+<pre><code class="language-mermaid">flowchart TD
+    START([用户逾期]) --&gt; LOAD[加载画像/风险评级]
+    LOAD --&gt; CHANNEL[选择触达渠道]
+    CHANNEL --&gt; FREQ{频率检查}
+
+    FREQ -- 超限 --&gt; SKIP[跳过本次&lt;br/&gt;记录原因]
+    SKIP --&gt; COOL1[冷却期]
+    COOL1 --&gt; CHANNEL
+
+    FREQ -- 通过 --&gt; EXEC[执行触达]
+    EXEC --&gt; DELIVER{送达检查}
+
+    DELIVER -- 未送达 --&gt; UNR[UNREACHABLE]
+    UNR --&gt; COOL2[冷却期 1h/4h/24h]
+    COOL2 --&gt; CHANNEL
+
+    DELIVER -- 已送达 --&gt; WAIT[等待用户回复]
+    WAIT --&gt; INTENT{意图识别}
+
+    INTENT --&gt; A[愿意还款 A]
+    INTENT --&gt; B[协商 B]
+    INTENT --&gt; C[回避 C]
+    INTENT --&gt; D[争议 D]
+    INTENT --&gt; STOP[要求停止]
+    INTENT --&gt; CRISIS[危机]
+    INTENT --&gt; REFUSE[拒绝 F]
+    INTENT --&gt; UNREACH[联系不上]
+
+    A --&gt; A1[确认方式/发送链接]
+    A1 --&gt; A2{等待还款}
+    A2 -- 已结清 --&gt; END1([结清归档])
+    A2 -- 未结清 --&gt; B
+
+    B --&gt; B1[询问困难]
+    B1 --&gt; B2[制定方案]
+    B2 --&gt; B3[审批]
+    B3 --&gt; B4[执行计划]
+    B4 --&gt; B5{跟进执行}
+    B5 -- 按时还款 --&gt; END1
+    B5 -- 再次违约 --&gt; B6[强化告知/升级]
+    B6 --&gt; ESC[升级/委外/法务]
+
+    C --&gt; C1[沉默追踪]
+    C1 --&gt; C2[重新识别]
+    C2 --&gt; INTENT
+
+    D --&gt; D1[身份+账单核实]
+    D1 -- 无误 --&gt; D2[解释明细]
+    D2 --&gt; A
+    D1 -- 确认争议 --&gt; D3[争议工单]
+    D3 --&gt; D4[暂停催收]
+
+    STOP --&gt; S1[确认本人]
+    S1 --&gt; S2[停止联系]
+    S2 --&gt; DNC([加入DNC])
+
+    CRISIS --&gt; CR1[福利告警]
+    CR1 --&gt; CR2[暂停30天]
+
+    REFUSE --&gt; R1[强化告知]
+    R1 --&gt; R2{是否接受协商}
+    R2 -- 是 --&gt; B
+    R2 -- 否 --&gt; ESC
+
+    UNREACH --&gt; U1[换渠道重试]
+    U1 --&gt; U2{多次失败}
+    U2 -- 是 --&gt; ESC
+    U2 -- 否 --&gt; CHANNEL
+</code></pre>
+]]></content>
+    <link href="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html"/>
+    <published>2026-05-30T15:40:00+00:00</published>
   </entry>
 </feed>

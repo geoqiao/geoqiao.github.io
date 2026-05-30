@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y">
+    <title>手搓一个催收Agent（二）：催收员每天都在做什么 - geoqiao&#39;s Blog</title>
+    
+<link rel="canonical" href="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html" />
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html">
+    <meta property="og:site_name" content="geoqiao&#39;s Blog">
+    <meta property="og:title" content="手搓一个催收Agent（二）：催收员每天都在做什么">
+    <meta property="og:description" content="Tags: collection-agent, ai-engineering, agent, business">
+    <meta property="og:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html">
+    <meta name="twitter:title" content="手搓一个催收Agent（二）：催收员每天都在做什么">
+    <meta name="twitter:description" content="Tags: collection-agent, ai-engineering, agent, business">
+    <meta name="twitter:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/templates/Escape2/static/css/style.css">
+    <link rel="stylesheet" href="/templates/Escape2/static/css/prism-nord.css">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    <link rel="icon" type="image/png" href="/templates/Escape2/static/images/favicon.png">
+    
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+            <div class="header">
+                <a href="/" class="terminal">
+                    <span>geoqiao@escaping ~ $</span><span class="cursor">_</span>
+                </a>
+                <input class="side-menu" type="checkbox" id="side-menu">
+                <label class="hamb" for="side-menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="header-nav"><span class="hamb-line"></span></label>
+                <nav class="headerLinks" id="header-nav">
+                    <ul>
+                        
+                        <li><a href="/blog/">~/Blog</a></li>
+                        
+                        <li><a href="/tag/">~/Tags</a></li>
+                        
+                        <li><a href="/about.html">~/About</a></li>
+                        
+                        <li><a href="/atom.xml">~/RSS</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="content">
+            <main class="main" id="main-content">
+                
+<article class="postWrapper">
+    <h1>手搓一个催收Agent（二）：催收员每天都在做什么</h1>
+
+    <section class="postMetadata">
+        <dl>
+            
+            <dt>tags</dt>
+            <dd>
+                
+                <a href="/tag/collection-agent.html" class="tag">#collection-agent</a> 
+                
+                <a href="/tag/ai-engineering.html" class="tag">#ai-engineering</a> 
+                
+                <a href="/tag/agent.html" class="tag">#agent</a> 
+                
+                <a href="/tag/business.html" class="tag">#business</a>
+                
+            </dd>
+            
+            <dt>published</dt>
+            <dd><time datetime="2026-05-30">2026-05-30</time></dd>
+        </dl>
+    </section>
+
+    <div class="post-content">
+        <h1>催收员的真实工作流程</h1>
+<blockquote>
+<p><strong>一句话结论</strong>：催收员的日常工作流程可以抽象为一个 collection-agent。</p>
+</blockquote>
+<h2>二、五个步骤详解</h2>
+<h3>第一步：查看逾期用户列表</h3>
+<p>系统每天生成一份逾期用户名单，按照风险评级排序。小李看到的列表长这样：</p>
+<pre><code>用户ID：U-8842    逾期15天    金额2580元    风险B    上次联系：3天前未接
+用户ID：U-2156    逾期8天     金额1200元    风险A    上次联系：已承诺周五还
+用户ID：U-7391    逾期32天    金额5000元    风险C    上次联系：7天前
+</code></pre>
+<p>每个用户都有完整的画像：逾期天数、金额、历史还款记录、上次联系结果、职业信息。这些信息决定了小李今天要优先联系谁、用什么方式联系。</p>
+<h3>第二步：选择触达方式</h3>
+<p>同一个用户，小李不会只打一次电话就放弃。触达渠道有优先级：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>渠道</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>电话</td>
+<td>首选，直接沟通效率最高</td>
+</tr>
+<tr>
+<td>2</td>
+<td>短信/企微/WhatsApp</td>
+<td>电话未接时，或作为辅助提醒</td>
+</tr>
+<tr>
+<td>3</td>
+<td>App Push</td>
+<td>用户活跃时使用</td>
+</tr>
+</tbody></table><p>如果电话没打通，小李会在冷却期后换短信；短信没回复，再换企微。不同渠道的冷却期不同（1<span class="pangu"></span>小时、4<span class="pangu"></span>小时、24<span class="pangu"></span>小时）。</p>
+<h3>第三步：触达用户</h3>
+<p>电话拨出去不等于用户收到了。小李需要确认：</p>
+<ul>
+<li>电话接通了吗？（忙线/未接/接通）</li>
+<li>短信送达了吗？（送达回执）</li>
+<li>企微消息已读了吗？</li>
+</ul>
+<p>如果<strong>未送达</strong>，标记为 UNREACHABLE，进入冷却期，下次换渠道重试。</p>
+<p>如果<strong>已送达</strong>（电话接通、用户回复了消息），进入最关键的一步——分析用户意图。</p>
+<h3>第四步：分析用户意图</h3>
+<p>用户回应后，小李需要快速判断用户的意图。催收业务里有<span class="pangu"></span>8<span class="pangu"></span>种典型的用户回应：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>用户表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>愿意还款</strong></td>
+<td>&quot;好的，我现在就还&quot;</td>
+</tr>
+<tr>
+<td><strong>协商</strong></td>
+<td>&quot;我现在没钱，能延期吗&quot;</td>
+</tr>
+<tr>
+<td><strong>回避</strong></td>
+<td>&quot;知道了&quot;（敷衍）</td>
+</tr>
+<tr>
+<td><strong>争议</strong></td>
+<td>&quot;金额不对，我没借这么多&quot;</td>
+</tr>
+<tr>
+<td><strong>要求停止</strong></td>
+<td>&quot;别再联系我了&quot;</td>
+</tr>
+<tr>
+<td><strong>危机</strong></td>
+<td>&quot;我不想活了&quot;</td>
+</tr>
+<tr>
+<td><strong>拒绝</strong></td>
+<td>&quot;我就是不还&quot;</td>
+</tr>
+<tr>
+<td><strong>联系不上</strong></td>
+<td>电话未接、消息不回</td>
+</tr>
+</tbody></table><p>这<span class="pangu"></span>8<span class="pangu"></span>个意图决定了下一步的行动策略。</p>
+<h3>第五步：根据意图谈判</h3>
+<p>不同意图，不同的谈判策略：</p>
+<p><strong>愿意还款</strong> → 确认方式，发送链接，等待还款，隔<span class="pangu"></span>2<span class="pangu"></span>小时查询状态</p>
+<p><strong>协商</strong> → 询问困难原因，提供方案（延期/分期），记录承诺，审批后执行</p>
+<p><strong>回避</strong> → 简短确认，标记静默，沉默追踪，一段时间后重新触达</p>
+<p><strong>争议</strong> → 核实身份和账单，无误则解释明细继续催，有问题则生成工单</p>
+<p><strong>要求停止</strong> → 确认本人，立即停止，加入<span class="pangu"></span>DNC（Do Not Contact，停止联系）名单</p>
+<p><strong>危机</strong> → 停止催收，安慰用户，提供援助热线，福利告警</p>
+<p><strong>拒绝</strong> → 强化告知，尝试协商，持续拒绝则升级</p>
+<p><strong>联系不上</strong> → 换渠道重试，多次失败后升级委外</p>
+<h2>四、完整工作流程图</h2>
+<p>以下是催收业务的完整工作流程，包含触达前的系统判断、触达后的用户意图分支、以及每个分支的详细处理路径：</p>
+<pre><code class="language-mermaid">flowchart TD
+    START([用户逾期]) --&gt; LOAD[加载画像/风险评级]
+    LOAD --&gt; CHANNEL[选择触达渠道]
+    CHANNEL --&gt; FREQ{频率检查}
+
+    FREQ -- 超限 --&gt; SKIP[跳过本次&lt;br/&gt;记录原因]
+    SKIP --&gt; COOL1[冷却期]
+    COOL1 --&gt; CHANNEL
+
+    FREQ -- 通过 --&gt; EXEC[执行触达]
+    EXEC --&gt; DELIVER{送达检查}
+
+    DELIVER -- 未送达 --&gt; UNR[UNREACHABLE]
+    UNR --&gt; COOL2[冷却期 1h/4h/24h]
+    COOL2 --&gt; CHANNEL
+
+    DELIVER -- 已送达 --&gt; WAIT[等待用户回复]
+    WAIT --&gt; INTENT{意图识别}
+
+    INTENT --&gt; A[愿意还款 A]
+    INTENT --&gt; B[协商 B]
+    INTENT --&gt; C[回避 C]
+    INTENT --&gt; D[争议 D]
+    INTENT --&gt; STOP[要求停止]
+    INTENT --&gt; CRISIS[危机]
+    INTENT --&gt; REFUSE[拒绝 F]
+    INTENT --&gt; UNREACH[联系不上]
+
+    A --&gt; A1[确认方式/发送链接]
+    A1 --&gt; A2{等待还款}
+    A2 -- 已结清 --&gt; END1([结清归档])
+    A2 -- 未结清 --&gt; B
+
+    B --&gt; B1[询问困难]
+    B1 --&gt; B2[制定方案]
+    B2 --&gt; B3[审批]
+    B3 --&gt; B4[执行计划]
+    B4 --&gt; B5{跟进执行}
+    B5 -- 按时还款 --&gt; END1
+    B5 -- 再次违约 --&gt; B6[强化告知/升级]
+    B6 --&gt; ESC[升级/委外/法务]
+
+    C --&gt; C1[沉默追踪]
+    C1 --&gt; C2[重新识别]
+    C2 --&gt; INTENT
+
+    D --&gt; D1[身份+账单核实]
+    D1 -- 无误 --&gt; D2[解释明细]
+    D2 --&gt; A
+    D1 -- 确认争议 --&gt; D3[争议工单]
+    D3 --&gt; D4[暂停催收]
+
+    STOP --&gt; S1[确认本人]
+    S1 --&gt; S2[停止联系]
+    S2 --&gt; DNC([加入DNC])
+
+    CRISIS --&gt; CR1[福利告警]
+    CR1 --&gt; CR2[暂停30天]
+
+    REFUSE --&gt; R1[强化告知]
+    R1 --&gt; R2{是否接受协商}
+    R2 -- 是 --&gt; B
+    R2 -- 否 --&gt; ESC
+
+    UNREACH --&gt; U1[换渠道重试]
+    U1 --&gt; U2{多次失败}
+    U2 -- 是 --&gt; ESC
+    U2 -- 否 --&gt; CHANNEL
+</code></pre>
+
+    </div>
+</article>
+
+<div class="comments" id="comments-container">
+    <p class="comments-loading">Loading comments...</p>
+    <noscript>
+        <p class="comments-error">Please enable JavaScript to view comments.</p>
+    </noscript>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    var container = document.getElementById('comments-container');
+    var loadingMsg = container.querySelector('.comments-loading');
+
+    // Detect iOS Safari / WebKit
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var isWebKit = /AppleWebKit/.test(navigator.userAgent) && !/Chrome|CriOS/.test(navigator.userAgent);
+
+    var DARK_THEME = 'photon-dark';
+
+    function getUtterancesTheme() {
+        return DARK_THEME;
+    }
+
+    function updateUtterancesTheme() {
+        var iframe = container.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            var message = {
+                type: 'set-theme',
+                theme: getUtterancesTheme()
+            };
+            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+    }
+
+    // Fix Safari lazy-loading bug: IntersectionObserver may skip lazy iframes
+    // in zero-height parents. We patch insertAdjacentHTML and also watch for lazily-created iframes.
+    var originalInsertAdjacentHTML = Element.prototype.insertAdjacentHTML;
+    Element.prototype.insertAdjacentHTML = function(position, text) {
+        if (typeof text === 'string' && text.indexOf('<iframe') !== -1 && text.indexOf('loading="lazy"') !== -1) {
+            text = text.replace(/loading="lazy"/g, '');
+        }
+        return originalInsertAdjacentHTML.call(this, position, text);
+    };
+
+    // MutationObserver fallback: strip loading="lazy" from any iframe added to comments
+    var lazyObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) {
+                    if (node.tagName === 'IFRAME' && node.getAttribute('loading') === 'lazy') {
+                        node.removeAttribute('loading');
+                    }
+                    var iframes = node.querySelectorAll ? node.querySelectorAll('iframe[loading="lazy"]') : [];
+                    for (var i = 0; i < iframes.length; i++) {
+                        iframes[i].removeAttribute('loading');
+                    }
+                }
+            });
+        });
+    });
+    lazyObserver.observe(container, { childList: true, subtree: true });
+
+    // Load Utterances dynamically
+    var script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'geoqiao/geoqiao.github.io');
+    script.setAttribute('issue-number', '38');
+    script.setAttribute('theme', getUtterancesTheme());
+    script.async = true;
+
+    var checkInterval;
+    var checkCount = 0;
+    var resizeReceived = false;
+
+    function checkIframe() {
+        var iframe = container.querySelector('iframe');
+        checkCount++;
+
+        // Give up after 20 seconds on mobile (longer for slow networks)
+        var maxChecks = (isIOS || isSafari || isWebKit) ? 100 : 75;
+        if (checkCount > maxChecks) {
+            clearInterval(checkInterval);
+            showError();
+            return false;
+        }
+        return false;
+    }
+
+    function showError() {
+        if (!loadingMsg) return;
+        var msg = 'Comments may not be available.';
+        if (isIOS || isSafari || isWebKit) {
+            msg += '<br><small>iOS Safari may block third-party content.<br>Try turning off "Prevent Cross-Site Tracking" in Settings → Safari → Privacy & Security</small>';
+        }
+        loadingMsg.innerHTML = msg + '<br><a href="https://github.com/geoqiao/geoqiao.github.io/issues/38" target="_blank" rel="noopener">View or add comment on GitHub →</a>';
+        loadingMsg.className = 'comments-error';
+    }
+
+    script.onload = function() {
+        checkInterval = setInterval(checkIframe, 200);
+    };
+
+    script.onerror = function() {
+        clearInterval(checkInterval);
+        showError();
+    };
+
+    // Listen for actual Utterances resize message (most reliable signal)
+    window.addEventListener('message', function(e) {
+        if (e.origin !== 'https://utteranc.es') return;
+        if (!e.data) return;
+
+        if (e.data.type === 'resize') {
+            resizeReceived = true;
+            if (loadingMsg) {
+                loadingMsg.style.display = 'none';
+            }
+            clearInterval(checkInterval);
+        } else if (e.data.type === 'error') {
+            // If utterances reports an internal error, show fallback sooner
+            resizeReceived = true;
+            clearInterval(checkInterval);
+            showError();
+        }
+    });
+
+    container.appendChild(script);
+
+    // Absolute fallback after 20 seconds
+    setTimeout(function() {
+        clearInterval(checkInterval);
+        if (!resizeReceived && loadingMsg) {
+            showError();
+        }
+    }, 20000);
+})();
+</script>
+
+            </main>
+        </div>
+
+        
+        <footer class="footer">
+            <p>
+                &copy; geoqiao · <a href="https://github.com/geoqiao/escaping" class="footerLink">github_blog</a>
+            </p>
+        </footer>
+        
+    </div>
+
+    <script src="/templates/Escape2/static/js/prism.js"></script>
+    <script>
+    (function() {
+        var checkbox = document.getElementById('side-menu');
+        var label = document.querySelector('.hamb');
+        if (checkbox && label) {
+            checkbox.addEventListener('change', function() {
+                label.setAttribute('aria-expanded', checkbox.checked ? 'true' : 'false');
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
