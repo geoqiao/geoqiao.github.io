@@ -89,10 +89,53 @@
     </section>
 
     <div class="post-content">
-        <h1>手搓一个催收<span class="pangu"></span>Agent（一）：比<span class="pangu"></span>Coding Agent<span class="pangu"></span>难在哪？</h1>
-<blockquote>
+        <blockquote>
 <p><strong>一句话结论</strong>：催收<span class="pangu"></span>Agent<span class="pangu"></span>比<span class="pangu"></span>Coding Agent<span class="pangu"></span>更难做，因为它面对的不是编译器，而是有情绪、会反抗、会说谎的人——而且说错一句话就是合规事故。</p>
 </blockquote>
+<h2>一、Coding Agent vs 催收<span class="pangu"></span>Agent</h2>
+<p>Coding Agent（Cursor、Devin）只需要理解代码、调用<span class="pangu"></span>API、生成文件。输出对不对，编译器和测试用例会告诉它。</p>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>面对的是<strong>人</strong>，而且是有情绪、会反抗、会说谎的人。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Coding Agent</th>
+<th>催收<span class="pangu"></span>Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>输出检验</strong></td>
+<td>编译器/测试用例</td>
+<td>合规审查 + 人工审核</td>
+</tr>
+<tr>
+<td><strong>容错空间</strong></td>
+<td>报错后可以重试</td>
+<td>说错话就是合规事故</td>
+</tr>
+<tr>
+<td><strong>上下文</strong></td>
+<td>代码文件 + 需求</td>
+<td>用户信息 + 对话历史 + 工具结果 + 系统状态</td>
+</tr>
+<tr>
+<td><strong>意图识别</strong></td>
+<td>明确（写函数/修<span class="pangu"></span>bug）</td>
+<td>模糊（&quot;知道了&quot;可能是回避也可能是拖延）</td>
+</tr>
+<tr>
+<td><strong>合规要求</strong></td>
+<td>无</td>
+<td>时间窗口、频次、内容、敏感职业、DNC</td>
+</tr>
+<tr>
+<td><strong>危机处理</strong></td>
+<td>无</td>
+<td>用户说&quot;不想活了&quot;必须立即停止催收</td>
+</tr>
+</tbody></table><p><strong>核心差异</strong>：Coding Agent<span class="pangu"></span>的输出是代码，人可以<span class="pangu"></span>review<span class="pangu"></span>后再提交。催收<span class="pangu"></span>Agent<span class="pangu"></span>的输出是话，一旦说出口就收不回来。</p>
+<p>这意味着催收<span class="pangu"></span>Agent<span class="pangu"></span>的每一个组件都必须经得起生产检验，不能靠&quot;提示词写得好一点&quot;来兜底。</p>
 <h2>二、难在哪里：四个组件缺一不可</h2>
 <p>催收<span class="pangu"></span>Agent<span class="pangu"></span>的架构可以抽象为四个核心组件：</p>
 <table>
@@ -125,6 +168,22 @@
 <td>Skill<span class="pangu"></span>是策略，Tool<span class="pangu"></span>是动作，两者不是并列关系而是&quot;策略决定调用什么动作&quot;</td>
 </tr>
 </tbody></table><p>这四个组件共同解决一个问题：<strong>在严格约束下，与不可预测的人进行有效交互</strong>。</p>
+<h2>三、这个系列讲什么</h2>
+<p>这个系列共<span class="pangu"></span>4<span class="pangu"></span>篇文章，从业务理解出发，逐层深入技术实现：</p>
+<pre><code>第1篇（本文）→ 为什么催收Agent比Coding Agent难
+       ↓
+第2篇 → 催收员每天都在做什么（业务流程）
+       ↓
+第3篇 → 把流程翻译成Agent架构（Context/Permissions/Decider/Skill/Tool）
+       ↓
+第4篇 → 让Agent稳定运行的工程实践（提示词拆分、CoT、信息压缩）
+</code></pre>
+<p><strong>阅读建议</strong>：</p>
+<ul>
+<li>如果你<strong>不懂催收业务</strong>：按顺序读。先理解催收员怎么工作，再看怎么变成代码。</li>
+<li>如果你<strong>已经是<span class="pangu"></span>Agent<span class="pangu"></span>开发者</strong>：直接从第<span class="pangu"></span>3<span class="pangu"></span>篇开始。业务部分可以快速跳过，重点看架构设计。</li>
+<li>如果你<strong>想看工程实践</strong>：跳到第<span class="pangu"></span>4<span class="pangu"></span>篇，看提示词拆分、CoT<span class="pangu"></span>与<span class="pangu"></span>Compaction<span class="pangu"></span>的具体做法。</li>
+</ul>
 <h2>四、技术来源</h2>
 <p>这个系列不是闭门造车，而是基于一本好书、一个好项目：</p>
 <p><strong>书</strong>：Chip Huyen 的 <em>AI Engineering: Building Applications with Foundation Models</em></p>
@@ -142,6 +201,17 @@
 <li>完整的状态机</li>
 </ul>
 <p>所有文章都有对应的可运行代码。</p>
+<h2>五、下一篇</h2>
+<p><strong>第<span class="pangu"></span>2<span class="pangu"></span>篇：《手搓一个催收<span class="pangu"></span>Agent（二）：催收员每天都在做什么》</strong></p>
+<p>我们会跟着一个催收员走完他的一天：</p>
+<ul>
+<li>早上<span class="pangu"></span>9<span class="pangu"></span>点，系统分配了<span class="pangu"></span>50<span class="pangu"></span>个<span class="pangu"></span>M1<span class="pangu"></span>逾期用户</li>
+<li>第一个用户接了电话，说&quot;我现在没钱&quot;→ 查账单 → 了解原因 → 提供分期 → 记录承诺</li>
+<li>第二个用户没接电话 → 发短信 → 标记静默 → 1<span class="pangu"></span>小时后再试</li>
+<li>第三个用户说&quot;别再打给我&quot;→ 立即停止 → 加入<span class="pangu"></span>DNC</li>
+<li>下午遇到一个律师 → 只能用标准话术 → 不能谈判</li>
+</ul>
+<p>看完这篇，你会对&quot;催收<span class="pangu"></span>Agent<span class="pangu"></span>要解决什么问题&quot;有一个具体的画面。</p>
 <h2>关联</h2>
 <ul>
 <li>[[chatbot-exploration]] — 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>

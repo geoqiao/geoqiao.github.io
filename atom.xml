@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-05-30T15:56:21.350875+00:00</updated>
+  <updated>2026-05-30T16:02:35.447860+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -2307,11 +2307,54 @@ status: draft
   <entry>
     <id>https://geoqiao.github.io/blog/37-shou-cuo-yi-ge-cui-shou-agent-yi-bi-coding-agent-nan-zai.html</id>
     <title>手搓一个催收Agent（一）：比Coding Agent难在哪？</title>
-    <updated>2026-05-30T15:39:47+00:00</updated>
-    <content type="html"><![CDATA[<h1>手搓一个催收<span class="pangu"></span>Agent（一）：比<span class="pangu"></span>Coding Agent<span class="pangu"></span>难在哪？</h1>
-<blockquote>
+    <updated>2026-05-30T16:02:11+00:00</updated>
+    <content type="html"><![CDATA[<blockquote>
 <p><strong>一句话结论</strong>：催收<span class="pangu"></span>Agent<span class="pangu"></span>比<span class="pangu"></span>Coding Agent<span class="pangu"></span>更难做，因为它面对的不是编译器，而是有情绪、会反抗、会说谎的人——而且说错一句话就是合规事故。</p>
 </blockquote>
+<h2>一、Coding Agent vs 催收<span class="pangu"></span>Agent</h2>
+<p>Coding Agent（Cursor、Devin）只需要理解代码、调用<span class="pangu"></span>API、生成文件。输出对不对，编译器和测试用例会告诉它。</p>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>面对的是<strong>人</strong>，而且是有情绪、会反抗、会说谎的人。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Coding Agent</th>
+<th>催收<span class="pangu"></span>Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>输出检验</strong></td>
+<td>编译器/测试用例</td>
+<td>合规审查 + 人工审核</td>
+</tr>
+<tr>
+<td><strong>容错空间</strong></td>
+<td>报错后可以重试</td>
+<td>说错话就是合规事故</td>
+</tr>
+<tr>
+<td><strong>上下文</strong></td>
+<td>代码文件 + 需求</td>
+<td>用户信息 + 对话历史 + 工具结果 + 系统状态</td>
+</tr>
+<tr>
+<td><strong>意图识别</strong></td>
+<td>明确（写函数/修<span class="pangu"></span>bug）</td>
+<td>模糊（&quot;知道了&quot;可能是回避也可能是拖延）</td>
+</tr>
+<tr>
+<td><strong>合规要求</strong></td>
+<td>无</td>
+<td>时间窗口、频次、内容、敏感职业、DNC</td>
+</tr>
+<tr>
+<td><strong>危机处理</strong></td>
+<td>无</td>
+<td>用户说&quot;不想活了&quot;必须立即停止催收</td>
+</tr>
+</tbody></table><p><strong>核心差异</strong>：Coding Agent<span class="pangu"></span>的输出是代码，人可以<span class="pangu"></span>review<span class="pangu"></span>后再提交。催收<span class="pangu"></span>Agent<span class="pangu"></span>的输出是话，一旦说出口就收不回来。</p>
+<p>这意味着催收<span class="pangu"></span>Agent<span class="pangu"></span>的每一个组件都必须经得起生产检验，不能靠&quot;提示词写得好一点&quot;来兜底。</p>
 <h2>二、难在哪里：四个组件缺一不可</h2>
 <p>催收<span class="pangu"></span>Agent<span class="pangu"></span>的架构可以抽象为四个核心组件：</p>
 <table>
@@ -2344,6 +2387,22 @@ status: draft
 <td>Skill<span class="pangu"></span>是策略，Tool<span class="pangu"></span>是动作，两者不是并列关系而是&quot;策略决定调用什么动作&quot;</td>
 </tr>
 </tbody></table><p>这四个组件共同解决一个问题：<strong>在严格约束下，与不可预测的人进行有效交互</strong>。</p>
+<h2>三、这个系列讲什么</h2>
+<p>这个系列共<span class="pangu"></span>4<span class="pangu"></span>篇文章，从业务理解出发，逐层深入技术实现：</p>
+<pre><code>第1篇（本文）→ 为什么催收Agent比Coding Agent难
+       ↓
+第2篇 → 催收员每天都在做什么（业务流程）
+       ↓
+第3篇 → 把流程翻译成Agent架构（Context/Permissions/Decider/Skill/Tool）
+       ↓
+第4篇 → 让Agent稳定运行的工程实践（提示词拆分、CoT、信息压缩）
+</code></pre>
+<p><strong>阅读建议</strong>：</p>
+<ul>
+<li>如果你<strong>不懂催收业务</strong>：按顺序读。先理解催收员怎么工作，再看怎么变成代码。</li>
+<li>如果你<strong>已经是<span class="pangu"></span>Agent<span class="pangu"></span>开发者</strong>：直接从第<span class="pangu"></span>3<span class="pangu"></span>篇开始。业务部分可以快速跳过，重点看架构设计。</li>
+<li>如果你<strong>想看工程实践</strong>：跳到第<span class="pangu"></span>4<span class="pangu"></span>篇，看提示词拆分、CoT<span class="pangu"></span>与<span class="pangu"></span>Compaction<span class="pangu"></span>的具体做法。</li>
+</ul>
 <h2>四、技术来源</h2>
 <p>这个系列不是闭门造车，而是基于一本好书、一个好项目：</p>
 <p><strong>书</strong>：Chip Huyen 的 <em>AI Engineering: Building Applications with Foundation Models</em></p>
@@ -2361,6 +2420,17 @@ status: draft
 <li>完整的状态机</li>
 </ul>
 <p>所有文章都有对应的可运行代码。</p>
+<h2>五、下一篇</h2>
+<p><strong>第<span class="pangu"></span>2<span class="pangu"></span>篇：《手搓一个催收<span class="pangu"></span>Agent（二）：催收员每天都在做什么》</strong></p>
+<p>我们会跟着一个催收员走完他的一天：</p>
+<ul>
+<li>早上<span class="pangu"></span>9<span class="pangu"></span>点，系统分配了<span class="pangu"></span>50<span class="pangu"></span>个<span class="pangu"></span>M1<span class="pangu"></span>逾期用户</li>
+<li>第一个用户接了电话，说&quot;我现在没钱&quot;→ 查账单 → 了解原因 → 提供分期 → 记录承诺</li>
+<li>第二个用户没接电话 → 发短信 → 标记静默 → 1<span class="pangu"></span>小时后再试</li>
+<li>第三个用户说&quot;别再打给我&quot;→ 立即停止 → 加入<span class="pangu"></span>DNC</li>
+<li>下午遇到一个律师 → 只能用标准话术 → 不能谈判</li>
+</ul>
+<p>看完这篇，你会对&quot;催收<span class="pangu"></span>Agent<span class="pangu"></span>要解决什么问题&quot;有一个具体的画面。</p>
 <h2>关联</h2>
 <ul>
 <li>[[chatbot-exploration]] — 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>
@@ -2374,11 +2444,21 @@ status: draft
   <entry>
     <id>https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html</id>
     <title>手搓一个催收Agent（二）：催收员每天都在做什么</title>
-    <updated>2026-05-30T15:40:00+00:00</updated>
-    <content type="html"><![CDATA[<h1>催收员的真实工作流程</h1>
-<blockquote>
+    <updated>2026-05-30T16:02:13+00:00</updated>
+    <content type="html"><![CDATA[<blockquote>
 <p><strong>一句话结论</strong>：催收员的日常工作流程可以抽象为一个 collection-agent。</p>
 </blockquote>
+<h2>一、催收员的一天</h2>
+<p>每天早上，催收员小李打开电脑，查看系统生成的逾期用户名单。他的工作，就是按照固定的流程，逐个处理这些用户。</p>
+<p>这个流程可以概括为五个步骤：</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[查看逾期用户列表] --&gt; B[选择触达方式]
+    B --&gt; C[触达用户]
+    C --&gt; D[分析用户意图]
+    D --&gt; E[根据意图谈判]
+    E --&gt; F[促成还款]
+</code></pre>
+<p>看起来很简单，但每一步背后都有复杂的判断规则和操作细节。</p>
 <h2>二、五个步骤详解</h2>
 <h3>第一步：查看逾期用户列表</h3>
 <p>系统每天生成一份逾期用户名单，按照风险评级排序。小李看到的列表长这样：</p>
@@ -2476,6 +2556,34 @@ status: draft
 <p><strong>危机</strong> → 停止催收，安慰用户，提供援助热线，福利告警</p>
 <p><strong>拒绝</strong> → 强化告知，尝试协商，持续拒绝则升级</p>
 <p><strong>联系不上</strong> → 换渠道重试，多次失败后升级委外</p>
+<h2>三、这个流程为什么能抽象为<span class="pangu"></span>Agent</h2>
+<p>看完小李的一天，你会发现催收工作的本质：<strong>在一个有明确规则和反馈闭环的流程中，根据用户输入做出判断，并执行对应的动作</strong>。</p>
+<p>这正是 Agent 的工作方式。</p>
+<table>
+<thead>
+<tr>
+<th>催收员的行为</th>
+<th>对应 Agent 的能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看用户列表、查账单、发链接</td>
+<td><strong>Tools</strong>（工具调用）</td>
+</tr>
+<tr>
+<td>遵守时间窗口、频次限制、DNC<span class="pangu"></span>规则</td>
+<td><strong>Permissions</strong>（合规约束）</td>
+</tr>
+<tr>
+<td>面对不同意图使用不同谈判策略</td>
+<td><strong>Skills</strong>（场景策略）</td>
+</tr>
+<tr>
+<td>记住用户信息、对话历史、联系记录</td>
+<td><strong>Context</strong>（上下文记忆）</td>
+</tr>
+</tbody></table><p>催收员的日常工作流程，就是一个天然适配 Agent 架构的业务场景。</p>
 <h2>四、完整工作流程图</h2>
 <p>以下是催收业务的完整工作流程，包含触达前的系统判断、触达后的用户意图分支、以及每个分支的详细处理路径：</p>
 <pre><code class="language-mermaid">flowchart TD
@@ -2547,6 +2655,14 @@ status: draft
     U2 -- 是 --&gt; ESC
     U2 -- 否 --&gt; CHANNEL
 </code></pre>
+<h2>关联</h2>
+<ul>
+<li>[[01-agent-overview]] — 系列总览</li>
+<li>[[03-agent-architecture]] — 下一篇：架构设计与伪代码</li>
+<li>[[chatbot-exploration]] — 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>
+</ul>
+<h2>Tags</h2>
+<p>#collection-agent #ai-engineering #agent #business</p>
 ]]></content>
     <link href="https://geoqiao.github.io/blog/38-shou-cuo-yi-ge-cui-shou-agent-er-cui-shou-yuan-mei-tian.html"/>
     <published>2026-05-30T15:40:00+00:00</published>
@@ -2554,15 +2670,51 @@ status: draft
   <entry>
     <id>https://geoqiao.github.io/blog/39-shou-cuo-yi-ge-cui-shou-agent-san-jia-gou-she-ji-yu-wei.html</id>
     <title>手搓一个催收Agent（三）：架构设计与伪代码</title>
-    <updated>2026-05-30T15:40:12+00:00</updated>
-    <content type="html"><![CDATA[<h1>催收<span class="pangu"></span>Agent<span class="pangu"></span>架构设计与实现</h1>
-<blockquote>
+    <updated>2026-05-30T16:02:15+00:00</updated>
+    <content type="html"><![CDATA[<blockquote>
 <p><strong>一句话结论</strong>:催收<span class="pangu"></span>Agent<span class="pangu"></span>就是一个按照固定流程执行任务的<span class="pangu"></span>Agent:查看用户→检查合规→触达→识别意图→加载策略→调用工具。四个组件(Context/Permissions/Decider/Skills/Tools)各负责一个环节。</p>
 </blockquote>
+<h2>一、流程总览</h2>
+<pre><code class="language-mermaid">flowchart LR
+    A[Context&lt;br/&gt;查看用户列表] --&gt; B[Permissions&lt;br/&gt;检查合规]
+    B --&gt; C[Decider&lt;br/&gt;识别意图]
+    C --&gt; D[Skill&lt;br/&gt;选择并执行应对策略]
+    D --&gt; E[Tool&lt;br/&gt;策略中的具体动作]
+</code></pre>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>的核心流程只有四步：</p>
+<table>
+<thead>
+<tr>
+<th>流程环节</th>
+<th>Agent<span class="pangu"></span>组件</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看逾期用户列表</td>
+<td><strong>Context</strong></td>
+<td>加载用户画像、历史对话、系统数据</td>
+</tr>
+<tr>
+<td>检查能否触达</td>
+<td><strong>Permissions</strong></td>
+<td>检查时间、频次、DNC、敏感职业</td>
+</tr>
+<tr>
+<td>识别用户意图</td>
+<td><strong>Decider</strong></td>
+<td>根据上下文判断用户属于哪种意图</td>
+</tr>
+<tr>
+<td>选择并执行应对策略</td>
+<td><strong>Skill + Tool</strong></td>
+<td>加载对应<span class="pangu"></span>Skill<span class="pangu"></span>策略，执行时调用<span class="pangu"></span>Tool</td>
+</tr>
+</tbody></table><p><strong>关键理解</strong>：Skill 和 Tool 不是并列关系。Skill 是&quot;策略模板&quot;（协商/安抚/争议处理），Tool 是策略执行时的&quot;具体动作&quot;（查账单、发链接、记录承诺）。Agent 先根据意图选择 Skill，再在 Skill 的 ReAct 循环中决定调用哪些 Tool。</p>
 <h2>二、Context:查看用户列表</h2>
 <p>Agent<span class="pangu"></span>的第一步:加载所有需要的信息。</p>
-<pre><code class="language-python"># core/models.py
-class UserState:
+<pre><code class="language-python">class UserState:
     user_id: str
     profile: UserProfile      # 金额、逾期天数、职业
     conversation: ConversationContext  # 最近50条对话
@@ -2575,8 +2727,7 @@ class Context:
     messages: list[Message]    # 对话历史
     session_state: str         # idle/interacting/stopped
 </code></pre>
-<pre><code class="language-python"># 伪代码:构建Context
-def build_context(user_id):
+<pre><code class="language-python">def build_context(user_id):
     state = db.load(user_id)
     return Context(
         facts={
@@ -2587,6 +2738,31 @@ def build_context(user_id):
     )
 </code></pre>
 <p><strong>关键设计</strong>:金额和逾期天数从系统读取,作为<code>facts</code>注入,LLM<span class="pangu"></span>不能编造。</p>
+<h2>三、Permissions:检查合规</h2>
+<p>Agent<span class="pangu"></span>的第二步:在触达前检查硬规则。</p>
+<pre><code class="language-python">class Harness:
+    def check(self, event, state) -&gt; HarnessResult:
+        # 状态拦截
+        if state.dnc or state.session_state == &quot;stopped&quot;:
+            return block(&quot;user_stopped&quot;)
+
+        # 时间窗口
+        if not compliance.is_within_valid_hours():
+            return block(&quot;outside_valid_hours&quot;)
+
+        # 频次限制
+        if quota.exceeded(state.user_id):
+            return block(&quot;quota_exceeded&quot;)
+
+        # STOP/CRISIS关键词快速路径
+        if stop_keyword in event.message:
+            return force_intent(&quot;STOP&quot;)
+
+        # 敏感职业标记
+        if state.profile.is_sensitive:
+            return mark_sensitive()
+</code></pre>
+<p><strong>关键设计</strong>:所有检查在<strong>LLM<span class="pangu"></span>调用前</strong>完成。不通过直接返回,不进后续流程。</p>
 <h2>四、Decider：触达+识别意图</h2>
 <p>Agent<span class="pangu"></span>的第三步：执行触达，识别用户意图。</p>
 <h3>意图来源不只是用户说了什么</h3>
@@ -2631,8 +2807,7 @@ def build_context(user_id):
 <td>NEGOTIATION（违约跟进）</td>
 </tr>
 </tbody></table><p>这意味着 Decider 的输入是整个 Context，而不仅是 <code>user_message</code>。</p>
-<pre><code class="language-python"># decider.py
-class Decider:
+<pre><code class="language-python">class Decider:
     async def decide(self, context: Context) -&gt; Decision:
         prompt = f&quot;&quot;&quot;
         用户消息：{context.user_message or &quot;（无输入）&quot;}
@@ -2696,13 +2871,158 @@ class Decider:
 <td>UNKNOWN</td>
 <td>troubleshoot</td>
 </tr>
-</tbody></table><p>name: negotiation
+</tbody></table><h2>五、Skill + Tool：选择并执行应对策略</h2>
+<p>Agent<span class="pangu"></span>的第四步：根据意图选择 Skill 策略，在策略执行中调用 Tool。</p>
+<h3>意图 → Skill 映射</h3>
+<p>识别出意图后，直接映射到对应的 Skill：</p>
+<table>
+<thead>
+<tr>
+<th>意图</th>
+<th>Skill</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COOPERATION</td>
+<td>payment_guidance</td>
+<td>引导还款</td>
+</tr>
+<tr>
+<td>NEGOTIATION</td>
+<td>negotiation</td>
+<td>协商方案</td>
+</tr>
+<tr>
+<td>AVOIDANCE</td>
+<td>reengage</td>
+<td>沉默追踪</td>
+</tr>
+<tr>
+<td>DISPUTE</td>
+<td>dispute</td>
+<td>核实账单</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>stop</td>
+<td>确认退出</td>
+</tr>
+<tr>
+<td>CRISIS</td>
+<td>crisis</td>
+<td>危机响应</td>
+</tr>
+<tr>
+<td>REFUSE</td>
+<td>troubleshoot</td>
+<td>兜底处理</td>
+</tr>
+</tbody></table><p>这是规则映射，不需要 LLM。<code>IntentClassifier</code> 输出意图，<code>SkillSelector</code> 查表即可。</p>
+<h3>Skill：策略模板</h3>
+<p>Skill 是一个独立的策略文件，定义了&quot;面对这种意图时，应该怎么处理&quot;。</p>
+<pre><code class="language-markdown">name: negotiation
 description: 用户表示困难，希望延期或分期
 tools: [query_bill, record_promise, send_payment_link]
-max_steps: 5</p>
-<h2>六、完整串联:AgentSession</h2>
-<pre><code class="language-python"># agent/session.py
-class AgentSession:
+max_steps: 5
+
+你是协商专家。用户表示还款困难，你的目标是：
+
+1. 了解困难原因
+2. 提供可行方案（延期7天/14天、分3期）
+3. 记录用户的还款承诺
+
+禁止：施压、威胁、承诺超出权限的减免
+</code></pre>
+<p><strong>Skill 的关键设计</strong>：</p>
+<ul>
+<li><code>tools</code>：白名单，这个 Skill 只能调用这些 Tool</li>
+<li><code>max_steps</code>：防止无限循环</li>
+<li><code>content</code>：策略指令，告诉 LLM 应该怎么谈判</li>
+</ul>
+<h3>Tool：策略中的具体动作</h3>
+<p>Tool 是 Skill 执行时的&quot;手脚&quot;。Skill 的 ReAct 循环中，LLM 决定什么时候调用什么 Tool。</p>
+<pre><code class="language-python">@tool(&quot;query_bill&quot;, &quot;查询用户账单&quot;)
+async def query_bill(user_id: str, store) -&gt; dict:
+    state = store.load(user_id)
+    return {
+        &quot;amount_due&quot;: state.profile.amount_due,
+        &quot;overdue_days&quot;: state.profile.overdue_days,
+    }
+
+@tool(&quot;send_payment_link&quot;, &quot;发送还款链接&quot;)
+async def send_payment_link(user_id: str, amount: float) -&gt; dict:
+    link = generate_link(user_id, amount)
+    await send_sms(user_id, f&quot;还款链接：{link}&quot;)
+    return {&quot;sent&quot;: True, &quot;link&quot;: link}
+
+@tool(&quot;record_promise&quot;, &quot;记录还款承诺&quot;)
+async def record_promise(user_id: str, amount: float, date: str, store) -&gt; dict:
+    store.save_promise(user_id, amount, date)
+    return {&quot;recorded&quot;: True}
+</code></pre>
+<h3>ReAct 循环：Skill 执行时调用 Tool</h3>
+<pre><code class="language-python">class SkillExecutor:
+    async def execute(self, skill, context, state) -&gt; SkillResult:
+        messages = build_messages(skill, context)
+
+        for step in range(skill.max_steps):
+            response = await llm.chat(messages)
+            action = parse_action(response)
+
+            if action.type == &quot;reply&quot;:
+                return SkillResult(response_text=action.text)
+
+            elif action.type == &quot;tool_call&quot;:
+                # 只能调用Skill白名单中的工具
+                if action.name not in skill.tools:
+                    return error(&quot;tool_not_allowed&quot;)
+
+                result = await call_tool(action.name, action.params, state)
+                messages.append(f&quot;Tool result: {result}&quot;)
+
+        return error(&quot;max_steps_exceeded&quot;)
+</code></pre>
+<p><strong>一个完整的 ReAct 示例</strong>：</p>
+<pre><code>Step 1: LLM 思考 → &quot;用户说没钱，我需要先查账单&quot;
+Step 1: LLM 调用 tool → query_bill(user_id=&quot;U-8842&quot;)
+Step 1: Tool 返回 → {&quot;amount_due&quot;: 2580, &quot;overdue_days&quot;: 15}
+
+Step 2: LLM 思考 → &quot;金额2580，逾期15天。用户说没钱，我提供分期方案&quot;
+Step 2: LLM 回复 → &quot;理解您的困难。您的账单是2580元，可以分3期...&quot;
+</code></pre>
+<h3>Tool 分级</h3>
+<table>
+<thead>
+<tr>
+<th>分级</th>
+<th>工具</th>
+<th>风险</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只读</td>
+<td>query_bill, query_user_history</td>
+<td>无</td>
+<td>查询信息</td>
+</tr>
+<tr>
+<td>扩展</td>
+<td>generate_payment_link, send_payment_link</td>
+<td>低</td>
+<td>发送内容</td>
+</tr>
+<tr>
+<td>写入</td>
+<td>record_promise, escalate_to_cs, add_to_dnc</td>
+<td>高</td>
+<td>修改状态</td>
+</tr>
+</tbody></table><h2>六、完整串联:AgentSession</h2>
+<pre><code class="language-python">class AgentSession:
     async def handle_event(self, event: Event) -&gt; SkillResult:
         # 1. 构建Context(查看用户列表)
         context = build_context(event.user_id)
@@ -2731,6 +3051,13 @@ class AgentSession:
         self.save_state()
         return result
 </code></pre>
+<h2>关联</h2>
+<ul>
+<li>[[02-collector-workflow]] - 上一篇:催收员的真实工作流程</li>
+<li>[[chatbot-exploration]] - 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>
+</ul>
+<h2>Tags</h2>
+<p>#collection-agent #ai-engineering #agent #architecture</p>
 ]]></content>
     <link href="https://geoqiao.github.io/blog/39-shou-cuo-yi-ge-cui-shou-agent-san-jia-gou-she-ji-yu-wei.html"/>
     <published>2026-05-30T15:40:12+00:00</published>
@@ -2738,11 +3065,57 @@ class AgentSession:
   <entry>
     <id>https://geoqiao.github.io/blog/40-shou-cuo-yi-ge-cui-shou-agent-si-ti-shi-ci-gong-cheng-de.html</id>
     <title>手搓一个催收Agent（四）：提示词工程的7个实践</title>
-    <updated>2026-05-30T15:40:25+00:00</updated>
-    <content type="html"><![CDATA[<h1>手搓一个催收<span class="pangu"></span>Agent（四）：提示词工程的<span class="pangu"></span>7<span class="pangu"></span>个实践</h1>
-<blockquote>
+    <updated>2026-05-30T16:02:17+00:00</updated>
+    <content type="html"><![CDATA[<blockquote>
 <p><strong>一句话结论</strong>：提示词工程不是&quot;调措辞&quot;，而是信息架构——把正确的信息放在正确的位置，让模型在约束条件下做出可预期的决策。</p>
 </blockquote>
+<h2>一、信息架构：Agent<span class="pangu"></span>必须知道什么，不能编造什么</h2>
+<h3>1.1 facts<span class="pangu"></span>与推理分离</h3>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>必须知道用户的账单金额、逾期天数，但不能让<span class="pangu"></span>LLM<span class="pangu"></span>自己编造。</p>
+<p>我们的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
+<pre><code class="language-python">context = {
+    &quot;user_message&quot;: &quot;我现在没钱&quot;,
+    &quot;facts&quot;: {
+        &quot;due_amount&quot;: 2580,        # 系统读取，禁止LLM修改
+        &quot;overdue_days&quot;: 15,
+        &quot;occupation&quot;: &quot;销售&quot;,
+    },
+    &quot;messages&quot;: [...],
+}
+</code></pre>
+<p><strong>为什么重要</strong>：如果让<span class="pangu"></span>LLM<span class="pangu"></span>自己&quot;记住&quot;金额，它会幻觉。把<span class="pangu"></span>facts<span class="pangu"></span>放在独立字段，并在<span class="pangu"></span>prompt<span class="pangu"></span>中明确要求&quot;只能使用<span class="pangu"></span>facts<span class="pangu"></span>中的金额&quot;，可以显著降低幻觉率。</p>
+<h3>1.2 信息压缩（Compaction）</h3>
+<p>简单丢弃旧消息（FIFO）会丢失关键信息。比如用户上周承诺&quot;周五还&quot;，如果被新的对话挤掉，Agent<span class="pangu"></span>就不知道这个承诺了。</p>
+<p><strong>做法</strong>：当对话历史超过<span class="pangu"></span>30<span class="pangu"></span>条时，保留最近<span class="pangu"></span>5<span class="pangu"></span>轮完整对话，更早的内容用<span class="pangu"></span>LLM<span class="pangu"></span>压缩为&quot;关键事实摘要&quot;。</p>
+<pre><code class="language-python">class ConversationContext:
+    messages: list[Message]
+    summary: str | None      # 压缩后的摘要
+
+    def compact(self):
+        if len(self.messages) &lt;= 30:
+            return
+        recent = self.messages[-5:]
+        older = self.messages[:-5]
+        self.summary = await llm.summarize(
+            older,
+            instruction=&quot;提取还款承诺、争议、危机事件、协商方案等关键事实&quot;
+        )
+        self.messages = recent
+</code></pre>
+<p><strong>压缩后的<span class="pangu"></span>Context<span class="pangu"></span>结构</strong>：</p>
+<pre><code>System prompt
+  ↓
+Facts（系统注入的账单金额、逾期天数）
+  ↓
+Summary（压缩后的历史关键事实）
+  ↓
+Recent messages（最近5轮完整对话）
+  ↓
+Current user message
+  ↓
+输出格式要求
+</code></pre>
+<p>这样，关键事实不会因为对话轮数增加而丢失，同时<span class="pangu"></span>prompt<span class="pangu"></span>长度可控。</p>
 <h2>二、职责分离：不要让一个<span class="pangu"></span>prompt<span class="pangu"></span>做所有事</h2>
 <p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>200+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
 <ul>
@@ -2776,6 +3149,48 @@ class AgentSession:
 <td>安全审查是独立关注点</td>
 </tr>
 </tbody></table><p><strong>好处</strong>：隔离故障、独立迭代、降低长度（减少<span class="pangu"></span>Lost in the Middle）。</p>
+<h2>三、推理透明：让<span class="pangu"></span>Agent&quot;说出&quot;它在想什么</h2>
+<h3>3.1 CoT：给模型思考时间</h3>
+<p>Decider<span class="pangu"></span>的<span class="pangu"></span>prompt<span class="pangu"></span>中加入了思考步骤，要求模型输出<span class="pangu"></span>thinking<span class="pangu"></span>字段：</p>
+<pre><code>思考流程（每轮必须执行）：
+1. 用户消息的关键词是什么？
+2. 历史意图是什么？
+3. 用户当前状态是什么？
+4. 最匹配的意图是什么？
+5. 置信度如何？
+
+输出JSON：{&quot;intent&quot;: &quot;...&quot;, &quot;confidence&quot;: 0.95, &quot;thinking&quot;: &quot;...&quot;}
+</code></pre>
+<p><strong>效果</strong>：加了<span class="pangu"></span>thinking<span class="pangu"></span>字段后，意图识别的准确率有明显提升。模型被迫&quot;说出&quot;自己的推理过程，减少了直觉性误判。</p>
+<p><strong>代价</strong>：增加了延迟（多了几十个输出<span class="pangu"></span>token），生产中需要权衡。</p>
+<h3>3.2 结构化输出：JSON<span class="pangu"></span>比自由文本更可靠</h3>
+<p>所有关键组件都要求模型输出结构化<span class="pangu"></span>JSON：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>输出格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decider</td>
+<td><code>{&quot;intent&quot;: &quot;...&quot;, &quot;confidence&quot;: 0.95}</code></td>
+</tr>
+<tr>
+<td>Skill action</td>
+<td><code>{&quot;type&quot;: &quot;tool_call&quot;, &quot;name&quot;: &quot;...&quot;, &quot;params&quot;: {}}</code></td>
+</tr>
+<tr>
+<td>Compliance audit</td>
+<td><code>{&quot;passed&quot;: true, &quot;violations&quot;: [...]}</code></td>
+</tr>
+</tbody></table><p><strong>为什么不用自由文本</strong>：</p>
+<ul>
+<li>自由文本需要复杂的正则提取，容易出错</li>
+<li>JSON<span class="pangu"></span>可以直接解析，下游处理简单</li>
+<li>结构化输出更容易验证和测试</li>
+</ul>
 <h2>四、安全兜底：说错话怎么办</h2>
 <p>催收场景对安全性要求极高。我们采用了三层防御：</p>
 <p><strong>第一层：Harness（代码层，不在<span class="pangu"></span>prompt<span class="pangu"></span>中）</strong></p>
@@ -2794,10 +3209,21 @@ class AgentSession:
 输出JSON：{&quot;passed&quot;: true/false, &quot;violations&quot;: [...]}
 </code></pre>
 <p>三层的关系：代码层拦截确定性违规，prompt<span class="pangu"></span>层约束行为边界，审核层捕获语义违规。</p>
-<p>name: negotiation
+<h2>五、Prompt<span class="pangu"></span>管理：让策略可迭代</h2>
+<p>collect-agent<span class="pangu"></span>的<span class="pangu"></span>Skills<span class="pangu"></span>从<span class="pangu"></span>Markdown<span class="pangu"></span>文件加载：</p>
+<pre><code class="language-markdown">name: negotiation
 description: 用户表示困难，希望延期或分期
 tools: [query_bill, record_promise]
-max_steps: 5</p>
+max_steps: 5
+
+你是协商专家...
+</code></pre>
+<p><strong>好处</strong>：</p>
+<ul>
+<li><strong>版本可控</strong>：git<span class="pangu"></span>管理，每次修改有记录</li>
+<li><strong>领域专家可参与</strong>：业务人员可以直接编辑<span class="pangu"></span>Markdown</li>
+<li><strong>运行时切换</strong>：不需要重启服务，可以动态加载新策略</li>
+</ul>
 <h2>关联</h2>
 <ul>
 <li>[[03-agent-architecture]] — Agent<span class="pangu"></span>架构设计与实现</li>

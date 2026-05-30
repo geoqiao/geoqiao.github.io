@@ -89,10 +89,56 @@
     </section>
 
     <div class="post-content">
-        <h1>手搓一个催收<span class="pangu"></span>Agent（四）：提示词工程的<span class="pangu"></span>7<span class="pangu"></span>个实践</h1>
-<blockquote>
+        <blockquote>
 <p><strong>一句话结论</strong>：提示词工程不是&quot;调措辞&quot;，而是信息架构——把正确的信息放在正确的位置，让模型在约束条件下做出可预期的决策。</p>
 </blockquote>
+<h2>一、信息架构：Agent<span class="pangu"></span>必须知道什么，不能编造什么</h2>
+<h3>1.1 facts<span class="pangu"></span>与推理分离</h3>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>必须知道用户的账单金额、逾期天数，但不能让<span class="pangu"></span>LLM<span class="pangu"></span>自己编造。</p>
+<p>我们的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
+<pre><code class="language-python">context = {
+    &quot;user_message&quot;: &quot;我现在没钱&quot;,
+    &quot;facts&quot;: {
+        &quot;due_amount&quot;: 2580,        # 系统读取，禁止LLM修改
+        &quot;overdue_days&quot;: 15,
+        &quot;occupation&quot;: &quot;销售&quot;,
+    },
+    &quot;messages&quot;: [...],
+}
+</code></pre>
+<p><strong>为什么重要</strong>：如果让<span class="pangu"></span>LLM<span class="pangu"></span>自己&quot;记住&quot;金额，它会幻觉。把<span class="pangu"></span>facts<span class="pangu"></span>放在独立字段，并在<span class="pangu"></span>prompt<span class="pangu"></span>中明确要求&quot;只能使用<span class="pangu"></span>facts<span class="pangu"></span>中的金额&quot;，可以显著降低幻觉率。</p>
+<h3>1.2 信息压缩（Compaction）</h3>
+<p>简单丢弃旧消息（FIFO）会丢失关键信息。比如用户上周承诺&quot;周五还&quot;，如果被新的对话挤掉，Agent<span class="pangu"></span>就不知道这个承诺了。</p>
+<p><strong>做法</strong>：当对话历史超过<span class="pangu"></span>30<span class="pangu"></span>条时，保留最近<span class="pangu"></span>5<span class="pangu"></span>轮完整对话，更早的内容用<span class="pangu"></span>LLM<span class="pangu"></span>压缩为&quot;关键事实摘要&quot;。</p>
+<pre><code class="language-python">class ConversationContext:
+    messages: list[Message]
+    summary: str | None      # 压缩后的摘要
+
+    def compact(self):
+        if len(self.messages) &lt;= 30:
+            return
+        recent = self.messages[-5:]
+        older = self.messages[:-5]
+        self.summary = await llm.summarize(
+            older,
+            instruction=&quot;提取还款承诺、争议、危机事件、协商方案等关键事实&quot;
+        )
+        self.messages = recent
+</code></pre>
+<p><strong>压缩后的<span class="pangu"></span>Context<span class="pangu"></span>结构</strong>：</p>
+<pre><code>System prompt
+  ↓
+Facts（系统注入的账单金额、逾期天数）
+  ↓
+Summary（压缩后的历史关键事实）
+  ↓
+Recent messages（最近5轮完整对话）
+  ↓
+Current user message
+  ↓
+输出格式要求
+</code></pre>
+<p>这样，关键事实不会因为对话轮数增加而丢失，同时<span class="pangu"></span>prompt<span class="pangu"></span>长度可控。</p>
 <h2>二、职责分离：不要让一个<span class="pangu"></span>prompt<span class="pangu"></span>做所有事</h2>
 <p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>200+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
 <ul>
@@ -126,6 +172,48 @@
 <td>安全审查是独立关注点</td>
 </tr>
 </tbody></table><p><strong>好处</strong>：隔离故障、独立迭代、降低长度（减少<span class="pangu"></span>Lost in the Middle）。</p>
+<h2>三、推理透明：让<span class="pangu"></span>Agent&quot;说出&quot;它在想什么</h2>
+<h3>3.1 CoT：给模型思考时间</h3>
+<p>Decider<span class="pangu"></span>的<span class="pangu"></span>prompt<span class="pangu"></span>中加入了思考步骤，要求模型输出<span class="pangu"></span>thinking<span class="pangu"></span>字段：</p>
+<pre><code>思考流程（每轮必须执行）：
+1. 用户消息的关键词是什么？
+2. 历史意图是什么？
+3. 用户当前状态是什么？
+4. 最匹配的意图是什么？
+5. 置信度如何？
+
+输出JSON：{&quot;intent&quot;: &quot;...&quot;, &quot;confidence&quot;: 0.95, &quot;thinking&quot;: &quot;...&quot;}
+</code></pre>
+<p><strong>效果</strong>：加了<span class="pangu"></span>thinking<span class="pangu"></span>字段后，意图识别的准确率有明显提升。模型被迫&quot;说出&quot;自己的推理过程，减少了直觉性误判。</p>
+<p><strong>代价</strong>：增加了延迟（多了几十个输出<span class="pangu"></span>token），生产中需要权衡。</p>
+<h3>3.2 结构化输出：JSON<span class="pangu"></span>比自由文本更可靠</h3>
+<p>所有关键组件都要求模型输出结构化<span class="pangu"></span>JSON：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>输出格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decider</td>
+<td><code>{&quot;intent&quot;: &quot;...&quot;, &quot;confidence&quot;: 0.95}</code></td>
+</tr>
+<tr>
+<td>Skill action</td>
+<td><code>{&quot;type&quot;: &quot;tool_call&quot;, &quot;name&quot;: &quot;...&quot;, &quot;params&quot;: {}}</code></td>
+</tr>
+<tr>
+<td>Compliance audit</td>
+<td><code>{&quot;passed&quot;: true, &quot;violations&quot;: [...]}</code></td>
+</tr>
+</tbody></table><p><strong>为什么不用自由文本</strong>：</p>
+<ul>
+<li>自由文本需要复杂的正则提取，容易出错</li>
+<li>JSON<span class="pangu"></span>可以直接解析，下游处理简单</li>
+<li>结构化输出更容易验证和测试</li>
+</ul>
 <h2>四、安全兜底：说错话怎么办</h2>
 <p>催收场景对安全性要求极高。我们采用了三层防御：</p>
 <p><strong>第一层：Harness（代码层，不在<span class="pangu"></span>prompt<span class="pangu"></span>中）</strong></p>
@@ -144,10 +232,21 @@
 输出JSON：{&quot;passed&quot;: true/false, &quot;violations&quot;: [...]}
 </code></pre>
 <p>三层的关系：代码层拦截确定性违规，prompt<span class="pangu"></span>层约束行为边界，审核层捕获语义违规。</p>
-<p>name: negotiation
+<h2>五、Prompt<span class="pangu"></span>管理：让策略可迭代</h2>
+<p>collect-agent<span class="pangu"></span>的<span class="pangu"></span>Skills<span class="pangu"></span>从<span class="pangu"></span>Markdown<span class="pangu"></span>文件加载：</p>
+<pre><code class="language-markdown">name: negotiation
 description: 用户表示困难，希望延期或分期
 tools: [query_bill, record_promise]
-max_steps: 5</p>
+max_steps: 5
+
+你是协商专家...
+</code></pre>
+<p><strong>好处</strong>：</p>
+<ul>
+<li><strong>版本可控</strong>：git<span class="pangu"></span>管理，每次修改有记录</li>
+<li><strong>领域专家可参与</strong>：业务人员可以直接编辑<span class="pangu"></span>Markdown</li>
+<li><strong>运行时切换</strong>：不需要重启服务，可以动态加载新策略</li>
+</ul>
 <h2>关联</h2>
 <ul>
 <li>[[03-agent-architecture]] — Agent<span class="pangu"></span>架构设计与实现</li>

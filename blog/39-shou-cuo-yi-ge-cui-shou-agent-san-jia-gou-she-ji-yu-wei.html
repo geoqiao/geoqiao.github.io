@@ -89,14 +89,50 @@
     </section>
 
     <div class="post-content">
-        <h1>催收<span class="pangu"></span>Agent<span class="pangu"></span>架构设计与实现</h1>
-<blockquote>
+        <blockquote>
 <p><strong>一句话结论</strong>:催收<span class="pangu"></span>Agent<span class="pangu"></span>就是一个按照固定流程执行任务的<span class="pangu"></span>Agent:查看用户→检查合规→触达→识别意图→加载策略→调用工具。四个组件(Context/Permissions/Decider/Skills/Tools)各负责一个环节。</p>
 </blockquote>
+<h2>一、流程总览</h2>
+<pre><code class="language-mermaid">flowchart LR
+    A[Context&lt;br/&gt;查看用户列表] --&gt; B[Permissions&lt;br/&gt;检查合规]
+    B --&gt; C[Decider&lt;br/&gt;识别意图]
+    C --&gt; D[Skill&lt;br/&gt;选择并执行应对策略]
+    D --&gt; E[Tool&lt;br/&gt;策略中的具体动作]
+</code></pre>
+<p>催收<span class="pangu"></span>Agent<span class="pangu"></span>的核心流程只有四步：</p>
+<table>
+<thead>
+<tr>
+<th>流程环节</th>
+<th>Agent<span class="pangu"></span>组件</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看逾期用户列表</td>
+<td><strong>Context</strong></td>
+<td>加载用户画像、历史对话、系统数据</td>
+</tr>
+<tr>
+<td>检查能否触达</td>
+<td><strong>Permissions</strong></td>
+<td>检查时间、频次、DNC、敏感职业</td>
+</tr>
+<tr>
+<td>识别用户意图</td>
+<td><strong>Decider</strong></td>
+<td>根据上下文判断用户属于哪种意图</td>
+</tr>
+<tr>
+<td>选择并执行应对策略</td>
+<td><strong>Skill + Tool</strong></td>
+<td>加载对应<span class="pangu"></span>Skill<span class="pangu"></span>策略，执行时调用<span class="pangu"></span>Tool</td>
+</tr>
+</tbody></table><p><strong>关键理解</strong>：Skill 和 Tool 不是并列关系。Skill 是&quot;策略模板&quot;（协商/安抚/争议处理），Tool 是策略执行时的&quot;具体动作&quot;（查账单、发链接、记录承诺）。Agent 先根据意图选择 Skill，再在 Skill 的 ReAct 循环中决定调用哪些 Tool。</p>
 <h2>二、Context:查看用户列表</h2>
 <p>Agent<span class="pangu"></span>的第一步:加载所有需要的信息。</p>
-<pre><code class="language-python"># core/models.py
-class UserState:
+<pre><code class="language-python">class UserState:
     user_id: str
     profile: UserProfile      # 金额、逾期天数、职业
     conversation: ConversationContext  # 最近50条对话
@@ -109,8 +145,7 @@ class Context:
     messages: list[Message]    # 对话历史
     session_state: str         # idle/interacting/stopped
 </code></pre>
-<pre><code class="language-python"># 伪代码:构建Context
-def build_context(user_id):
+<pre><code class="language-python">def build_context(user_id):
     state = db.load(user_id)
     return Context(
         facts={
@@ -121,6 +156,31 @@ def build_context(user_id):
     )
 </code></pre>
 <p><strong>关键设计</strong>:金额和逾期天数从系统读取,作为<code>facts</code>注入,LLM<span class="pangu"></span>不能编造。</p>
+<h2>三、Permissions:检查合规</h2>
+<p>Agent<span class="pangu"></span>的第二步:在触达前检查硬规则。</p>
+<pre><code class="language-python">class Harness:
+    def check(self, event, state) -&gt; HarnessResult:
+        # 状态拦截
+        if state.dnc or state.session_state == &quot;stopped&quot;:
+            return block(&quot;user_stopped&quot;)
+
+        # 时间窗口
+        if not compliance.is_within_valid_hours():
+            return block(&quot;outside_valid_hours&quot;)
+
+        # 频次限制
+        if quota.exceeded(state.user_id):
+            return block(&quot;quota_exceeded&quot;)
+
+        # STOP/CRISIS关键词快速路径
+        if stop_keyword in event.message:
+            return force_intent(&quot;STOP&quot;)
+
+        # 敏感职业标记
+        if state.profile.is_sensitive:
+            return mark_sensitive()
+</code></pre>
+<p><strong>关键设计</strong>:所有检查在<strong>LLM<span class="pangu"></span>调用前</strong>完成。不通过直接返回,不进后续流程。</p>
 <h2>四、Decider：触达+识别意图</h2>
 <p>Agent<span class="pangu"></span>的第三步：执行触达，识别用户意图。</p>
 <h3>意图来源不只是用户说了什么</h3>
@@ -165,8 +225,7 @@ def build_context(user_id):
 <td>NEGOTIATION（违约跟进）</td>
 </tr>
 </tbody></table><p>这意味着 Decider 的输入是整个 Context，而不仅是 <code>user_message</code>。</p>
-<pre><code class="language-python"># decider.py
-class Decider:
+<pre><code class="language-python">class Decider:
     async def decide(self, context: Context) -&gt; Decision:
         prompt = f&quot;&quot;&quot;
         用户消息：{context.user_message or &quot;（无输入）&quot;}
@@ -230,13 +289,158 @@ class Decider:
 <td>UNKNOWN</td>
 <td>troubleshoot</td>
 </tr>
-</tbody></table><p>name: negotiation
+</tbody></table><h2>五、Skill + Tool：选择并执行应对策略</h2>
+<p>Agent<span class="pangu"></span>的第四步：根据意图选择 Skill 策略，在策略执行中调用 Tool。</p>
+<h3>意图 → Skill 映射</h3>
+<p>识别出意图后，直接映射到对应的 Skill：</p>
+<table>
+<thead>
+<tr>
+<th>意图</th>
+<th>Skill</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COOPERATION</td>
+<td>payment_guidance</td>
+<td>引导还款</td>
+</tr>
+<tr>
+<td>NEGOTIATION</td>
+<td>negotiation</td>
+<td>协商方案</td>
+</tr>
+<tr>
+<td>AVOIDANCE</td>
+<td>reengage</td>
+<td>沉默追踪</td>
+</tr>
+<tr>
+<td>DISPUTE</td>
+<td>dispute</td>
+<td>核实账单</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>stop</td>
+<td>确认退出</td>
+</tr>
+<tr>
+<td>CRISIS</td>
+<td>crisis</td>
+<td>危机响应</td>
+</tr>
+<tr>
+<td>REFUSE</td>
+<td>troubleshoot</td>
+<td>兜底处理</td>
+</tr>
+</tbody></table><p>这是规则映射，不需要 LLM。<code>IntentClassifier</code> 输出意图，<code>SkillSelector</code> 查表即可。</p>
+<h3>Skill：策略模板</h3>
+<p>Skill 是一个独立的策略文件，定义了&quot;面对这种意图时，应该怎么处理&quot;。</p>
+<pre><code class="language-markdown">name: negotiation
 description: 用户表示困难，希望延期或分期
 tools: [query_bill, record_promise, send_payment_link]
-max_steps: 5</p>
-<h2>六、完整串联:AgentSession</h2>
-<pre><code class="language-python"># agent/session.py
-class AgentSession:
+max_steps: 5
+
+你是协商专家。用户表示还款困难，你的目标是：
+
+1. 了解困难原因
+2. 提供可行方案（延期7天/14天、分3期）
+3. 记录用户的还款承诺
+
+禁止：施压、威胁、承诺超出权限的减免
+</code></pre>
+<p><strong>Skill 的关键设计</strong>：</p>
+<ul>
+<li><code>tools</code>：白名单，这个 Skill 只能调用这些 Tool</li>
+<li><code>max_steps</code>：防止无限循环</li>
+<li><code>content</code>：策略指令，告诉 LLM 应该怎么谈判</li>
+</ul>
+<h3>Tool：策略中的具体动作</h3>
+<p>Tool 是 Skill 执行时的&quot;手脚&quot;。Skill 的 ReAct 循环中，LLM 决定什么时候调用什么 Tool。</p>
+<pre><code class="language-python">@tool(&quot;query_bill&quot;, &quot;查询用户账单&quot;)
+async def query_bill(user_id: str, store) -&gt; dict:
+    state = store.load(user_id)
+    return {
+        &quot;amount_due&quot;: state.profile.amount_due,
+        &quot;overdue_days&quot;: state.profile.overdue_days,
+    }
+
+@tool(&quot;send_payment_link&quot;, &quot;发送还款链接&quot;)
+async def send_payment_link(user_id: str, amount: float) -&gt; dict:
+    link = generate_link(user_id, amount)
+    await send_sms(user_id, f&quot;还款链接：{link}&quot;)
+    return {&quot;sent&quot;: True, &quot;link&quot;: link}
+
+@tool(&quot;record_promise&quot;, &quot;记录还款承诺&quot;)
+async def record_promise(user_id: str, amount: float, date: str, store) -&gt; dict:
+    store.save_promise(user_id, amount, date)
+    return {&quot;recorded&quot;: True}
+</code></pre>
+<h3>ReAct 循环：Skill 执行时调用 Tool</h3>
+<pre><code class="language-python">class SkillExecutor:
+    async def execute(self, skill, context, state) -&gt; SkillResult:
+        messages = build_messages(skill, context)
+
+        for step in range(skill.max_steps):
+            response = await llm.chat(messages)
+            action = parse_action(response)
+
+            if action.type == &quot;reply&quot;:
+                return SkillResult(response_text=action.text)
+
+            elif action.type == &quot;tool_call&quot;:
+                # 只能调用Skill白名单中的工具
+                if action.name not in skill.tools:
+                    return error(&quot;tool_not_allowed&quot;)
+
+                result = await call_tool(action.name, action.params, state)
+                messages.append(f&quot;Tool result: {result}&quot;)
+
+        return error(&quot;max_steps_exceeded&quot;)
+</code></pre>
+<p><strong>一个完整的 ReAct 示例</strong>：</p>
+<pre><code>Step 1: LLM 思考 → &quot;用户说没钱，我需要先查账单&quot;
+Step 1: LLM 调用 tool → query_bill(user_id=&quot;U-8842&quot;)
+Step 1: Tool 返回 → {&quot;amount_due&quot;: 2580, &quot;overdue_days&quot;: 15}
+
+Step 2: LLM 思考 → &quot;金额2580，逾期15天。用户说没钱，我提供分期方案&quot;
+Step 2: LLM 回复 → &quot;理解您的困难。您的账单是2580元，可以分3期...&quot;
+</code></pre>
+<h3>Tool 分级</h3>
+<table>
+<thead>
+<tr>
+<th>分级</th>
+<th>工具</th>
+<th>风险</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只读</td>
+<td>query_bill, query_user_history</td>
+<td>无</td>
+<td>查询信息</td>
+</tr>
+<tr>
+<td>扩展</td>
+<td>generate_payment_link, send_payment_link</td>
+<td>低</td>
+<td>发送内容</td>
+</tr>
+<tr>
+<td>写入</td>
+<td>record_promise, escalate_to_cs, add_to_dnc</td>
+<td>高</td>
+<td>修改状态</td>
+</tr>
+</tbody></table><h2>六、完整串联:AgentSession</h2>
+<pre><code class="language-python">class AgentSession:
     async def handle_event(self, event: Event) -&gt; SkillResult:
         # 1. 构建Context(查看用户列表)
         context = build_context(event.user_id)
@@ -265,6 +469,13 @@ class AgentSession:
         self.save_state()
         return result
 </code></pre>
+<h2>关联</h2>
+<ul>
+<li>[[02-collector-workflow]] - 上一篇:催收员的真实工作流程</li>
+<li>[[chatbot-exploration]] - 催收<span class="pangu"></span>chatbot<span class="pangu"></span>项目设计文档</li>
+</ul>
+<h2>Tags</h2>
+<p>#collection-agent #ai-engineering #agent #architecture</p>
 
     </div>
 </article>
