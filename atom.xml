@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-05-31T06:53:47.898973+00:00</updated>
+  <updated>2026-05-31T06:54:33.316786+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -3065,14 +3065,14 @@ Step 2: LLM 回复 → &quot;理解您的困难。您的账单是2580元，可�
   <entry>
     <id>https://geoqiao.github.io/blog/40-shou-cuo-yi-ge-cui-shou-agent-si-ti-shi-ci-gong-cheng-de.html</id>
     <title>手搓一个催收Agent（四）：提示词工程的7个实践</title>
-    <updated>2026-05-30T16:06:24+00:00</updated>
+    <updated>2026-05-31T06:54:26+00:00</updated>
     <content type="html"><![CDATA[<blockquote>
 <p><strong>一句话结论</strong>：提示词工程不是&quot;调措辞&quot;，而是信息架构——把正确的信息放在正确的位置，让模型在约束条件下做出可预期的决策。</p>
 </blockquote>
 <h2>一、信息架构：Agent<span class="pangu"></span>必须知道什么，不能编造什么</h2>
 <h3>1.1 facts<span class="pangu"></span>与推理分离</h3>
 <p>催收<span class="pangu"></span>Agent<span class="pangu"></span>必须知道用户的账单金额、逾期天数，但不能让<span class="pangu"></span>LLM<span class="pangu"></span>自己编造。</p>
-<p>我们的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
+<p>我的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
 <pre><code class="language-python">context = {
     &quot;user_message&quot;: &quot;我现在没钱&quot;,
     &quot;facts&quot;: {
@@ -3117,7 +3117,7 @@ Current user message
 </code></pre>
 <p>这样，关键事实不会因为对话轮数增加而丢失，同时<span class="pangu"></span>prompt<span class="pangu"></span>长度可控。</p>
 <h2>二、职责分离：不要让一个<span class="pangu"></span>prompt<span class="pangu"></span>做所有事</h2>
-<p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>200+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
+<p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>4000+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
 <ul>
 <li>意图识别准确率受<span class="pangu"></span>Skill<span class="pangu"></span>描述干扰</li>
 <li>改一句<span class="pangu"></span>Skill<span class="pangu"></span>描述，意图识别也受影响</li>

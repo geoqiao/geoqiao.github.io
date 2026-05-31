@@ -95,7 +95,7 @@
 <h2>一、信息架构：Agent<span class="pangu"></span>必须知道什么，不能编造什么</h2>
 <h3>1.1 facts<span class="pangu"></span>与推理分离</h3>
 <p>催收<span class="pangu"></span>Agent<span class="pangu"></span>必须知道用户的账单金额、逾期天数，但不能让<span class="pangu"></span>LLM<span class="pangu"></span>自己编造。</p>
-<p>我们的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
+<p>我的做法是：<strong>把事实注入为结构化数据，与推理指令严格分离</strong>。</p>
 <pre><code class="language-python">context = {
     &quot;user_message&quot;: &quot;我现在没钱&quot;,
     &quot;facts&quot;: {
@@ -140,7 +140,7 @@ Current user message
 </code></pre>
 <p>这样，关键事实不会因为对话轮数增加而丢失，同时<span class="pangu"></span>prompt<span class="pangu"></span>长度可控。</p>
 <h2>二、职责分离：不要让一个<span class="pangu"></span>prompt<span class="pangu"></span>做所有事</h2>
-<p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>200+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
+<p>collect-agent<span class="pangu"></span>最初把意图识别和<span class="pangu"></span>Skill<span class="pangu"></span>选择放在同一个<span class="pangu"></span>4000+行的<span class="pangu"></span>system prompt<span class="pangu"></span>里。结果：</p>
 <ul>
 <li>意图识别准确率受<span class="pangu"></span>Skill<span class="pangu"></span>描述干扰</li>
 <li>改一句<span class="pangu"></span>Skill<span class="pangu"></span>描述，意图识别也受影响</li>
