@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-05-31T06:54:47.903910+00:00</updated>
+  <updated>2026-08-01T18:50:48.251929+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -3234,5 +3234,122 @@ max_steps: 5
 ]]></content>
     <link href="https://geoqiao.github.io/blog/40-shou-cuo-yi-ge-cui-shou-agent-si-ti-shi-ci-gong-cheng-de.html"/>
     <published>2026-05-30T15:40:25+00:00</published>
+  </entry>
+  <entry>
+    <id>https://geoqiao.github.io/blog/41-what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin.html</id>
+    <title>What's on My Pi Agent?：把 90% 的 Codex Desktop 装进终端</title>
+    <updated>2026-08-01T18:50:25+00:00</updated>
+    <content type="html"><![CDATA[<p>Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。</p>
+<p>所以我使用<span class="pangu"></span>pi + Herdr + neovim 打造了一个终端中的 codex desktop</p>
+<p>![[pi-herdr-neovim-workspace.png]]</p>
+<ul>
+<li><strong>Herdr</strong> 管工作台：workspace、tab、pane、布局、多 Agent 侧边栏。</li>
+<li><strong>Pi</strong> 管 Agent：模型循环、工具调用、会话、扩展。</li>
+<li><strong>Neovim</strong> 管代码：浏览、编辑、Buffer，并通过 <code>pi-nvim</code> 把上下文喂给 Pi。</li>
+</ul>
+<p>Codex Desktop 一手包办的几件事，在这里被拆给了更适合终端的零件。</p>
+<h2>Trace</h2>
+<pre><code class="language-mermaid">flowchart TD
+    A[&quot;打开项目&quot;] --&gt; B[&quot;切换到 Herdr workspace&quot;]
+    B --&gt; C[&quot;按 prefix+shift+e&quot;]
+    C --&gt; D[&quot;恢复 code tab&lt;br/&gt;50:50 布局&quot;]
+    D --&gt; P[&quot;左侧 pane&lt;br/&gt;Pi&quot;]
+    D --&gt; N[&quot;右侧 pane&lt;br/&gt;Neovim&quot;]
+    B -. &quot;Herdr 侧边栏&quot; .-&gt; S[&quot;查看 workspace 与 Agent 状态&lt;br/&gt;idle · working · blocked · done&quot;]
+    S --&gt; T[&quot;在 pane / tab 间切换长期任务&quot;]
+</code></pre>
+<h3>Editor -&gt;  Neovim</h3>
+<p>右侧 pane 固定放 Neovim，查看、编辑和跳转文件都不用离开终端。需要让 Pi 看代码时，<code>pi-nvim</code> 可以把当前文件、选区或整个 Buffer 直接送到左侧会话，不用复制粘贴，也不用切回 VS Code。</p>
+<h3>Side Chat -&gt; /btw</h3>
+<p><code>/btw</code> 为 Pi 提供独立 Side Chat：它会在 Herdr 中打开一个带工具能力的 pane，并继承当前目录、模型和 thinking level。Side Chat 拥有独立上下文，支持连续追问，不会改动主会话；需要时再用 <code>/btw merge</code> 把结论合并回来。</p>
+<h3>Subagent -&gt; pi-subagents</h3>
+<p><code>pi-subagents</code> 负责把 research、implementation、review 等任务交给独立的子 Agent。启动时可以选择 <code>fresh</code> 或 <code>fork</code> 上下文，也可以为每个 Agent 指定模型和 thinking level，或者让它们在后台并行工作。配合 Herdr skills，还能像在 Codex Desktop 里一样，打开某个 Subagent 的 pane，直接查看它的对话和进度。</p>
+<h3>Goal -&gt; pi-goal</h3>
+<p><code>pi-goal</code> 让 Pi 可以围绕一个目标持续工作，而不是每完成一轮就停下来等下一条提示。任务受阻时会进入 <code>blocked</code>；我也可以随时 <code>/goal pause</code>，之后再用 <code>/goal resume</code> 从原来的目标继续。</p>
+<h3>Web-search &amp; Computer-use</h3>
+<p><code>pi-web-access</code> 负责搜索和读取网页，也能处理 GitHub、PDF 和视频内容；<code>pi-computer-use</code> 负责观察并操作桌面界面，包括定位窗口、点击、输入和滚动。一个解决“找到信息”，另一个解决“替我操作”。</p>
+<h3>Compaction -&gt; pi-codex-compaction</h3>
+<p><code>pi-codex-compaction</code> 在使用 OpenAI Codex 模型时，把原生的上下文压缩能力接进 Pi。Pi 自带的 compaction 在超长任务里经常还是会撞上上下文上限；换成 Codex 的原生 compaction 后，长会话可以继续压缩和恢复，token 也更耐用。</p>
+<h2>PROS &amp; CONS</h2>
+<p>优点很直接：</p>
+<ul>
+<li>风扇不转了。</li>
+<li>token 更耐用了。</li>
+<li>以上所有配置都可以让 AI 完成。</li>
+</ul>
+<p>缺点也很明显：</p>
+<ul>
+<li>无法开箱即用，终端操作和 Neovim 都有使用门槛。</li>
+<li>浏览器和 Computer Use 还比较粗糙，窗口失焦之类的问题也没有完全解决。</li>
+</ul>
+<p>这并不适合想要开箱即用的人。虽然 AI 可以帮忙解决 99% 的配置问题，但日常操作仍然需要适应，与 Desktop App 还有差距。</p>
+<h2>软件与插件链接</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>在这套系统中的用途</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pi</td>
+<td>Agent runtime</td>
+<td>[<a href="https://github.com/earendil-works/pi">GitHub</a>](https://github.com/earendil-works/pi)</td>
+</tr>
+<tr>
+<td>Herdr</td>
+<td>Workspace、布局和多 Agent TUI</td>
+<td>[<a href="https://github.com/ogulcancelik/herdr">GitHub</a>](https://github.com/ogulcancelik/herdr)</td>
+</tr>
+<tr>
+<td>Neovim</td>
+<td>编辑器</td>
+<td>[<a href="https://neovim.io/">官网</a>](https://neovim.io/)</td>
+</tr>
+<tr>
+<td><code>pi-nvim</code></td>
+<td>将 Neovim 上下文发送给 Pi</td>
+<td>[<a href="https://github.com/carderne/pi-nvim">GitHub</a>](https://github.com/carderne/pi-nvim)</td>
+</tr>
+<tr>
+<td><code>pi-web-access</code></td>
+<td>搜索并读取网页内容</td>
+<td>[<a href="https://github.com/nicobailon/pi-web-access">GitHub</a>](https://github.com/nicobailon/pi-web-access)</td>
+</tr>
+<tr>
+<td><code>pi-subagents</code></td>
+<td>任务级 Subagent</td>
+<td>[<a href="https://github.com/nicobailon/pi-subagents">GitHub</a>](https://github.com/nicobailon/pi-subagents)</td>
+</tr>
+<tr>
+<td><code>pi-herdr-btw</code></td>
+<td>独立 Side Chat</td>
+<td>[<a href="https://github.com/oscabriel/pi-herdr-btw">GitHub</a>](https://github.com/oscabriel/pi-herdr-btw)</td>
+</tr>
+<tr>
+<td><code>pi-goal</code></td>
+<td>Goal、continuation 与恢复</td>
+<td>[<a href="https://github.com/kky42/pi-goal">GitHub</a>](https://github.com/kky42/pi-goal)</td>
+</tr>
+<tr>
+<td><code>pi-codex-compaction</code></td>
+<td>接入 Codex 原生 compaction</td>
+<td>[<a href="https://github.com/ogulcancelik/pi-extensions">GitHub</a>](https://github.com/ogulcancelik/pi-extensions)</td>
+</tr>
+<tr>
+<td><code>pi-computer-use</code></td>
+<td>操作桌面应用</td>
+<td>[<a href="https://github.com/injaneity/pi-computer-use">GitHub</a>](https://github.com/injaneity/pi-computer-use)</td>
+</tr>
+<tr>
+<td><code>pi-mcp-adapter</code></td>
+<td>接入 MCP 服务</td>
+<td>[<a href="https://github.com/nicobailon/pi-mcp-adapter">GitHub</a>](https://github.com/nicobailon/pi-mcp-adapter)</td>
+</tr>
+</tbody></table>]]></content>
+    <link href="https://geoqiao.github.io/blog/41-what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin.html"/>
+    <published>2026-08-01T18:50:25+00:00</published>
   </entry>
 </feed>
