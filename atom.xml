@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-08-02T10:01:00.507966+00:00</updated>
+  <updated>2026-08-02T10:03:13.703557+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -11,8 +11,12 @@
   <entry>
     <id>https://geoqiao.github.io/blog/2-excel-xue-xi-jing-yan-fen-xiang.html</id>
     <title>excel 学习经验分享</title>
-    <updated>2026-04-18T12:14:51+00:00</updated>
-    <content type="html"><![CDATA[<h2>描述</h2>
+    <updated>2026-08-02T10:02:53+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: excel-xue-xi-jing-yan-fen-xiang
+description: &quot;描述 1. 这是一个分享个人 excel 经验的文档。&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<h2>描述</h2>
 <ol>
 <li>
 <p>这是一个分享个人 excel 经验的文档。</p>
@@ -69,8 +73,12 @@
   <entry>
     <id>https://geoqiao.github.io/blog/3-with-sql-as-english.html</id>
     <title>with_sql _as_english</title>
-    <updated>2026-04-18T12:18:10+00:00</updated>
-    <content type="html"><![CDATA[<h2>描述</h2>
+    <updated>2026-08-02T10:02:55+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: with-sql-as-english
+description: &quot;描述&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<h2>描述</h2>
 <ol>
 <li>分享自己学习 SQL 的经验。</li>
 <li><code>WITH 临时表名 AS 子查询</code> 是 SQL 中一个常用的语法，这篇分享会介绍这个语法。</li>
@@ -99,8 +107,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/4-guan-yu-li-shi.html</id>
     <title>关于历史</title>
-    <updated>2026-04-18T12:14:50+00:00</updated>
-    <content type="html"><![CDATA[<p>吃饭的时候突然想到，把历史比喻成一个车轮真的是生动形象且具体。</p>
+    <updated>2026-08-02T10:02:58+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: guan-yu-li-shi
+description: &quot;吃饭的时候突然想到，把历史比喻成一个车轮真的是生动形象且具体。&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<p>吃饭的时候突然想到，把历史比喻成一个车轮真的是生动形象且具体。</p>
 <p>在某种角度上来看，这个车轮一直在向前滚动；另一种种角度上，车轮又在不断循环，车轮的材质变化，滚动的速度也不一样。</p>
 <p>一些东西一直再改变，但一些东西一直没变。</p>
 ]]></content>
@@ -110,8 +122,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/5-kong-tiao-bo-xue-li-lun-de-ti-chu.html</id>
     <title>空调剥削理论的提出</title>
-    <updated>2026-04-18T12:14:49+00:00</updated>
-    <content type="html"><![CDATA[<h2>两大基本原理</h2>
+    <updated>2026-08-02T10:03:00+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: kong-diao-bo-xue-li-lun-de-ti-chu
+description: &quot;两大基本原理 首先 ，在开始阐述空调剥削理论之前，先来了解一下这个理论成立的两大基本原理：&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<h2>两大基本原理</h2>
 <p><strong>首先</strong>，在开始阐述空调剥削理论之前，先来了解一下这个理论成立的两大基本原理：</p>
 <p><strong>空调制冷原理</strong>和<strong>能量守恒</strong></p>
 <h3>空调制冷原理</h3>
@@ -151,8 +167,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/6-out-of-the-depth-of-misfortune-comes-bliss.html</id>
     <title>Out of the depth of misfortune comes bliss</title>
-    <updated>2026-04-18T12:14:49+00:00</updated>
-    <content type="html"><![CDATA[<p>大方无隅</p>
+    <updated>2026-08-02T10:03:03+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: out-of-the-depth-of-misfortune-comes-bliss
+description: &quot;大方无隅&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<p>大方无隅</p>
 <p>大器晚成</p>
 <p>大音希声</p>
 <p>大象无形</p>
@@ -178,8 +198,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/7-zong-dei-huo-zhe-ba.html</id>
     <title>总得活着吧？</title>
-    <updated>2026-04-18T12:14:48+00:00</updated>
-    <content type="html"><![CDATA[<p>世俗价值都是禁不起推敲的，推敲下去觉得活着没意义。  </p>
+    <updated>2026-08-02T10:03:05+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: zong-de-huo-zhao-ba
+description: &quot;世俗价值都是禁不起推敲的，推敲下去觉得活着没意义。&quot;
+created_date: &quot;2023-07-15&quot;</h2>
+<p>世俗价值都是禁不起推敲的，推敲下去觉得活着没意义。  </p>
 <p>你越想意义就越痛苦。所以人们只能有两个选择，肉体自杀和哲学自杀。</p>
 <h2>哲学自杀</h2>
 <p>哲学自杀就是不再想这个问题了，老子选择信仰个宗教，伊斯兰或者马克思，或者世俗主义，或者纯粹享乐比谁啪的多，比谁赚得多…总之信个世俗价值的东西。你可以随便吃饭时候问一下同桌人，生活的意义是啥，别人不是笑你就是说想这干嘛，但他们是无法给出答案的。这就是所谓哲学自杀。人如果不愿放弃，继续思考，结果必然面对找不到意义的尴尬，也就是加缪的名词‘荒谬’，很可能走向虚无。</p>
@@ -199,8 +223,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/8-ji-yu-github-issues-de-ge-ren-blog-da-jian.html</id>
     <title>基于 GitHub issues 的个人 blog 搭建</title>
-    <updated>2026-04-18T12:14:48+00:00</updated>
-    <content type="html"><![CDATA[<h2>背景</h2>
+    <updated>2026-08-02T10:03:07+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: ji-yu-github-issues-de-ge-ren-blog-da-jian
+description: &quot;背景 我最近碰到了以下问题： 1. 偶尔想写点东西，想有一个个人 blog 2. 不懂代码：听到部署、买域名、备案、服务器这些词就头疼想逃避 3. 不想花钱：买服务器、域名一年好几百甚至可能上千&quot;
+created_date: &quot;2023-07-18&quot;</h2>
+<h2>背景</h2>
 <p>我最近碰到了以下问题：</p>
 <ol>
 <li>偶尔想写点东西，想有一个个人 blog</li>
@@ -232,8 +260,12 @@ WHERE table1.column1 = &#x27;1&#x27;
   <entry>
     <id>https://geoqiao.github.io/blog/9-what-s-on-my-mac.html</id>
     <title>What's on my Mac</title>
-    <updated>2026-04-18T12:14:47+00:00</updated>
-    <content type="html"><![CDATA[<p>和大多数人一样，拿到一台<span class="pangu"></span>MacBook<span class="pangu"></span>第一件事就是找各种软件，以下是我目前在用的一些。它们的整体使用体验都很不错，且部分软件可以联动形成 workflow ，供大家参考。</p>
+    <updated>2026-08-02T10:03:10+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: what-s-on-my-mac
+description: &quot;和大多数人一样，拿到一台<span class="pangu"></span>MacBook<span class="pangu"></span>第一件事就是找各种软件，以下是我目前在用的一些。它们的整体使用体验都很不错，且部分软件可以联动形成 workflow ，供大家参考。&quot;
+created_date: &quot;2023-07-29&quot;</h2>
+<p>和大多数人一样，拿到一台<span class="pangu"></span>MacBook<span class="pangu"></span>第一件事就是找各种软件，以下是我目前在用的一些。它们的整体使用体验都很不错，且部分软件可以联动形成 workflow ，供大家参考。</p>
 <h2>启动器类- Raycast</h2>
 <p>目前免费的启动器类<span class="pangu"></span>app，可以启动、替代很多软件。自带的窗口管理功能替代 magnet、rectangle 等等窗口管理软件；自带的文件搜索功能替代了访达；还有一系列提升工作效率的插件。不了解的人可以<a href="https://telegra.ph/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%94%A8raycast%E6%9B%BF%E4%BB%A3%E4%BA%86alfred-07-17">参考这里</a>。</p>
 <h2>自动切换输入法- Input Source Pro</h2>
@@ -770,8 +802,12 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <id>https://geoqiao.github.io/blog/1-rye-hao-yong-de-python-bao-guan-li-gong-ju.html</id>
     <title>rye - 好用的Python包管理工具</title>
-    <updated>2026-04-18T12:14:27+00:00</updated>
-    <content type="html"><![CDATA[<p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
+    <updated>2026-08-02T10:02:50+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: rye-hao-yong-de-pythonbao-guan-li-gong-ju
+description: &quot;rye<span class="pangu"></span>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<span class="pangu"></span>Armin Ronacher&quot;
+created_date: &quot;2024-01-06&quot;</h2>
+<p><a href="https://github.com/mitsuhiko/rye">rye</a>是一个 Python 的包管理器，可以更轻松的管理 Python 项目和虚拟环境，作者是流行 web 框架 flask 的作者<a href="https://github.com/mitsuhiko">Armin Ronacher</a></p>
 <p>作为一个刚开始学习 Python 的新手，它解决了我碰到的两个难题：</p>
 <ol>
 <li>使用<code>pip</code>安装包时，经常某些包无法在当前 python 版本安装</li>
