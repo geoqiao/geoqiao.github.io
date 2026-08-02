@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-08-02T10:04:49.631641+00:00</updated>
+  <updated>2026-08-02T11:20:14.045915+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -2421,14 +2421,14 @@ status: draft
   <entry>
     <id>https://geoqiao.github.io/blog/41-what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin.html</id>
     <title>What's on My Pi Agent?：把 90% 的 Codex Desktop 装进终端</title>
-    <updated>2026-08-02T10:04:15+00:00</updated>
+    <updated>2026-08-02T11:19:51+00:00</updated>
     <content type="html"><![CDATA[<hr />
 <h2>slug: what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin-zhong-duan
 description: &quot;Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。&quot;
 created_date: &quot;2026-08-01&quot;</h2>
 <p>Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。</p>
 <p>所以我使用<span class="pangu"></span>pi + Herdr + neovim 打造了一个终端中的 codex desktop</p>
-<p>![[pi-herdr-neovim-workspace.png]]</p>
+<img width="2032" height="1162" alt="Image" src="https://github.com/user-attachments/assets/206b181a-d5df-4f2a-9195-4dda54611db6" />
 <ul>
 <li><strong>Herdr</strong> 管工作台：workspace、tab、pane、布局、多 Agent 侧边栏。</li>
 <li><strong>Pi</strong> 管 Agent：模型循环、工具调用、会话、扩展。</li>
