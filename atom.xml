@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-08-02T10:04:11.706828+00:00</updated>
+  <updated>2026-08-02T10:04:33.786064+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -2250,8 +2250,12 @@ print(f&quot;✓ 已保存 {len(df)} 行到 {output_path}&quot;)
   <entry>
     <id>https://geoqiao.github.io/blog/36-cong-obsidian-dao-bo-ke-wo-ru-he-yong-yi-tiao-ming-ling.html</id>
     <title>从 Obsidian 到博客：我如何用一条命令把笔记变成网站</title>
-    <updated>2026-04-18T12:41:36+00:00</updated>
-    <content type="html"><![CDATA[<h1>从 Obsidian 到博客：我如何用一条命令把笔记变成网站</h1>
+    <updated>2026-08-02T10:04:12+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: cong-obsidian-dao-bo-ke-wo-ru-he-yong-yi-tiao-ming-ling-ba-bi-ji-bian
+description: &quot;从 Obsidian 到博客：我如何用一条命令把笔记变成网站&quot;
+created_date: &quot;2026-04-18&quot;</h2>
+<h1>从 Obsidian 到博客：我如何用一条命令把笔记变成网站</h1>
 <blockquote>
 <p><strong>TL;DR</strong>：我在 Obsidian 里写完文章，对 AI 说&quot;发出去&quot;，博客就自动更新了。</p>
 </blockquote>
@@ -2417,8 +2421,12 @@ status: draft
   <entry>
     <id>https://geoqiao.github.io/blog/41-what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin.html</id>
     <title>What's on My Pi Agent?：把 90% 的 Codex Desktop 装进终端</title>
-    <updated>2026-08-01T18:52:22+00:00</updated>
-    <content type="html"><![CDATA[<p>Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。</p>
+    <updated>2026-08-02T10:04:15+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin-zhong-duan
+description: &quot;Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。&quot;
+created_date: &quot;2026-08-01&quot;</h2>
+<p>Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没有转过的风扇，只要打开<span class="pangu"></span>codex 就转不停。</p>
 <p>所以我使用<span class="pangu"></span>pi + Herdr + neovim 打造了一个终端中的 codex desktop</p>
 <p>![[pi-herdr-neovim-workspace.png]]</p>
 <ul>
