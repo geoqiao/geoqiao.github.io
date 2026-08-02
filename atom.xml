@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-08-02T10:03:13.703557+00:00</updated>
+  <updated>2026-08-02T10:03:32.563163+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -303,8 +303,12 @@ created_date: &quot;2023-07-29&quot;</h2>
   <entry>
     <id>https://geoqiao.github.io/blog/10-shottr-yuan-sheng-qing-qiao-qie-gong-neng-qiang-da-de.html</id>
     <title>Shottr- 原生、轻巧且功能强大的免费macOS截图工具</title>
-    <updated>2026-04-18T12:14:47+00:00</updated>
-    <content type="html"><![CDATA[<p>| <a href="https://shottr.cc/">Shottr<span class="pangu"></span>官网</a></p>
+    <updated>2026-08-02T10:03:12+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: shottr-yuan-sheng-qing-qiao-qie-gong-neng-qiang-da-de-mian-fei-tu-gong
+description: &quot;| Shottr<span class="pangu"></span>官网&quot;
+created_date: &quot;2023-07-29&quot;</h2>
+<p>| <a href="https://shottr.cc/">Shottr<span class="pangu"></span>官网</a></p>
 <ul>
 <li>
 <p><strong>截图</strong>：不得不说，作为截图工具的基础功能，shottr 并没有特别出彩的地方，UI 也谈不上漂亮。但是基础的区域截图、顺序标记都有，操作起来也非常直觉。而且在其他同类<span class="pangu"></span>app<span class="pangu"></span>中要付费的滚动截图功能也是免费的。</p>
@@ -330,8 +334,12 @@ created_date: &quot;2023-07-29&quot;</h2>
   <entry>
     <id>https://geoqiao.github.io/blog/11-python-huan-jing-an-zhuang-anaconda-wei-li.html</id>
     <title>Python环境安装-Anaconda为例</title>
-    <updated>2026-04-18T12:14:46+00:00</updated>
-    <content type="html"><![CDATA[<p>学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。</p>
+    <updated>2026-08-02T10:03:15+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: pythonhuan-jing-an-zhuang-anacondawei-li
+description: &quot;学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。&quot;
+created_date: &quot;2023-07-30&quot;</h2>
+<p>学习 Python 第一步就是需要安装一个 Python 环境，这可劝退了大部分人。</p>
 <h2>安装 Python 环境的几种传统方式</h2>
 <ol>
 <li>系统自带，直接用系统的。比如 macOS 一般自带 Python3。</li>
@@ -374,8 +382,12 @@ created_date: &quot;2023-07-29&quot;</h2>
   <entry>
     <id>https://geoqiao.github.io/blog/12-zhong-qi-qing-yong-obsidian.html</id>
     <title>重器轻用-Obsidian</title>
-    <updated>2026-04-18T12:14:46+00:00</updated>
-    <content type="html"><![CDATA[<h2>什么是 Obsidian</h2>
+    <updated>2026-08-02T10:03:17+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: zhong-qi-qing-yong-obsidian
+description: &quot;什么是 Obsidian&quot;
+created_date: &quot;2023-08-19&quot;</h2>
+<h2>什么是 Obsidian</h2>
 <p>Obsidian 是一个个人知识管理和笔记应用程序，它使用<strong>Markdown</strong>语法来编写和格式化笔记，帮助用户组织、链接和探索知识。它支持<strong>双向链接</strong>、标签、搜索和<strong>插件扩展</strong>，并且完全本地化存储，让用户轻松构建和管理一个互相关联的知识网络。</p>
 <p>总结下来三个优点：</p>
 <ol>
@@ -416,8 +428,12 @@ created_date: &quot;2023-07-29&quot;</h2>
   <entry>
     <id>https://geoqiao.github.io/blog/13-wo-de-di-yi-ge-wan-zheng-de-ji-qi-xue-xi-xiang-mu.html</id>
     <title>我的第一个完整的机器学习项目-Titanic总结</title>
-    <updated>2026-04-18T12:14:45+00:00</updated>
-    <content type="html"><![CDATA[<h2>背景</h2>
+    <updated>2026-08-02T10:03:20+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: wo-de-di-yi-ge-wan-zheng-de-ji-qi-xue-xi-xiang-mu-titaniczong-jie
+description: &quot;背景 最近一直在学习<span class="pangu"></span>Python，尝试使用<span class="pangu"></span>Python<span class="pangu"></span>解决一些工作上的问题。这里记录参加这次比赛的心得总结，并会给出我的代码示例(rank：top16%)&quot;
+created_date: &quot;2023-08-31&quot;</h2>
+<h2>背景</h2>
 <p>最近一直在学习<span class="pangu"></span>Python，尝试使用<span class="pangu"></span>Python<span class="pangu"></span>解决一些工作上的问题。这里记录参加这次比赛的心得总结，并会给出我的<a href="https://github.com/geoqiao/Python_DA_100_day/blob/main/kaggle_competition/titanic.py">代码示例(rank：top16%)</a></p>
 <p>Titanic<span class="pangu"></span>是一个机器学习的入门级分类问题的比赛，数据集记录了<span class="pangu"></span>titanic<span class="pangu"></span>乘客的一些信息如性别、票价、船舱等级等信息。数据集被分成<span class="pangu"></span>train_data 和 test_data<span class="pangu"></span>两部分。参赛者需要根据<span class="pangu"></span>train_data<span class="pangu"></span>的数据信息，利用模型对数据集进行学习，并且预测<span class="pangu"></span>test_data<span class="pangu"></span>中乘客是否最终幸存。</p>
 <p>titanic<span class="pangu"></span>数据集的优势是：</p>
@@ -474,8 +490,12 @@ b.快且效果好，相对与其他模型需要适当调整参数来说，xgboos
   <entry>
     <id>https://geoqiao.github.io/blog/14-coke-machine-challenge.html</id>
     <title>Coke Machine Challenge </title>
-    <updated>2026-04-18T12:14:30+00:00</updated>
-    <content type="html"><![CDATA[<h2>什么是 Coke Machine</h2>
+    <updated>2026-08-02T10:03:22+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: coke-machine-challenge
+description: &quot;什么是 Coke Machine&quot;
+created_date: &quot;2023-09-03&quot;</h2>
+<h2>什么是 Coke Machine</h2>
 <p>Coke Machine 是<a href="https://cs50.harvard.edu/python/2022/">CS50P</a>课程中 loop 章节的其中一个课后练习，这个课后练习需要使用 Python 语言中的 loop 语法实现一个可乐售卖机，具体要求如下：</p>
 <blockquote>
 <p>Suppose that a machine sells bottles of Coca-Cola (Coke) for 50 cents and only accepts coins in these denominations: 25 cents, 10 cents, and 5 cents.</p>
@@ -562,8 +582,12 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <id>https://geoqiao.github.io/blog/15-zong-you-yi-xie-app-zhi-neng-windows-yong.html</id>
     <title>总有一些 app 只能 Windows 用</title>
-    <updated>2026-04-18T12:14:30+00:00</updated>
-    <content type="html"><![CDATA[<p>总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。</p>
+    <updated>2026-08-02T10:03:25+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: zong-you-yi-xie-app-zhi-neng-windows-yong
+description: &quot;总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。&quot;
+created_date: &quot;2023-09-24&quot;</h2>
+<p>总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。</p>
 <h2>结论</h2>
 <ol>
 <li>我最终选择了 VMware</li>
@@ -596,8 +620,12 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <id>https://geoqiao.github.io/blog/16-vim-don-t-be-afraid.html</id>
     <title>Vim？ Don't be afraid ！</title>
-    <updated>2026-04-18T12:14:29+00:00</updated>
-    <content type="html"><![CDATA[<p>作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。</p>
+    <updated>2026-08-02T10:03:27+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: vim-don-t-be-afraid
+description: &quot;作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。&quot;
+created_date: &quot;2023-10-22&quot;</h2>
+<p>作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。</p>
 <p><code>vim ~/.zshrc</code> 一旦<code>ENTER</code>按下去，就完蛋了。这他妈什么界面？我的终端怎么变成这样，什么命令都无法输入？我该怎么返回上一步？直接退出的话教程就跟不上了怎么办？</p>
 <p>真的是太难了，刚开始不了解终端，不了解每条命令的原理，碰见 Vim 真的让人慌张。</p>
 <p>这个 issue 用来帮助读者克服 Vim 恐惧，再也不用担心搜到的教程含有 Vim 命令。</p>
@@ -630,8 +658,12 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <id>https://geoqiao.github.io/blog/17-app-defaults-2023.html</id>
     <title>App Defaults 2023</title>
-    <updated>2026-04-18T12:14:28+00:00</updated>
-    <content type="html"><![CDATA[<h1>背景</h1>
+    <updated>2026-08-02T10:03:30+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: app-defaults-2023
+description: &quot;背景&quot;
+created_date: &quot;2023-11-11&quot;</h2>
+<h1>背景</h1>
 <p>一段时间之前写过一篇<a href="https://github.com/geoqiao/geoqiao.github.io/issues/9">what's on my mac</a>，推荐过一些自己使用的 Mac 应用。</p>
 <p>最近逛 Twitter 刷到<a href="https://defaults.rknight.me/">App Defaults</a>项目，这是一份 RSS 订阅清单，包含了很多播客作者的 App Defaults 文章，可以直接通过 OPML 文件订阅。</p>
 <p>这次一些软件发生了变化，对之前的文章做一个更新。</p>
