@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://geoqiao.github.io/</id>
   <title>geoqiao's Blog</title>
-  <updated>2026-08-02T10:03:55.721661+00:00</updated>
+  <updated>2026-08-02T10:04:11.706828+00:00</updated>
   <author>
     <name>geoqiao</name>
   </author>
@@ -1557,8 +1557,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/29-2024-nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu.html</id>
     <title>2024年终总结：控制预期，坚持下去</title>
-    <updated>2026-04-18T12:14:02+00:00</updated>
-    <content type="html"><![CDATA[<p>好久不见!</p>
+    <updated>2026-08-02T10:03:56+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: 2024nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu
+description: &quot;好久不见!&quot;
+created_date: &quot;2024-12-31&quot;</h2>
+<p>好久不见!</p>
 <p>已经好久没有更新博客了，甚至很久没有优化博客的代码实现。</p>
 <p>2024 年发生了很多事情，我很感谢它。</p>
 <blockquote>
@@ -1600,8 +1604,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/30-wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha.html</id>
     <title>我喜欢冬天的下午走路去成都的茶馆喝茶</title>
-    <updated>2026-04-18T12:14:01+00:00</updated>
-    <content type="html"><![CDATA[<h2>记录一下</h2>
+    <updated>2026-08-02T10:03:58+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha-guan-he-cha
+description: &quot;记录一下&quot;
+created_date: &quot;2025-02-05&quot;</h2>
+<h2>记录一下</h2>
 <p>今年的计划完成了一大项：带妈妈出去走走。</p>
 <p>正好赶上春节期间表妹结婚，要去成都，所以回家也待不了几天，于是邀请妈妈来上海。</p>
 <p>去了杭州、苏州，也再次逛了一下上海，最后去成都。</p>
@@ -1623,8 +1631,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/31-2025-nian-zhong-zong-jie-guan-zhu-zi-ji.html</id>
     <title>2025年终总结：关注自己</title>
-    <updated>2026-04-18T12:14:01+00:00</updated>
-    <content type="html"><![CDATA[<p>是时候回顾一下了。26<span class="pangu"></span>年已经到来，祝有缘读到这篇的朋友新年快乐！</p>
+    <updated>2026-08-02T10:04:01+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: 2025nian-zhong-zong-jie-guan-zhu-zi-ji
+description: &quot;是时候回顾一下了。26<span class="pangu"></span>年已经到来，祝有缘读到这篇的朋友新年快乐！&quot;
+created_date: &quot;2026-02-21&quot;</h2>
+<p>是时候回顾一下了。26<span class="pangu"></span>年已经到来，祝有缘读到这篇的朋友新年快乐！</p>
 <h2>25<span class="pangu"></span>年待办进度</h2>
 <p>25<span class="pangu"></span>年的待办事项基本完成</p>
 <ul>
@@ -1710,8 +1722,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/32-vibe-coding-shi-zhan-hou-gan-github-blog-with-trae.html</id>
     <title>Vibe Coding 实战后感 - github_blog with Trae</title>
-    <updated>2026-04-18T12:18:08+00:00</updated>
-    <content type="html"><![CDATA[<h2>TL:DR</h2>
+    <updated>2026-08-02T10:04:03+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: vibe-coding-shi-zhan-hou-gan-github-blog-with-trae
+description: &quot;TL:DR&quot;
+created_date: &quot;2026-03-21&quot;</h2>
+<h2>TL:DR</h2>
 <p>我使用 Trae IDE 对我的 github_blog 项目做了一些迭代。与之前不同的是，这次完全<code>vibe coding</code>，没有手写一行代码。</p>
 <blockquote>
 <p>也许以后真的只需要自然语言编程，设置好明确的准出条件，剩下的就完全交给 AI 去做就好了。</p>
@@ -1766,8 +1782,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/34-bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de.html</id>
     <title>不懂Git、不会前端，一个文科生的GitHub Blog</title>
-    <updated>2026-04-18T12:14:00+00:00</updated>
-    <content type="html"><![CDATA[<blockquote>
+    <updated>2026-08-02T10:04:06+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de-github-blog
+description: &quot;“ People Die, but Long Live GitHub ” [gitblog]&quot;
+created_date: &quot;2026-04-05&quot;</h2>
+<blockquote>
 <p>“<strong>People Die, but Long Live GitHub</strong>” -- [<a href="https://github.com/yihong0618/gitblog">gitblog</a>]</p>
 </blockquote>
 <h1>Escaping 🚀</h1>
@@ -1871,8 +1891,12 @@ ollama run qwen2.5-coder:7b # 安装 qwen2.5-coder:7b
   <entry>
     <id>https://geoqiao.github.io/blog/35-cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen.html</id>
     <title>从 Superpowers 学习高质量 AI 协作：一份给策略分析师的 Claude Code 指南</title>
-    <updated>2026-04-18T12:13:26+00:00</updated>
-    <content type="html"><![CDATA[<h2>一、Superpowers 简介</h2>
+    <updated>2026-08-02T10:04:09+00:00</updated>
+    <content type="html"><![CDATA[<hr />
+<h2>slug: cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen-gei-ce-lue-fen
+description: &quot;一、Superpowers 简介&quot;
+created_date: &quot;2026-04-18&quot;</h2>
+<h2>一、Superpowers 简介</h2>
 <p><strong><a href="https://github.com/obra/superpowers">obra/superpowers</a></strong> 是由 Jesse Vincent 与 Prime Radiant 开发的 <strong>agentic skills framework</strong>。它不是传统代码库，而是一套嵌入 Claude Code、Cursor、Codex、Gemini CLI 等工具的<strong>软件开发方法论</strong>。</p>
 <p>核心机制：<strong>14 个可组合 skill</strong>，在任务启动时按关键词自动触发，强制 AI 遵循&quot;先思考、再规划、后执行、最后验证&quot;的完整闭环。</p>
 <table>
