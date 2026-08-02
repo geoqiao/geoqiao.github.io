@@ -63,42 +63,42 @@
   
   <url>
     <loc>https://geoqiao.github.io/blog/28-pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/27-python-huan-jing-pei-zhi-cong-ling-kai-shi-uv-pdm-he.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/26-ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/25-bu-yao-jiu-jie-le-zai-pandas-zhong-shu-ju-shai-xuan-jiu.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/24-wei-github-pages-ge-ren-bo-ke-tian-jia-yaml-pei-zhi-gong.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/23-uv-github-20k-star-de-zhong-ji-python-xiang-mu-guan-li.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/21-shi-yong-python-he-github-pages-da-jian-ge-ren-bo-ke.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/blog/20-ji-yu-fastapi-de-crud-lian-xi-rss-ding-yue-guan-li.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
@@ -108,7 +108,7 @@
   
   <url>
     <loc>https://geoqiao.github.io/blog/18-python-bian-ji-qi-wo-de-vscode-pei-zhi.html</loc>
-    <lastmod>2026-04-18</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
@@ -300,6 +300,16 @@
   </url>
   
   <url>
+    <loc>https://geoqiao.github.io/tag/tag:copilot.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geoqiao.github.io/tag/tag:data-analysis.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  
+  <url>
     <loc>https://geoqiao.github.io/tag/tag:excel.html</loc>
     <lastmod>2026-08-02</lastmod>
   </url>
@@ -320,12 +330,22 @@
   </url>
   
   <url>
+    <loc>https://geoqiao.github.io/tag/tag:rss.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  
+  <url>
     <loc>https://geoqiao.github.io/tag/tag:sql.html</loc>
     <lastmod>2026-08-02</lastmod>
   </url>
   
   <url>
     <loc>https://geoqiao.github.io/tag/tag:vim.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://geoqiao.github.io/tag/tag:vscode.html</loc>
     <lastmod>2026-08-02</lastmod>
   </url>
   

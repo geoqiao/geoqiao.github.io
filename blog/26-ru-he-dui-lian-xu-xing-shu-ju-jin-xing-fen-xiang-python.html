@@ -15,14 +15,14 @@
     <meta property="og:url" content="https://geoqiao.github.io/blog/26-ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python.html">
     <meta property="og:site_name" content="geoqiao&#39;s Blog">
     <meta property="og:title" content="如何对连续型数据进行分箱 - Python">
-    <meta property="og:description" content="Tags: python, blog, data-analysis">
+    <meta property="og:description" content="Tags: python, blog, data-analysis, type:blog, published, tag:data-analysis, tag:python">
     <meta property="og:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://geoqiao.github.io/blog/26-ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python.html">
     <meta name="twitter:title" content="如何对连续型数据进行分箱 - Python">
-    <meta name="twitter:description" content="Tags: python, blog, data-analysis">
+    <meta name="twitter:description" content="Tags: python, blog, data-analysis, type:blog, published, tag:data-analysis, tag:python">
     <meta name="twitter:image" content="https://geoqiao.github.io/templates/Escape2/static/images/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,15 @@
                 
                 <a href="/tag/blog.html" class="tag">#blog</a> 
                 
-                <a href="/tag/data-analysis.html" class="tag">#data-analysis</a>
+                <a href="/tag/data-analysis.html" class="tag">#data-analysis</a> 
+                
+                <a href="/tag/type:blog.html" class="tag">#type:blog</a> 
+                
+                <a href="/tag/published.html" class="tag">#published</a> 
+                
+                <a href="/tag/tag:data-analysis.html" class="tag">#tag:data-analysis</a> 
+                
+                <a href="/tag/tag:python.html" class="tag">#tag:python</a>
                 
             </dd>
             
@@ -87,7 +95,11 @@
     </section>
 
     <div class="post-content">
-        <p>在做数据分析时，经常要对连续型数据进行分箱。面临的主要问题是：怎么分箱才是最优的？</p>
+        <hr />
+<h2>slug: ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python
+description: &quot;在做数据分析时，经常要对连续型数据进行分箱。面临的主要问题是：怎么分箱才是最优的？&quot;
+created_date: &quot;2024-10-26&quot;</h2>
+<p>在做数据分析时，经常要对连续型数据进行分箱。面临的主要问题是：怎么分箱才是最优的？</p>
 <p>一个常见的场景是，老板想看用户在不同年龄段的占比以及消费情况，这时如果将所有年龄全部展示出来会话，表格会非常长，不容易阅读。一般情况下，我们会把相近的年龄做一个区间，来展示不同年龄区间数据。这就需要用到分箱，把年龄划分成不同的区间。</p>
 <h2>常用的分箱方法</h2>
 <ol>
