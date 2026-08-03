@@ -93,6 +93,37 @@ comments:
   theme_mode: auto
 
 # ============================================
+# Projects（站点维护的公开项目目录）
+# GitHub metadata 会在构建时刷新；fallback 只保留稳定字段
+# ============================================
+projects:
+  - slug: escaping
+    title: escaping
+    repository: geoqiao/escaping
+    summary: 以 GitHub Issues 为内容源、带严格校验与原子发布的个人静态站点生成器。
+    featured: true
+    order: 1
+    fallback_metadata:
+      language: Python
+      topics:
+        - github-issues
+        - static-site-generator
+        - github-pages
+
+  - slug: jojo-codex-pet
+    title: JoJo Codex Pet
+    repository: geoqiao/jojo-codex-pet
+    summary: 非官方、非商业的 JoJo 主题 Codex Pet V2 图鉴、安装包与双语画廊。
+    featured: true
+    order: 2
+    fallback_metadata:
+      language: Astro
+      topics:
+        - codex-pet
+        - fan-project
+        - pixel-art
+
+# ============================================
 # 安全配置
 # token_env 动态决定 Token 环境变量名，不硬编码
 # ============================================
