@@ -1,0 +1,121 @@
+{
+  "origin": "https://geoqiao.me",
+  "redirects": [
+    {
+      "from": "/blog/rye-hao-yong-de-pythonbao-guan-li-gong-ju/",
+      "to": "/blog/rye-python-package-manager-guide/"
+    },
+    {
+      "from": "/blog/excel-xue-xi-jing-yan-fen-xiang/",
+      "to": "/blog/practical-excel-learning-tips/"
+    },
+    {
+      "from": "/blog/with-sql-as-english/",
+      "to": "/blog/learn-sql-in-plain-english/"
+    },
+    {
+      "from": "/blog/guan-yu-li-shi/",
+      "to": "/blog/history-as-a-rolling-wheel/"
+    },
+    {
+      "from": "/blog/kong-diao-bo-xue-li-lun-de-ti-chu/",
+      "to": "/blog/air-conditioning-exploitation-theory/"
+    },
+    {
+      "from": "/blog/zong-de-huo-zhao-ba/",
+      "to": "/blog/why-we-still-choose-to-live/"
+    },
+    {
+      "from": "/blog/ji-yu-github-issues-de-ge-ren-blog-da-jian/",
+      "to": "/blog/github-issues-blog-setup-guide/"
+    },
+    {
+      "from": "/blog/shottr-yuan-sheng-qing-qiao-qie-gong-neng-qiang-da-de-mian-fei-tu-gong/",
+      "to": "/blog/shottr-lightweight-macos-screenshot-tool/"
+    },
+    {
+      "from": "/blog/pythonhuan-jing-an-zhuang-anacondawei-li/",
+      "to": "/blog/install-python-with-anaconda/"
+    },
+    {
+      "from": "/blog/zhong-qi-qing-yong-obsidian/",
+      "to": "/blog/use-obsidian-the-simple-way/"
+    },
+    {
+      "from": "/blog/wo-de-di-yi-ge-wan-zheng-de-ji-qi-xue-xi-xiang-mu-titaniczong-jie/",
+      "to": "/blog/my-first-titanic-machine-learning-project/"
+    },
+    {
+      "from": "/blog/zong-you-yi-xie-app-zhi-neng-windows-yong/",
+      "to": "/blog/run-windows-apps-on-mac-with-vmware/"
+    },
+    {
+      "from": "/blog/pythonbian-ji-qi-wo-de-vscodepei-zhi/",
+      "to": "/blog/my-vscode-setup-for-python/"
+    },
+    {
+      "from": "/blog/ji-yu-fastapi-de-crud-lian-xi-rss-ding-yue-guan-li/",
+      "to": "/blog/build-an-rss-manager-with-fastapi/"
+    },
+    {
+      "from": "/blog/shi-yong-python-he-github-pages-da-jian-ge-ren-bo-ke/",
+      "to": "/blog/build-a-python-blog-on-github-pages/"
+    },
+    {
+      "from": "/blog/uv-github-20k-star-de-zhong-ji-python-xiang-mu-guan-li-gong-ju/",
+      "to": "/blog/uv-python-project-management-guide/"
+    },
+    {
+      "from": "/blog/wei-github-pages-ge-ren-bo-ke-tian-jia-yaml-pei-zhi-gong-neng-ji-yu/",
+      "to": "/blog/add-yaml-config-to-github-pages-blog/"
+    },
+    {
+      "from": "/blog/bu-yao-jiu-jie-liao-zai-pandaszhong-shu-ju-shai-xuan-jiu-yong-ta/",
+      "to": "/blog/filter-pandas-dataframes-with-loc/"
+    },
+    {
+      "from": "/blog/ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python/",
+      "to": "/blog/optimal-binning-for-continuous-data-in-python/"
+    },
+    {
+      "from": "/blog/python-huan-jing-pei-zhi-cong-ling-kai-shi-uv-pdm-he-vscode-de-zui-jia/",
+      "to": "/blog/python-setup-with-uv-pdm-and-vscode/"
+    },
+    {
+      "from": "/blog/pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama-groqhe-kuo/",
+      "to": "/blog/free-vscode-ai-with-ollama-groq-and-continue/"
+    },
+    {
+      "from": "/blog/2024nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu/",
+      "to": "/blog/2024-review-manage-expectations-and-keep-going/"
+    },
+    {
+      "from": "/blog/wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha-guan-he-cha/",
+      "to": "/blog/winter-walks-to-chengdu-teahouses/"
+    },
+    {
+      "from": "/blog/2025nian-zhong-zong-jie-guan-zhu-zi-ji/",
+      "to": "/blog/2025-review-focus-on-yourself/"
+    },
+    {
+      "from": "/blog/vibe-coding-shi-zhan-hou-gan-github-blog-with-trae/",
+      "to": "/blog/vibe-coding-github-blog-with-trae/"
+    },
+    {
+      "from": "/blog/bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de-github-blog/",
+      "to": "/blog/build-a-github-blog-without-git-or-frontend/"
+    },
+    {
+      "from": "/blog/cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen-gei-ce-lue-fen/",
+      "to": "/blog/superpowers-claude-code-guide-for-strategy-analysts/"
+    },
+    {
+      "from": "/blog/cong-obsidian-dao-bo-ke-wo-ru-he-yong-yi-tiao-ming-ling-ba-bi-ji-bian/",
+      "to": "/blog/publish-obsidian-notes-with-one-command/"
+    },
+    {
+      "from": "/blog/what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin-zhong-duan/",
+      "to": "/blog/terminal-codex-workflow-with-pi-and-herdr/"
+    }
+  ]
+}

@@ -8,6 +8,9 @@ on:
     paths:
       - ".github/workflows/pages.yml"
       - "config.yaml"
+      - "content-migrations/**"
+      - "scripts/**"
+      - "tests/**"
       - "theme/**"
       - "CNAME"
 
@@ -42,12 +45,21 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
+      - name: Test site migration tooling
+        run: python3 -m unittest -v tests/test_render_slug_redirects.py
+
       - name: Generate site from the site Config
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           uv run --project "$GITHUB_WORKSPACE/compiler" --frozen
           blog-gen --config "$GITHUB_WORKSPACE/config.yaml"
+
+      - name: Render Blog slug compatibility pages
+        run: >-
+          python3 scripts/render_slug_redirects.py
+          --map content-migrations/blog-slugs-2026-08.json
+          --output output
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
