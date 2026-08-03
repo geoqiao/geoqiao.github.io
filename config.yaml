@@ -59,7 +59,7 @@ about:
 # ============================================
 branding:
   show_powered_by: true
-  powered_by_text: github_blog
+  powered_by_text: escaping
   powered_by_url: https://github.com/geoqiao/escaping
   source_link_url: https://github.com/geoqiao/escaping
 

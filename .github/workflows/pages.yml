@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: geoqiao/escaping
-          ref: 842e21125715275596f51aad1629d9f0acd0391c
+          ref: 5de375ac9137e19ca84a256c4255c0e3521ba359
           path: compiler
 
       - name: Install uv
@@ -53,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           uv run --project "$GITHUB_WORKSPACE/compiler" --frozen
-          blog-gen --config "$GITHUB_WORKSPACE/config.yaml"
+          escpe --config "$GITHUB_WORKSPACE/config.yaml"
 
       - name: Render Blog slug compatibility pages
         run: >-
