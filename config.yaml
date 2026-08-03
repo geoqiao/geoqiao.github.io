@@ -11,9 +11,9 @@ github:
 # 拥有标题、作者显示名、规范 HTTPS 源、描述、语言和导航
 # ============================================
 site:
-  title: geoqiao's Blog
+  title: Geo Qiao
   url: https://geoqiao.me/
-  author: geoqiao
+  author: Geo Qiao
   description: ""
   language: zh-CN
   navigation:
