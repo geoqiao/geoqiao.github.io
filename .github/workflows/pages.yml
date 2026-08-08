@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: geoqiao/escaping
-          ref: af15bb0ed0bcf6fffa4b71fa18c6b2e218d5bf15
+          ref: e5beb636853f821f93490cfa5112bafff693d63d
           path: compiler
 
       - name: Install uv
