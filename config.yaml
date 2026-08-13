@@ -16,6 +16,9 @@ site:
   author: Geo Qiao
   description: ""
   language: zh-CN
+  thesis:
+    - 演悲欢离合，当代岂无前代事？
+    - 观抑扬褒贬，座中常有剧中人。
   navigation:
     items:
       - name: Blog
@@ -33,10 +36,11 @@ site:
 
 # ============================================
 # 站点档案（Site Profile）
-# 仅包含头像、简介和链接；详细 About 叙述属于 About Issue Content
+# 仅包含头像、简短标签、简介和链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
   avatar: https://github.com/geoqiao.png
+  tagline: 贷后策略分析师 / tool tinkerer
   bio: |
     你好，我是 geoqiao。
     一名金融行业的贷后策略分析师，喜欢折腾工具，也享受用代码解决重复性工作。
