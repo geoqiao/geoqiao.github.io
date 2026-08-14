@@ -104,7 +104,7 @@ projects:
   - slug: escaping
     title: escaping
     repository: geoqiao/escaping
-    summary: 以 GitHub Issues 为内容源、带严格校验与原子发布的个人静态站点生成器。
+    summary: 以 GitHub Issues 为内容源、带严格校验与分阶段发布的个人静态站点生成器。
     featured: true
     order: 1
     fallback_metadata:
