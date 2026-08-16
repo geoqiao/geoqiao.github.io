@@ -39,7 +39,7 @@ site:
 # 仅包含头像、简短标签、简介和链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
-  avatar: https://github.com/geoqiao.png
+  avatar: /templates/geoqiao.me/static/images/author-mark.png
   tagline: 贷后策略分析师 / tool tinkerer
   bio: |
     你好，我是 geoqiao。
