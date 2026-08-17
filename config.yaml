@@ -33,7 +33,7 @@ site:
 
 # ============================================
 # 站点档案（Site Profile）
-# 首页仅展示链接；详细 About 叙述属于 About Issue Content
+# 仅保留站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
   links:
