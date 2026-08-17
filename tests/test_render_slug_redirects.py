@@ -23,10 +23,6 @@ SMOKE_FILES = (
     "atom.xml",
     "sitemap.xml",
     "robots.txt",
-    "templates/geoqiao.me/static/css/style.css",
-    "templates/geoqiao.me/static/images/favicon.png",
-    "templates/geoqiao.me/static/js/comments.js",
-    "templates/geoqiao.me/static/js/theme.js",
 )
 
 
@@ -143,6 +139,32 @@ class RenderSlugRedirectsTests(unittest.TestCase):
             self.assertEqual(set(after), {*before, redirect})
             for path, content in before.items():
                 self.assertEqual(after[path], content)
+
+    def test_cli_accepts_a_different_theme_asset_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "output"
+            self.seed_site_artifact(output)
+            theme_asset = output / "templates" / "Escape1" / "static" / "theme.css"
+            theme_asset.parent.mkdir(parents=True)
+            theme_asset.write_text("alternate theme asset", encoding="utf-8")
+            target = output / "blog" / "new-english-slug" / "index.html"
+            target.parent.mkdir(parents=True)
+            target.write_text("new canonical page", encoding="utf-8")
+
+            result = self.run_script(
+                root,
+                output,
+                [{"from": "/blog/old-pinyin-slug/", "to": "/blog/new-english-slug/"}],
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(
+                theme_asset.read_text(encoding="utf-8"), "alternate theme asset"
+            )
+            self.assertTrue(
+                (output / "blog" / "old-pinyin-slug" / "index.html").is_file()
+            )
 
     def test_cli_leaves_current_canonical_page_untouched_before_cutover(
         self,

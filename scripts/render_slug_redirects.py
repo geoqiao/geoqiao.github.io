@@ -25,10 +25,6 @@ _SITE_SMOKE_FILES = (
     "atom.xml",
     "sitemap.xml",
     "robots.txt",
-    "templates/geoqiao.me/static/css/style.css",
-    "templates/geoqiao.me/static/images/favicon.png",
-    "templates/geoqiao.me/static/js/comments.js",
-    "templates/geoqiao.me/static/js/theme.js",
 )
 
 
