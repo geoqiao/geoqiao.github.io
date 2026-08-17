@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: geoqiao/escaping
-          ref: cfec81fdcee6f321fc433f2cb4342d3243ced6f1
+          ref: 71ef7f68029a35e64ab0ba62a6595e770588ad99
           path: compiler
           persist-credentials: false
 
