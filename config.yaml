@@ -41,10 +41,6 @@ site:
 profile:
   avatar: /templates/geoqiao.me/static/images/author-mark.png
   tagline: 贷后策略分析师 / tool tinkerer
-  bio: |
-    你好，我是 geoqiao。
-    一名金融行业的贷后策略分析师，喜欢折腾工具，也享受用代码解决重复性工作。
-    工作之余，我喜欢记录生活中的碎片。
   links:
     - name: GitHub
       url: https://github.com/geoqiao
