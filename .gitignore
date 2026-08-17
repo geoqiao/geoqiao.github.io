@@ -1,0 +1,23 @@
+# GitHub Pages build artifact
+/output/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+/cache/
+/.cache/
+.venv/
+venv/
+*.egg-info/
+
+# Coverage reports
+.coverage
+.coverage.*
+/coverage/
+/htmlcov/
+
+# Local OS metadata
+.DS_Store
