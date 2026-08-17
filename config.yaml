@@ -16,9 +16,6 @@ site:
   author: Geo Qiao
   description: ""
   language: zh-CN
-  thesis:
-    - 演悲欢离合，当代岂无前代事？
-    - 观抑扬褒贬，座中常有剧中人。
   navigation:
     items:
       - name: Blog
@@ -36,11 +33,9 @@ site:
 
 # ============================================
 # 站点档案（Site Profile）
-# 仅包含头像、简短标签、简介和链接；详细 About 叙述属于 About Issue Content
+# 仅保留站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
-  avatar: /templates/geoqiao.me/static/images/author-mark.png
-  tagline: 贷后策略分析师 / tool tinkerer
   links:
     - name: GitHub
       url: https://github.com/geoqiao
@@ -61,7 +56,6 @@ branding:
   show_powered_by: true
   powered_by_text: escaping
   powered_by_url: https://github.com/geoqiao/escaping
-  source_link_url: https://github.com/geoqiao/escaping
 
 # ============================================
 # 生成路径配置
