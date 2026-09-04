@@ -16,6 +16,9 @@ site:
   author: Geo Qiao
   description: ""
   language: zh-CN
+  thesis:
+    - Escaping is a static blog system based on GitHub Issues.
+    - Generated with Python + Jinja2, deployed via GitHub Actions.
   navigation:
     items:
       - name: Blog
@@ -56,6 +59,7 @@ branding:
   show_powered_by: true
   powered_by_text: escaping
   powered_by_url: https://github.com/geoqiao/escaping
+  source_link_url: https://github.com/geoqiao/escaping
 
 # ============================================
 # 生成路径配置
@@ -68,7 +72,7 @@ paths:
 
 theme:
   source: builtin
-  name: geoqiao.me
+  name: Escape2
 
 # ============================================
 # SEO 配置
