@@ -36,9 +36,10 @@ site:
 
 # ============================================
 # 站点档案（Site Profile）
-# 仅保留站点级链接；详细 About 叙述属于 About Issue Content
+# 头像与站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
+  avatar: https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/profile/avatar.png
   links:
     - name: GitHub
       url: https://github.com/geoqiao
