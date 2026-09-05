@@ -10,9 +10,9 @@ MiniMax Plus,22,110,816,463.0,21.045454545454547,estimate
 Claude Max 5×,100,1700,2300,2000.0,20.0,estimate
 GLM Max,160,939,2000,1469.5,9.184375,estimate
 GLM Pro,72,403,900,651.5,9.04861111111111,estimate
-Alibaba Coding Plan,50,300,600,450.0,9.0,estimate
 GLM Lite,18,67,225,146.0,8.11111111111111,estimate
 OpenCode Go,10,60,60,60.0,6.0,cap
+Kimi Vivace,199,1040,1080,1060.0,5.326633165829146,estimate
 SuperGrok Heavy,300,870,1950,1410.0,4.7,estimate
 TRAE Ultra,100,400,400,400.0,4.0,floor
 Ollama Max,100,300,300,300.0,3.0,credit
@@ -27,8 +27,3 @@ TRAE Pro,10,20,20,20.0,2.0,floor
 Copilot Pro+,39,70,70,70.0,1.794871794871795,credit
 TRAE Lite,3,5,5,5.0,1.6666666666666667,floor
 Copilot Pro,10,15,15,15.0,1.5,credit
-Warp Max,200,240,240,240.0,1.2,replacement
-JetBrains AI Ultimate,30,35,35,35.0,1.1666666666666667,credit
-Warp Build,20,20,20,20.0,1.0,replacement
-JetBrains AI Pro,10,10,10,10.0,1.0,credit
-Zed Pro,10,5,5,5.0,0.5,credit
