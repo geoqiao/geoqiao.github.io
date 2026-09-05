@@ -72,7 +72,7 @@ paths:
 
 theme:
   source: builtin
-  name: Escape2
+  name: Quiet
 
 # ============================================
 # SEO 配置
