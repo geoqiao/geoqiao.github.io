@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: geoqiao/escaping
-          ref: a1e95cf4ff45657c9ab9258c650d0eeba91375bf
+          ref: b85ac6ea60cffec8f26687f72404b3a3139b6eca
           path: compiler
           persist-credentials: false
 
@@ -49,7 +49,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Test site migration tooling
-        run: python3 -m unittest -v tests/test_render_slug_redirects.py
+        run: python3 -m unittest discover -s tests -v
 
       - name: Generate site from the site Config
         env:

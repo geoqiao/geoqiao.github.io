@@ -1,5 +1,6 @@
-# GitHub Pages build artifact
+# GitHub Pages build artifact and local migration backups/previews
 /output/
+/.scratch/
 
 # Python caches and local environments
 __pycache__/
