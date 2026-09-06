@@ -26,8 +26,6 @@ jobs:
       issues: read
     env:
       ESCAPING_SHA: caaea758f7d0feea128f17e81ac08b0612fdacea
-      UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/compiler-venv
-      UV_CACHE_DIR: ${{ runner.temp }}/compiler-cache
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -52,8 +50,12 @@ jobs:
         run: uv python install 3.14
 
       - name: Install locked noneditable compiler
+        env:
+          UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/compiler-venv
+          UV_CACHE_DIR: ${{ runner.temp }}/compiler-cache
         run: |
           set -euo pipefail
+          printf '%s\n' "UV_PROJECT_ENVIRONMENT=$UV_PROJECT_ENVIRONMENT" "UV_CACHE_DIR=$UV_CACHE_DIR" >> "$GITHUB_ENV"
           bash compiler/starter/.github/scripts/install.sh \
             "$GITHUB_WORKSPACE/compiler" "$ESCAPING_SHA" 3.14 >> "$GITHUB_STEP_SUMMARY"
 

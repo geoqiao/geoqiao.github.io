@@ -16,7 +16,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         self.assertNotIn("if", build)  # Branch builds remain available.
         self.assertEqual(build["permissions"], {"contents": "read", "issues": "read"})
         self.assertRegex(build["env"]["ESCAPING_SHA"], r"^[0-9a-f]{40}$")
-        self.assertEqual(build["env"]["UV_PROJECT_ENVIRONMENT"], "${{ runner.temp }}/compiler-venv")
+        self.assertNotIn("runner.", str(build["env"]))
         self.assertEqual(jobs["deploy"]["if"], "github.ref == 'refs/heads/main'")
         self.assertEqual(jobs["deploy"]["needs"], "build")
         self.assertEqual(jobs["deploy"]["permissions"], {"pages": "write", "id-token": "write"})
@@ -35,7 +35,13 @@ class ProductionWorkflowTests(unittest.TestCase):
             self.assertFalse(step.get("continue-on-error", False))
         by_name = {step["name"]: step for step in steps}
         self.assertEqual(by_name["Checkout pinned escaping compiler"]["with"]["ref"], "${{ env.ESCAPING_SHA }}")
-        install = by_name[required[1]]["run"]
+        install_step = by_name[required[1]]
+        self.assertEqual(install_step["env"]["UV_PROJECT_ENVIRONMENT"], "${{ runner.temp }}/compiler-venv")
+        self.assertEqual(install_step["env"]["UV_CACHE_DIR"], "${{ runner.temp }}/compiler-cache")
+        install = install_step["run"]
+        self.assertIn('"UV_PROJECT_ENVIRONMENT=$UV_PROJECT_ENVIRONMENT"', install)
+        self.assertIn('"UV_CACHE_DIR=$UV_CACHE_DIR"', install)
+        self.assertIn('>> "$GITHUB_ENV"', install)
         self.assertIn('bash compiler/starter/.github/scripts/install.sh', install)
         self.assertIn('"$GITHUB_WORKSPACE/compiler" "$ESCAPING_SHA" 3.14', install)
         self.assertIn("set -euo pipefail", install)
