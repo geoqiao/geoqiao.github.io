@@ -21,6 +21,8 @@ site:
     - Generated with Python + Jinja2, deployed via GitHub Actions.
   navigation:
     items:
+      - name: Home
+        url: /
       - name: Blog
         url: /blog/
       - name: Ideas
@@ -87,6 +89,7 @@ seo:
 # theme_mode: auto 跟随博客主题
 # ============================================
 comments:
+  enabled: true
   repo: ""
   theme: github-light
   theme_mode: auto

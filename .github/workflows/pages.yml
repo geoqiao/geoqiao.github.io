@@ -24,6 +24,8 @@ jobs:
     permissions:
       contents: read
       issues: read
+    env:
+      ESCAPING_SHA: caaea758f7d0feea128f17e81ac08b0612fdacea
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -34,33 +36,42 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: geoqiao/escaping
-          ref: b85ac6ea60cffec8f26687f72404b3a3139b6eca
+          ref: ${{ env.ESCAPING_SHA }}
           path: compiler
           persist-credentials: false
 
       - name: Install uv
         uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
-          enable-cache: true
-          cache-dependency-glob: compiler/uv.lock
+          enable-cache: false
           version: "0.12.0"
 
-      - name: Set up Python
-        run: uv python install 3.11
+      - name: Set up Python 3.14
+        run: uv python install 3.14
+
+      - name: Install locked noneditable compiler
+        env:
+          UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/compiler-venv
+          UV_CACHE_DIR: ${{ runner.temp }}/compiler-cache
+        run: |
+          set -euo pipefail
+          printf '%s\n' "UV_PROJECT_ENVIRONMENT=$UV_PROJECT_ENVIRONMENT" "UV_CACHE_DIR=$UV_CACHE_DIR" >> "$GITHUB_ENV"
+          bash compiler/starter/.github/scripts/install.sh \
+            "$GITHUB_WORKSPACE/compiler" "$ESCAPING_SHA" 3.14 >> "$GITHUB_STEP_SUMMARY"
 
       - name: Test site migration tooling
-        run: python3 -m unittest discover -s tests -v
+        run: '"$UV_PROJECT_ENVIRONMENT/bin/python" -m unittest discover -s tests -v'
 
       - name: Generate site from the site Config
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
-          uv run --project "$GITHUB_WORKSPACE/compiler" --frozen
-          escpe --config "$GITHUB_WORKSPACE/config.yaml"
+          "$UV_PROJECT_ENVIRONMENT/bin/escpe"
+          --config "$GITHUB_WORKSPACE/config.yaml"
 
       - name: Render and validate final Pages artifact
         run: >-
-          python3 scripts/render_slug_redirects.py
+          "$UV_PROJECT_ENVIRONMENT/bin/python" scripts/render_slug_redirects.py
           --map content-migrations/blog-slugs-2026-08.json
           --output output
           --repository-root "$GITHUB_WORKSPACE"
