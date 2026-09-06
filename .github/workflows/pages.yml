@@ -25,7 +25,7 @@ jobs:
       contents: read
       issues: read
     env:
-      ESCAPING_SHA: caaea758f7d0feea128f17e81ac08b0612fdacea
+      ESCAPING_SHA: 3d17f8131c6b68bb6e7436adca4663caadce4cae
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
