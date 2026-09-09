@@ -9,6 +9,7 @@
 - `.github/workflows/pages.yml`：构建与部署流程
 - `scripts/render_slug_redirects.py`：Blog slug 迁移兼容页生成脚本
 - `assets/profile/`：头像；Quiet 复用该图片作为 favicon
+- `assets/social/`：全站分享图；`seo.social_image` 引用固定 commit 直链，维护步骤见[图片说明](assets/social/README.md)
 - `assets/issues/<issue-number>/`：文章附件原件；正文使用固定 commit 的 GitHub 直链
 - `assets/charts/`：已有 #62 图表与 CSV，保留原路径
 - `content-migrations/`：迁移映射与附件 SHA-256 校验值
