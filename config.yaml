@@ -80,6 +80,8 @@ theme:
 # ============================================
 seo:
   google_search_console: DRggZlykSzc8M9TyaS0BPSRE7Kvw8W9hHt5pZrIMm3Y
+  social_image: https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/071e377fd6cc319f9ac7db686c3d4531e07be8d8/assets/social/og.png
+  social_image_alt: "Geo Qiao：AI 工作流、Python 实践与个人项目。手绘笔记本上的洋红色个人标记，旁边是工具箱和钢笔。"
 
 # ============================================
 # 评论配置
