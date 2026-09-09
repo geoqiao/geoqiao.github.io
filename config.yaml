@@ -14,7 +14,7 @@ site:
   title: Geo Qiao
   url: https://geoqiao.me/
   author: Geo Qiao
-  description: ""
+  description: "金融行业的贷后策略分析师，记录 AI 工作流、Python 实践与个人项目。"
   language: zh-CN
   thesis:
     - Escaping is a static blog system based on GitHub Issues.
