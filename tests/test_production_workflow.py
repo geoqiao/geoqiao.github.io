@@ -7,6 +7,16 @@ import yaml
 
 
 class ProductionWorkflowTests(unittest.TestCase):
+    def test_content_lifecycle_events_trigger_rebuilds(self):
+        root = Path(__file__).resolve().parents[1]
+        workflow = yaml.safe_load((root / ".github/workflows/pages.yml").read_text())
+        # PyYAML's YAML 1.1 loader reads the unquoted Actions `on` key as True.
+        events = set(workflow[True]["issues"]["types"])
+        self.assertTrue({
+            "opened", "edited", "labeled", "unlabeled", "closed", "reopened",
+            "deleted", "transferred",
+        }.issubset(events), events)
+
     def test_locked_install_and_required_checks_gate_upload(self):
         root = Path(__file__).resolve().parents[1]
         workflow = yaml.safe_load((root / ".github/workflows/pages.yml").read_text())

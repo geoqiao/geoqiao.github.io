@@ -3,7 +3,7 @@ name: Build and deploy geoqiao.me
 on:
   workflow_dispatch:
   issues:
-    types: [opened, edited, labeled, unlabeled, closed, reopened]
+    types: [opened, edited, labeled, unlabeled, closed, reopened, deleted, transferred]
   push:
     paths:
       - ".github/workflows/pages.yml"
