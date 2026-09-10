@@ -19,6 +19,13 @@
 
 `output/` 只包含本地或 CI 构建生成物，不提交到仓库。旧的根目录 HTML/feed/sitemap/robots、`blog/`、`tag/` 和 `templates/Escape2/` 均为历史生成物，不是源码。
 
+## 内容变更与撤稿
+
+工作流监听 Issue 的创建、编辑、标签变更、关闭、重开、删除与转移。
+`deleted`、`transferred` 是 GitHub 支持的 [`issues` 事件类型](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#issues)，不是需要创建的标签；这类事件要求工作流文件位于默认分支。
+
+移除 `published` 才是常规撤稿操作，仅关闭 Issue 不会撤稿。撤稿、删除或转移时，一并处理 `site.featured_posts`、指向该文的正文内链和相关 `content-migrations` 映射；未处理的引用可能阻止构建。只有构建、校验和部署全部成功后，线上内容才更新；不要删除校验来绕过失败。
+
 ## 构建与升级
 
 工作流的 `ESCAPING_SHA` 是生成器版本的唯一固定值，不跟随移动分支。
