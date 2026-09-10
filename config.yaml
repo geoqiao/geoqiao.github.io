@@ -16,6 +16,7 @@ site:
   author: Geo Qiao
   description: "金融行业的贷后策略分析师，记录 AI 工作流、Python 实践与个人项目。"
   language: zh-CN
+  featured_posts: [41, 62, 49]
   thesis:
     - Escaping is a static blog system based on GitHub Issues.
     - Generated with Python + Jinja2, deployed via GitHub Actions.
@@ -39,6 +40,8 @@ site:
 # 头像与站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
+  tagline: 为自己的工作方式造工具，也做些纯粹好玩的东西。
+  bio: 金融行业的贷后策略分析师，平时折腾 Python、TypeScript 和 AI 工作流。记录试用、取舍与实践，帮你选择适合自己的工具。
   avatar: https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/profile/avatar.png
   links:
     - name: GitHub
