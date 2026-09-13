@@ -19,6 +19,15 @@
 
 `output/` 只包含本地或 CI 构建生成物，不提交到仓库。旧的根目录 HTML/feed/sitemap/robots、`blog/`、`tag/` 和 `templates/Escape2/` 均为历史生成物，不是源码。
 
+## 本站博客发布规范
+
+escaping 的通用契约允许省略部分元数据，但本站博客必须显式填写 `slug`、`description`、`created_date`。
+`slug` 使用表达文章主题的英文单词，以连字符分隔，可含年份；正式地址为 `/blog/{slug}/`，不使用 Issue 编号或纯数字占位。`description` 是简洁的内容摘要，`created_date` 是带引号的真实原始创作日期。
+标题使用 Issue 原生标题，类型/标签/发布状态使用 GitHub labels；Issue body 的 front matter 仅保留上述三项。
+
+既有文章通常保持地址不变。作者明确授权纠正错误地址时，先在 `content-migrations/blog-slugs-2026-08.json` 增加旧地址到新 slug 的映射，再修改最新远端 Issue 的 slug；不从本地历史稿覆盖正文。该映射在切换前保留旧文章，切换后生成带 canonical 和即时跳转的兼容页。
+修改后核验新页、旧址跳转、首页、Atom、sitemap 和评论的原 Issue 绑定；不得因改地址新建 Issue、重置日期或搬动附件。
+
 ## 内容变更与撤稿
 
 工作流监听 Issue 的创建、编辑、标签变更、关闭、重开、删除与转移。
