@@ -139,22 +139,17 @@ projects:
     fallback_metadata:
       language: Python
 
-  - slug: jojo-codex-pet
-    title: JoJo Codex Pet
-    repository: geoqiao/jojo-codex-pet
-    summary: JoJo 主题的 Codex 宠物。非官方、非商业，是一个纯粹好玩的兴趣项目。
-    image: https://raw.githubusercontent.com/geoqiao/jojo-codex-pet/39c3e3e22b822bedfb9413ea08f56319a79056c6/apps/web/public/pilot-bases/part-03-jotaro-kujo-card-320.webp
+  - slug: paseo-stuff
+    title: paseo-stuff
+    repository: geoqiao/paseo-stuff
+    summary: 为 Paseo 提供社区插件：Agent 活动展示、DeepSeek 接入、数学公式渲染与侧边栏宠物。
     links:
-      - name: 看看宠物
-        url: https://pixelstand.pet/
+      - name: 安装说明
+        url: https://github.com/geoqiao/paseo-stuff#install-a-plugin-from-this-repository
     featured: true
     order: 4
     fallback_metadata:
-      language: Astro
-      topics:
-        - codex-pet
-        - fan-project
-        - pixel-art
+      language: TypeScript
 
 # ============================================
 # 安全配置
