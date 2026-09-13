@@ -192,6 +192,75 @@ class RenderSlugRedirectsTests(unittest.TestCase):
             )
             self.assertIn("created=0 skipped=1", result.stdout)
 
+    def test_cli_preserves_both_old_urls_across_a_second_slug_change(self) -> None:
+        redirects = [
+            {"from": "/blog/74/", "to": "/blog/first-title/"},
+            {"from": "/blog/first-title/", "to": "/blog/updated-title/"},
+        ]
+        for slug in ("first-title", "updated-title"):
+            for mapping in (redirects, list(reversed(redirects))):
+                with (
+                    self.subTest(slug=slug, mapping=mapping),
+                    tempfile.TemporaryDirectory() as directory,
+                ):
+                    root = Path(directory)
+                    output = root / "output"
+                    self.seed_site_artifact(output)
+                    canonical = output / "blog" / slug / "index.html"
+                    canonical.parent.mkdir(parents=True)
+                    canonical.write_text("article content", encoding="utf-8")
+
+                    result = self.run_script(root, output, mapping)
+
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    expected_url = f"https://geoqiao.me/blog/{slug}/"
+                    self.assertEqual(canonical.read_text(), "article content")
+                    self.assertEqual(
+                        (output / "blog/74/index.html").read_text(),
+                        _redirect_html(expected_url),
+                    )
+                    if slug == "updated-title":
+                        self.assertEqual(
+                            (output / "blog/first-title/index.html").read_text(),
+                            _redirect_html(expected_url),
+                        )
+                        self.assertIn("created=2 skipped=0", result.stdout)
+                    else:
+                        self.assertFalse((output / "blog/updated-title").exists())
+                        self.assertIn("created=1 skipped=1", result.stdout)
+
+    def test_cli_rejects_redirect_cycles_before_writing_any_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "output"
+            self.seed_site_artifact(output)
+            canonical = output / "blog/current/index.html"
+            canonical.parent.mkdir(parents=True)
+            canonical.write_text("article content", encoding="utf-8")
+            before = {
+                path.relative_to(output): path.read_bytes()
+                for path in output.rglob("*")
+                if path.is_file()
+            }
+
+            result = self.run_script(
+                root,
+                output,
+                [
+                    {"from": "/blog/current/", "to": "/blog/next/"},
+                    {"from": "/blog/next/", "to": "/blog/current/"},
+                ],
+            )
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("cycle", result.stderr)
+            after = {
+                path.relative_to(output): path.read_bytes()
+                for path in output.rglob("*")
+                if path.is_file()
+            }
+            self.assertEqual(after, before)
+
     def test_cli_fails_without_overwriting_when_both_pages_exist(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -257,7 +326,7 @@ class RenderSlugRedirectsTests(unittest.TestCase):
             self.addCleanup(outside.rmdir)
             mapping = self.write_mapping(root, [])
 
-            result = subprocess.run(
+            result = subprocess.run(  # noqa: S603 - fixed test command
                 [
                     sys.executable,
                     str(SCRIPT),
