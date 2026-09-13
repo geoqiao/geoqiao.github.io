@@ -40,8 +40,8 @@ site:
 # 头像与站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
-  tagline: 为自己的工作方式造工具，也做些纯粹好玩的东西。
-  bio: 金融行业的贷后策略分析师，平时折腾 Python、TypeScript 和 AI 工作流。记录试用、取舍与实践，帮你选择适合自己的工具。
+  tagline: I make tools for the way I work — and a few things just for fun.
+  bio: Post-loan strategy analyst by day. Usually tinkering with Python, TypeScript, or AI coding workflows.
   avatar: https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/profile/avatar.png
   links:
     - name: GitHub
