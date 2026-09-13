@@ -10,7 +10,7 @@ import json
 import os
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -49,7 +49,7 @@ def _origin(value: object) -> str:
     parsed = urlsplit(value)
     try:
         hostname = parsed.hostname
-        parsed.port
+        _ = parsed.port
     except ValueError as exc:
         raise ValueError("origin must contain a valid HTTPS host") from exc
     if (
@@ -192,7 +192,35 @@ def _load_redirects(mapping_path: Path, output: Path) -> list[_Redirect]:
                 target_url=f"{origin}{target_route}",
             )
         )
-    return result
+    by_source = {redirect.source_route: redirect for redirect in result}
+    resolved: list[_Redirect] = []
+    for redirect in result:
+        chain = [redirect]
+        visited = {redirect.source_route}
+        while True:
+            target_route = chain[-1].target_route
+            if target_route in visited:
+                raise ValueError(f"redirect cycle includes {target_route!r}")
+            visited.add(target_route)
+            successor = by_source.get(target_route)
+            if successor is None:
+                break
+            chain.append(successor)
+        # Before cutover an intermediate article still exists; afterwards every
+        # old URL should point directly to the latest generated article.
+        target = next(
+            (entry for entry in reversed(chain) if entry.target.exists()),
+            chain[-1],
+        )
+        resolved.append(
+            replace(
+                redirect,
+                target_route=target.target_route,
+                target=target.target,
+                target_url=target.target_url,
+            )
+        )
+    return resolved
 
 
 def _require_regular_file(path: Path, label: str) -> None:
