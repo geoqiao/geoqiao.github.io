@@ -27,7 +27,7 @@
 }
 .home-intro p + p { margin-top: 0; }
 .annotation-link {
-  --note: #416eaa;
+  --note: var(--accent);
   --delay: 0ms;
   position: relative;
   display: inline-block;
@@ -61,15 +61,12 @@
   overflow: visible;
 }
 .annotation-arrow path { stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
-.note-projects { --note: #328052; --delay: 250ms; }
+.note-projects { --delay: 250ms; }
 .note-projects .annotation-note { transform: translateX(-28%) rotate(-4deg); }
 .note-projects .annotation-arrow { left: calc(50% - 14px); }
-.note-about { --note: #8953a7; --delay: 500ms; }
+.note-about { --delay: 500ms; }
 .note-about .annotation-note { top: calc(100% + 49px); bottom: auto; transform: translateX(-24%) rotate(-4deg); }
 .note-about .annotation-arrow { top: calc(100% + 3px); bottom: auto; left: calc(50% - 12px); }
-:root[data-theme="dark"] .note-writing { --note: #7ba8e8; }
-:root[data-theme="dark"] .note-projects { --note: #7bbe91; }
-:root[data-theme="dark"] .note-about { --note: #ba91dc; }
 .home-section { margin-top: 64px; animation: none; }
 .home-section > .section-heading { margin-bottom: 22px; }
 .home-section > .section-heading h2 { font: 400 1.8rem/1.3 var(--display); letter-spacing: -.015em; }
@@ -191,9 +188,6 @@
 @media (prefers-reduced-motion: reduce) and (max-width: 600px) { .deck-list { grid-template-columns: 1fr; } }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .home-light { display: none; }
-  :root:not([data-theme]) .note-writing { --note: #7ba8e8; }
-  :root:not([data-theme]) .note-projects { --note: #7bbe91; }
-  :root:not([data-theme]) .note-about { --note: #ba91dc; }
 }
 @media print {
   .annotation-note, .annotation-arrow, .deck-close, .deck-hint { display: none; }

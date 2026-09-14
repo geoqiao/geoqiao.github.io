@@ -18,6 +18,8 @@ The integration contract is **escaping Theme API 2**. All required page template
 - `tags.html` and `tag.html`: an alphabetical topic index with counts and compact article listings.
 - `static/images/projects/`: local [homepage covers](../docs/theme-covers.md) and [project logos](../docs/theme-logos.md).
 
+The UI uses one green accent family drawn from the green stroke in the profile mark: `#216f56` in light mode and `#4faf90` in dark mode. Tags, navigation markers, links, focus outlines, and handwritten notes share the same token. Selection backgrounds use matching muted greens. The palette belongs to `geo.css`, including system-appearance and print fallbacks.
+
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.
 
 Project content stays in `config.yaml`, using existing `projects[].image`, `summary`, `language`, and links. `image` supplies the small project logo; an omitted image uses the project's initial. The homepage deck separately selects its four curated screenshot covers in `project-deck.html` and opens the matching anchor in the local Projects catalog. Assets use `/templates/Geo/static/images/projects/…`. No new compiler/config fields or external runtime dependencies were added.
