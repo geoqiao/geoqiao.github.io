@@ -13,7 +13,7 @@ Run `bash scripts/preview_geo.sh` from the repository, then open <http://localho
 - Narrow screens show a swipeable row with direct links. Reduced motion uses a static grid. Links and descriptions also work without JavaScript.
 - Light and dark appearance, search, project pages, article pages, and existing content routes are retained.
 - Projects uses small logos, text descriptions, and explicit links. About uses a compact version of the same component. Tags is an alphabetical text index with article counts.
-- The UI uses a consistent profile-inspired green for links, tags, active markers, and handwritten notes: deep green in light mode and softer green in dark mode.
+- Dark mode uses profile-inspired green for links, tags, active markers, and handwritten notes. Light mode keeps its original pink accents and blue/green/purple notes.
 - Inner pages use a fixed, narrow list of muted text links in the left margin, with a small dot marking the current section. Search and appearance remain at the top, matching Home's position. On smaller screens, a Menu control at the top left opens the links; the compact header stays available while scrolling.
 
 ## Captured preview
@@ -55,7 +55,7 @@ The project and topic catalogs:
 - Passed all 18 existing site tests.
 - Passed all five browser cases during layout verification in full Chromium and WebKit: project selection/navigation, modifier links, keyboard controls, reinitialization, resizing, mobile/reduced-motion layouts, script fallbacks, search, and persisted appearance.
 - Checked desktop and mobile screenshots, intermediate widths, image loading, JavaScript/shell syntax, and whitespace errors.
-- After the palette revision, rebuilt the site and checked computed accent colors in both modes, all handwritten notes, system appearance without JavaScript, and black print accents. Refreshed desktop/mobile screenshots. Accent contrast is 5.74:1 on the light canvas, 5.27:1 on light panels, 7.32:1 on the dark canvas, and 6.57:1 on dark panels; highlighted annotation hover text remains at least 4.52:1.
+- After scoping the green palette to dark mode, rebuilt and checked the original light accents and handwritten colors, green dark accents, manual switching, and both system-appearance fallbacks without JavaScript in Chromium and WebKit. Dark accent contrast is 7.32:1 on the canvas and 6.57:1 on panels.
 - After the catalog revision, all 18 site tests and both five-case browser suites passed. Projects, Tags, About, and the Python archive fit at seven widths from 320 to 1440px. All 28 tag links returned a page whose article count matched the index. Checked all logo images, About's heading hierarchy, and the homepage's four screenshot-cover URLs.
 - After the left-navigation revision, reran all 18 site tests and both five-case browser suites. Checked Home, Blog, Projects, Tags, and About at 320, 390, 768, 1080, 1081, and 1440px: control positions match, the desktop navigation stays outside the reading column, and no document overflow occurs. Scoped Chromium/WebKit checks covered keyboard traversal, Escape, focus across breakpoints, page switching, and usable navigation with JavaScript disabled or the site script blocked. WebKit's native Option-Tab behavior was used to traverse links on macOS.
 - A separate review found no actionable reproducible problems. It also checked scroll interruption and changing motion preferences interactively; these edge cases are not fully asserted by the automated suite.

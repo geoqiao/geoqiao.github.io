@@ -18,7 +18,7 @@ The integration contract is **escaping Theme API 2**. All required page template
 - `tags.html` and `tag.html`: an alphabetical topic index with counts and compact article listings.
 - `static/images/projects/`: local [homepage covers](../docs/theme-covers.md) and [project logos](../docs/theme-logos.md).
 
-The UI uses one green accent family drawn from the green stroke in the profile mark: `#216f56` in light mode and `#4faf90` in dark mode. Tags, navigation markers, links, focus outlines, and handwritten notes share the same token. Selection backgrounds use matching muted greens. The palette belongs to `geo.css`, including system-appearance and print fallbacks.
+Dark mode uses a green accent drawn from the green stroke in the profile mark (`#4faf90`) for tags, navigation markers, links, focus outlines, and handwritten notes. Light mode uses its original pink accent (`#a72f6a`), pale pink selection, and blue/green/purple handwritten notes. The shared palette belongs to `geo.css`; `home.css` scopes the unified note color to dark mode. Both support system appearance without JavaScript and neutral print colors.
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.
 
