@@ -6,10 +6,11 @@ The integration contract is **escaping Theme API 2**. All required page template
 
 ## Design and source
 
+- `base.html` and `header-controls.html`: inner pages use a compact brand row and horizontal navigation. Search and appearance match Home's icons, size, and position. The links remain visible on mobile and without JavaScript.
 - `intro.html`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
 - `home.html`: identity, featured/recent writing, and the project section.
 - `project-deck.html`: real project links with optional desktop previews.
-- `static/css/geo.css`: Geo's shared palette and Spectral typefaces.
+- `static/css/geo.css`: Geo's shared palette, Spectral typefaces, and top header layout.
 - `static/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
 - `static/js/home.js`: one selected card, switch/dismiss/navigation behavior, measured positioning, and interruptible scroll assistance. It loads only on Home.
 - `static/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key.

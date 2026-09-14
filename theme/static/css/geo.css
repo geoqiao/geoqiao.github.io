@@ -49,7 +49,26 @@
 }
 .page-heading h1 { font-size: 2.5rem; font-weight: 400; }
 .article-heading h1 { font-weight: 600; }
-.entry h2, .work-heading h2, .identity-name { font-family: var(--sans); }
+.entry h2, .work-heading h2 { font-family: var(--sans); }
+/* Inner-page controls share Home's size, reading-column edge, and top offset. */
+.site-header { width: min(var(--reading-width), calc(100% - 48px)); margin: 24px auto 0; }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 44px; }
+.header-brand { font: 400 1.5rem/1.2 var(--display); letter-spacing: -.025em; }
+.header-controls { display: flex; flex-shrink: 0; gap: 4px; }
+.header-controls :is(.search-toggle, .theme-toggle) { display: flex; align-items: center; justify-content: center; flex: 0 0 44px; width: 44px; height: 44px; min-height: 44px; margin: 0; padding: 0; color: var(--muted); }
+:is(.home-tools, .header-controls) .theme-toggle { display: flex; align-items: center; justify-content: center; border: 0; background: none; }
+.theme-toggle > span { font-size: 1.2rem; }
+.header-controls :is(.search-toggle, .theme-toggle):hover { color: var(--accent); background: none; }
+#site-navigation { display: flex; flex-wrap: wrap; align-items: center; gap: 0 clamp(12px, 2.2vw, 24px); margin-top: 16px; border-bottom: 1px solid var(--line); }
+#site-navigation > a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 0 12px; color: var(--muted); font-size: .8125rem; }
+#site-navigation > a:hover { color: var(--ink); }
+#site-navigation > a[aria-current="page"] { color: var(--accent); }
+#site-navigation > a[aria-current="page"]::after { content: ""; position: absolute; inset: auto 0 -1px; height: 2px; border-radius: 2px; background: currentColor; }
+@media (max-width: 520px) {
+  .site-header { margin-top: 14px; }
+  .header-brand { font-size: 1.375rem; }
+  #site-navigation { margin-top: 10px; }
+}
 .site-footer strong { font-family: var(--sans); }
 .work-card { border-radius: 12px; }
 .work-heading { flex-wrap: wrap; }

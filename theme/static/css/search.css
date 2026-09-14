@@ -31,9 +31,6 @@ html.search-open { overflow: hidden; }
 .search-error { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 8px 0; font-size: .875rem; }
 .search-retry { padding: 8px 16px; border: 1px solid var(--boundary); border-radius: 4px; background: var(--paper); min-height: 44px; }
 .search-header, .search-form, .search-scope, .search-status, .search-error, .search-footer { flex-shrink: 0; }
-@media (max-width: 1160px) {
-  .search-toggle { width: auto; margin: 8px 0 12px; padding: 8px 12px; }
-}
 @media (max-width: 767px) {
   .search-dialog { padding: 18px; max-height: min(720px, calc(100dvh - 24px)); }
   .search-header { margin-bottom: 12px; }
