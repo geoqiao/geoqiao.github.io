@@ -24,7 +24,6 @@
   --boundary: #858585;
   --diagram-filter: none;
   --reading-width: 704px;
-  --side-width: 160px;
   --column-gap: 40px;
   --toc-width: clamp(160px, calc((100vw - var(--reading-width)) / 2 - var(--column-gap) - 24px), 320px);
   --code-bg: #f6f7f9;

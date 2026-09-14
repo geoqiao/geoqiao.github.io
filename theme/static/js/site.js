@@ -100,7 +100,7 @@
     sizeToc();
     let scheduled = false;
     function updateLocation() {
-      // ponytail: one scan per frame; use an observer if articles reach hundreds of headings.
+      // One scan per animation frame keeps the active heading in sync with scrolling.
       let active = 0;
       headings.forEach((heading, index) => {
         if (heading.getBoundingClientRect().top <= 160) active = index;

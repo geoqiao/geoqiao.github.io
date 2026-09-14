@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 # Build the real site with its pinned compiler and serve only on loopback.
 set -euo pipefail
+if [[ $# -gt 1 || ! "${1:-8765}" =~ ^(--build-only|[0-9]{1,5})$ ]]; then
+  echo "Usage: $0 [port (1–65535) | --build-only]" >&2
+  exit 2
+fi
+if [[ "${1:-}" != "--build-only" ]]; then
+  port=$((10#${1:-8765}))
+  if (( port < 1 || port > 65535 )); then
+    echo "Preview port must be between 1 and 65535." >&2
+    exit 2
+  fi
+fi
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 scratch="$root/.scratch/geo"
 compiler_dir="$scratch/compiler"
@@ -42,7 +53,6 @@ uv run --no-project --python "$runtime_dir/bin/python" python \
   --map "$root/content-migrations/blog-slugs-2026-08.json" \
   --output output --repository-root "$root"
 if [[ "${1:-}" == "--build-only" ]]; then exit 0; fi
-port=${1:-8765}
 echo "Geo preview: http://localhost:$port"
 exec uv run --no-project --python "$runtime_dir/bin/python" python \
   -m http.server "$port" --bind 127.0.0.1 --directory "$root/output"

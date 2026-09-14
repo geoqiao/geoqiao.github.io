@@ -111,8 +111,6 @@
   }
 
   trigger.hidden = false;
-  const shortcut = trigger.querySelector("[data-search-shortcut]");
-  if (shortcut) shortcut.textContent = /Mac|iPhone|iPad/.test(navigator.platform) ? "⌘ K" : "Ctrl K";
   trigger.addEventListener("click", open);
   dialog.querySelector(".search-close").addEventListener("click", () => dialog.close());
   dialog.querySelector(".search-retry").addEventListener("click", () => { load(); query.focus(); });
@@ -131,9 +129,9 @@
   });
   dialog.addEventListener("close", () => {
     document.documentElement.classList.remove("search-open");
-    const fallback = document.querySelector(".menu-toggle") || trigger;
-    if (returnFocus?.isConnected && returnFocus.getClientRects().length) returnFocus.focus();
-    else if (fallback.getClientRects().length) fallback.focus();
+    const target = [returnFocus, document.querySelector(".navigation-toggle"), trigger]
+      .find(element => element?.isConnected && element.getClientRects().length);
+    target?.focus({ preventScroll: true });
   });
   dialog.addEventListener("keydown", event => {
     if (composing || event.isComposing) return;

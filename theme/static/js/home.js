@@ -134,6 +134,8 @@
       if (selected && !event.target.closest(".deck-card, .deck-close")) close();
     });
     document.addEventListener("keydown", (event) => {
+      // Search and other controls own keys they have already handled.
+      if (event.defaultPrevented || event.isComposing) return;
       if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
         manualScroll = true;
         cancelScroll();

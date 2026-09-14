@@ -1,7 +1,6 @@
 .search-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; width: 100%; margin-top: 24px; padding: 8px 4px; border: 0; border-radius: 6px; background: none; color: var(--muted); font-size: .875rem; }
 .search-toggle:hover { background: var(--feature); color: var(--accent); }
 .search-toggle > span { font-size: 1.25rem; }
-.search-toggle kbd { padding: 1px 4px; border: 1px solid var(--line); border-radius: 3px; font: .625rem/1.5 var(--mono); }
 .search-dialog { width: min(620px, calc(100% - 32px)); max-height: min(720px, calc(100dvh - 48px)); margin: auto; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--canvas); color: var(--ink); box-shadow: 0 24px 80px #0003; overflow: hidden; }
 .search-dialog[open] { display: flex; flex-direction: column; }
 .search-dialog::backdrop { background: #1f191c44; backdrop-filter: blur(2px); }
