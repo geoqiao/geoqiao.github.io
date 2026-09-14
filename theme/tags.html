@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% set page_title = 'Tags' %}
+{% set active_section = site_routes.tags.canonical_path %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">{{ tags_index.tags|length }} topics</p><h1>Tags<span class="heading-dot" aria-hidden="true">.</span></h1><p>Browse the writing by topic.</p></div>
+<ul class="topic-directory">{% for tag in tags_index.tags %}<li><a href="{{ tag.route.canonical_path }}"><span class="topic-name">{{ tag.name }}</span><span class="topic-count">{{ tag.count }}<span class="visually-hidden"> {{ 'article' if tag.count == 1 else 'articles' }}</span></span></a></li>{% else %}<li class="empty-state">No topics yet.</li>{% endfor %}</ul>
+{% endblock %}

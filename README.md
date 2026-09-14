@@ -1,5 +1,7 @@
 # geoqiao.me
 
+The site uses **[Geo](theme/README.md)**, an independent local theme owned by this repository. Quiet was its starting point; Geo does not track future Quiet changes. Quiet remains escaping's default theme. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
+
 这是站点源码仓库。站点内容来自 GitHub Issues，`config.yaml`、`.github/workflows/pages.yml` 和迁移脚本是源码；GitHub Pages workflow 生成并上传 `output/` artifact。
 
 主要源码：
@@ -8,7 +10,7 @@
 - `config.yaml`：站点配置
 - `.github/workflows/pages.yml`：构建与部署流程
 - `scripts/render_slug_redirects.py`：Blog slug 迁移兼容页生成脚本
-- `assets/profile/`：头像；Quiet 复用该图片作为 favicon
+- `assets/profile/`：头像原件；Geo 使用 `theme/static/images/avatar.png` 的本地副本作为头像与 favicon
 - `assets/social/`：全站分享图；`seo.social_image` 引用固定 commit 直链，维护步骤见[图片说明](assets/social/README.md)
 - `assets/issues/<issue-number>/`：文章附件原件；正文使用固定 commit 的 GitHub 直链
 - `assets/charts/`：已有 #62 图表与 CSV，保留原路径
