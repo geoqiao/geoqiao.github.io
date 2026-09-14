@@ -49,7 +49,7 @@
 }
 .page-heading h1 { font-size: 2.5rem; font-weight: 400; }
 .article-heading h1 { font-weight: 600; }
-.entry h2, .work-heading h2 { font-family: var(--sans); }
+.entry h2 { font-family: var(--sans); }
 /* Inner-page controls share Home's size, reading-column edge, and top offset. */
 .site-header { position: relative; z-index: 15; width: min(var(--reading-width), calc(100% - 48px)); margin: 24px auto 0; }
 .header-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 20px; min-height: 44px; }
@@ -83,12 +83,38 @@
   .site-header { margin-top: 14px; }
 }
 .site-footer strong { font-family: var(--sans); }
-.work-card { border-radius: 12px; }
-.work-heading { flex-wrap: wrap; }
-.work-heading .work-image { width: 100%; flex: 0 0 100%; }
-.work-heading .work-image img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 7px; }
-.about-works .work-heading .work-image { width: 100%; flex-basis: 100%; }
-.about-works .work-heading .work-image img { width: 100%; height: auto; }
+/* Project identity stays small; the text carries the catalog. */
+.project-list { border-bottom: 1px solid var(--line); }
+.project-entry { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; padding: 26px 0; border-top: 1px solid var(--line); scroll-margin-top: 96px; }
+.project-logo { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 10px; overflow: hidden; background: var(--paper); color: var(--muted); font: 400 1.5rem/1 var(--display); }
+.project-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.project-copy { min-width: 0; }
+.project-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.project-heading h2, .project-heading h3 { min-width: 0; font: 600 1.125rem/1.5 var(--sans); }
+.project-heading a { display: inline-block; padding-block: 2px; }
+.project-language { color: var(--muted); font: .625rem/1.6 var(--mono); }
+.project-summary { margin-top: 8px; color: var(--muted); font-size: .875rem; line-height: 1.8; overflow-wrap: anywhere; }
+.project-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 8px; font-size: .75rem; }
+.project-links a { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; color: var(--accent); overflow-wrap: anywhere; }
+.about-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+.project-entry--compact { grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding: 18px 0; }
+.project-entry--compact .project-logo { width: 32px; height: 32px; border-radius: 7px; font-size: 1.125rem; }
+.project-entry--compact h3 { font-size: .9375rem; }
+.project-entry--compact .project-summary { margin-top: 6px; font-size: .8125rem; line-height: 1.75; }
+/* An alphabetical text index, with quiet counts at the reading edge. */
+.topic-directory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; list-style: none; padding: 0; margin: 0; }
+.topic-directory li { min-width: 0; border-bottom: 1px solid var(--line); }
+.topic-directory a { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; min-height: 52px; padding: 14px 0; font-size: .9375rem; }
+.topic-name { min-width: 0; overflow-wrap: anywhere; }
+.topic-count { flex-shrink: 0; color: var(--muted); font: .6875rem/1.6 var(--mono); font-variant-numeric: tabular-nums; }
+.tag-entries .entry h2 { font-size: 1rem; line-height: 1.7; }
+@media (max-width: 600px) {
+  .project-entry { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding-block: 22px; }
+  .project-logo { width: 40px; height: 40px; border-radius: 8px; }
+  .project-heading h2 { font-size: 1.0625rem; }
+  .about-projects, .topic-directory { grid-template-columns: 1fr; }
+  .project-entry--compact { grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding-block: 16px; }
+}
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media print {
   :root, :root:not([data-theme]), :root[data-theme="dark"] { --canvas: white; --paper: white; --ink: black; --muted: black; --line: #aaa; }

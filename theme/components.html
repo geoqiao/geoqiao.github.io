@@ -18,13 +18,19 @@
 {%- endmacro %}
 
 {% macro project_entry(project, compact=false) -%}
-<article class="work-card" id="{{ project.slug }}">
-  <header class="work-heading">
-    {% if project.image %}<span class="work-image"><img src="{{ project.image }}" width="44" height="44" alt="" loading="lazy"></span>{% endif %}
-    <div>{% if project.language and not compact %}<p class="work-context">{{ project.language }}</p>{% endif %}{% if compact %}<h3><a href="{{ project.url }}">{{ project.title }} <span class="project-arrow" aria-hidden="true">↗</span></a></h3>{% else %}<h2><a href="{{ project.url }}">{{ project.title }}</a></h2>{% endif %}</div>
-  </header>
-  {% if project.summary %}<p class="work-summary">{{ project.summary }}</p>{% endif %}
-  {% if not compact or project.links %}<footer class="work-footer"><nav aria-label="{{ project.title }} links">{% if not compact %}<a href="{{ project.url }}">GitHub <span aria-hidden="true">↗</span></a>{% endif %}{% for link in project.links %}<a href="{{ link.url }}">{{ link.name }} <span aria-hidden="true">↗</span></a>{% endfor %}</nav></footer>{% endif %}
+<article class="project-entry{% if compact %} project-entry--compact{% endif %}" id="{{ project.slug }}">
+  <span class="project-logo" aria-hidden="true">{% if project.image %}<img src="{{ project.image }}" width="48" height="48" alt="" loading="lazy" decoding="async">{% else %}<span>{{ project.title[:1]|upper }}</span>{% endif %}</span>
+  <div class="project-copy">
+    <header class="project-heading">
+      {% if compact %}<h3><a href="{{ project.url }}">{{ project.title }} <span class="project-arrow" aria-hidden="true">↗</span></a></h3>{% else %}<h2><a href="{{ project.url }}">{{ project.title }}</a></h2>{% endif %}
+      {% if project.language and not compact %}<span class="project-language">{{ project.language }}</span>{% endif %}
+    </header>
+    {% if project.summary %}<p class="project-summary">{{ project.summary }}</p>{% endif %}
+    {% if not compact %}<nav class="project-links" aria-label="{{ project.title }} links">
+      <a href="{{ project.url }}">GitHub <span aria-hidden="true">↗</span></a>
+      {% for link in project.links %}<a href="{{ link.url }}">{{ link.name }} <span aria-hidden="true">↗</span></a>{% endfor %}
+    </nav>{% endif %}
+  </div>
 </article>
 {%- endmacro %}
 

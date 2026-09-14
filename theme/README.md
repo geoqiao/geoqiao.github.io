@@ -14,11 +14,13 @@ The integration contract is **escaping Theme API 2**. All required page template
 - `static/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
 - `static/js/home.js`: one selected card, switch/dismiss/navigation behavior, measured positioning, and interruptible scroll assistance. It loads only on Home.
 - `static/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key. `site.js` also handles the compact navigation disclosure, Escape/outside dismissal, and focus when crossing the navigation breakpoint.
-- `static/images/projects/`: four local project covers, with [source and regeneration notes](../docs/theme-covers.md).
+- `components.html`: a text-led Projects catalog and a compact, correctly nested project list on About. Project logos are 48px on desktop, 40px on narrow screens, and 32px on About.
+- `tags.html` and `tag.html`: an alphabetical topic index with counts and compact article listings.
+- `static/images/projects/`: local [homepage covers](../docs/theme-covers.md) and [project logos](../docs/theme-logos.md).
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.
 
-Project content stays in `config.yaml`, using existing `projects[].image`, `summary`, `language`, and links. The cards open the matching anchor in the local Projects catalog. Cover image URLs use `/templates/Geo/static/images/projects/…`. No new compiler/config fields or external runtime dependencies were added.
+Project content stays in `config.yaml`, using existing `projects[].image`, `summary`, `language`, and links. `image` supplies the small project logo; an omitted image uses the project's initial. The homepage deck separately selects its four curated screenshot covers in `project-deck.html` and opens the matching anchor in the local Projects catalog. Assets use `/templates/Geo/static/images/projects/…`. No new compiler/config fields or external runtime dependencies were added.
 
 ## Local preview
 

@@ -10,7 +10,7 @@
   {% if featured_projects %}
   <section class="about-works" aria-labelledby="projects-title">
     <div class="section-heading"><h2 id="projects-title">Also building</h2><a class="more-projects" href="{{ site_routes.projects.canonical_path }}">All projects <span aria-hidden="true">↗</span></a></div>
-    <div class="works-grid">{% for project in featured_projects[:4] %}{{ project_entry(project) }}{% endfor %}</div>
+    <div class="about-projects">{% for project in featured_projects[:4] %}{{ project_entry(project, compact=true) }}{% endfor %}</div>
   </section>
   {% endif %}
   <div class="article-end"><a href="{{ home_path }}">Back to Home</a><a href="#top">Back to top ↑</a></div>
