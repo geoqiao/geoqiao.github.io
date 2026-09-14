@@ -24,6 +24,46 @@
 
   root.classList.add("js");
 
+  const navigation = document.getElementById("site-navigation");
+  const menu = document.querySelector(".navigation-toggle");
+  if (navigation && menu) {
+    const compactNavigation = matchMedia("(max-width: 1080px)");
+    let lastNavigationFocus;
+    function closeNavigation() {
+      menu.setAttribute("aria-expanded", "false");
+      navigation.classList.remove("is-open");
+    }
+    menu.addEventListener("click", () => {
+      const open = menu.getAttribute("aria-expanded") !== "true";
+      menu.setAttribute("aria-expanded", String(open));
+      navigation.classList.toggle("is-open", open);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") {
+        closeNavigation();
+        menu.focus({ preventScroll: true });
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!event.target.closest(".navigation-area")) closeNavigation();
+    });
+    document.addEventListener("focusin", (event) => {
+      lastNavigationFocus = event.target;
+      if (!event.target.closest(".navigation-area")) closeNavigation();
+    });
+    compactNavigation.addEventListener("change", () => {
+      // A breakpoint may hide the focused element before this event runs.
+      const active = document.activeElement === document.body ? lastNavigationFocus : document.activeElement;
+      closeNavigation();
+      if (compactNavigation.matches && navigation.contains(active)) menu.focus({ preventScroll: true });
+      if (!compactNavigation.matches && active === menu) {
+        (navigation.querySelector('[aria-current="page"]') || navigation.querySelector("a"))?.focus({ preventScroll: true });
+      }
+    });
+    // Hide the compact fallback only once every disclosure handler is ready.
+    root.classList.add("navigation-ready");
+  }
+
   const body = document.querySelector(".post-content");
   if (!body) return;
   const headings = [...body.querySelectorAll("h1, h2, h3")];

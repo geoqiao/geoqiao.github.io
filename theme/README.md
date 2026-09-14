@@ -6,14 +6,14 @@ The integration contract is **escaping Theme API 2**. All required page template
 
 ## Design and source
 
-- `base.html` and `header-controls.html`: inner pages use a compact brand row and horizontal navigation. Search and appearance match Home's icons, size, and position. The links remain visible on mobile and without JavaScript.
+- `base.html` and `header-controls.html`: inner pages use a narrow text navigation list in the left margin. Search and appearance match Home's icons, size, and position. At 1080px and below, navigation collapses into a Menu control at the top left; the compact header stays available while scrolling. Without JavaScript, navigation links remain visible in the page.
 - `intro.html`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
 - `home.html`: identity, featured/recent writing, and the project section.
 - `project-deck.html`: real project links with optional desktop previews.
-- `static/css/geo.css`: Geo's shared palette, Spectral typefaces, and top header layout.
+- `static/css/geo.css`: Geo's shared palette, Spectral typefaces, left navigation, and top controls.
 - `static/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
 - `static/js/home.js`: one selected card, switch/dismiss/navigation behavior, measured positioning, and interruptible scroll assistance. It loads only on Home.
-- `static/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key.
+- `static/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key. `site.js` also handles the compact navigation disclosure, Escape/outside dismissal, and focus when crossing the navigation breakpoint.
 - `static/images/projects/`: four local project covers, with [source and regeneration notes](../docs/theme-covers.md).
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.

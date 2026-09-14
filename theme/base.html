@@ -52,14 +52,16 @@
   {% else %}
   <header class="site-header" lang="en">
     <div class="header-row">
-      <a class="header-brand" href="{{ home_path }}" aria-label="{{ blog_title }} — Home">{{ author_name }}</a>
+      {% if navigation_items %}<div class="navigation-area">
+        <button class="navigation-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">Menu <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
+        <nav id="site-navigation" aria-label="Main navigation">
+          {% for item in navigation_items %}
+          <a href="{{ item.url }}"{% if item.url == active_section %} aria-current="page"{% endif %}>{{ item.name }}</a>
+          {% endfor %}
+        </nav>
+      </div>{% endif %}
       <div class="header-controls">{% include "header-controls.html" %}</div>
     </div>
-    {% if navigation_items %}<nav id="site-navigation" aria-label="Main navigation">
-      {% for item in navigation_items %}
-      <a href="{{ item.url }}"{% if item.url == active_section %} aria-current="page"{% endif %}>{{ item.name }}</a>
-      {% endfor %}
-    </nav>{% endif %}
   </header>
   {% endif %}
   {% include "search.html" %}
