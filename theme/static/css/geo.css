@@ -1,0 +1,63 @@
+/* Geo's shared palette and type. No runtime dependency on another theme. */
+@font-face {
+  font-family: Spectral;
+  src: url("../fonts/spectral-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url("../fonts/spectral-latin-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600 900;
+  font-display: swap;
+}
+:root {
+  --canvas: #faf9f6;
+  --paper: #f1efeb;
+  --rail: #f1efeb;
+  --line: #d9d5d0;
+  --ink: #292725;
+  --muted: #706d68;
+  --reading-width: 704px;
+  --display: Spectral, "Songti SC", Georgia, serif;
+  --object-shadow: 0 2px 3px #29272508, 0 14px 32px #29272512;
+  --raised-shadow: 0 5px 12px #29272512, 0 26px 60px #29272524;
+}
+:root[data-theme="dark"] {
+  --canvas: #0c0c0e;
+  --paper: #19191c;
+  --rail: #19191c;
+  --line: #39393f;
+  --ink: #e8e7e5;
+  --muted: #a4a1a9;
+  --object-shadow: 0 0 0 1px var(--line);
+  --raised-shadow: 0 0 0 1px #69646c, 0 22px 64px #0006;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --canvas: #0c0c0e;
+    --paper: #19191c;
+    --rail: #19191c;
+    --line: #39393f;
+    --ink: #e8e7e5;
+    --muted: #a4a1a9;
+    --object-shadow: 0 0 0 1px var(--line);
+    --raised-shadow: 0 0 0 1px #69646c, 0 22px 64px #0006;
+  }
+}
+.page-heading h1 { font-size: 2.5rem; font-weight: 400; }
+.article-heading h1 { font-weight: 600; }
+.entry h2, .work-heading h2, .identity-name { font-family: var(--sans); }
+.site-footer strong { font-family: var(--sans); }
+.work-card { border-radius: 12px; }
+.work-heading { flex-wrap: wrap; }
+.work-heading .work-image { width: 100%; flex: 0 0 100%; }
+.work-heading .work-image img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 7px; }
+.about-works .work-heading .work-image { width: 100%; flex-basis: 100%; }
+.about-works .work-heading .work-image img { width: 100%; height: auto; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media print {
+  :root, :root:not([data-theme]), :root[data-theme="dark"] { --canvas: white; --paper: white; --ink: black; --muted: black; --line: #aaa; }
+}

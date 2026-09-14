@@ -1,0 +1,23 @@
+{% set deck_projects = featured_projects[:4] %}
+<div class="project-deck" data-project-deck>
+  <button class="deck-close" type="button" aria-label="Close project preview" hidden><span aria-hidden="true">×</span> Close</button>
+  <ul class="deck-list">
+    {% for project in deck_projects %}
+    {% set position = loop.index0 - (deck_projects|length - 1) / 2 %}
+    <li class="deck-slot" style="--position: {{ position }}; --tilt: {{ position * 4 }}deg; --drop: {{ position|abs * 10 }}px; --order: {{ loop.index0 }}">
+      <a class="deck-card" href="{{ site_routes.projects.canonical_path }}#{{ project.slug }}" aria-labelledby="deck-title-{{ project.slug }}" data-project-name="{{ project.title }}">
+        <span class="deck-cover">
+          {% if project.image %}<img src="{{ project.image }}" alt="" width="1000" height="750" loading="lazy" decoding="async">{% else %}<span class="deck-placeholder" aria-hidden="true">{{ project.title }}</span>{% endif %}
+        </span>
+        <span class="deck-meta"><span class="deck-title" id="deck-title-{{ project.slug }}">{{ project.title }}</span>{% if project.language %}<span class="deck-language">{{ project.language }}</span>{% endif %}</span>
+        <span class="deck-details" id="deck-details-{{ project.slug }}">
+          {% if project.summary %}<span class="deck-summary">{{ project.summary }}</span>{% endif %}
+          <span class="deck-open" lang="en">Open project <span aria-hidden="true">↗</span></span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <p class="deck-hint" id="deck-hint" lang="en" hidden>Click a card to lift it. Click again to open the project.</p>
+  <p class="visually-hidden" data-deck-status role="status" aria-live="polite"></p>
+</div>

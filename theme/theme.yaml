@@ -1,0 +1,9 @@
+# Geo — an independent, site-owned theme. Theme API 2 is its compiler contract.
+api_version: "2"
+capabilities: [home, blog, ideas, about, projects, tags, comments, responsive, dark-mode]
+required_templates: []
+required_assets:
+  - static/css
+  - static/js
+  - static/fonts
+  - static/images

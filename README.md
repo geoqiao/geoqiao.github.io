@@ -1,5 +1,7 @@
 # geoqiao.me
 
+The site uses **[Geo](theme/README.md)**, an independent local theme owned by this repository. Quiet was its starting point; Geo does not track future Quiet changes. Quiet remains escaping's default theme. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
+
 这是站点源码仓库。站点内容来自 GitHub Issues，`config.yaml`、`.github/workflows/pages.yml` 和迁移脚本是源码；GitHub Pages workflow 生成并上传 `output/` artifact。
 
 主要源码：

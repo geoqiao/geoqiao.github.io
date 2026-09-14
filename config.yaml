@@ -42,7 +42,7 @@ site:
 profile:
   tagline: I make tools for the way I work — and a few things just for fun.
   bio: Post-loan strategy analyst by day. Usually tinkering with Python, TypeScript, or AI coding workflows.
-  avatar: https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/profile/avatar.png
+  avatar: /templates/Geo/static/images/avatar.png
   links:
     - name: GitHub
       url: https://github.com/geoqiao
@@ -75,8 +75,9 @@ paths:
   page_size: 10
 
 theme:
-  source: builtin
-  name: Quiet
+  source: local
+  name: Geo
+  path: theme
 
 # ============================================
 # SEO 配置
@@ -106,7 +107,7 @@ projects:
     title: pi-tools
     repository: geoqiao/pi-tools
     summary: 为 Pi / Paseo 提供结构化提问、旁支对话和本地 AI 用量报告。
-    image: https://raw.githubusercontent.com/geoqiao/geoqiao/0e114158f698e754cf1bd840ecbf264ef67e2dc5/assets/pi-tools-icon.png
+    image: /templates/Geo/static/images/projects/pi-tools.webp
     featured: true
     order: 1
     fallback_metadata:
@@ -116,7 +117,7 @@ projects:
     title: escaping
     repository: geoqiao/escaping
     summary: 把 GitHub Issues 变成个人网站。你正在读的这个博客，也由它驱动。
-    image: https://raw.githubusercontent.com/geoqiao/escaping/3b0b8d568462cf9ac81d9bef2dbba683ce57ec39/docs/assets/escaping-logo.png
+    image: /templates/Geo/static/images/projects/escaping.webp
     links:
       - name: 访问网站
         url: https://geoqiao.me/
@@ -133,7 +134,7 @@ projects:
     title: oh-my-share
     repository: geoqiao/oh-my-share
     summary: 为 Agent 提供 A 股、港股和美股的公开市场数据，在本地命令行使用。
-    image: https://raw.githubusercontent.com/geoqiao/oh-my-share/dee76d7aa8adff7f9fcb4c3c3b67c6f47757c0ff/docs/assets/oh-my-share-logo.png
+    image: /templates/Geo/static/images/projects/oh-my-share.webp
     featured: true
     order: 3
     fallback_metadata:
@@ -143,6 +144,7 @@ projects:
     title: paseo-stuff
     repository: geoqiao/paseo-stuff
     summary: 为 Paseo 提供社区插件：Agent 活动展示、DeepSeek 接入、数学公式渲染与侧边栏宠物。
+    image: /templates/Geo/static/images/projects/paseo-stuff.webp
     links:
       - name: 安装说明
         url: https://github.com/geoqiao/paseo-stuff#install-a-plugin-from-this-repository
