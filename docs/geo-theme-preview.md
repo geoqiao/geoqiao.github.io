@@ -13,7 +13,7 @@ Run `bash scripts/preview_geo.sh` from the repository, then open <http://localho
 - Narrow screens show a swipeable row with direct links. Reduced motion uses a static grid. Links and descriptions also work without JavaScript.
 - Light and dark appearance, search, project pages, article pages, and existing content routes are retained.
 - Projects uses small logos, text descriptions, and explicit links. About uses a compact version of the same component. Tags is an alphabetical text index with article counts.
-- Dark mode uses profile-inspired green for links, tags, active markers, and handwritten notes. Light mode keeps its original pink accents and blue/green/purple notes.
+- Dark mode uses profile-inspired green for links, tags, active markers, and annotation link highlights. Light mode keeps its original pink accents. Handwritten notes and arrows stay blue/green/purple in both appearances.
 - Inner pages use a fixed, narrow list of muted text links in the left margin, with a small dot marking the current section. Search and appearance remain at the top, matching Home's position. On smaller screens, a Menu control at the top left opens the links; the compact header stays available while scrolling.
 
 ## Captured preview

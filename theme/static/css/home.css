@@ -27,7 +27,8 @@
 }
 .home-intro p + p { margin-top: 0; }
 .annotation-link {
-  --note: #416eaa;
+  --note-ink: #416eaa;
+  --note: var(--note-ink);
   --delay: 0ms;
   position: relative;
   display: inline-block;
@@ -47,7 +48,7 @@
   left: 50%;
   width: max-content;
   max-width: 240px;
-  color: var(--note);
+  color: var(--note-ink);
   font: 400 1.0625rem/1.15 var(--hand);
   transform: translateX(-64%) rotate(-5deg);
 }
@@ -57,14 +58,14 @@
   height: 48px;
   bottom: calc(100% + 1px);
   left: calc(50% - 49px);
-  color: var(--note);
+  color: var(--note-ink);
   overflow: visible;
 }
 .annotation-arrow path { stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
-.note-projects { --note: #328052; --delay: 250ms; }
+.note-projects { --note-ink: #328052; --delay: 250ms; }
 .note-projects .annotation-note { transform: translateX(-28%) rotate(-4deg); }
 .note-projects .annotation-arrow { left: calc(50% - 14px); }
-.note-about { --note: #8953a7; --delay: 500ms; }
+.note-about { --note-ink: #8953a7; --delay: 500ms; }
 .note-about .annotation-note { top: calc(100% + 49px); bottom: auto; transform: translateX(-24%) rotate(-4deg); }
 .note-about .annotation-arrow { top: calc(100% + 3px); bottom: auto; left: calc(50% - 12px); }
 :root[data-theme="dark"] .annotation-link { --note: var(--accent); }
