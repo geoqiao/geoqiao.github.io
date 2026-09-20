@@ -1,0 +1,46 @@
+# Geo owns this complete catalog, including projects without a public repository.
+projects:
+  - slug: pi-tools
+    title: pi-tools
+    repository: geoqiao/pi-tools
+    summary: 为 Pi 提供结构化提问与本地 AI 用量报告，支持 Paseo 等 RPC 客户端。
+    image: /templates/Geo/static/images/projects/pi-tools-logo.webp
+    featured: true
+    order: 1
+    fallback_metadata:
+      language: TypeScript
+
+  - slug: escaping
+    title: escaping
+    repository: geoqiao/escaping
+    summary: 把 GitHub Issues 变成个人网站。你正在读的这个博客，也由它驱动。
+    image: /templates/Geo/static/images/projects/escaping-logo.webp
+    links:
+      - name: 访问网站
+        url: https://geoqiao.me/
+    featured: true
+    order: 2
+    fallback_metadata:
+      language: Python
+      topics: [github-issues, static-site-generator, github-pages]
+
+  - slug: md2xarticle
+    title: md2xarticle
+    website: https://md2xarticle.com/
+    summary: 把 Markdown 变成 X 长文，处理本地图片、表格与 Mermaid 图表。
+    image: /templates/Geo/static/images/projects/md2xarticle.svg
+    links:
+      - name: 打开编辑器
+        url: https://md2xarticle.com/
+    featured: true
+    order: 3
+
+  - slug: paseo-stuff
+    title: paseo-stuff
+    repository: geoqiao/paseo-stuff
+    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
+    image: /templates/Geo/static/images/projects/paseo-stuff-logo.svg
+    featured: true
+    order: 4
+    fallback_metadata:
+      language: TypeScript

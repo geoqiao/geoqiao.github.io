@@ -10,7 +10,7 @@ Projects and About use small identity images instead of screenshot covers. These
 
 The icon for pi-tools was resized directly. Excess transparent padding around escaping and white padding around oh-my-share were trimmed before centering the original marks on square canvases. No new logo design or image generation was used.
 
-Paseo-stuff has no supplied project-wide logo. Its `image` field is omitted, so the shared component displays a small typographic P. This is a fallback initial, not an official Paseo logo.
+Paseo-stuff now uses `paseo-stuff-logo.svg`: the approved prototype's white `p+` on a purple (`#7a48d6`) rounded square. It is a site-owned project mark, not an official Paseo logo. Its glyphs are vector paths, so rendering does not depend on installed fonts. Projects, About and the dedicated homepage use this same file. `md2xarticle.svg` comes from the product's original editor. These additions use no image generation.
 
 To reproduce the conversions after downloading the linked originals:
 
@@ -20,4 +20,4 @@ magick escaping-logo.png -trim +repage -resize 100x100 -background none -gravity
 magick oh-my-share-logo.png -fuzz 10% -trim +repage -resize 100x100 -background white -gravity center -extent 128x128 -strip -quality 90 oh-my-share-logo.webp
 ```
 
-Place the results in `theme/static/images/projects/`. `config.yaml` selects these logos via the existing project `image` field. The homepage deck selects its own [screenshot covers](theme-covers.md) independently.
+Place the results in `theme/static/images/projects/`. `theme/projects.yaml` selects active logos through `image`. The homepage deck selects its own [screenshot covers](theme-covers.md) independently. The earlier oh-my-share logo remains a historical asset but is no longer selected or displayed.
