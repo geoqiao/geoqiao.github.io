@@ -1,0 +1,2 @@
+# Preserve whitespace inside the original editor bundle, including JS string literals.
+theme/projects/article-studio.html -whitespace linguist-vendored

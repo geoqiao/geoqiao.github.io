@@ -60,7 +60,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         compile_step = by_name[required[3]]
         self.assertEqual(compile_step["env"], {"GITHUB_TOKEN": "${{ github.token }}"})
         self.assertEqual(compile_step["run"].split(), [
-            '"$UV_PROJECT_ENVIRONMENT/bin/escpe"', "--config", '"$GITHUB_WORKSPACE/config.yaml"',
+            '"$UV_PROJECT_ENVIRONMENT/bin/python"', "theme/build.py", "--config", '"$GITHUB_WORKSPACE/config.yaml"',
         ])
         self.assertEqual(by_name[required[5]]["with"]["path"], "output")
         self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"uv run|python3(?:\s|$)")

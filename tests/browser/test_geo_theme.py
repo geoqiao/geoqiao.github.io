@@ -2,19 +2,22 @@
 
 import os
 import re
+import sys
 import unittest
 from contextlib import contextmanager
 from functools import partial
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from http.server import ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
 
 from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from scripts.serve_preview import PreviewHandler
 
 
-class QuietHandler(SimpleHTTPRequestHandler):
+class QuietHandler(PreviewHandler):
     def log_message(self, *_args):
         pass
 
@@ -279,6 +282,58 @@ class GeoThemeBrowserTests(unittest.TestCase):
             page.wait_for_function("window.scrollY === 0")
             page.wait_for_timeout(550)
             self.assertEqual(page.evaluate("window.scrollY"), 0)
+
+
+    def test_product_catalog_pages_and_shared_logo(self):
+        with self.page() as page:
+            for slug in ("pi-tools", "escaping", "md2xarticle", "paseo-stuff"):
+                page.goto(self.origin + "/projects/")
+                page.locator(f"#{slug} h2 a").click()
+                expect(page).to_have_url(self.origin + f"/projects/{slug}/")
+                expect(page.locator("h1")).to_be_visible()
+                for width in (390, 768, 1440):
+                    page.set_viewport_size({"width": width, "height": 1000})
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
+                page.get_by_role("link", name="所有项目", exact=True).click()
+                expect(page).to_have_url(self.origin + "/projects/")
+            catalog_logo = page.locator("#paseo-stuff .project-logo img").get_attribute("src")
+            page.goto(self.origin + "/projects/paseo-stuff/")
+            self.assertEqual(page.locator("header .brand img").get_attribute("src"), catalog_logo)
+            page.goto(self.origin + "/about/")
+            self.assertEqual(page.locator("#paseo-stuff .project-logo img").get_attribute("src"), catalog_logo)
+            page.goto(self.origin + "/projects/")
+            page.get_by_role("button", name="Search", exact=True).click()
+            page.get_by_role("dialog").locator("input").fill("md2xarticle")
+            page.get_by_role("dialog").get_by_role("link", name=re.compile("md2xarticle")).click()
+            expect(page).to_have_url(self.origin + "/projects/md2xarticle/")
+
+    def test_original_product_media_and_editor(self):
+        with self.page() as page:
+            page.goto(self.origin + "/projects/pi-tools/")
+            page.get_by_role("button", name="方案预览", exact=True).click()
+            expect(page.locator("#ask-screenshot")).to_have_attribute("src", re.compile("ask-preview.png$"))
+            # Chromium exposes clipboard permissions to automation; WebKit does not.
+            if os.getenv("GEO_BROWSER", "chromium") == "chromium":
+                page.context.grant_permissions(["clipboard-read", "clipboard-write"])
+                page.get_by_role("button", name="复制 pi-ask 安装命令").click()
+                self.assertEqual(page.evaluate("navigator.clipboard.readText()"), "pi install npm:@geoqiao/pi-ask")
+                page.locator("[data-open-video]").first.click()
+                page.locator("video").evaluate("v => v.play()")
+                page.wait_for_function("() => {const v=document.querySelector('video'); return v.readyState === 4 && v.seekable.length > 0 && v.seekable.end(0) > 12}", timeout=15000)
+                page.locator("video").evaluate("v => {v.pause(); v.currentTime=12}")
+                page.wait_for_function("document.querySelector('video').currentTime >= 11.9")
+                page.keyboard.press("Escape")
+                expect(page.locator("dialog")).not_to_be_visible()
+            page.goto(self.origin + "/projects/md2xarticle/")
+            source = page.frame_locator("iframe").get_by_role("textbox", name="Markdown source", exact=True)
+            original = source.input_value()
+            source.fill("# The original editor\n\nLive Markdown preview.")
+            expect(page.frame_locator("iframe").get_by_role("heading", name="The original editor", exact=True)).to_be_visible()
+            source.fill(original)
+            page.get_by_role("button", name="放大 md2xarticle 预览").click()
+            page.wait_for_function("!!document.fullscreenElement")
+            page.get_by_role("button", name="收起 md2xarticle 预览").click()
+            page.wait_for_function("!document.fullscreenElement")
 
 
 if __name__ == "__main__":

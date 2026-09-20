@@ -99,58 +99,10 @@ comments:
   theme_mode: auto
 
 # ============================================
-# Projects（站点维护的公开项目目录）
-# GitHub metadata 会在构建时刷新；fallback 只保留稳定字段
+# Geo 项目目录与产品首页由 theme/projects.yaml 和 theme/build.py 维护。
+# 原生 compiler config 不复制该目录。
 # ============================================
-projects:
-  - slug: pi-tools
-    title: pi-tools
-    repository: geoqiao/pi-tools
-    summary: 为 Pi / Paseo 提供结构化提问、旁支对话和本地 AI 用量报告。
-    image: /templates/Geo/static/images/projects/pi-tools-logo.webp
-    featured: true
-    order: 1
-    fallback_metadata:
-      language: TypeScript
-
-  - slug: escaping
-    title: escaping
-    repository: geoqiao/escaping
-    summary: 把 GitHub Issues 变成个人网站。你正在读的这个博客，也由它驱动。
-    image: /templates/Geo/static/images/projects/escaping-logo.webp
-    links:
-      - name: 访问网站
-        url: https://geoqiao.me/
-    featured: true
-    order: 2
-    fallback_metadata:
-      language: Python
-      topics:
-        - github-issues
-        - static-site-generator
-        - github-pages
-
-  - slug: oh-my-share
-    title: oh-my-share
-    repository: geoqiao/oh-my-share
-    summary: 为 Agent 提供 A 股、港股和美股的公开市场数据，在本地命令行使用。
-    image: /templates/Geo/static/images/projects/oh-my-share-logo.webp
-    featured: true
-    order: 3
-    fallback_metadata:
-      language: Python
-
-  - slug: paseo-stuff
-    title: paseo-stuff
-    repository: geoqiao/paseo-stuff
-    summary: 为 Paseo 提供社区插件：Agent 活动展示、DeepSeek 接入、数学公式渲染与侧边栏宠物。
-    links:
-      - name: 安装说明
-        url: https://github.com/geoqiao/paseo-stuff#install-a-plugin-from-this-repository
-    featured: true
-    order: 4
-    fallback_metadata:
-      language: TypeScript
+projects: []
 
 # ============================================
 # 安全配置

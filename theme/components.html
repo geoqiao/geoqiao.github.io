@@ -27,7 +27,7 @@
     </header>
     {% if project.summary %}<p class="project-summary">{{ project.summary }}</p>{% endif %}
     {% if not compact %}<nav class="project-links" aria-label="{{ project.title }} links">
-      <a href="{{ project.url }}">GitHub <span aria-hidden="true">↗</span></a>
+      <a href="{{ project.url }}">了解项目 <span aria-hidden="true">↗</span></a>
       {% for link in project.links %}<a href="{{ link.url }}">{{ link.name }} <span aria-hidden="true">↗</span></a>{% endfor %}
     </nav>{% endif %}
   </div>

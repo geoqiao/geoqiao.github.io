@@ -46,7 +46,8 @@ if [[ -z "${GITHUB_TOKEN:-}" ]]; then
   GITHUB_TOKEN=$(gh auth token)
   export GITHUB_TOKEN
 fi
-"$runtime_dir/bin/escpe" --config "$root/config.yaml"
+uv run --no-project --python "$runtime_dir/bin/python" python \
+  "$root/theme/build.py" --config "$root/config.yaml"
 unset GITHUB_TOKEN
 uv run --no-project --python "$runtime_dir/bin/python" python \
   "$root/scripts/render_slug_redirects.py" \
@@ -55,4 +56,4 @@ uv run --no-project --python "$runtime_dir/bin/python" python \
 if [[ "${1:-}" == "--build-only" ]]; then exit 0; fi
 echo "Geo preview: http://localhost:$port"
 exec uv run --no-project --python "$runtime_dir/bin/python" python \
-  -m http.server "$port" --bind 127.0.0.1 --directory "$root/output"
+  "$root/scripts/serve_preview.py" --port "$port" --directory "$root/output"

@@ -22,7 +22,9 @@ Dark mode uses a green accent drawn from the green stroke in the profile mark (`
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.
 
-Project content stays in `config.yaml`, using existing `projects[].image`, `summary`, `language`, and links. `image` supplies the small project logo; an omitted image uses the project's initial. The homepage deck separately selects its four curated screenshot covers in `project-deck.html` and opens the matching anchor in the local Projects catalog. Assets use `/templates/Geo/static/images/projects/…`. No new compiler/config fields or external runtime dependencies were added.
+Project content lives in `theme/projects.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use the injected `theme_path` prefix.
+
+`theme/build.py` is this site's build entry point. It composes the pinned compiler's content compiler, models, RouteRegistry, renderer, artifact validator and staged publication with Geo's four product pages. The complete catalog includes md2xarticle without inventing a public repository. All routes exist before search/sitemap generation and validation. This is owned by Geo: **no escaping code, Quiet template, generator pin or Theme API was changed**. Maintenance, media provenance and compatibility limits are documented in [product homepages](../docs/product-homepages.md).
 
 ## Local preview
 
@@ -40,7 +42,7 @@ Open **http://localhost:8765**. A numeric argument selects another port. Stop th
 bash scripts/preview_geo.sh --build-only
 ```
 
-The helper generates and validates the real site, then renders and validates all 31 legacy slug redirects. It serves `output/` as the document root. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
+The helper runs Geo's build entry point, validates the complete site including product pages, then renders and validates all 31 legacy slug redirects. It serves `output/` as the document root. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git. Running the generic `escpe` CLI alone does not compose Geo's product catalog; use this helper or the workflow entry point.
 
 If changing the compiler pin later, preserve the existing `.scratch/geo` directory under another name and let the helper prepare a fresh compiler/runtime. Do not reuse an environment installed from a different pin. This task's initial runtime was installed by the same pinned installer; `.scratch/geo/install.log` records its exact identity.
 

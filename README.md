@@ -8,6 +8,8 @@ The site uses **[Geo](theme/README.md)**, an independent local theme owned by th
 
 - GitHub Issues：Blog 与 About 内容源
 - `config.yaml`：站点配置
+- `theme/projects.yaml`、`theme/projects/`：Geo 项目目录与独立产品首页
+- `theme/build.py`：本站构建入口，复用固定版本 escaping 的编译、路由、校验与暂存发布
 - `.github/workflows/pages.yml`：构建与部署流程
 - `scripts/render_slug_redirects.py`：Blog slug 迁移兼容页生成脚本
 - `assets/profile/`：头像原件；Geo 使用 `theme/static/images/avatar.png` 的本地副本作为头像与 favicon
@@ -49,7 +51,7 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 | 安装 | 干净、精确 SHA 的 compiler checkout，调用其 `starter/.github/scripts/install.sh`，按 lock 和 build group 安装为 noneditable 包 |
 | 环境 | 虚拟环境及 cache 位于 runner temp，不写进 compiler source；测试和构建均使用安装环境的 Python |
 | 配置 | 根目录 `config.yaml` 显式提供仓库与站点 URL；输出仍为根目录 `output/` |
-| 校验 | 站点 unittest、编译器校验、本站 redirect/artifact 校验全部成功后才上传 |
+| 校验 | 站点 unittest、Geo 完整 SiteModel 的编译器校验、本站 redirect/artifact 校验全部成功后才上传 |
 | 发布 | 分支可以构建，只有 main 的成功 build 可以部署；短期 token 仅进入编译步骤的环境变量 |
 
 本地验证请使用可写站点副本，沿用工作流的固定 SHA 和安装命令。

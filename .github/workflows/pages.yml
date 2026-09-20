@@ -66,7 +66,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
-          "$UV_PROJECT_ENVIRONMENT/bin/escpe"
+          "$UV_PROJECT_ENVIRONMENT/bin/python" theme/build.py
           --config "$GITHUB_WORKSPACE/config.yaml"
 
       - name: Render and validate final Pages artifact
