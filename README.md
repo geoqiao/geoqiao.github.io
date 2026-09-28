@@ -8,8 +8,7 @@ The site uses **[Geo](theme/README.md)**, an independent local theme owned by th
 
 - GitHub Issues：Blog 与 About 内容源
 - `config.yaml`：站点配置
-- `theme/projects.yaml`、`theme/projects/`：Geo 项目目录与独立产品首页
-- `theme/build.py`：本站构建入口，复用固定版本 escaping 的编译、路由、校验与暂存发布
+- `config.yaml` 的 `projects:`、`theme/projects/`：项目目录与独立产品首页；`theme/theme.yaml` 为每个项目声明 `/projects/<slug>/`
 - `.github/workflows/pages.yml`：构建与部署流程
 - `scripts/render_slug_redirects.py`：Blog slug 迁移兼容页生成脚本
 - `assets/profile/`：头像原件；Geo 使用 `theme/static/images/avatar.png` 的本地副本作为头像与 favicon
@@ -39,25 +38,21 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 工作流监听 Issue 的创建、编辑、标签变更、关闭、重开、删除与转移。
 `deleted`、`transferred` 是 GitHub 支持的 [`issues` 事件类型](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#issues)，不是需要创建的标签；这类事件要求工作流文件位于默认分支。
 
-移除 `published` 才是常规撤稿操作，仅关闭 Issue 不会撤稿。撤稿、删除或转移时，一并处理 `site.featured_posts`、指向该文的正文内链和相关 `content-migrations` 映射；未处理的引用可能阻止构建。只有构建、校验和部署全部成功后，线上内容才更新；不要删除校验来绕过失败。
+移除 `published` 才是常规撤稿操作，仅关闭 Issue 不会撤稿。撤稿、删除或转移时，一并处理 `theme.options.featured_posts`、指向该文的正文内链和相关 `content-migrations` 映射；未处理的引用可能阻止构建。只有构建、校验和部署全部成功后，线上内容才更新；不要删除校验来绕过失败。
 
 ## 构建与升级
 
-工作流的 `ESCAPING_SHA` 是生成器版本的唯一固定值，不跟随移动分支。
-运行时统一使用 Python 3.14.x；Actions summary 记录实际安装身份。
+工作流的 `uses: geoqiao/escaping@<完整 commit SHA> # vX.Y.Z` 是生成器版本的唯一固定值，不跟随移动分支；升级时改为新版本 tag 对应的完整 commit SHA。
+escaping Action 用自身 lock 在 runner temp 安装 Python 3.14 环境并构建，站点不再自行安装编译器。
 
 | 环节 | 约定 |
 | --- | --- |
-| 安装 | 干净、精确 SHA 的 compiler checkout，调用其 `starter/.github/scripts/install.sh`，按 lock 和 build group 安装为 noneditable 包 |
-| 环境 | 虚拟环境及 cache 位于 runner temp，不写进 compiler source；测试和构建均使用安装环境的 Python |
-| 配置 | 根目录 `config.yaml` 显式提供仓库与站点 URL；输出仍为根目录 `output/` |
-| 校验 | 站点 unittest、Geo 完整 SiteModel 的编译器校验、本站 redirect/artifact 校验全部成功后才上传 |
-| 发布 | 分支可以构建，只有 main 的成功 build 可以部署；短期 token 仅进入编译步骤的环境变量 |
+| 测试 | 站点 unittest 在构建前运行：`uv run --no-project --python 3.14 --with pyyaml==6.0.3` |
+| 构建 | `geoqiao/escaping` Action 读取根目录 `config.yaml`，校验整站（含 `/projects/<slug>/`）后输出到 `output/` |
+| 校验 | `scripts/render_slug_redirects.py` 在 Action 输出上生成并校验旧 slug 兼容页，成功后才上传 |
+| 发布 | 分支可以构建，只有 main 的成功 build 可以部署；有 Issue 被跳过时部署照常进行，随后工作流标红并列出这些 Issue |
 
-本地验证请使用可写站点副本，沿用工作流的固定 SHA 和安装命令。
-`UV_PROJECT_ENVIRONMENT` 必须指向源码之外、尚不存在的绝对路径；如安装独立 Python，
-同时设置副本内的 `UV_PYTHON_INSTALL_DIR`、`UV_PYTHON_BIN_DIR` 和 `UV_CACHE_DIR`。
-站点测试使用安装环境已有的 PyYAML，无单独依赖清单。
+本地预览与检查见 [Geo 主题说明](theme/README.md)。
 
 升级前保留当前 Config、workflow、生成器身份和成功的 Pages artifact。
 先推分支检查安装、构建和完整产物，再合入 main；上线后检查页面、旧链接、feed、

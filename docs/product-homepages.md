@@ -4,15 +4,15 @@ Projects keeps the existing catalog layout. Project names, About entries, search
 
 ## Ownership and build
 
-This feature belongs entirely to this site's Geo theme. Escaping and its built-in Quiet theme are unchanged; the workflow still pins `9b16dbbea2dd2dd2a38e742198b0f7300f0404eb`.
+The pages belong to this site's Geo theme and use escaping Theme API 3; the generator has no Geo-specific code.
 
-- `theme/projects.yaml`: the complete catalog, including repository-free websites. Strict Pydantic validation reuses the compiler's repository, link, image and fallback-metadata validation, and checks safe unique route slugs.
-- `theme/build.py`: reads Config and public Issue snapshots, compiles the catalog and content, then adds complete project Routes to the same RouteRegistry and a GeoSiteModel. It renders and validates all artifacts before the normal staged output publication. It does not patch generated HTML or suppress validator errors.
+- `config.yaml` `projects:`: the complete catalog, including the repository-free md2xarticle website (explicit `slug`). escaping validates repositories, links, images, fallback metadata and unique slugs.
+- `theme/theme.yaml` `pages:`: `/projects/{slug}/` rendered from `projects/{slug}.html` for each project. escaping adds these routes to search and the sitemap, sets each project's `page`, and validates all links before the staged output publication.
 - `theme/projects/<slug>.html`: approved standalone layouts and concise copy. These use only `static/landing/landing.css`, not Geo's blog stylesheet.
 - `theme/static/landing/`: original media, Inter font, and the small controller for screenshots, actual video, copying and fullscreen previews.
 - `theme/static/images/projects/paseo-stuff-logo.svg`: the shared purple `p+` mark for Projects, About and the product homepage.
 
-The standard compiler Config keeps `projects: []` to prevent competing catalogs. The production workflow and `scripts/preview_geo.sh` invoke `theme/build.py`; the generic `escpe` entry point alone will not build these Geo additions. No plugin mechanism or additional runtime dependencies were introduced. Upgrading the generator pin requires running this site's integration tests against the new installed package as well as checking Theme API 2.
+Adding a project requires a matching `theme/projects/<slug>.html`; otherwise the build fails. Upgrading escaping requires `escpe theme check` and the browser suite against the new version.
 
 Use `bash scripts/preview_geo.sh --build-only` and serve `output/` as the HTTP root. The site helper uses `scripts/serve_preview.py`, bound to loopback, with HTTP byte-range support so the original recording can seek like it does on Pages. The browser suite uses the same handler. Production metadata keeps `https://geoqiao.me` for canonical, Open Graph, Twitter and sitemap URLs.
 
@@ -39,6 +39,6 @@ Product and font licenses are retained under `theme/static/landing/`. DeepSeek a
 
 ## Verification and limits
 
-The site suite includes a complete product-page render/search/sitemap tracer, invalid-catalog cases and staged-output preservation when a template or link fails. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, the original editor's live preview and fullscreen. Existing navigation, appearance and Home-card tests still run.
+Catalog validation, route registration and staged-output preservation are escaping's own tested behavior. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, the original editor's live preview and fullscreen. Existing navigation, appearance and Home-card tests still run.
 
 The editor does not publish to X from these checks. X draft creation requires the companion and Articles access, with final publication inside X. RPC support requires a client implementing Pi's portable interactions; the full TUI form is not promised in RPC. Activity requires Full detail; Math targets Paseo 0.9; MaKa remains experimental. Native Pi/Paseo and phone-device acceptance are outside this site change.

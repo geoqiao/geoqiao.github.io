@@ -81,7 +81,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
 
     def test_switch_keyboard_dismiss_and_reinitialization(self):
         with self.page() as page:
-            page.add_script_tag(url=self.origin + "/templates/Geo/static/js/home.js")
+            page.add_script_tag(url=self.origin + "/assets/js/home.js")
             cards = page.locator(".deck-card")
             cards.last.focus()
             page.keyboard.press("Enter")
@@ -123,7 +123,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
         for disabled in (True, False):
             with self.subTest(java_script_disabled=disabled), self.page(java_script_enabled=not disabled) as page:
                 if not disabled:
-                    page.route("**/static/js/home.js", lambda route: route.abort())
+                    page.route("**/assets/js/home.js", lambda route: route.abort())
                     page.reload()
                 card = page.locator(".deck-card").first
                 expect(page.locator(".deck-details").first).to_be_visible()

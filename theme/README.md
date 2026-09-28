@@ -2,13 +2,13 @@
 
 Geo is geoqiao.me's independent, site-owned theme. Its starting point was Quiet at escaping commit `9b16dbbea2dd2dd2a38e742198b0f7300f0404eb`; this is historical provenance, not an upstream to track. Geo has its own design, behavior, files, and maintenance decisions. There is no inheritance, synchronization, or obligation to adopt future Quiet changes. Quiet remains escaping's default built-in theme.
 
-The integration contract is **escaping Theme API 2**. All required page templates and static assets are owned here. The compiler continues to supply validated content, routes, search/feed output, and the shared comments and Mermaid resources.
+The integration contract is **escaping Theme API 3** (`theme.yaml`: `api: 3`). Templates read the four documented names `site`, `page`, `theme` and `t`. All page templates and static assets are owned here; `static/` is published at `/assets/`. The generator supplies validated content, routes, search/feed output, and the shared comments and Mermaid scripts under `/assets/escaping/`. Geo does not extend Quiet.
 
 ## Design and source
 
 - `base.html` and `header-controls.html`: inner pages use a narrow text navigation list in the left margin. Search and appearance match Home's icons, size, and position. At 1080px and below, navigation collapses into a Menu control at the top left; the compact header stays available while scrolling. Without JavaScript, navigation links remain visible in the page.
 - `intro.html`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
-- `home.html`: identity, featured/recent writing, and the project section.
+- `home.html`: identity, featured writing (`theme.options.featured_posts`), the five newest posts, and the project section.
 - `project-deck.html`: real project links with optional desktop previews.
 - `static/css/geo.css`: Geo's shared palette, Spectral typefaces, left navigation, and top controls.
 - `static/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
@@ -22,13 +22,13 @@ Dark mode uses a green accent drawn from the green stroke in the profile mark (`
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files. Existing Source Serif 4/Manrope assets and notices came with the initial theme copy.
 
-Project content lives in `theme/projects.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use the injected `theme_path` prefix.
+Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
 
-`theme/build.py` is this site's build entry point. It composes the pinned compiler's content compiler, models, RouteRegistry, renderer, artifact validator and staged publication with Geo's four product pages. The complete catalog includes md2xarticle without inventing a public repository. All routes exist before search/sitemap generation and validation. This is owned by Geo: **no escaping code, Quiet template, generator pin or Theme API was changed**. Maintenance, media provenance and compatibility limits are documented in [product homepages](../docs/product-homepages.md).
+`theme.yaml` declares one page per project: `path: /projects/{slug}/`, `template: projects/{slug}.html`, `for_each: projects`. The generator renders them with the rest of the site, lists them in search and the sitemap, and validates every link before publishing. Every project in `config.yaml` therefore needs its own `projects/<slug>.html`. md2xarticle is a website-only project with an explicit `slug`. Maintenance, media provenance and compatibility limits are documented in [product homepages](../docs/product-homepages.md).
 
 ## Local preview
 
-Requirements: Git, uv, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the compiler SHA from the production workflow, checks out that version in `.scratch/geo/compiler`, and installs its locked noneditable Python 3.14 environment outside the compiler source. No hosting action is part of the helper.
+Requirements: Git, uv, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the escaping version from the production workflow (`uses: geoqiao/escaping@…`), fetches it into `.scratch/geo/escaping-<version>`, and runs it the way the Action does: `uv run --locked` with Python 3.14 and an environment outside the checkout. `ESCAPING_SOURCE=/path/to/escaping` uses a local checkout instead. No hosting action is part of the helper.
 
 From the site repository:
 
@@ -42,9 +42,7 @@ Open **http://localhost:8765**. A numeric argument selects another port. Stop th
 bash scripts/preview_geo.sh --build-only
 ```
 
-The helper runs Geo's build entry point, validates the complete site including product pages, then renders and validates all 31 legacy slug redirects. It serves `output/` as the document root. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git. Running the generic `escpe` CLI alone does not compose Geo's product catalog; use this helper or the workflow entry point.
-
-If changing the compiler pin later, preserve the existing `.scratch/geo` directory under another name and let the helper prepare a fresh compiler/runtime. Do not reuse an environment installed from a different pin. This task's initial runtime was installed by the same pinned installer; `.scratch/geo/install.log` records its exact identity.
+The helper runs `escpe build`, which validates the complete site including product pages, then renders and validates all 31 legacy slug redirects. It serves `output/` as the document root. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
 
 ## Interaction contract
 
@@ -59,7 +57,7 @@ The retreat distance is measured from the complete selected card so its descript
 Build before running browser checks:
 
 ```sh
-uv run --no-project --python .scratch/geo/runtime/bin/python python -m unittest discover -s tests -v
+uv run --no-project --python 3.14 --with pyyaml==6.0.3 python -m unittest discover -s tests -v
 uv run --no-project --python 3.14 --with playwright==1.62.0 python tests/browser/test_geo_theme.py
 GEO_BROWSER=webkit uv run --no-project --python 3.14 --with playwright==1.62.0 python tests/browser/test_geo_theme.py
 git diff --check
