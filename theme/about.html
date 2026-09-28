@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% set page_title = page.about.title %}
+{% set page_title = page.item.title %}
 {% set active_section = site.routes.about.canonical_path %}
 {% block content %}
 {% from 'components.html' import project_entry, comments_section with context %}
 <article class="about-page">
-  <header class="about-header"><p class="eyebrow muted">About</p><h1>{{ page.about.title }}</h1></header>
-  <div class="post-content about-story">{% if page.about.is_profile %}<p>{{ site.profile.bio }}</p>{% else %}{{ page.about.body_html|safe }}{% endif %}</div>
+  <header class="about-header"><p class="eyebrow muted">About</p><h1>{{ page.item.title }}</h1></header>
+  <div class="post-content about-story">{% if page.item.is_profile %}<p>{{ site.profile.bio }}</p>{% else %}{{ page.item.body_html|safe }}{% endif %}</div>
   {% if site.featured_projects %}
   <section class="about-works" aria-labelledby="projects-title">
     <div class="section-heading"><h2 id="projects-title">Also building</h2><a class="more-projects" href="{{ site.routes.projects.canonical_path }}">All projects <span aria-hidden="true">↗</span></a></div>
@@ -13,7 +13,7 @@
   </section>
   {% endif %}
   <div class="article-end"><a href="{{ site.routes.home.canonical_path }}">Back to Home</a><a href="#top">Back to top ↑</a></div>
-  {% if site.comments.enabled and not page.about.is_profile %}{{ comments_section(page.about.issue_number) }}{% endif %}
+  {% if site.comments.enabled and not page.item.is_profile %}{{ comments_section(page.item.issue_number) }}{% endif %}
 </article>
 <script src="/assets/escaping/mermaid.js" data-runtime-src="/assets/escaping/mermaid/mermaid.min.js" data-mermaid-theme="neutral" defer></script>
 {% endblock %}

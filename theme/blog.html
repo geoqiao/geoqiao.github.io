@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-{% set page_title = 'Blog' if page.archive.page_number == 1 else 'Blog · ' ~ page.archive.page_number %}
+{% set page_title = 'Blog' if page.pagination.number == 1 else 'Blog · ' ~ page.pagination.number %}
 {% set active_section = site.routes.blog.canonical_path %}
 {% block content %}
 {% from 'components.html' import entry_list with context %}
 <div class="page-heading blog-heading"><p class="eyebrow">Notes in long form</p><h1>Blog<span class="heading-dot" aria-hidden="true">.</span></h1><div class="page-caption"><p>A collection, in chronological order.</p><a href="{{ site.routes.tags.canonical_path }}">Explore by topic ↗</a></div></div>
-{{ entry_list(page.archive.posts, show_descriptions=true) }}
+{{ entry_list(page.items, show_descriptions=true) }}
 <nav class="pagination" aria-label="Blog pagination">
-  {% if page.archive.prev_route %}<a rel="prev" href="{{ page.archive.prev_route.canonical_path }}">← Newer</a>{% else %}<span></span>{% endif %}
-  <span>{{ page.archive.page_number }} / {{ page.archive.total_pages }}</span>
-  {% if page.archive.next_route %}<a rel="next" href="{{ page.archive.next_route.canonical_path }}">Older →</a>{% else %}<span></span>{% endif %}
+  {% if page.pagination.prev %}<a rel="prev" href="{{ page.pagination.prev.canonical_path }}">← Newer</a>{% else %}<span></span>{% endif %}
+  <span>{{ page.pagination.number }} / {{ page.pagination.total }}</span>
+  {% if page.pagination.next %}<a rel="next" href="{{ page.pagination.next.canonical_path }}">Older →</a>{% else %}<span></span>{% endif %}
 </nav>
 {% endblock %}

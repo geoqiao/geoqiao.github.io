@@ -4,10 +4,10 @@ Projects keeps the existing catalog layout. Project names, About entries, search
 
 ## Ownership and build
 
-The pages belong to this site's Geo theme and use escaping Theme API 3; the generator has no Geo-specific code.
+The page templates belong to this site's Geo theme and use escaping Theme API 4; the generator has no Geo-specific code.
 
 - `config.yaml` `projects:`: the complete catalog, including the repository-free md2xarticle website (explicit `slug`). escaping validates repositories, links, images, fallback metadata and unique slugs.
-- `theme/theme.yaml` `pages:`: `/projects/{slug}/` rendered from `projects/{slug}.html` for each project. escaping adds these routes to search and the sitemap, sets each project's `page`, and validates all links before the staged output publication.
+- `config.yaml` `pages.extra`: `/projects/{slug}/` rendered from `projects/{slug}.html` for each project. escaping adds these routes to search and the sitemap, sets each project's `page`, and validates all links before the staged output publication.
 - `theme/projects/<slug>.html`: approved standalone layouts and concise copy. These use only `static/landing/landing.css`, not Geo's blog stylesheet.
 - `theme/static/landing/`: original media, Inter font, and the small controller for screenshots, actual video, copying and fullscreen previews.
 - `theme/static/images/projects/paseo-stuff-logo.svg`: the shared purple `p+` mark for Projects, About and the product homepage.

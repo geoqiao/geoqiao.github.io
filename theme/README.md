@@ -2,7 +2,7 @@
 
 Geo is geoqiao.me's independent, site-owned theme. Its starting point was Quiet at escaping commit `9b16dbbea2dd2dd2a38e742198b0f7300f0404eb`; this is historical provenance, not an upstream to track. Geo has its own design, behavior, files, and maintenance decisions. There is no inheritance, synchronization, or obligation to adopt future Quiet changes. Quiet remains escaping's default built-in theme.
 
-The integration contract is **escaping Theme API 3** (`theme.yaml`: `api: 3`). Templates read the four documented names `site`, `page`, `theme` and `t`. All page templates and static assets are owned here; `static/` is published at `/assets/`. The generator supplies validated content, routes, search/feed output, and the shared comments and Mermaid scripts under `/assets/escaping/`. Geo does not extend Quiet.
+The integration contract is **escaping Theme API 4** (`theme.yaml`: `api: 4`). Templates read the four documented names `site`, `page`, `theme` and `t`. All page templates and static assets are owned here; `static/` is published at `/assets/`. The generator supplies validated content, routes, search/feed output, and the shared comments and Mermaid scripts under `/assets/escaping/`. Geo does not extend Quiet.
 
 ## Design and source
 
@@ -24,7 +24,7 @@ The homepage takes visual inspiration from kieran.build. The annotation SVG path
 
 Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
 
-`theme.yaml` declares one page per project: `path: /projects/{slug}/`, `template: projects/{slug}.html`, `for_each: projects`. The generator renders them with the rest of the site, lists them in search and the sitemap, and validates every link before publishing. Every project in `config.yaml` therefore needs its own `projects/<slug>.html`. md2xarticle is a website-only project with an explicit `slug`. Maintenance, media provenance and compatibility limits are documented in [product homepages](../docs/product-homepages.md).
+The site's `config.yaml` opens one page per project under `pages.extra`: `path: /projects/{slug}/`, `template: projects/{slug}.html`, `for_each: projects`. The generator renders them with the rest of the site, lists them in search and the sitemap, and validates every link before publishing. Every project in `config.yaml` therefore needs its own `projects/<slug>.html`. md2xarticle is a website-only project with an explicit `slug`. Maintenance, media provenance and compatibility limits are documented in [product homepages](../docs/product-homepages.md).
 
 ## Local preview
 
