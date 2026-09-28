@@ -3,7 +3,7 @@
 {% macro writing_list(entries) -%}
 <ul class="home-writing">
   {% for entry in entries %}
-  <li><a href="{{ entry.detail_path }}"><span>{{ entry.title }}</span><time datetime="{{ entry.created_date }}">{{ entry.created_date }}</time></a></li>
+  <li><a href="{{ entry.route.canonical_path }}"><span>{{ entry.title }}</span><time datetime="{{ entry.created_date }}">{{ entry.created_date }}</time></a></li>
   {% endfor %}
 </ul>
 {%- endmacro %}
@@ -15,28 +15,28 @@
 </div>
 <header class="home-heading">
   <div class="home-title">
-    <h1>{{ blog_title }}</h1>
-    {% if metadata.profile.avatar %}<a class="home-signature" href="{{ site_routes.about.canonical_path }}" aria-label="About {{ author_name }}"><img class="home-avatar" src="{{ metadata.profile.avatar }}" alt="" width="88" height="88"></a>{% endif %}
+    <h1>{{ site.title }}</h1>
+    {% if site.profile.avatar %}<a class="home-signature" href="{{ site.routes.about.canonical_path }}" aria-label="About {{ site.author }}"><img class="home-avatar" src="{{ site.profile.avatar }}" alt="" width="88" height="88"></a>{% endif %}
   </div>
   {% include 'intro.html' %}
 </header>
-{% if home_page.featured_posts %}
+{% if theme.featured_posts %}
 <section class="home-section" aria-labelledby="featured-title">
   <div class="section-heading"><h2 id="featured-title">Featured writing</h2></div>
-  {{ writing_list(home_page.featured_posts) }}
+  {{ writing_list(theme.featured_posts) }}
 </section>
 {% endif %}
-{% if home_page.recent_posts %}
+{% if site.posts %}
 <section class="home-section" aria-labelledby="recent-title">
-  <div class="section-heading"><h2 id="recent-title">Recent articles</h2><a href="{{ site_routes.blog.canonical_path }}">View all <span aria-hidden="true">→</span></a></div>
-  {{ writing_list(home_page.recent_posts) }}
+  <div class="section-heading"><h2 id="recent-title">Recent articles</h2><a href="{{ site.routes.blog.canonical_path }}">View all <span aria-hidden="true">→</span></a></div>
+  {{ writing_list(site.posts[:5]) }}
 </section>
 {% else %}
 <section class="home-section" aria-labelledby="recent-title"><div class="section-heading"><h2 id="recent-title">Recent articles</h2></div><p class="muted">No published writing yet.</p></section>
 {% endif %}
-{% if featured_projects %}
+{% if site.featured_projects %}
 <section class="home-section home-projects" aria-labelledby="projects-title">
-  <div class="section-heading"><h2 id="projects-title">Projects</h2><a href="{{ site_routes.projects.canonical_path }}">All projects <span aria-hidden="true">→</span></a></div>
+  <div class="section-heading"><h2 id="projects-title">Projects</h2><a href="{{ site.routes.projects.canonical_path }}">All projects <span aria-hidden="true">→</span></a></div>
   {% include 'project-deck.html' %}
 </section>
 {% endif %}

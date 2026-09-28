@@ -14,8 +14,9 @@ on:
       - "theme/**"
       - "CNAME"
 
+permissions: {}
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -24,20 +25,13 @@ jobs:
     permissions:
       contents: read
       issues: read
-    env:
-      ESCAPING_SHA: 9b16dbbea2dd2dd2a38e742198b0f7300f0404eb
+      pages: read
+    outputs:
+      skipped-issues: ${{ steps.site.outputs.skipped-issues }}
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
-
-      - name: Checkout pinned escaping compiler
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: geoqiao/escaping
-          ref: ${{ env.ESCAPING_SHA }}
-          path: compiler
           persist-credentials: false
 
       - name: Install uv
@@ -46,40 +40,28 @@ jobs:
           enable-cache: false
           version: "0.12.0"
 
-      - name: Set up Python 3.14
-        run: uv python install 3.14
-
-      - name: Install locked noneditable compiler
-        env:
-          UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/compiler-venv
-          UV_CACHE_DIR: ${{ runner.temp }}/compiler-cache
-        run: |
-          set -euo pipefail
-          printf '%s\n' "UV_PROJECT_ENVIRONMENT=$UV_PROJECT_ENVIRONMENT" "UV_CACHE_DIR=$UV_CACHE_DIR" >> "$GITHUB_ENV"
-          bash compiler/starter/.github/scripts/install.sh \
-            "$GITHUB_WORKSPACE/compiler" "$ESCAPING_SHA" 3.14 >> "$GITHUB_STEP_SUMMARY"
-
       - name: Test site migration tooling
-        run: '"$UV_PROJECT_ENVIRONMENT/bin/python" -m unittest discover -s tests -v'
+        run: uv run --no-project --python 3.14 --with pyyaml==6.0.3 python -m unittest discover -s tests -v
 
-      - name: Generate site from the site Config
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: >-
-          "$UV_PROJECT_ENVIRONMENT/bin/python" theme/build.py
-          --config "$GITHUB_WORKSPACE/config.yaml"
+      - name: Build the site
+        id: site
+        uses: geoqiao/escaping@a62c423fd606d62e62617ddfa995276f0fefc0e7 # v0.2.0
+        with:
+          config: config.yaml
 
       - name: Render and validate final Pages artifact
+        env:
+          OUTPUT: ${{ steps.site.outputs.output }}
         run: >-
-          "$UV_PROJECT_ENVIRONMENT/bin/python" scripts/render_slug_redirects.py
+          uv run --no-project --python 3.14 python scripts/render_slug_redirects.py
           --map content-migrations/blog-slugs-2026-08.json
-          --output output
+          --output "$(realpath --relative-to="$GITHUB_WORKSPACE" "$OUTPUT")"
           --repository-root "$GITHUB_WORKSPACE"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: output
+          path: ${{ steps.site.outputs.output }}
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -95,3 +77,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+      - name: Report skipped Issues
+        if: needs.build.outputs.skipped-issues != ''
+        env:
+          SKIPPED: ${{ needs.build.outputs.skipped-issues }}
+        run: |
+          echo "::error title=Some Issues were not published::Issues $SKIPPED have errors; the build job summary says what to fix. Everything else is live."
+          exit 1

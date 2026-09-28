@@ -1,70 +1,61 @@
-"""Keep the production install/build/upload boundary explicit (uses locked PyYAML)."""
+"""Keep the production build/validate/upload boundary explicit (uses PyYAML)."""
 
+import re
 import unittest
 from pathlib import Path
 
 import yaml
 
+ROOT = Path(__file__).resolve().parents[1]
+
 
 class ProductionWorkflowTests(unittest.TestCase):
+    def setUp(self):
+        self.workflow = yaml.safe_load((ROOT / ".github/workflows/pages.yml").read_text())
+
     def test_content_lifecycle_events_trigger_rebuilds(self):
-        root = Path(__file__).resolve().parents[1]
-        workflow = yaml.safe_load((root / ".github/workflows/pages.yml").read_text())
         # PyYAML's YAML 1.1 loader reads the unquoted Actions `on` key as True.
-        events = set(workflow[True]["issues"]["types"])
+        events = set(self.workflow[True]["issues"]["types"])
         self.assertTrue({
             "opened", "edited", "labeled", "unlabeled", "closed", "reopened",
             "deleted", "transferred",
         }.issubset(events), events)
 
-    def test_locked_install_and_required_checks_gate_upload(self):
-        root = Path(__file__).resolve().parents[1]
-        workflow = yaml.safe_load((root / ".github/workflows/pages.yml").read_text())
-        jobs = workflow["jobs"]
+    def test_checks_gate_upload_and_deploy_reports_skipped_issues(self):
+        self.assertEqual(self.workflow["permissions"], {})
+        jobs = self.workflow["jobs"]
         self.assertEqual(set(jobs), {"build", "deploy"})
         build = jobs["build"]
         self.assertNotIn("if", build)  # Branch builds remain available.
-        self.assertEqual(build["permissions"], {"contents": "read", "issues": "read"})
-        self.assertRegex(build["env"]["ESCAPING_SHA"], r"^[0-9a-f]{40}$")
-        self.assertNotIn("runner.", str(build["env"]))
-        self.assertEqual(jobs["deploy"]["if"], "github.ref == 'refs/heads/main'")
-        self.assertEqual(jobs["deploy"]["needs"], "build")
-        self.assertEqual(jobs["deploy"]["permissions"], {"pages": "write", "id-token": "write"})
+        self.assertEqual(build["permissions"], {"contents": "read", "issues": "read", "pages": "read"})
         steps = build["steps"]
-        names = [step["name"] for step in steps]
-        required = [
-            "Set up Python 3.14", "Install locked noneditable compiler",
-            "Test site migration tooling", "Generate site from the site Config",
-            "Render and validate final Pages artifact", "Upload Pages artifact",
-        ]
-        positions = [names.index(name) for name in required]
-        self.assertEqual(positions, sorted(positions))
-        self.assertFalse(build.get("continue-on-error", False))
         for step in steps:
             self.assertNotIn("if", step)  # Default success(), never always().
             self.assertFalse(step.get("continue-on-error", False))
+            if uses := step.get("uses", ""):
+                self.assertRegex(uses, r"@[0-9a-f]{40}$")  # Full commit SHAs only.
         by_name = {step["name"]: step for step in steps}
-        self.assertEqual(by_name["Checkout pinned escaping compiler"]["with"]["ref"], "${{ env.ESCAPING_SHA }}")
-        install_step = by_name[required[1]]
-        self.assertEqual(install_step["env"]["UV_PROJECT_ENVIRONMENT"], "${{ runner.temp }}/compiler-venv")
-        self.assertEqual(install_step["env"]["UV_CACHE_DIR"], "${{ runner.temp }}/compiler-cache")
-        install = install_step["run"]
-        self.assertIn('"UV_PROJECT_ENVIRONMENT=$UV_PROJECT_ENVIRONMENT"', install)
-        self.assertIn('"UV_CACHE_DIR=$UV_CACHE_DIR"', install)
-        self.assertIn('>> "$GITHUB_ENV"', install)
-        self.assertIn('bash compiler/starter/.github/scripts/install.sh', install)
-        self.assertIn('"$GITHUB_WORKSPACE/compiler" "$ESCAPING_SHA" 3.14', install)
-        self.assertIn("set -euo pipefail", install)
-        for name in (required[2], required[4]):
-            self.assertTrue(by_name[name]["run"].startswith('"$UV_PROJECT_ENVIRONMENT/bin/python"'))
-        compile_step = by_name[required[3]]
-        self.assertEqual(compile_step["env"], {"GITHUB_TOKEN": "${{ github.token }}"})
-        self.assertEqual(compile_step["run"].split(), [
-            '"$UV_PROJECT_ENVIRONMENT/bin/python"', "theme/build.py", "--config", '"$GITHUB_WORKSPACE/config.yaml"',
-        ])
-        self.assertEqual(by_name[required[5]]["with"]["path"], "output")
-        self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"uv run|python3(?:\s|$)")
-        self.assertEqual(yaml.safe_load((root / "config.yaml").read_text())["paths"]["output"], "output")
+        required = [
+            "Test site migration tooling", "Build the site",
+            "Render and validate final Pages artifact", "Upload Pages artifact",
+        ]
+        positions = [list(by_name).index(name) for name in required]
+        self.assertEqual(positions, sorted(positions))
+        site = by_name["Build the site"]
+        self.assertEqual((site["id"], site["with"]), ("site", {"config": "config.yaml"}))
+        self.assertRegex(site["uses"], r"^geoqiao/escaping@[0-9a-f]{40}$")
+        output = "${{ steps.site.outputs.output }}"
+        self.assertEqual(by_name["Render and validate final Pages artifact"]["env"], {"OUTPUT": output})
+        self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], output)
+        self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
+
+        deploy = jobs["deploy"]
+        self.assertEqual(deploy["if"], "github.ref == 'refs/heads/main'")
+        self.assertEqual(deploy["needs"], "build")
+        self.assertEqual(deploy["permissions"], {"pages": "write", "id-token": "write"})
+        report = deploy["steps"][-1]
+        self.assertEqual(report["if"], "needs.build.outputs.skipped-issues != ''")
+        self.assertTrue(re.search(r"exit 1\s*$", report["run"]))
 
 
 if __name__ == "__main__":

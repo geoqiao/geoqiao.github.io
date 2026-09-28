@@ -1,4 +1,4 @@
 {% extends 'article.html' %}
-{% set article = post %}
-{% set active_section = site_routes.blog.canonical_path %}
+{% set article = page.post %}
+{% set active_section = site.routes.blog.canonical_path %}
 {% set section_label = 'Blog' %}

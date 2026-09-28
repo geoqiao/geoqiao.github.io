@@ -20,4 +20,4 @@ magick escaping-logo.png -trim +repage -resize 100x100 -background none -gravity
 magick oh-my-share-logo.png -fuzz 10% -trim +repage -resize 100x100 -background white -gravity center -extent 128x128 -strip -quality 90 oh-my-share-logo.webp
 ```
 
-Place the results in `theme/static/images/projects/`. `theme/projects.yaml` selects active logos through `image`. The homepage deck selects its own [screenshot covers](theme-covers.md) independently. The earlier oh-my-share logo remains a historical asset but is no longer selected or displayed.
+Place the results in `theme/static/images/projects/`. `projects:` in `config.yaml` selects active logos through `image` (`/assets/images/projects/…`). The homepage deck selects its own [screenshot covers](theme-covers.md) independently. The earlier oh-my-share logo remains a historical asset but is no longer selected or displayed.

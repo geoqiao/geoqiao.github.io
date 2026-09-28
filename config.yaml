@@ -16,10 +16,6 @@ site:
   author: Geo Qiao
   description: "金融行业的贷后策略分析师，记录 AI 工作流、Python 实践与个人项目。"
   language: zh-CN
-  featured_posts: [41, 67, 49]
-  thesis:
-    - Escaping is a static blog system based on GitHub Issues.
-    - Generated with Python + Jinja2, deployed via GitHub Actions.
   navigation:
     items:
       - name: Home
@@ -40,9 +36,8 @@ site:
 # 头像与站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
-  tagline: I make tools for the way I work — and a few things just for fun.
   bio: Post-loan strategy analyst by day. Usually tinkering with Python, TypeScript, or AI coding workflows.
-  avatar: /templates/Geo/static/images/avatar.png
+  avatar: /assets/images/avatar.png
   links:
     - name: GitHub
       url: https://github.com/geoqiao
@@ -57,27 +52,23 @@ about:
   issue_number: 42
 
 # ============================================
-# 使用声明（开源相关，建议保留）
-# ============================================
-branding:
-  show_powered_by: true
-  powered_by_text: escaping
-  powered_by_url: https://github.com/geoqiao/escaping
-  source_link_url: https://github.com/geoqiao/escaping
-
-# ============================================
 # 生成路径配置
 # page_size 为正整数，默认 10
-# Home 最近 Blog 数量在 v1 固定为 5，不可配置
 # ============================================
 paths:
   output: output
   page_size: 10
 
+# ============================================
+# Geo 主题（theme/theme.yaml 声明这些选项）
+# ============================================
 theme:
-  source: local
-  name: Geo
-  path: theme
+  use: ./theme
+  options:
+    featured_posts: [41, 67, 49]
+    show_powered_by: true
+    comments_theme: github-light
+    comments_theme_mode: auto
 
 # ============================================
 # SEO 配置
@@ -89,24 +80,57 @@ seo:
 
 # ============================================
 # 评论配置
-# repo 留空时回退到 github.repo
-# theme_mode: auto 跟随博客主题
+# repo 留空时回退到 github.repo；配色见 theme.options.comments_theme*
 # ============================================
 comments:
   enabled: true
-  repo: ""
-  theme: github-light
-  theme_mode: auto
 
 # ============================================
-# Geo 项目目录与产品首页由 theme/projects.yaml 和 theme/build.py 维护。
-# 原生 compiler config 不复制该目录。
+# 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/
+# 产品首页模板是 theme/projects/<slug>.html
 # ============================================
-projects: []
+projects:
+  - slug: pi-tools
+    title: pi-tools
+    repository: geoqiao/pi-tools
+    summary: 为 Pi 提供结构化提问与本地 AI 用量报告，支持 Paseo 等 RPC 客户端。
+    image: /assets/images/projects/pi-tools-logo.webp
+    featured: true
+    order: 1
+    fallback_metadata:
+      language: TypeScript
 
-# ============================================
-# 安全配置
-# token_env 动态决定 Token 环境变量名，不硬编码
-# ============================================
-security:
-  token_env: GITHUB_TOKEN
+  - slug: escaping
+    title: escaping
+    repository: geoqiao/escaping
+    summary: 把 GitHub Issues 变成个人网站。你正在读的这个博客，也由它驱动。
+    image: /assets/images/projects/escaping-logo.webp
+    links:
+      - name: 访问网站
+        url: https://geoqiao.me/
+    featured: true
+    order: 2
+    fallback_metadata:
+      language: Python
+      topics: [github-issues, static-site-generator, github-pages]
+
+  - slug: md2xarticle
+    title: md2xarticle
+    website: https://md2xarticle.com/
+    summary: 把 Markdown 变成 X 长文，处理本地图片、表格与 Mermaid 图表。
+    image: /assets/images/projects/md2xarticle.svg
+    links:
+      - name: 打开编辑器
+        url: https://md2xarticle.com/
+    featured: true
+    order: 3
+
+  - slug: paseo-stuff
+    title: paseo-stuff
+    repository: geoqiao/paseo-stuff
+    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
+    image: /assets/images/projects/paseo-stuff-logo.svg
+    featured: true
+    order: 4
+    fallback_metadata:
+      language: TypeScript
