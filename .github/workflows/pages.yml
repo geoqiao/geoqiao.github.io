@@ -45,7 +45,7 @@ jobs:
 
       - name: Build the site
         id: site
-        uses: geoqiao/escaping@c7a16437777d606b132ab860d516c20ac436d429 # v0.3.0
+        uses: geoqiao/escaping@046ec4511cb63c49b23ffc83b23bf8f5bd6f4140 # v0.4.0
         with:
           config: config.yaml
 
