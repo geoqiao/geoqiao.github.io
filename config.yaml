@@ -86,8 +86,52 @@ comments:
   enabled: true
 
 # ============================================
-# 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/
-# 产品首页模板是 theme/projects/<slug>.html
+# 页面：/projects/<slug>/ 是每个项目的产品首页，模板是 theme/projects/<slug>.html
+# ============================================
+pages:
+  extra:
+    - path: /projects/{slug}/
+      template: projects/{slug}.html
+      for_each: projects
+
+# ============================================
+# 旧地址：2026-08 改过 slug 的文章，旧地址跳到新地址
+# ============================================
+redirects:
+  /blog/rye-hao-yong-de-pythonbao-guan-li-gong-ju/: /blog/rye-python-package-manager-guide/
+  /blog/excel-xue-xi-jing-yan-fen-xiang/: /blog/practical-excel-learning-tips/
+  /blog/with-sql-as-english/: /blog/learn-sql-in-plain-english/
+  /blog/guan-yu-li-shi/: /blog/history-as-a-rolling-wheel/
+  /blog/kong-diao-bo-xue-li-lun-de-ti-chu/: /blog/air-conditioning-exploitation-theory/
+  /blog/zong-de-huo-zhao-ba/: /blog/why-we-still-choose-to-live/
+  /blog/ji-yu-github-issues-de-ge-ren-blog-da-jian/: /blog/github-issues-blog-setup-guide/
+  /blog/shottr-yuan-sheng-qing-qiao-qie-gong-neng-qiang-da-de-mian-fei-tu-gong/: /blog/shottr-lightweight-macos-screenshot-tool/
+  /blog/pythonhuan-jing-an-zhuang-anacondawei-li/: /blog/install-python-with-anaconda/
+  /blog/zhong-qi-qing-yong-obsidian/: /blog/use-obsidian-the-simple-way/
+  /blog/wo-de-di-yi-ge-wan-zheng-de-ji-qi-xue-xi-xiang-mu-titaniczong-jie/: /blog/my-first-titanic-machine-learning-project/
+  /blog/zong-you-yi-xie-app-zhi-neng-windows-yong/: /blog/run-windows-apps-on-mac-with-vmware/
+  /blog/pythonbian-ji-qi-wo-de-vscodepei-zhi/: /blog/my-vscode-setup-for-python/
+  /blog/ji-yu-fastapi-de-crud-lian-xi-rss-ding-yue-guan-li/: /blog/build-an-rss-manager-with-fastapi/
+  /blog/shi-yong-python-he-github-pages-da-jian-ge-ren-bo-ke/: /blog/build-a-python-blog-on-github-pages/
+  /blog/uv-github-20k-star-de-zhong-ji-python-xiang-mu-guan-li-gong-ju/: /blog/uv-python-project-management-guide/
+  /blog/wei-github-pages-ge-ren-bo-ke-tian-jia-yaml-pei-zhi-gong-neng-ji-yu/: /blog/add-yaml-config-to-github-pages-blog/
+  /blog/bu-yao-jiu-jie-liao-zai-pandaszhong-shu-ju-shai-xuan-jiu-yong-ta/: /blog/filter-pandas-dataframes-with-loc/
+  /blog/ru-he-dui-lian-xu-xing-shu-ju-jin-xing-fen-xiang-python/: /blog/optimal-binning-for-continuous-data-in-python/
+  /blog/python-huan-jing-pei-zhi-cong-ling-kai-shi-uv-pdm-he-vscode-de-zui-jia/: /blog/python-setup-with-uv-pdm-and-vscode/
+  /blog/pei-zhi-vscode-de-mian-fei-ai-bian-cheng-zhu-shou-ollama-groqhe-kuo/: /blog/free-vscode-ai-with-ollama-groq-and-continue/
+  /blog/2024nian-zhong-zong-jie-kong-zhi-yu-qi-jian-chi-xia-qu/: /blog/2024-review-manage-expectations-and-keep-going/
+  /blog/wo-xi-huan-dong-tian-de-xia-wu-zou-lu-qu-cheng-du-de-cha-guan-he-cha/: /blog/winter-walks-to-chengdu-teahouses/
+  /blog/2025nian-zhong-zong-jie-guan-zhu-zi-ji/: /blog/2025-review-focus-on-yourself/
+  /blog/vibe-coding-shi-zhan-hou-gan-github-blog-with-trae/: /blog/vibe-coding-github-blog-with-trae/
+  /blog/bu-dong-git-bu-hui-qian-duan-yi-ge-wen-ke-sheng-de-github-blog/: /blog/build-a-github-blog-without-git-or-frontend/
+  /blog/cong-superpowers-xue-xi-gao-zhi-liang-ai-xie-zuo-yi-fen-gei-ce-lue-fen/: /blog/superpowers-claude-code-guide-for-strategy-analysts/
+  /blog/cong-obsidian-dao-bo-ke-wo-ru-he-yong-yi-tiao-ming-ling-ba-bi-ji-bian/: /blog/publish-obsidian-notes-with-one-command/
+  /blog/what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin-zhong-duan/: /blog/terminal-codex-workflow-with-pi-and-herdr/
+  /blog/74/: /blog/which-harness-should-you-use-in-2026/
+  /blog/which-harness-should-you-use-in-2026/: /blog/which-ai-agent-harness-should-you-use-in-2026/
+
+# ============================================
+# 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/（见 pages.extra）
 # ============================================
 projects:
   - slug: pi-tools

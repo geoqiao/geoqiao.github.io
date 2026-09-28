@@ -1,5 +1,5 @@
 # Geo — geoqiao.me's own Theme. Set these under theme.options in config.yaml.
-api: 3
+api: 4
 
 options:
   featured_posts:
@@ -20,9 +20,3 @@ options:
     values: [auto, fixed]
     default: auto
     description: auto follows Geo's light/dark mode; fixed always uses comments_theme.
-
-# One product homepage per project: theme/projects/<slug>.html.
-pages:
-  - path: /projects/{slug}/
-    template: projects/{slug}.html
-    for_each: projects

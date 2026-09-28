@@ -45,18 +45,9 @@ jobs:
 
       - name: Build the site
         id: site
-        uses: geoqiao/escaping@a62c423fd606d62e62617ddfa995276f0fefc0e7 # v0.2.0
+        uses: geoqiao/escaping@c7a16437777d606b132ab860d516c20ac436d429 # v0.3.0
         with:
           config: config.yaml
-
-      - name: Render and validate final Pages artifact
-        env:
-          OUTPUT: ${{ steps.site.outputs.output }}
-        run: >-
-          uv run --no-project --python 3.14 python scripts/render_slug_redirects.py
-          --map content-migrations/blog-slugs-2026-08.json
-          --output "$(realpath --relative-to="$GITHUB_WORKSPACE" "$OUTPUT")"
-          --repository-root "$GITHUB_WORKSPACE"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

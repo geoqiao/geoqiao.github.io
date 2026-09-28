@@ -36,8 +36,7 @@ class ProductionWorkflowTests(unittest.TestCase):
                 self.assertRegex(uses, r"@[0-9a-f]{40}$")  # Full commit SHAs only.
         by_name = {step["name"]: step for step in steps}
         required = [
-            "Test site migration tooling", "Build the site",
-            "Render and validate final Pages artifact", "Upload Pages artifact",
+            "Test site migration tooling", "Build the site", "Upload Pages artifact",
         ]
         positions = [list(by_name).index(name) for name in required]
         self.assertEqual(positions, sorted(positions))
@@ -45,7 +44,6 @@ class ProductionWorkflowTests(unittest.TestCase):
         self.assertEqual((site["id"], site["with"]), ("site", {"config": "config.yaml"}))
         self.assertRegex(site["uses"], r"^geoqiao/escaping@[0-9a-f]{40}$")
         output = "${{ steps.site.outputs.output }}"
-        self.assertEqual(by_name["Render and validate final Pages artifact"]["env"], {"OUTPUT": output})
         self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], output)
         self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
 

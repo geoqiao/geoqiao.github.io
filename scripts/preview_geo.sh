@@ -40,9 +40,6 @@ UV_PROJECT_ENVIRONMENT="$scratch/runtime-$ref" uv run --project "$compiler_dir" 
 unset GITHUB_TOKEN
 # 2: published, but some Issues were skipped; the build output says which.
 if (( status != 0 && status != 2 )); then exit "$status"; fi
-uv run --no-project --python 3.14 python "$root/scripts/render_slug_redirects.py" \
-  --map "$root/content-migrations/blog-slugs-2026-08.json" \
-  --output output --repository-root "$root"
 if [[ "${1:-}" == "--build-only" ]]; then exit 0; fi
 echo "Geo preview: http://localhost:$port"
 exec uv run --no-project --python 3.14 python \
