@@ -86,13 +86,16 @@ comments:
   enabled: true
 
 # ============================================
-# 页面：/projects/<slug>/ 是每个项目的产品首页，模板是 theme/projects/<slug>.html
+# 页面：/projects/<slug>/ 是每个项目的产品首页，模板是 theme/projects/<slug>.html；
+# /projects/md2xarticle/studio/ 是 md2xarticle 首页内嵌的原版编辑器
 # ============================================
 pages:
   extra:
     - path: /projects/{slug}/
       template: projects/{slug}.html
       for_each: projects
+    - path: /projects/md2xarticle/studio/
+      template: projects/article-studio.html
 
 # ============================================
 # 旧地址：2026-08 改过 slug 的文章，旧地址跳到新地址

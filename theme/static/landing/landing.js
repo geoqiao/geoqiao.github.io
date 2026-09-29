@@ -12,7 +12,7 @@ document.addEventListener('click',async event=>{
 });
 dialog?.addEventListener('close',()=>dialog.querySelector('video').pause());
 dialog?.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
-function fit(viewport){if(!viewport.clientWidth||!viewport.clientHeight)return;const width=document.fullscreenElement?viewport.clientWidth:Number(viewport.dataset.sourceWidth);const frame=viewport.querySelector('iframe');const scale=viewport.clientWidth/width;frame.style.width=width+'px';frame.style.height=viewport.clientHeight/scale+'px';frame.style.transform=`scale(${scale})`;}
+function fit(viewport){if(!viewport.clientWidth||!viewport.clientHeight)return;const width=document.fullscreenElement||innerWidth<720?viewport.clientWidth:Number(viewport.dataset.sourceWidth);const frame=viewport.querySelector('iframe');const scale=viewport.clientWidth/width;frame.style.width=width+'px';frame.style.height=viewport.clientHeight/scale+'px';frame.style.transform=`scale(${scale})`;}
 const observer=new ResizeObserver(entries=>entries.forEach(({target})=>fit(target)));
 document.querySelectorAll('.frame-viewport').forEach(viewport=>observer.observe(viewport));
 document.addEventListener('fullscreenchange',()=>document.querySelectorAll('[data-fullscreen]').forEach(button=>{const full=document.fullscreenElement===button.closest('[data-preview]');const name=button.closest('[data-preview]').querySelector('iframe').title.replace(' 原版页面预览','');button.textContent=full?'⤡':'⤢';button.setAttribute('aria-label',(full?'收起 ':'放大 ')+name+' 预览');}));
