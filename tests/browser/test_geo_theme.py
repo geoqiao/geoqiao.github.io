@@ -229,9 +229,8 @@ class GeoThemeBrowserTests(unittest.TestCase):
     def test_appearance_palettes_with_and_without_scripts(self):
         palettes = {
             "light": ("#a72f6a", "#ead6e0", ["#416eaa", "#328052", "#8953a7"]),
-            "dark": ("#4faf90", "#203d32", ["#416eaa", "#328052", "#8953a7"]),
+            "dark": ("#4faf90", "#203d32", ["#6f9ad6", "#4fa874", "#b087cf"]),
         }
-        light_highlights = {}
         for scripts in (True, False):
             for scheme, (accent, selection, notes) in palettes.items():
                 with self.subTest(scripts=scripts, scheme=scheme), self.page(
@@ -247,16 +246,14 @@ class GeoThemeBrowserTests(unittest.TestCase):
                     self.assertEqual(page.locator(".annotation-link").evaluate_all("""elements =>
                         elements.map(element => getComputedStyle(element).getPropertyValue('--note').trim())
                     """), notes)
+                    highlights = {}
                     for width in (390, 1440):
                         page.set_viewport_size({"width": width, "height": 1000})
-                        highlights = page.locator(".annotation-word").evaluate_all("""elements =>
+                        highlights[width] = page.locator(".annotation-word").evaluate_all("""elements =>
                             elements.map(element => getComputedStyle(element).backgroundImage)
                         """)
-                        self.assertEqual(len(set(highlights)), 3)
-                        if scheme == "light":
-                            light_highlights[scripts, width] = highlights
-                        else:
-                            self.assertEqual(highlights, light_highlights[scripts, width])
+                        self.assertEqual(len(set(highlights[width])), 3)
+                    self.assertEqual(highlights[390], highlights[1440])
                     page.goto(self.origin + "/blog/")
                     self.assertEqual(palette(), [accent, selection])
 
