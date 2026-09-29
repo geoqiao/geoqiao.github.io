@@ -26,7 +26,8 @@ class ProductionWorkflowTests(unittest.TestCase):
         jobs = self.workflow["jobs"]
         self.assertEqual(set(jobs), {"build", "deploy"})
         build = jobs["build"]
-        self.assertNotIn("if", build)  # Branch builds remain available.
+        # Branch builds remain available; Issue events build only for the repository's own members.
+        self.assertEqual(build["if"], "github.event_name != 'issues' || contains(fromJSON('[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]'), github.event.issue.author_association)")
         self.assertEqual(build["permissions"], {"contents": "read", "issues": "read", "pages": "read"})
         steps = build["steps"]
         for step in steps:

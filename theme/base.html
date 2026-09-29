@@ -1,5 +1,5 @@
 {% set page_title = page_title|default(site.title) %}
-{% set active_section = active_section|default(site.routes.home.canonical_path) %}
+{% set active_section = active_section|default(none) %}
 {% set canonical_url = page.route.canonical_url if page.route else none %}
 <!DOCTYPE html>
 <html lang="{{ site.language }}">
