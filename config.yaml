@@ -90,6 +90,7 @@ comments:
 # /projects/md2xarticle/studio/ 是 md2xarticle 首页内嵌的原版编辑器
 # ============================================
 pages:
+  ideas: false
   extra:
     - path: /projects/{slug}/
       template: projects/{slug}.html
