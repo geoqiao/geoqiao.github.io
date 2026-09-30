@@ -6,7 +6,7 @@ The integration contract is **escaping Theme API 4** (`theme.yaml`: `api: 4`). T
 
 ## Design and source
 
-- `base.html` and `header-controls.html`: inner pages use a narrow text navigation list in the left margin. Search and appearance match Home's icons, size, and position. At 1080px and below, navigation collapses into a Menu control at the top left; the compact header stays available while scrolling. Without JavaScript, navigation links remain visible in the page.
+- `base.html` and `header-controls.html`: inner pages use a narrow text navigation list in the left margin, with search and appearance directly below it; the whole rail stays in place while scrolling. Home keeps them at the top right of the reading column. With a mouse, the two controls are 36px and sit side by side as one group; touch keeps 44px targets. At 1080px and below, navigation collapses into a Menu control at the top left; the compact header stays available while scrolling. Without JavaScript, navigation links remain visible in the page.
 - `intro.html`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
 - `home.html`: identity, featured writing (`theme.options.featured_posts`), the five newest posts, and the project section.
 - `project-deck.html`: real project links with optional desktop previews.
