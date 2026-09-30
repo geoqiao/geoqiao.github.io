@@ -9,6 +9,10 @@
 .home-tools { display: flex; justify-content: flex-end; gap: 4px; width: min(var(--reading-width), calc(100% - 48px)); height: 44px; margin: 24px auto 0; }
 .home-tools :is(.search-toggle, .theme-toggle) { flex: 0 0 44px; width: 44px; height: 44px; margin: 0; padding: 0; color: var(--muted); }
 .home-tools :is(.search-toggle, .theme-toggle):hover { color: var(--accent); background: none; }
+@media (pointer: fine) {
+  .home-tools { align-items: center; gap: 0; }
+  .home-tools :is(.search-toggle, .theme-toggle) { flex-basis: 36px; width: 36px; height: 36px; }
+}
 .home .site-surface { padding-top: 60px; }
 .home-heading { margin-bottom: 112px; animation: none; }
 .home-title { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 96px; }

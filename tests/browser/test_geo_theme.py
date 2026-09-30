@@ -192,20 +192,34 @@ class GeoThemeBrowserTests(unittest.TestCase):
     def test_navigation_layout_and_keyboard_disclosure(self):
         with self.page() as page:
             controls = (".search-toggle", ".theme-toggle")
-            home_positions = [page.locator(selector).bounding_box() for selector in controls]
+            rail_positions = None
             for path in ("/blog/", "/projects/", "/tags/", "/about/"):
                 with self.subTest(path=path):
                     page.goto(self.origin + path)
-                    for selector, home_box in zip(controls, home_positions):
-                        box = page.locator(selector).bounding_box()
-                        for dimension in ("x", "y", "width", "height"):
-                            self.assertAlmostEqual(box[dimension], home_box[dimension], delta=1)
                     navigation = page.locator("#site-navigation")
                     expect(navigation.locator('[aria-current="page"]')).to_have_count(1)
                     box = navigation.bounding_box()
-                    self.assertLess(box["x"] + box["width"], page.locator("main").bounding_box()["x"])
+                    main_x = page.locator("main").bounding_box()["x"]
+                    self.assertLess(box["x"] + box["width"], main_x)
+                    # Search and appearance sit together under the rail links and stay put while scrolling.
+                    positions = [page.locator(selector).bounding_box() for selector in controls]
+                    search, theme = positions
+                    self.assertGreaterEqual(search["y"], box["y"] + box["height"])
+                    self.assertAlmostEqual(search["y"], theme["y"], delta=1)
+                    self.assertLess(theme["x"] + theme["width"], main_x)
+                    page.mouse.wheel(0, 1200)
+                    page.wait_for_function("scrollY > 0 || document.documentElement.scrollHeight <= innerHeight")
+                    self.assertAlmostEqual(page.locator(".search-toggle").bounding_box()["y"], search["y"], delta=1)
+                    page.evaluate("scrollTo(0, 0)")
+                    if rail_positions is None:
+                        rail_positions = positions
+                    for box, first in zip(positions, rail_positions):
+                        for dimension in ("x", "width", "height"):
+                            self.assertAlmostEqual(box[dimension], first[dimension], delta=1)
 
             page.set_viewport_size({"width": 800, "height": 1000})
+            # Let the breakpoint change event, which closes the menu, run before opening it.
+            page.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
             menu = page.get_by_role("button", name="Menu", exact=True)
             expect(navigation).not_to_be_visible()
             menu.press("Enter")
