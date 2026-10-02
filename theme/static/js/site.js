@@ -62,6 +62,36 @@
     });
     // Hide the compact fallback only once every disclosure handler is ready.
     root.classList.add("navigation-ready");
+
+    // Headroom: on compact screens the sticky header leaves on scroll down and returns on scroll up.
+    const header = document.querySelector(".site-header");
+    let lastY = scrollY;
+    let hidden = false;
+    let frame = 0;
+    function setHidden(next) {
+      if (next === hidden) return;
+      hidden = next;
+      header.classList.toggle("is-hidden", next);
+    }
+    function updateHeader() {
+      frame = 0;
+      const max = root.scrollHeight - innerHeight;
+      const y = scrollY;
+      // Elastic overscroll reports positions outside the document; ignore it.
+      if (y < 0 || y > max) return;
+      const delta = y - lastY;
+      if (!compactNavigation.matches || y < header.offsetHeight
+        || menu.getAttribute("aria-expanded") === "true" || header.contains(document.activeElement)) {
+        setHidden(false);
+        lastY = y;
+      } else if (Math.abs(delta) > 6) {
+        setHidden(delta > 0);
+        lastY = y;
+      }
+    }
+    window.addEventListener("scroll", () => { frame ||= requestAnimationFrame(updateHeader); }, { passive: true });
+    header.addEventListener("focusin", () => setHidden(false));
+    compactNavigation.addEventListener("change", () => setHidden(false));
   }
 
   const body = document.querySelector(".post-content");

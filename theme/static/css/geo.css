@@ -89,7 +89,9 @@
   .navigation-area { display: contents; }
   #site-navigation { position: static; order: 1; flex: 0 0 100%; width: 100%; max-height: none; overflow: visible; flex-direction: row; flex-wrap: wrap; gap: 0 8px; margin-top: 12px; }
   #site-navigation > a { min-height: 44px; padding-inline: 10px; }
-  .navigation-ready .site-header { position: sticky; top: 14px; background: var(--canvas); box-shadow: 0 0 0 8px var(--canvas); border-radius: 4px; }
+  /* Headroom: the bar leaves on scroll down and returns on scroll up (see site.js). */
+  .navigation-ready .site-header { position: sticky; top: 0; margin-top: 0; padding: 16px 0 6px; background: var(--canvas); }
+  .navigation-ready .site-header.is-hidden { transform: translateY(-100%); }
   .navigation-ready .navigation-area { position: relative; display: block; }
   .navigation-ready .navigation-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--muted); font-size: .8125rem; }
   .navigation-toggle:hover, .navigation-toggle[aria-expanded="true"] { color: var(--ink); }
@@ -99,6 +101,9 @@
 }
 @media (max-width: 520px) {
   .site-header { margin-top: 14px; }
+}
+@media (max-width: 1080px) and (prefers-reduced-motion: no-preference) {
+  .navigation-ready .site-header { transition: transform .22s ease; }
 }
 .site-footer strong { font-family: var(--sans); }
 /* Project identity stays small; the text carries the catalog. */

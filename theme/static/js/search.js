@@ -99,6 +99,13 @@
     })();
   }
 
+  // iOS keeps the layout viewport under the keyboard, so size the sheet to the visible area.
+  const viewport = window.visualViewport;
+  function fit() {
+    if (viewport) dialog.style.setProperty("--search-max-height", `${viewport.height}px`);
+  }
+  viewport?.addEventListener("resize", fit);
+
   function open(event) {
     if (!dialog.open) {
       returnFocus = event?.currentTarget === trigger || document.activeElement === document.body
@@ -106,6 +113,7 @@
       dialog.showModal();
       document.documentElement.classList.add("search-open");
     }
+    fit();
     query.focus();
     load();
   }
