@@ -174,6 +174,26 @@ class GeoThemeBrowserTests(unittest.TestCase):
             page.keyboard.press("Escape")
             expect(search).to_be_focused()
 
+    def test_compact_header_hides_on_scroll_down_and_returns_on_scroll_up(self):
+        with self.page() as page:
+            page.set_viewport_size({"width": 390, "height": 800})
+            page.goto(self.origin + "/blog/")
+            header = page.locator(".site-header")
+            for y, hidden in ((1200, True), (900, False), (1600, True)):
+                page.evaluate("y => scrollTo(0, y)", y)
+                page.wait_for_function(
+                    "hidden => document.querySelector('.site-header').classList.contains('is-hidden') === hidden",
+                    arg=hidden,
+                )
+            page.evaluate("scrollTo(0, 0)")
+            expect(header).not_to_have_class(re.compile("is-hidden"))
+            page.evaluate("scrollTo(0, 1200)")
+            page.wait_for_function("document.querySelector('.site-header').classList.contains('is-hidden')")
+            page.get_by_role("button", name="Menu", exact=True).focus()
+            expect(header).not_to_have_class(re.compile("is-hidden"))
+            page.set_viewport_size({"width": 1440, "height": 1000})
+            expect(header).not_to_have_class(re.compile("is-hidden"))
+
     def test_search_escape_preserves_project_preview(self):
         with self.page() as page:
             card = page.locator(".deck-card").last
