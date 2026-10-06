@@ -1,4 +1,4 @@
-name: Build and deploy geoqiao.me
+name: Export and check geoqiao.me
 
 on:
   workflow_dispatch:
@@ -35,8 +35,6 @@ jobs:
     permissions:
       contents: write # The build commits the exported content on main.
       issues: read
-    outputs:
-      skipped-issues: ${{ steps.content.outputs.skipped-issues }}
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -85,8 +83,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: pnpm build
 
-      # Cloudflare builds the site from the repository on every push, so the content
-      # is committed only after it has built here.
+      # Cloudflare builds and publishes the site from the repository on every push,
+      # so the content is committed only after it has built here.
       - name: Commit the content
         env:
           GH_TOKEN: ${{ github.token }}
@@ -107,30 +105,10 @@ jobs:
           git pull --quiet --rebase origin main
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: dist
-
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
-
       - name: Report skipped Issues
-        if: needs.build.outputs.skipped-issues != ''
         env:
-          SKIPPED: ${{ needs.build.outputs.skipped-issues }}
+          SKIPPED: ${{ steps.content.outputs.skipped-issues }}
         run: |
-          echo "::error title=Some Issues were not published::Issues $SKIPPED have errors; the build job summary says what to fix. Everything else is live."
+          if [ -z "$SKIPPED" ]; then exit 0; fi
+          echo "::error title=Some Issues were not published::Issues $SKIPPED have errors; the job summary says what to fix. Everything else is published."
           exit 1

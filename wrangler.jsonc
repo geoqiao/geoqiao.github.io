@@ -3,8 +3,11 @@
   "name": "geoqiao-me",
   "account_id": "4c7b6a86dbcbd91469298d396009cccf",
   "compatibility_date": "2026-10-01",
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
+  "routes": [
+    { "pattern": "geoqiao.me", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     // Every address ends in a slash; an unknown address answers 404 with dist/404.html.
