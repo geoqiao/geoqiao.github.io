@@ -6,7 +6,7 @@ on:
     types: [opened, edited, labeled, unlabeled, closed, reopened, deleted, transferred]
   push:
     paths:
-      - ".github/workflows/pages.yml"
+      - ".github/workflows/content.yml"
       - "config.yaml"
       - "content-migrations/**"
       - "scripts/**"
@@ -25,7 +25,7 @@ on:
 
 permissions: {}
 concurrency:
-  group: pages-${{ github.ref }}
+  group: content-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

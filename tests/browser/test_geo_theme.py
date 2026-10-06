@@ -356,15 +356,12 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 page.keyboard.press("Escape")
                 expect(page.locator("dialog")).not_to_be_visible()
             page.goto(self.origin + "/projects/md2xarticle/")
-            source = page.frame_locator("iframe").get_by_role("textbox", name="Markdown source", exact=True)
-            original = source.input_value()
-            source.fill("# The original editor\n\nLive Markdown preview.")
-            expect(page.frame_locator("iframe").get_by_role("heading", name="The original editor", exact=True)).to_be_visible()
-            source.fill(original)
-            page.get_by_role("button", name="放大 md2xarticle 预览").click()
-            page.wait_for_function("!!document.fullscreenElement")
-            page.get_by_role("button", name="收起 md2xarticle 预览").click()
-            page.wait_for_function("!document.fullscreenElement")
+            # The editor lives on its own site, which refuses to be framed: the page shows a capture that opens it.
+            shot = page.locator("a.preview-shot")
+            expect(shot).to_have_attribute("href", "https://md2xarticle.com/")
+            shot.scroll_into_view_if_needed()
+            page.wait_for_function("document.querySelector('a.preview-shot img').naturalWidth === 1000")
+            expect(page.locator("iframe")).to_have_count(0)
 
     def test_article_code_colors_diagram_contents_and_comments(self):
         for scheme, comment in (("light", "rgb(23, 117, 0)"), ("dark", "rgb(139, 148, 158)")):

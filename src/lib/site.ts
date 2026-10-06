@@ -2,8 +2,6 @@ import { redirectMap, site } from "./config";
 import { posts, type Post, type Tag } from "./content";
 import { getProjects } from "./projects";
 
-export const STUDIO_PATH = "/projects/md2xarticle/studio/";
-
 export interface TagPage extends Tag {
   path: string;
   posts: Post[];
@@ -67,7 +65,6 @@ export async function pagePaths(): Promise<string[]> {
     paths.push(post.path);
   }
   for (const project of await getProjects()) paths.push(project.path);
-  paths.push(STUDIO_PATH);
   for (const archive of archives.slice(1)) paths.push(archive.path);
   return paths;
 }

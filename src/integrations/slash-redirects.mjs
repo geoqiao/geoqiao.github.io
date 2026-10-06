@@ -1,4 +1,4 @@
-import { readdirSync, statSync, writeFileSync } from "node:fs";
+import { appendFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,8 +13,9 @@ function pageDirectories(dir, path = "") {
 }
 
 /**
- * Write Cloudflare's `_redirects`: an address without its closing slash moves
- * permanently to the page. Cloudflare alone would answer with a temporary 307.
+ * Add to Cloudflare's `_redirects` (public/_redirects holds the hand-written
+ * lines): an address without its closing slash moves permanently to the page.
+ * Cloudflare alone would answer with a temporary 307.
  */
 export default function slashRedirects() {
   return {
@@ -25,7 +26,7 @@ export default function slashRedirects() {
         const lines = pageDirectories(root)
           .sort()
           .map((path) => `${path} ${path}/ 301`);
-        writeFileSync(join(root, "_redirects"), lines.join("\n") + "\n");
+        appendFileSync(join(root, "_redirects"), lines.join("\n") + "\n");
       },
     },
   };

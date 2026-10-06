@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class ProductionWorkflowTests(unittest.TestCase):
     def setUp(self):
-        self.workflow = yaml.safe_load((ROOT / ".github/workflows/pages.yml").read_text())
+        self.workflow = yaml.safe_load((ROOT / ".github/workflows/content.yml").read_text())
 
     def test_content_lifecycle_events_trigger_rebuilds(self):
         # PyYAML's YAML 1.1 loader reads the unquoted Actions `on` key as True.
