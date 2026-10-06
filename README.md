@@ -2,7 +2,7 @@
 
 The site is an [Astro](https://astro.build/) project with its own design, **[Geo](docs/geo.md)**. Content is written in GitHub Issues; [escaping](https://github.com/geoqiao/escaping) exports the published Issues as Markdown and this repository builds every page from them. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
 
-这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/pages.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建出 `dist/`，构建通过后把 `content/` 提交回 main，并上传 `dist/` 为 GitHub Pages artifact。`content/` 由 workflow 写入，不要手工修改。
+这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/pages.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建一遍作为检查，通过后把 `content/` 提交回 main。站点部署在 Cloudflare Workers 上：Cloudflare 在 main 每次有新提交时运行 `pnpm build` 和 `npx wrangler deploy`。`content/` 由 workflow 写入，不要手工修改。
 
 主要源码：
 
@@ -11,7 +11,7 @@ The site is an [Astro](https://astro.build/) project with its own design, **[Geo
 - `src/`：页面、布局、Markdown 渲染与清洗、feed/sitemap/搜索索引；`src/site.config.ts` 是首页精选文章等展示选项
 - `public/`：原样发布的静态资源（`public/assets/` 即 `/assets/`）
 - `config.yaml` 的 `projects:`、`src/project-pages/`：项目目录与独立产品首页；每个项目需要 `src/project-pages/<slug>.html`，发布在 `/projects/<slug>/`
-- `.github/workflows/pages.yml`：构建与部署流程
+- `.github/workflows/pages.yml`：导出、检查并提交内容的流程；`wrangler.jsonc`：Cloudflare 的部署配置
 - `assets/profile/`：头像原件；Geo 使用 `public/assets/images/avatar.png` 的本地副本作为头像与 favicon
 - `assets/social/`：全站分享图；`seo.social_image` 引用固定 commit 直链，维护步骤见[图片说明](assets/social/README.md)
 - `assets/issues/<issue-number>/`：文章附件原件；正文使用固定 commit 的 GitHub 直链
@@ -53,13 +53,15 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 | 导出 | `escaping-site export` 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `content/` |
 | 构建 | `pnpm build` 生成整站（含 `/projects/<slug>/` 和 `redirects` 的旧地址页）到 `dist/`，并检查所有站内链接都指向已生成的页面或文件 |
 | 提交内容 | main 上构建通过且 `content/` 有变化时，workflow 以 `github-actions[bot]` 提交 `content: update from Issues`；内容没变就不提交，构建失败也不提交 |
-| 发布 | 分支可以构建，只有 main 的成功 build 可以部署；有 Issue 被跳过时部署照常进行，随后工作流标红并列出这些 Issue |
+| 发布 | Cloudflare 的 Git 构建在 main 的每次提交后构建并部署；分支不部署。有 Issue 被跳过时其余内容照常提交和发布，随后工作流标红并列出这些 Issue |
 
 本地预览与检查见 [Geo 说明](docs/geo.md)。
 
-`wrangler.jsonc` 把 `dist/` 作为 Cloudflare Workers 的静态资源部署，仓库里有了 `content/`，Cloudflare 只用 `pnpm build` 就能构建。`dist/_redirects`（构建时生成）让缺尾斜杠的地址 301 到带斜杠的页面，`public/_headers` 保留跨域读取，`wrangler.www.jsonc` 把 `www.geoqiao.me` 301 到主域名。
+`wrangler.jsonc` 把 `dist/` 作为 Cloudflare Workers 的静态资源部署到 `geoqiao.me`，仓库里有了 `content/`，Cloudflare 只用 `pnpm build` 就能构建。构建设置（仓库、分支、命令）在 Cloudflare 控制台的 Worker `geoqiao-me` → Settings → Builds。`dist/_redirects`（构建时生成）让缺尾斜杠的地址 301 到带斜杠的页面，`public/_headers` 保留跨域读取，`wrangler.www.jsonc` 把 `www.geoqiao.me` 301 到主域名；它不随 Git 构建部署，改动后手动运行 `pnpm exec wrangler deploy --config wrangler.www.jsonc`。
 
-升级前保留当前 Config、workflow、escaping 版本、lockfile 和成功的 Pages artifact。
+GitHub Pages 的设置（自定义域名 `geoqiao.me`）保持不动：它让 `geoqiao.github.io` 的旧地址继续 301 到 `geoqiao.me`。DNS 里不再有指向 GitHub 的记录。
+
+升级前保留当前 Config、workflow、escaping 版本和 lockfile；Cloudflare 保留每次部署的版本，可用 `pnpm exec wrangler rollback` 回到上一个。
 先推分支检查安装、构建和完整产物，再合入 main；上线后检查页面、旧链接、feed、
 sitemap 和静态资源。构建成功不代替线上检查。
 

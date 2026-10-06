@@ -1,4 +1,4 @@
-"""Keep the production build/validate/upload boundary explicit (uses PyYAML)."""
+"""Keep the production export/check/commit boundary explicit (uses PyYAML)."""
 
 import re
 import unittest
@@ -21,10 +21,11 @@ class ProductionWorkflowTests(unittest.TestCase):
             "deleted", "transferred",
         }.issubset(events), events)
 
-    def test_checks_gate_upload_and_deploy_reports_skipped_issues(self):
+    def test_checks_gate_the_content_commit_and_skipped_issues_are_reported(self):
         self.assertEqual(self.workflow["permissions"], {})
         jobs = self.workflow["jobs"]
-        self.assertEqual(set(jobs), {"build", "deploy"})
+        # Cloudflare publishes on the push; this workflow never deploys.
+        self.assertEqual(set(jobs), {"build"})
         build = jobs["build"]
         # Branch builds remain available; Issue events build only for the repository's own members.
         self.assertEqual(build["if"], "github.event_name != 'issues' || contains(fromJSON('[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]'), github.event.issue.author_association)")
@@ -39,7 +40,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         required = [
             "Test site migration tooling", "Export the content", "Install site dependencies",
             "Test the Markdown allowlist", "Build the site", "Commit the content",
-            "Upload Pages artifact",
+            "Report skipped Issues",
         ]
         positions = [list(by_name).index(name) for name in required]
         self.assertEqual(positions, sorted(positions))
@@ -60,20 +61,12 @@ class ProductionWorkflowTests(unittest.TestCase):
         self.assertIn("git add --all content\nif git diff --cached --quiet; then", commit)
         self.assertNotIn("--force", commit)
         self.assertFalse(steps[0]["with"]["persist-credentials"])
-        self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], "dist")
-        self.assertEqual(
-            self.workflow["jobs"]["build"]["outputs"]["skipped-issues"],
-            "${{ steps.content.outputs.skipped-issues }}",
-        )
-        self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
-
-        deploy = jobs["deploy"]
-        self.assertEqual(deploy["if"], "github.ref == 'refs/heads/main'")
-        self.assertEqual(deploy["needs"], "build")
-        self.assertEqual(deploy["permissions"], {"pages": "write", "id-token": "write"})
-        report = deploy["steps"][-1]
-        self.assertEqual(report["if"], "needs.build.outputs.skipped-issues != ''")
+        # Skipped Issues fail the run only after everything else was committed.
+        report = by_name["Report skipped Issues"]
+        self.assertEqual(report["env"], {"SKIPPED": "${{ steps.content.outputs.skipped-issues }}"})
+        self.assertIn('if [ -z "$SKIPPED" ]; then exit 0; fi', report["run"])
         self.assertTrue(re.search(r"exit 1\s*$", report["run"]))
+        self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
 
 
 if __name__ == "__main__":
