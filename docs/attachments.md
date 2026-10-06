@@ -13,7 +13,7 @@ GitHub 直链：不引入图床、不在生产构建时下载图片、不改写�
 | `assets/charts/` | #62 已发布图表与 CSV；无需为了目录整齐再迁移 |
 | `content-migrations/attachments-2026-09.json` | 本次旧 URL、文件路径、固定 commit、SHA-256 与字节数 |
 | `.scratch/attachment-migration-2026-09-05/` | 本地完整 Issue/评论快照、迁移预览；不提交、不作为第二内容源 |
-| `output/` | 编译器生成物，不提交；本方案不复制 `assets/` 到这里 |
+| `dist/`、`build/` | 站点构建产物与内容导出，不提交；本方案不复制 `assets/` 到这里 |
 
 新附件文件名建议取 SHA-256 前 16 位。相同文件名必须对应相同原始字节；发现碰撞就
 增加摘要长度，不能覆盖。大视频、大型压缩包不适合普通 Git；需要时再另行选择托管，

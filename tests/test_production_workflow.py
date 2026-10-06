@@ -28,7 +28,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         build = jobs["build"]
         # Branch builds remain available; Issue events build only for the repository's own members.
         self.assertEqual(build["if"], "github.event_name != 'issues' || contains(fromJSON('[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]'), github.event.issue.author_association)")
-        self.assertEqual(build["permissions"], {"contents": "read", "issues": "read", "pages": "read"})
+        self.assertEqual(build["permissions"], {"contents": "read", "issues": "read"})
         steps = build["steps"]
         for step in steps:
             self.assertNotIn("if", step)  # Default success(), never always().
@@ -37,15 +37,24 @@ class ProductionWorkflowTests(unittest.TestCase):
                 self.assertRegex(uses, r"@[0-9a-f]{40}$")  # Full commit SHAs only.
         by_name = {step["name"]: step for step in steps}
         required = [
-            "Test site migration tooling", "Build the site", "Upload Pages artifact",
+            "Test site migration tooling", "Export the content", "Install site dependencies",
+            "Test the Markdown allowlist", "Build the site", "Upload Pages artifact",
         ]
         positions = [list(by_name).index(name) for name in required]
         self.assertEqual(positions, sorted(positions))
+        content = by_name["Export the content"]
+        self.assertEqual((content["id"], content["with"]), ("content", {"config": "config.yaml"}))
+        self.assertRegex(content["uses"], r"^geoqiao/escaping/export@[0-9a-f]{40}$")
+        # The lockfile decides what is installed; the site reads the directory the export wrote.
+        self.assertEqual(by_name["Install site dependencies"]["run"], "pnpm install --frozen-lockfile")
         site = by_name["Build the site"]
-        self.assertEqual((site["id"], site["with"]), ("site", {"config": "config.yaml"}))
-        self.assertRegex(site["uses"], r"^geoqiao/escaping@[0-9a-f]{40}$")
-        output = "${{ steps.site.outputs.output }}"
-        self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], output)
+        self.assertEqual(site["run"], "pnpm build")
+        self.assertEqual(site["env"]["CONTENT_DIR"], "${{ steps.content.outputs.output }}")
+        self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], "dist")
+        self.assertEqual(
+            self.workflow["jobs"]["build"]["outputs"]["skipped-issues"],
+            "${{ steps.content.outputs.skipped-issues }}",
+        )
         self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
 
         deploy = jobs["deploy"]

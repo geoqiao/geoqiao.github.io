@@ -1,4 +1,4 @@
-"""Geo's real-browser contract; run after building output (see theme/README.md)."""
+"""Geo's real-browser contract; run after `pnpm build` (see docs/geo.md)."""
 
 import os
 import re
@@ -26,7 +26,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.server = ThreadingHTTPServer(
-            ("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT / "output"))
+            ("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT / "dist"))
         )
         cls.thread = Thread(target=cls.server.serve_forever, daemon=True)
         cls.thread.start()
@@ -365,6 +365,35 @@ class GeoThemeBrowserTests(unittest.TestCase):
             page.wait_for_function("!!document.fullscreenElement")
             page.get_by_role("button", name="收起 md2xarticle 预览").click()
             page.wait_for_function("!document.fullscreenElement")
+
+    def test_article_code_colors_diagram_contents_and_comments(self):
+        for scheme, comment in (("light", "rgb(23, 117, 0)"), ("dark", "rgb(139, 148, 158)")):
+            with self.subTest(scheme=scheme), self.page(color_scheme=scheme) as page:
+                # Utterances is a third party; the page must not depend on reaching it.
+                page.route("https://utteranc.es/**", lambda route: route.abort())
+                page.goto(self.origin + "/blog/rye-python-package-manager-guide/")
+                block = page.locator(".code-block").first
+                expect(block.locator(".code-language")).not_to_be_empty()
+                expect(block.get_by_role("button")).to_be_visible()
+                colors = page.locator(".post-content code.syntax span span").evaluate_all(
+                    "elements => [...new Set(elements.map(element => getComputedStyle(element).color))]"
+                )
+                self.assertGreater(len(colors), 1, colors)
+                self.assertIn(comment, colors)
+                expect(page.locator("pre.mermaid svg").first).to_be_visible()
+                expect(page.locator("[data-toc] a").first).to_be_attached()
+                container = page.locator("#comments-container")
+                self.assertRegex(container.get_attribute("data-issue-number"), r"^[0-9]+$")
+                self.assertEqual(container.get_attribute("data-comments-repo"), "geoqiao/geoqiao.github.io")
+
+    def test_old_address_page_leads_to_the_article(self):
+        # Read the file as a crawler does; a browser would leave for the live site at once.
+        with self.page() as page:
+            html = page.request.get(self.origin + "/blog/74/").text()
+        target = "https://geoqiao.me/blog/which-ai-agent-harness-should-you-use-in-2026/"
+        self.assertIn(f'<link rel="canonical" href="{target}">', html)
+        self.assertIn(f'<meta http-equiv="refresh" content="0; url={target}">', html)
+        self.assertIn('<meta name="robots" content="noindex">', html)
 
 
 if __name__ == "__main__":

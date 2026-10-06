@@ -52,23 +52,10 @@ about:
   issue_number: 42
 
 # ============================================
-# 生成路径配置
-# page_size 为正整数，默认 10
+# 博客列表每页文章数（正整数）
 # ============================================
 paths:
-  output: output
   page_size: 10
-
-# ============================================
-# Geo 主题（theme/theme.yaml 声明这些选项）
-# ============================================
-theme:
-  use: ./theme
-  options:
-    featured_posts: [41, 67, 49]
-    show_powered_by: true
-    comments_theme: github-light
-    comments_theme_mode: auto
 
 # ============================================
 # SEO 配置
@@ -80,23 +67,16 @@ seo:
 
 # ============================================
 # 评论配置
-# repo 留空时回退到 github.repo；配色见 theme.options.comments_theme*
+# repo 留空时回退到 github.repo；配色见 src/site.config.ts
 # ============================================
 comments:
   enabled: true
 
 # ============================================
-# 页面：/projects/<slug>/ 是每个项目的产品首页，模板是 theme/projects/<slug>.html；
-# /projects/md2xarticle/studio/ 是 md2xarticle 首页内嵌的原版编辑器
+# 本站没有 Ideas 页面；type:Idea 的 Issue 不会导出
 # ============================================
 pages:
   ideas: false
-  extra:
-    - path: /projects/{slug}/
-      template: projects/{slug}.html
-      for_each: projects
-    - path: /projects/md2xarticle/studio/
-      template: projects/article-studio.html
 
 # ============================================
 # 旧地址：2026-08 改过 slug 的文章，旧地址跳到新地址
@@ -135,7 +115,8 @@ redirects:
   /blog/which-harness-should-you-use-in-2026/: /blog/which-ai-agent-harness-should-you-use-in-2026/
 
 # ============================================
-# 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/（见 pages.extra）
+# 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/
+# （每个项目需要 src/project-pages/<slug>.html）
 # ============================================
 projects:
   - slug: pi-tools

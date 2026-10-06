@@ -4,17 +4,17 @@ Projects keeps the existing catalog layout. Project names, About entries, search
 
 ## Ownership and build
 
-The page templates belong to this site's Geo theme and use escaping Theme API 4; the generator has no Geo-specific code.
+The pages belong to this site and are written by `src/pages/[...file].ts`; escaping has no part in them.
 
-- `config.yaml` `projects:`: the complete catalog, including the repository-free md2xarticle website (explicit `slug`). escaping validates repositories, links, images, fallback metadata and unique slugs.
-- `config.yaml` `pages.extra`: `/projects/{slug}/` rendered from `projects/{slug}.html` for each project, plus `/projects/md2xarticle/studio/` rendered from `projects/article-studio.html`. escaping adds these routes to search and the sitemap, sets each project's `page`, and validates all links before the staged output publication.
-- `theme/projects/<slug>.html`: approved standalone layouts and concise copy. These use only `static/landing/landing.css`, not Geo's blog stylesheet.
-- `theme/static/landing/`: original media, Inter font, and the small controller for screenshots, actual video, copying and fullscreen previews.
-- `theme/static/images/projects/paseo-stuff-logo.svg`: the shared purple `p+` mark for Projects, About and the product homepage.
+- `config.yaml` `projects:`: the complete catalog, including the repository-free md2xarticle website (explicit `slug`).
+- `src/project-pages/<slug>.html`: approved standalone layouts and concise copy, published at `/projects/<slug>/`. They are whole HTML documents with `{{ project.title }}`, `{{ project.summary }}`, `{{ project.image }}`, `{{ page.path }}`, `{{ page.url }}`, `{{ site.title }}` and `{{ site.author }}` placeholders; an unknown placeholder fails the build. These use only `/assets/landing/landing.css`, not Geo's blog stylesheet.
+- `public/projects/md2xarticle/studio/index.html`: the original editor, published unchanged at `/projects/md2xarticle/studio/`.
+- `public/assets/landing/`: original media, Inter font, and the small controller for screenshots, actual video, copying and fullscreen previews.
+- `public/assets/images/projects/paseo-stuff-logo.svg`: the shared purple `p+` mark for Projects, About and the product homepage.
 
-Adding a project requires a matching `theme/projects/<slug>.html`; otherwise the build fails. Upgrading escaping requires `escpe theme check` and the browser suite against the new version.
+Adding a project requires a matching `src/project-pages/<slug>.html`; otherwise the build fails.
 
-Use `bash scripts/preview_geo.sh --build-only` and serve `output/` as the HTTP root. The site helper uses `scripts/serve_preview.py`, bound to loopback, with HTTP byte-range support so the original recording can seek like it does on Pages. The browser suite uses the same handler. Production metadata keeps `https://geoqiao.me` for canonical, Open Graph, Twitter and sitemap URLs.
+Use `bash scripts/preview_geo.sh --build-only` and serve `dist/` as the HTTP root. The site helper uses `scripts/serve_preview.py`, bound to loopback, with HTTP byte-range support so the original recording can seek like it does on Pages. The browser suite uses the same handler. Production metadata keeps `https://geoqiao.me` for canonical, Open Graph, Twitter and sitemap URLs.
 
 ## Media provenance
 
@@ -33,12 +33,12 @@ The implemented pages preserve the approved product-landings-v2 prototype. Produ
 | md2xarticle Home cover | Actual original-editor browser capture at 1180 × 885, resized to 1000 × 750 WebP |
 | Inter | `https://rsms.me/inter/font-files/InterVariable.woff2`; OFL license alongside the font |
 
-The md2xarticle website denies iframe embedding. The original self-contained editor lives in `theme/projects/article-studio.html`, outside `static/`, and `pages.extra` publishes it as the registered page `/projects/md2xarticle/studio/`. Do not rename it to evade HTML validation or strip the site's framing headers. Its dependencies and third-party notices are part of the original file. The editor page is approximately 4.7 MB before compression; the md2xarticle homepage stays small and its `loading="lazy"` iframe fetches the editor only near the preview. The iframe sandbox omits `allow-same-origin`, so the editor runs in an opaque origin: it cannot reach the site's page or storage, and it saves no draft there (it shows "Not saved · download your Markdown"). Below 720 CSS pixels the preview renders at its real width so the editor's own mobile layout applies. The original standalone editor's release behavior and browser requirements still apply.
+The md2xarticle website denies iframe embedding. The original self-contained editor lives in `public/projects/md2xarticle/studio/index.html` and is published unchanged as the page `/projects/md2xarticle/studio/`, which the sitemap lists. Its dependencies and third-party notices are part of the original file. The editor page is approximately 4.7 MB before compression; the md2xarticle homepage stays small and its `loading="lazy"` iframe fetches the editor only near the preview. The iframe sandbox omits `allow-same-origin`, so the editor runs in an opaque origin: it cannot reach the site's page or storage, and it saves no draft there (it shows "Not saved · download your Markdown"). Below 720 CSS pixels the preview renders at its real width so the editor's own mobile layout applies. The original standalone editor's release behavior and browser requirements still apply.
 
-Product and font licenses are retained under `theme/static/landing/`. DeepSeek and MaKa are typographic headings, not newly invented product UI. The `p+` is Geo's project mark, not an official Paseo endorsement.
+Product and font licenses are retained under `public/assets/landing/`. DeepSeek and MaKa are typographic headings, not newly invented product UI. The `p+` is Geo's project mark, not an official Paseo endorsement.
 
 ## Verification and limits
 
-Catalog validation, route registration and staged-output preservation are escaping's own tested behavior. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, the original editor's live preview and fullscreen. Existing navigation, appearance and Home-card tests still run.
+The build checks that every project has its page and that every link to this site resolves. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, the original editor's live preview and fullscreen. Existing navigation, appearance and Home-card tests still run.
 
 The editor does not publish to X from these checks. X draft creation requires the companion and Articles access, with final publication inside X. RPC support requires a client implementing Pi's portable interactions; the full TUI form is not promised in RPC. Activity requires Full detail; Math targets Paseo 0.9; MaKa remains experimental. Native Pi/Paseo and phone-device acceptance are outside this site change.

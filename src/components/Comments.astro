@@ -1,0 +1,20 @@
+---
+import { site } from "../lib/config";
+import { commentsTheme, commentsThemeMode } from "../site.config";
+
+interface Props {
+  /** The Issue the page was written in; its comments are the page's comments. */
+  issueNumber: number;
+}
+
+const { issueNumber } = Astro.props;
+---
+<section class="comments-section" aria-labelledby="comments-title">
+  <div class="section-heading"><h2 id="comments-title">Conversation</h2><a href={`https://github.com/${site.repo}/issues/${issueNumber}`}>GitHub ↗</a></div>
+  <p class="muted">Have something to add? Join the conversation on this Issue.</p>
+  <div id="comments-container" data-issue-number={issueNumber} data-comments-repo={site.comments.repo} data-source-repo={site.repo} data-comments-theme={commentsTheme} data-comments-theme-mode={commentsThemeMode} data-blog-theme-default="light">
+    <p class="comments-loading" role="status">Loading comments…</p>
+  </div>
+  <noscript><p>Comments require JavaScript. You can also read and reply on GitHub.</p></noscript>
+</section>
+<script is:inline src="/assets/escaping/comments.js" defer></script>

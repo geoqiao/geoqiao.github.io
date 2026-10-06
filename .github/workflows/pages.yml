@@ -11,7 +11,13 @@ on:
       - "content-migrations/**"
       - "scripts/**"
       - "tests/**"
-      - "theme/**"
+      - "src/**"
+      - "public/**"
+      - "astro.config.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "tsconfig.json"
       - "CNAME"
 
 permissions: {}
@@ -26,9 +32,8 @@ jobs:
     permissions:
       contents: read
       issues: read
-      pages: read
     outputs:
-      skipped-issues: ${{ steps.site.outputs.skipped-issues }}
+      skipped-issues: ${{ steps.content.outputs.skipped-issues }}
     steps:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -44,16 +49,37 @@ jobs:
       - name: Test site migration tooling
         run: uv run --no-project --python 3.14 --with pyyaml==6.0.3 python -m unittest discover -s tests -v
 
-      - name: Build the site
-        id: site
-        uses: geoqiao/escaping@34a5e51f74bfc9fc07a10174406c969d7f199525 # v0.5.1
+      - name: Export the content
+        id: content
+        uses: geoqiao/escaping/export@d69ace78a0543995917871eec16f4aa4c9a320bc # unreleased: feat/content-export
         with:
           config: config.yaml
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Install site dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test the Markdown allowlist
+        run: pnpm test
+
+      - name: Build the site
+        env:
+          CONTENT_DIR: ${{ steps.content.outputs.output }}
+          # Reads the public language and topics of the projects in config.yaml.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: ${{ steps.site.outputs.output }}
+          path: dist
 
   deploy:
     if: github.ref == 'refs/heads/main'

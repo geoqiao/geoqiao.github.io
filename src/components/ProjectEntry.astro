@@ -1,0 +1,26 @@
+---
+import type { Project } from "../lib/projects";
+
+interface Props {
+  project: Project;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+---
+<article class:list={["project-entry", compact && "project-entry--compact"]} id={project.slug}>
+  <span class="project-logo" aria-hidden="true">{project.image ? <img src={project.image} width="48" height="48" alt="" loading="lazy" decoding="async"> : <span>{project.title.slice(0, 1).toUpperCase()}</span>}</span>
+  <div class="project-copy">
+    <header class="project-heading">
+      {compact ? <h3><a href={project.path}>{project.title} <span class="project-arrow" aria-hidden="true">↗</span></a></h3> : <h2><a href={project.path}>{project.title}</a></h2>}
+      {project.language && !compact && <span class="project-language">{project.language}</span>}
+    </header>
+    {project.summary && <p class="project-summary">{project.summary}</p>}
+    {!compact && (
+      <nav class="project-links" aria-label={`${project.title} links`}>
+        <a href={project.path}>了解项目 <span aria-hidden="true">↗</span></a>
+        {project.links.map((link) => <a href={link.url}>{link.name} <span aria-hidden="true">↗</span></a>)}
+      </nav>
+    )}
+  </div>
+</article>
