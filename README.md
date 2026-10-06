@@ -29,7 +29,7 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 `slug` 使用表达文章主题的英文单词，以连字符分隔，可含年份；正式地址为 `/blog/{slug}/`，不使用 Issue 编号或纯数字占位。`description` 是简洁的内容摘要，`created_date` 是带引号的真实原始创作日期。
 标题使用 Issue 原生标题，类型/标签/发布状态使用 GitHub labels；Issue body 的 front matter 仅保留上述三项。
 
-既有文章通常保持地址不变。作者明确授权纠正错误地址时，先在 `config.yaml` 的 `redirects` 增加旧地址到新地址的一行，再修改最新远端 Issue 的 slug；不从本地历史稿覆盖正文。站点为每个旧地址生成带 canonical 和即时跳转的页面；旧地址仍是文章页时，文章页优先，跳转页暂不生成（构建日志给出警告）。
+既有文章通常保持地址不变。作者明确授权纠正错误地址时，先在 `config.yaml` 的 `redirects` 增加旧地址到新地址的一行，再修改最新远端 Issue 的 slug；不从本地历史稿覆盖正文。构建把每个旧地址（带或不带结尾斜杠）写进 Cloudflare 的 `_redirects`，一步 301 到文章；旧地址仍是文章页时，文章页优先，这条跳转暂不生成（构建日志给出警告）。
 修改后核验新页、旧址跳转、首页、Atom、sitemap 和评论的原 Issue 绑定；不得因改地址新建 Issue、重置日期或搬动附件。
 
 同一篇文章再次改名时，保留原来那行，并追加当前地址到新地址的一行。站点沿着这些行找到仍存在的文章页，让所有旧地址直接跳到最新地址，不依赖顺序；循环的旧地址会让构建失败。
@@ -51,7 +51,7 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 | --- | --- |
 | 测试 | 站点 unittest 在导出前运行：`uv run --no-project --python 3.14 --with pyyaml==6.0.3`；Markdown 清洗规则的测试在构建前运行：`pnpm test` |
 | 导出 | `escaping-site export` 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `content/` |
-| 构建 | `pnpm build` 生成整站（含 `/projects/<slug>/` 和 `redirects` 的旧地址页）到 `dist/`，并检查所有站内链接都指向已生成的页面或文件 |
+| 构建 | `pnpm build` 生成整站（含 `/projects/<slug>/` 和 `_redirects`）到 `dist/`，并检查所有站内链接都指向已生成的页面或文件 |
 | 提交内容 | main 上构建通过且 `content/` 有变化时，workflow 以 `github-actions[bot]` 提交 `content: update from Issues`；内容没变就不提交，构建失败也不提交 |
 | 发布 | Cloudflare 的 Git 构建在 main 的每次提交后构建并部署；分支不部署。有 Issue 被跳过时其余内容照常提交和发布，随后工作流标红并列出这些 Issue |
 

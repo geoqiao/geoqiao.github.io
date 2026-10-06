@@ -383,14 +383,17 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 self.assertRegex(container.get_attribute("data-issue-number"), r"^[0-9]+$")
                 self.assertEqual(container.get_attribute("data-comments-repo"), "geoqiao/geoqiao.github.io")
 
-    def test_old_address_page_leads_to_the_article(self):
-        # Read the file as a crawler does; a browser would leave for the live site at once.
+    def test_old_addresses_move_to_the_article_in_one_step(self):
+        # Cloudflare answers from _redirects; the preview server only serves the file.
         with self.page() as page:
-            html = page.request.get(self.origin + "/blog/74/").text()
-        target = "https://geoqiao.me/blog/which-ai-agent-harness-should-you-use-in-2026/"
-        self.assertIn(f'<link rel="canonical" href="{target}">', html)
-        self.assertIn(f'<meta http-equiv="refresh" content="0; url={target}">', html)
-        self.assertIn('<meta name="robots" content="noindex">', html)
+            rules = page.request.get(self.origin + "/_redirects").text().splitlines()
+        target = "/blog/which-ai-agent-harness-should-you-use-in-2026/"
+        # An old address that led to another old address goes straight to the page.
+        self.assertIn(f"/blog/74/ {target} 301", rules)
+        self.assertIn(f"/blog/74 {target} 301", rules)
+        self.assertIn("/projects/md2xarticle/studio/ https://md2xarticle.com/ 301", rules)
+        # Old addresses come before the closing-slash lines of the site's own pages.
+        self.assertLess(rules.index(f"/blog/74 {target} 301"), rules.index("/about /about/ 301"))
 
 
 if __name__ == "__main__":

@@ -75,14 +75,18 @@ export interface Redirect {
 }
 
 /**
- * Old addresses that lead to a page of this site. A redirect to another old
- * address follows it to the page. A page always wins over a redirect, and a
- * redirect whose page is gone is left out: both depend on Issues.
+ * Old addresses that lead to a page of this site or to another site. A redirect
+ * to another old address follows it to the page. A page always wins over a
+ * redirect, and a redirect whose page is gone is left out: both depend on Issues.
  */
 export async function redirects(): Promise<Redirect[]> {
   const pages = new Set(await pagePaths());
   const result: Redirect[] = [];
   for (const [from, configured] of Object.entries(redirectMap)) {
+    if (/^https?:\/\//.test(configured)) {
+      result.push({ from, to: configured });
+      continue;
+    }
     let to = configured;
     const followed = new Set([from]);
     while (!pages.has(to) && to in redirectMap) {

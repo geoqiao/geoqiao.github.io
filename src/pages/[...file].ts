@@ -4,10 +4,10 @@ import type { APIRoute } from "astro";
 import { absolute, site } from "../lib/config";
 import { escapeHtml } from "../lib/html";
 import { getProjects, type Project } from "../lib/projects";
-import { redirects } from "../lib/site";
+import { redirects, type Redirect } from "../lib/site";
 
-// Whole HTML documents that do not use the site's layout: each project's
-// product page (src/project-pages/<slug>.html) and the pages of old addresses.
+// Files that do not use the site's layout: each project's product page
+// (src/project-pages/<slug>.html) and Cloudflare's list of redirects.
 
 /** Fill the {{ name }} placeholders of a project page; an unknown name is an error. */
 function projectPage(project: Project): string {
@@ -27,24 +27,15 @@ function projectPage(project: Project): string {
   });
 }
 
-/** A page that sends visitors and search engines to the new address at once. */
-function redirectPage(to: string): string {
-  const url = escapeHtml(absolute(to));
-  return `<!DOCTYPE html>
-<html lang="${escapeHtml(site.language)}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moved</title>
-<meta name="robots" content="noindex">
-<link rel="canonical" href="${url}">
-<meta http-equiv="refresh" content="0; url=${url}">
-</head>
-<body>
-<p>This page moved to <a href="${url}">${url}</a>.</p>
-</body>
-</html>
-`;
+/**
+ * Cloudflare's `_redirects`: every old address, with or without its closing
+ * slash, moves permanently (301) to its page in one step. The slash-redirects
+ * integration adds the lines for the site's own pages after the build.
+ */
+function redirectsFile(list: Redirect[]): string {
+  return list
+    .flatMap(({ from, to }) => [from, ...(from.endsWith("/") ? [from.slice(0, -1)] : [])].map((path) => `${path} ${to} 301`))
+    .join("\n") + "\n";
 }
 
 function file(path: string): string {
@@ -55,14 +46,10 @@ export async function getStaticPaths() {
   return [
     ...(await getProjects()).map((project) => ({
       params: { file: file(project.path) },
-      props: { html: projectPage(project) },
+      props: { body: projectPage(project), type: "text/html; charset=utf-8" },
     })),
-    ...(await redirects()).map((redirect) => ({
-      params: { file: file(redirect.from) },
-      props: { html: redirectPage(redirect.to) },
-    })),
+    { params: { file: "_redirects" }, props: { body: redirectsFile(await redirects()), type: "text/plain" } },
   ];
 }
 
-export const GET: APIRoute = ({ props }) =>
-  new Response(props.html, { headers: { "content-type": "text/html; charset=utf-8" } });
+export const GET: APIRoute = ({ props }) => new Response(props.body, { headers: { "content-type": props.type } });
