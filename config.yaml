@@ -113,6 +113,7 @@ redirects:
   /blog/what-s-on-my-pi-agent-ba-90-de-codex-desktop-zhuang-jin-zhong-duan/: /blog/terminal-codex-workflow-with-pi-and-herdr/
   /blog/74/: /blog/which-harness-should-you-use-in-2026/
   /blog/which-harness-should-you-use-in-2026/: /blog/which-ai-agent-harness-should-you-use-in-2026/
+  /projects/md2xarticle/studio/: https://md2xarticle.com/
 
 # ============================================
 # 项目目录：/projects/ 与每个项目的产品首页 /projects/<slug>/

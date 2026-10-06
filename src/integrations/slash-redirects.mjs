@@ -13,9 +13,9 @@ function pageDirectories(dir, path = "") {
 }
 
 /**
- * Add to Cloudflare's `_redirects` (public/_redirects holds the hand-written
- * lines): an address without its closing slash moves permanently to the page.
- * Cloudflare alone would answer with a temporary 307.
+ * Add to Cloudflare's `_redirects` (src/pages/[...file].ts writes the old
+ * addresses first): an address without its closing slash moves permanently to
+ * the page. Cloudflare alone would answer with a temporary 307.
  */
 export default function slashRedirects() {
   return {

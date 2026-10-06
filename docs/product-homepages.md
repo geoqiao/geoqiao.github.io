@@ -31,7 +31,7 @@ The implemented pages preserve the approved product-landings-v2 prototype. Produ
 | Math | Original synthetic React Native Web renderer preview, retaining its component-preview label |
 | Inter | `https://rsms.me/inter/font-files/InterVariable.woff2`; OFL license alongside the font |
 
-The md2xarticle website denies iframe embedding (`X-Frame-Options: DENY`), so its homepage here shows the editor capture `public/assets/images/projects/md2xarticle.webp`, which opens `https://md2xarticle.com/`. The site once published a copy of the editor at `/projects/md2xarticle/studio/`; `public/_redirects` moves that address to md2xarticle.com with a 301.
+The md2xarticle website denies iframe embedding (`X-Frame-Options: DENY`), so its homepage here shows the editor capture `public/assets/images/projects/md2xarticle.webp`, which opens `https://md2xarticle.com/`. The site once published a copy of the editor at `/projects/md2xarticle/studio/`; a line in `config.yaml` `redirects` moves that address to md2xarticle.com with a 301.
 
 Product and font licenses are retained under `public/assets/landing/`. DeepSeek and MaKa are typographic headings, not newly invented product UI. The `p+` is Geo's project mark, not an official Paseo endorsement.
 
