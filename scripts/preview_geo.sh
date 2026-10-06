@@ -34,7 +34,8 @@ status=0
 "${escaping[@]}" export --config "$root/config.yaml" || status=$?
 # 2: exported, but some Issues were skipped; the export output says which.
 if (( status != 0 && status != 2 )); then exit "$status"; fi
-(cd "$root" && pnpm install --frozen-lockfile && pnpm build)
+# The preview reads its own export; content/ belongs to the workflow.
+(cd "$root" && pnpm install --frozen-lockfile && CONTENT_DIR=build/content pnpm build)
 unset GITHUB_TOKEN
 if [[ "${1:-}" == "--build-only" ]]; then exit 0; fi
 echo "Geo preview: http://localhost:$port"

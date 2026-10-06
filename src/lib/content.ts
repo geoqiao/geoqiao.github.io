@@ -3,8 +3,9 @@ import { resolve } from "node:path";
 import { parse } from "yaml";
 import { site } from "./config";
 
-// The directory `escaping-site export` writes; see escaping's docs/contracts/content-export-v1.md.
-const contentDir = resolve(process.cwd(), process.env.CONTENT_DIR ?? "build/content");
+// What `escaping-site export` wrote; see escaping's docs/contracts/content-export-v1.md.
+// The workflow commits it to content/, so a host can build the site from the repository alone.
+const contentDir = resolve(process.cwd(), process.env.CONTENT_DIR ?? "content");
 const SUPPORTED_EXPORT_VERSION = 1;
 
 export interface Tag {
@@ -54,7 +55,7 @@ function loadManifest(): Manifest {
   const file = resolve(contentDir, "manifest.json");
   if (!existsSync(file)) {
     throw new Error(
-      `No content at ${contentDir}. Run "escaping-site export --config config.yaml" first (see README.md).`,
+      `No content at ${contentDir}. Run "escaping-site export --config config.yaml --output content" first (see README.md).`,
     );
   }
   const manifest = JSON.parse(readFileSync(file, "utf8")) as Manifest;

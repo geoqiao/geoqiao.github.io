@@ -4,11 +4,12 @@ Geo is geoqiao.me's own design. Its starting point was Quiet, escaping's built-i
 
 The site is an [Astro](https://astro.build/) project in this repository. escaping only exports the published Issues as Markdown (`escaping-site export`, [content export v1](https://github.com/geoqiao/escaping/blob/main/docs/contracts/content-export-v1.md)); everything a reader or a crawler receives is built here:
 
-- `src/lib/content.ts` reads the export (`build/content/`, or `CONTENT_DIR`); `src/lib/config.ts` reads `config.yaml`.
+- `src/lib/content.ts` reads the export (`content/`, which the workflow commits, or `CONTENT_DIR`); `src/lib/config.ts` reads `config.yaml`.
 - `src/lib/markdown.ts` renders Issue bodies: GitHub-flavored Markdown, an HTML allowlist, and code colors at build time. `tests/markdown.test.mjs` guards the allowlist.
 - `src/lib/site.ts` derives tags, Blog pages, the sitemap order and the old-address redirects.
 - `src/pages/` writes the pages, `atom.xml`, `sitemap.xml`, `robots.txt` and `search.json`; `src/pages/[...file].ts` writes the product pages and the old-address pages.
 - `src/integrations/check-links.mjs` fails the build when a page links to an address of this site that was not built.
+- `src/integrations/slash-redirects.mjs` writes `_redirects`, so that on Cloudflare an address without its closing slash moves permanently (301) to the page.
 - `src/site.config.ts` holds the presentation choices: featured posts, the escaping footer link, comment colors.
 - `public/assets/` is published as `/assets/` unchanged. `public/assets/escaping/` is a copy of escaping's comments and Mermaid scripts (escaping v0.5.1); the site owns it now.
 
@@ -55,7 +56,7 @@ Open **http://localhost:8765**. A numeric argument selects another port. Stop th
 bash scripts/preview_geo.sh --build-only
 ```
 
-The helper runs `escaping-site export` into `build/content/`, then `pnpm build` into `dist/`, and serves `dist/` as the document root. Once the content is exported, `pnpm dev` gives a live-reloading preview of design changes; it does not serve the old-address pages. `PROJECT_METADATA=offline` builds without asking GitHub for the projects' language and topics. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
+The helper runs `escaping-site export` into `build/content/` (its own export; it leaves the committed `content/` alone), then `pnpm build` into `dist/`, and serves `dist/` as the document root. `pnpm dev` gives a live-reloading preview of design changes from the committed `content/`; it does not serve the old-address pages. `PROJECT_METADATA=offline` builds without asking GitHub for the projects' language and topics. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
 
 ## Interaction contract
 

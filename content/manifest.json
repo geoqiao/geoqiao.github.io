@@ -1,0 +1,217 @@
+{
+  "export_version": 1,
+  "repository": "geoqiao/geoqiao.github.io",
+  "blog": [
+    {
+      "issue_number": 91,
+      "slug": "whats-on-my-pi-agent-october-2026",
+      "path": "blog/whats-on-my-pi-agent-october-2026.md"
+    },
+    {
+      "issue_number": 83,
+      "slug": "pi-codex-paseo-workflow",
+      "path": "blog/pi-codex-paseo-workflow.md"
+    },
+    {
+      "issue_number": 74,
+      "slug": "which-ai-agent-harness-should-you-use-in-2026",
+      "path": "blog/which-ai-agent-harness-should-you-use-in-2026.md"
+    },
+    {
+      "issue_number": 73,
+      "slug": "is-code-mode-the-future",
+      "path": "blog/is-code-mode-the-future.md"
+    },
+    {
+      "issue_number": 67,
+      "slug": "how-i-use-paseo",
+      "path": "blog/how-i-use-paseo.md"
+    },
+    {
+      "issue_number": 62,
+      "slug": "ai-coding-subscriptions-api-value-comparison",
+      "path": "blog/ai-coding-subscriptions-api-value-comparison.md"
+    },
+    {
+      "issue_number": 49,
+      "slug": "agent-orchestrator-desktop-selection",
+      "path": "blog/agent-orchestrator-desktop-selection.md"
+    },
+    {
+      "issue_number": 41,
+      "slug": "terminal-codex-workflow-with-pi-and-herdr",
+      "path": "blog/terminal-codex-workflow-with-pi-and-herdr.md"
+    },
+    {
+      "issue_number": 36,
+      "slug": "publish-obsidian-notes-with-one-command",
+      "path": "blog/publish-obsidian-notes-with-one-command.md"
+    },
+    {
+      "issue_number": 35,
+      "slug": "superpowers-claude-code-guide-for-strategy-analysts",
+      "path": "blog/superpowers-claude-code-guide-for-strategy-analysts.md"
+    },
+    {
+      "issue_number": 34,
+      "slug": "build-a-github-blog-without-git-or-frontend",
+      "path": "blog/build-a-github-blog-without-git-or-frontend.md"
+    },
+    {
+      "issue_number": 32,
+      "slug": "vibe-coding-github-blog-with-trae",
+      "path": "blog/vibe-coding-github-blog-with-trae.md"
+    },
+    {
+      "issue_number": 31,
+      "slug": "2025-review-focus-on-yourself",
+      "path": "blog/2025-review-focus-on-yourself.md"
+    },
+    {
+      "issue_number": 30,
+      "slug": "winter-walks-to-chengdu-teahouses",
+      "path": "blog/winter-walks-to-chengdu-teahouses.md"
+    },
+    {
+      "issue_number": 29,
+      "slug": "2024-review-manage-expectations-and-keep-going",
+      "path": "blog/2024-review-manage-expectations-and-keep-going.md"
+    },
+    {
+      "issue_number": 28,
+      "slug": "free-vscode-ai-with-ollama-groq-and-continue",
+      "path": "blog/free-vscode-ai-with-ollama-groq-and-continue.md"
+    },
+    {
+      "issue_number": 27,
+      "slug": "python-setup-with-uv-pdm-and-vscode",
+      "path": "blog/python-setup-with-uv-pdm-and-vscode.md"
+    },
+    {
+      "issue_number": 26,
+      "slug": "optimal-binning-for-continuous-data-in-python",
+      "path": "blog/optimal-binning-for-continuous-data-in-python.md"
+    },
+    {
+      "issue_number": 25,
+      "slug": "filter-pandas-dataframes-with-loc",
+      "path": "blog/filter-pandas-dataframes-with-loc.md"
+    },
+    {
+      "issue_number": 24,
+      "slug": "add-yaml-config-to-github-pages-blog",
+      "path": "blog/add-yaml-config-to-github-pages-blog.md"
+    },
+    {
+      "issue_number": 23,
+      "slug": "uv-python-project-management-guide",
+      "path": "blog/uv-python-project-management-guide.md"
+    },
+    {
+      "issue_number": 21,
+      "slug": "build-a-python-blog-on-github-pages",
+      "path": "blog/build-a-python-blog-on-github-pages.md"
+    },
+    {
+      "issue_number": 20,
+      "slug": "build-an-rss-manager-with-fastapi",
+      "path": "blog/build-an-rss-manager-with-fastapi.md"
+    },
+    {
+      "issue_number": 1,
+      "slug": "rye-python-package-manager-guide",
+      "path": "blog/rye-python-package-manager-guide.md"
+    },
+    {
+      "issue_number": 18,
+      "slug": "my-vscode-setup-for-python",
+      "path": "blog/my-vscode-setup-for-python.md"
+    },
+    {
+      "issue_number": 17,
+      "slug": "app-defaults-2023",
+      "path": "blog/app-defaults-2023.md"
+    },
+    {
+      "issue_number": 16,
+      "slug": "vim-don-t-be-afraid",
+      "path": "blog/vim-don-t-be-afraid.md"
+    },
+    {
+      "issue_number": 15,
+      "slug": "run-windows-apps-on-mac-with-vmware",
+      "path": "blog/run-windows-apps-on-mac-with-vmware.md"
+    },
+    {
+      "issue_number": 14,
+      "slug": "coke-machine-challenge",
+      "path": "blog/coke-machine-challenge.md"
+    },
+    {
+      "issue_number": 13,
+      "slug": "my-first-titanic-machine-learning-project",
+      "path": "blog/my-first-titanic-machine-learning-project.md"
+    },
+    {
+      "issue_number": 12,
+      "slug": "use-obsidian-the-simple-way",
+      "path": "blog/use-obsidian-the-simple-way.md"
+    },
+    {
+      "issue_number": 11,
+      "slug": "install-python-with-anaconda",
+      "path": "blog/install-python-with-anaconda.md"
+    },
+    {
+      "issue_number": 10,
+      "slug": "shottr-lightweight-macos-screenshot-tool",
+      "path": "blog/shottr-lightweight-macos-screenshot-tool.md"
+    },
+    {
+      "issue_number": 9,
+      "slug": "what-s-on-my-mac",
+      "path": "blog/what-s-on-my-mac.md"
+    },
+    {
+      "issue_number": 8,
+      "slug": "github-issues-blog-setup-guide",
+      "path": "blog/github-issues-blog-setup-guide.md"
+    },
+    {
+      "issue_number": 7,
+      "slug": "why-we-still-choose-to-live",
+      "path": "blog/why-we-still-choose-to-live.md"
+    },
+    {
+      "issue_number": 6,
+      "slug": "out-of-the-depth-of-misfortune-comes-bliss",
+      "path": "blog/out-of-the-depth-of-misfortune-comes-bliss.md"
+    },
+    {
+      "issue_number": 5,
+      "slug": "air-conditioning-exploitation-theory",
+      "path": "blog/air-conditioning-exploitation-theory.md"
+    },
+    {
+      "issue_number": 4,
+      "slug": "history-as-a-rolling-wheel",
+      "path": "blog/history-as-a-rolling-wheel.md"
+    },
+    {
+      "issue_number": 3,
+      "slug": "learn-sql-in-plain-english",
+      "path": "blog/learn-sql-in-plain-english.md"
+    },
+    {
+      "issue_number": 2,
+      "slug": "practical-excel-learning-tips",
+      "path": "blog/practical-excel-learning-tips.md"
+    }
+  ],
+  "ideas": [],
+  "about": {
+    "issue_number": 42,
+    "path": "about.md"
+  },
+  "skipped_issues": []
+}

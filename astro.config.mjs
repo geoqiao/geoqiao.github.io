@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
 import checkLinks from "./src/integrations/check-links.mjs";
+import slashRedirects from "./src/integrations/slash-redirects.mjs";
 
 const config = parse(readFileSync(new URL("./config.yaml", import.meta.url), "utf8"));
 
@@ -12,5 +13,5 @@ export default defineConfig({
   build: { format: "directory" },
   compressHTML: false,
   devToolbar: { enabled: false },
-  integrations: [checkLinks()],
+  integrations: [checkLinks(), slashRedirects()],
 });

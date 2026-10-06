@@ -18,6 +18,9 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "tsconfig.json"
+      - ".node-version"
+      - "wrangler*.jsonc"
+      - "worker/**"
       - "CNAME"
 
 permissions: {}
@@ -30,7 +33,7 @@ jobs:
     if: github.event_name != 'issues' || contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # The build commits the exported content on main.
       issues: read
     outputs:
       skipped-issues: ${{ steps.content.outputs.skipped-issues }}
@@ -39,6 +42,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0 # The content commit is rebased when main has moved.
 
       - name: Install uv
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
@@ -55,7 +59,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           status=0
-          uvx --python 3.14 escaping-site@0.6.0 export --config config.yaml || status=$?
+          uvx --python 3.14 escaping-site@0.6.0 export --config config.yaml --output content || status=$?
           # 2: exported, but some Issues were skipped; the skipped-issues output says which.
           if [ "$status" -eq 2 ]; then exit 0; fi
           exit "$status"
@@ -80,6 +84,28 @@ jobs:
           # Reads the public language and topics of the projects in config.yaml.
           GITHUB_TOKEN: ${{ github.token }}
         run: pnpm build
+
+      # Cloudflare builds the site from the repository on every push, so the content
+      # is committed only after it has built here.
+      - name: Commit the content
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Not main; the content is not committed."
+            exit 0
+          fi
+          git add --all content
+          if git diff --cached --quiet; then
+            echo "The content has not changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --quiet --message "content: update from Issues"
+          git pull --quiet --rebase origin main
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
