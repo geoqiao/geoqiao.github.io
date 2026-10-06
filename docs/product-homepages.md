@@ -8,7 +8,6 @@ The pages belong to this site and are written by `src/pages/[...file].ts`; escap
 
 - `config.yaml` `projects:`: the complete catalog, including the repository-free md2xarticle website (explicit `slug`).
 - `src/project-pages/<slug>.html`: approved standalone layouts and concise copy, published at `/projects/<slug>/`. They are whole HTML documents with `{{ project.title }}`, `{{ project.summary }}`, `{{ project.image }}`, `{{ page.path }}`, `{{ page.url }}`, `{{ site.title }}` and `{{ site.author }}` placeholders; an unknown placeholder fails the build. These use only `/assets/landing/landing.css`, not Geo's blog stylesheet.
-- `public/projects/md2xarticle/studio/index.html`: the original editor, published unchanged at `/projects/md2xarticle/studio/`.
 - `public/assets/landing/`: original media, Inter font, and the small controller for screenshots, actual video, copying and fullscreen previews.
 - `public/assets/images/projects/paseo-stuff-logo.svg`: the shared purple `p+` mark for Projects, About and the product homepage.
 
@@ -26,19 +25,18 @@ The implemented pages preserve the approved product-landings-v2 prototype. Produ
 | pi-ask recording | Original README terminal recording, 1182 × 656, 54.78 seconds; actual playback controls |
 | pi-usage | Original `pi-tools` dashboard screenshot; visual crop with a link to the full image |
 | escaping | Live `https://geoqiao.me/` iframe; full-screen and external-open actions |
-| Article Studio | Original standalone editor from md2xarticle, published as its own page and embedded with a lazy `iframe`; editor bytes remain unchanged within Jinja raw delimiters |
+| Article Studio | Actual original-editor browser capture at 1180 × 885, resized to 1000 × 750 WebP; opens md2xarticle.com |
 | Table / Mermaid | PNGs actually exported by that original editor; no reconstructed UI |
 | Activity | Crop of the plugin's real renderer comparison preview, with synthetic data; not a live Paseo capture |
 | Math | Original synthetic React Native Web renderer preview, retaining its component-preview label |
-| md2xarticle Home cover | Actual original-editor browser capture at 1180 × 885, resized to 1000 × 750 WebP |
 | Inter | `https://rsms.me/inter/font-files/InterVariable.woff2`; OFL license alongside the font |
 
-The md2xarticle website denies iframe embedding. The original self-contained editor lives in `public/projects/md2xarticle/studio/index.html` and is published unchanged as the page `/projects/md2xarticle/studio/`, which the sitemap lists. Its dependencies and third-party notices are part of the original file. The editor page is approximately 4.7 MB before compression; the md2xarticle homepage stays small and its `loading="lazy"` iframe fetches the editor only near the preview. The iframe sandbox omits `allow-same-origin`, so the editor runs in an opaque origin: it cannot reach the site's page or storage, and it saves no draft there (it shows "Not saved · download your Markdown"). Below 720 CSS pixels the preview renders at its real width so the editor's own mobile layout applies. The original standalone editor's release behavior and browser requirements still apply.
+The md2xarticle website denies iframe embedding (`X-Frame-Options: DENY`), so its homepage here shows the editor capture `public/assets/images/projects/md2xarticle.webp`, which opens `https://md2xarticle.com/`. The site once published a copy of the editor at `/projects/md2xarticle/studio/`; `public/_redirects` moves that address to md2xarticle.com with a 301.
 
 Product and font licenses are retained under `public/assets/landing/`. DeepSeek and MaKa are typographic headings, not newly invented product UI. The `p+` is Geo's project mark, not an official Paseo endorsement.
 
 ## Verification and limits
 
-The build checks that every project has its page and that every link to this site resolves. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, the original editor's live preview and fullscreen. Existing navigation, appearance and Home-card tests still run.
+The build checks that every project has its page and that every link to this site resolves. The browser suite covers catalog navigation, shared logos, search destinations, responsive pages, actual screenshots/video/copying, and the editor capture's link. Existing navigation, appearance and Home-card tests still run.
 
-The editor does not publish to X from these checks. X draft creation requires the companion and Articles access, with final publication inside X. RPC support requires a client implementing Pi's portable interactions; the full TUI form is not promised in RPC. Activity requires Full detail; Math targets Paseo 0.9; MaKa remains experimental. Native Pi/Paseo and phone-device acceptance are outside this site change.
+X draft creation requires the companion and Articles access, with final publication inside X. RPC support requires a client implementing Pi's portable interactions; the full TUI form is not promised in RPC. Activity requires Full detail; Math targets Paseo 0.9; MaKa remains experimental. Native Pi/Paseo and phone-device acceptance are outside this site change.

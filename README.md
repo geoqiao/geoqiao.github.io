@@ -2,7 +2,7 @@
 
 The site is an [Astro](https://astro.build/) project with its own design, **[Geo](docs/geo.md)**. Content is written in GitHub Issues; [escaping](https://github.com/geoqiao/escaping) exports the published Issues as Markdown and this repository builds every page from them. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
 
-这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/pages.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建一遍作为检查，通过后把 `content/` 提交回 main。站点部署在 Cloudflare Workers 上：Cloudflare 在 main 每次有新提交时运行 `pnpm build` 和 `npx wrangler deploy`。`content/` 由 workflow 写入，不要手工修改。
+这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/content.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建一遍作为检查，通过后把 `content/` 提交回 main。站点部署在 Cloudflare Workers 上：Cloudflare 在 main 每次有新提交时运行 `pnpm build` 和 `npx wrangler deploy`。`content/` 由 workflow 写入，不要手工修改。
 
 主要源码：
 
@@ -11,7 +11,7 @@ The site is an [Astro](https://astro.build/) project with its own design, **[Geo
 - `src/`：页面、布局、Markdown 渲染与清洗、feed/sitemap/搜索索引；`src/site.config.ts` 是首页精选文章等展示选项
 - `public/`：原样发布的静态资源（`public/assets/` 即 `/assets/`）
 - `config.yaml` 的 `projects:`、`src/project-pages/`：项目目录与独立产品首页；每个项目需要 `src/project-pages/<slug>.html`，发布在 `/projects/<slug>/`
-- `.github/workflows/pages.yml`：导出、检查并提交内容的流程；`wrangler.jsonc`：Cloudflare 的部署配置
+- `.github/workflows/content.yml`：导出、检查并提交内容的流程；`wrangler.jsonc`：Cloudflare 的部署配置
 - `assets/profile/`：头像原件；Geo 使用 `public/assets/images/avatar.png` 的本地副本作为头像与 favicon
 - `assets/social/`：全站分享图；`seo.social_image` 引用固定 commit 直链，维护步骤见[图片说明](assets/social/README.md)
 - `assets/issues/<issue-number>/`：文章附件原件；正文使用固定 commit 的 GitHub 直链

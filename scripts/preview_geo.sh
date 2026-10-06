@@ -13,7 +13,7 @@ if [[ "${1:-}" != "--build-only" ]]; then
   fi
 fi
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
-package=$(sed -n 's/.*uvx .*\(escaping-site@[0-9.]*\) export.*/\1/p' "$root/.github/workflows/pages.yml")
+package=$(sed -n 's/.*uvx .*\(escaping-site@[0-9.]*\) export.*/\1/p' "$root/.github/workflows/content.yml")
 if [[ ! "$package" =~ ^escaping-site@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Cannot read the escaping version from the production workflow." >&2
   exit 1
