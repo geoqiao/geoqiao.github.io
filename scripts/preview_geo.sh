@@ -19,7 +19,11 @@ if [[ ! "$package" =~ ^escaping-site@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   exit 1
 fi
 # ESCAPING_SOURCE=/path/to/escaping exports with an unreleased local checkout instead.
-package=${ESCAPING_SOURCE:-$package}
+# It runs from the checkout's own environment: uvx would reuse an earlier build.
+escaping=(uvx --python 3.14 "$package")
+if [[ -n "${ESCAPING_SOURCE:-}" ]]; then
+  escaping=(uv run --project "$(cd "$ESCAPING_SOURCE" && pwd -P)" escaping-site)
+fi
 
 # Token stays in the process environment, never in a config or log file.
 if [[ -z "${GITHUB_TOKEN:-}" ]]; then
@@ -27,7 +31,7 @@ if [[ -z "${GITHUB_TOKEN:-}" ]]; then
   export GITHUB_TOKEN
 fi
 status=0
-uvx --python 3.14 --from "$package" escaping-site export --config "$root/config.yaml" || status=$?
+"${escaping[@]}" export --config "$root/config.yaml" || status=$?
 # 2: exported, but some Issues were skipped; the export output says which.
 if (( status != 0 && status != 2 )); then exit "$status"; fi
 (cd "$root" && pnpm install --frozen-lockfile && pnpm build)

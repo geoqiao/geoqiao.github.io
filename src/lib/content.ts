@@ -18,6 +18,8 @@ export interface Post {
   slug: string;
   description: string;
   createdDate: string;
+  /** The day the author last revised the post; equal to createdDate when never. */
+  updateDate: string;
   publishedAt: string;
   updatedAt: string;
   tags: Tag[];
@@ -66,7 +68,8 @@ function loadManifest(): Manifest {
     throw new Error(`The export is from ${manifest.repository}, not ${site.repo}.`);
   }
   if (manifest.ideas.length) {
-    throw new Error("The export contains Ideas, which this site has no pages for.");
+    // The export carries every content type; this site has no pages for Ideas.
+    console.warn(`Ignoring ${manifest.ideas.length} exported Idea(s): this site has no Ideas pages.`);
   }
   return manifest;
 }
@@ -82,6 +85,7 @@ export const posts: Post[] = manifest.blog.map((item) => {
     slug: data.slug,
     description: data.description,
     createdDate: data.created_date,
+    updateDate: data.update_date,
     publishedAt: data.published_at,
     updatedAt: data.updated_at,
     tags: data.tags ?? [],
