@@ -45,7 +45,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         content = by_name["Export the content"]
         self.assertEqual(content["id"], "content")
         # One exact escaping version; exit status 2 (some Issues skipped) still builds the rest.
-        self.assertRegex(content["run"], r"uvx --python 3\.14 --from 'escpe==\d+\.\d+\.\d+' escpe export --config config\.yaml \|\| status=\$\?\n")
+        self.assertRegex(content["run"], r"uvx --python 3\.14 escaping-site@\d+\.\d+\.\d+ export --config config\.yaml \|\| status=\$\?\n")
         self.assertIn('if [ "$status" -eq 2 ]; then exit 0; fi\nexit "$status"', content["run"])
         self.assertEqual(content["env"], {"GITHUB_TOKEN": "${{ github.token }}"})
         # The lockfile decides what is installed; the site reads the directory the export wrote.

@@ -13,8 +13,8 @@ if [[ "${1:-}" != "--build-only" ]]; then
   fi
 fi
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
-package=$(sed -n "s/.*uvx .*--from '\(escpe==[0-9.]*\)'.*/\1/p" "$root/.github/workflows/pages.yml")
-if [[ ! "$package" =~ ^escpe==[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+package=$(sed -n 's/.*uvx .*\(escaping-site@[0-9.]*\) export.*/\1/p' "$root/.github/workflows/pages.yml")
+if [[ ! "$package" =~ ^escaping-site@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Cannot read the escaping version from the production workflow." >&2
   exit 1
 fi
@@ -27,7 +27,7 @@ if [[ -z "${GITHUB_TOKEN:-}" ]]; then
   export GITHUB_TOKEN
 fi
 status=0
-uvx --python 3.14 --from "$package" escpe export --config "$root/config.yaml" || status=$?
+uvx --python 3.14 --from "$package" escaping-site export --config "$root/config.yaml" || status=$?
 # 2: exported, but some Issues were skipped; the export output says which.
 if (( status != 0 && status != 2 )); then exit "$status"; fi
 (cd "$root" && pnpm install --frozen-lockfile && pnpm build)

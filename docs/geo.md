@@ -2,7 +2,7 @@
 
 Geo is geoqiao.me's own design. Its starting point was Quiet, escaping's built-in theme, at escaping commit `9b16dbbea2dd2dd2a38e742198b0f7300f0404eb`; this is historical provenance, not an upstream to track.
 
-The site is an [Astro](https://astro.build/) project in this repository. escaping only exports the published Issues as Markdown (`escpe export`, [content export v1](https://github.com/geoqiao/escaping/blob/main/docs/contracts/content-export-v1.md)); everything a reader or a crawler receives is built here:
+The site is an [Astro](https://astro.build/) project in this repository. escaping only exports the published Issues as Markdown (`escaping-site export`, [content export v1](https://github.com/geoqiao/escaping/blob/main/docs/contracts/content-export-v1.md)); everything a reader or a crawler receives is built here:
 
 - `src/lib/content.ts` reads the export (`build/content/`, or `CONTENT_DIR`); `src/lib/config.ts` reads `config.yaml`.
 - `src/lib/markdown.ts` renders Issue bodies: GitHub-flavored Markdown, an HTML allowlist, and code colors at build time. `tests/markdown.test.mjs` guards the allowlist.
@@ -41,7 +41,7 @@ Each project has a product page at `/projects/<slug>/`, written from `src/projec
 
 ## Local preview
 
-Requirements: Git, uv, Node.js 24 with pnpm, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the escaping version from the production workflow (`uvx --from 'escpe==X.Y.Z'`) and runs that package from PyPI the same way. `ESCAPING_SOURCE=/path/to/escaping` uses a local checkout instead. No hosting action is part of the helper.
+Requirements: Git, uv, Node.js 24 with pnpm, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the escaping version from the production workflow (`uvx escaping-site@X.Y.Z`) and runs that package from PyPI the same way. `ESCAPING_SOURCE=/path/to/escaping` uses a local checkout instead. No hosting action is part of the helper.
 
 From the site repository:
 
@@ -55,7 +55,7 @@ Open **http://localhost:8765**. A numeric argument selects another port. Stop th
 bash scripts/preview_geo.sh --build-only
 ```
 
-The helper runs `escpe export` into `build/content/`, then `pnpm build` into `dist/`, and serves `dist/` as the document root. Once the content is exported, `pnpm dev` gives a live-reloading preview of design changes; it does not serve the old-address pages. `PROJECT_METADATA=offline` builds without asking GitHub for the projects' language and topics. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
+The helper runs `escaping-site export` into `build/content/`, then `pnpm build` into `dist/`, and serves `dist/` as the document root. Once the content is exported, `pnpm dev` gives a live-reloading preview of design changes; it does not serve the old-address pages. `PROJECT_METADATA=offline` builds without asking GitHub for the projects' language and topics. Production canonical URLs intentionally stay `https://geoqiao.me/`; the local server does not change content identity. Generated output and local environments are ignored by Git.
 
 ## Interaction contract
 

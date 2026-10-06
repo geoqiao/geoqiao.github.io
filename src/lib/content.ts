@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { parse } from "yaml";
 import { site } from "./config";
 
-// The directory `escpe export` writes; see escaping's docs/contracts/content-export-v1.md.
+// The directory `escaping-site export` writes; see escaping's docs/contracts/content-export-v1.md.
 const contentDir = resolve(process.cwd(), process.env.CONTENT_DIR ?? "build/content");
 const SUPPORTED_EXPORT_VERSION = 1;
 
@@ -52,7 +52,7 @@ function loadManifest(): Manifest {
   const file = resolve(contentDir, "manifest.json");
   if (!existsSync(file)) {
     throw new Error(
-      `No content at ${contentDir}. Run "escpe export --config config.yaml" first (see README.md).`,
+      `No content at ${contentDir}. Run "escaping-site export --config config.yaml" first (see README.md).`,
     );
   }
   const manifest = JSON.parse(readFileSync(file, "utf8")) as Manifest;

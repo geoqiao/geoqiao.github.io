@@ -55,7 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           status=0
-          uvx --python 3.14 --from 'escpe==0.6.0' escpe export --config config.yaml || status=$?
+          uvx --python 3.14 escaping-site@0.6.0 export --config config.yaml || status=$?
           # 2: exported, but some Issues were skipped; the skipped-issues output says which.
           if [ "$status" -eq 2 ]; then exit 0; fi
           exit "$status"
