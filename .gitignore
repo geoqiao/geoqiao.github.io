@@ -22,3 +22,9 @@ venv/
 
 # Local OS metadata
 .DS_Store
+
+# Astro build, content export and dependencies
+/dist/
+/build/
+/.astro/
+node_modules/

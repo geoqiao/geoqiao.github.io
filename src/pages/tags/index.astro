@@ -1,0 +1,8 @@
+---
+import Base from "../../layouts/Base.astro";
+import { tags } from "../../lib/site";
+---
+<Base title="Tags" path="/tags/" section="/tags/">
+<div class="page-heading"><p class="eyebrow">{tags.length} topics</p><h1>Tags<span class="heading-dot" aria-hidden="true">.</span></h1><p>Browse the writing by topic.</p></div>
+<ul class="topic-directory">{tags.map((tag) => <li><a href={tag.path}><span class="topic-name">{tag.name}</span><span class="topic-count">{tag.posts.length}<span class="visually-hidden"> {tag.posts.length === 1 ? "article" : "articles"}</span></span></a></li>)}{tags.length === 0 && <li class="empty-state">No topics yet.</li>}</ul>
+</Base>

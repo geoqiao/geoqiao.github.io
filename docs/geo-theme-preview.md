@@ -6,7 +6,7 @@ This preview was prepared on `design/geo-theme` on 2026-09-14. It is local only;
 
 ## Try it
 
-Run `bash scripts/preview_geo.sh` from the repository, then open <http://localhost:8765>. See the [theme guide](../theme/README.md) for requirements, rebuilding, and implementation details.
+Run `bash scripts/preview_geo.sh` from the repository, then open <http://localhost:8765>. See the [design guide](geo.md) for requirements, rebuilding, and implementation details.
 
 - On a wide desktop, click a project card to lift it, then click again to open its project. Click another card to switch; Close, Escape, or clicking outside dismisses the preview.
 - The introduction has drawn arrows, handwritten notes, and animated link highlights.

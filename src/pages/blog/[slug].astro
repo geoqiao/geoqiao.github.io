@@ -1,0 +1,56 @@
+---
+import Comments from "../../components/Comments.astro";
+import Mermaid from "../../components/Mermaid.astro";
+import TagLinks from "../../components/TagLinks.astro";
+import Base from "../../layouts/Base.astro";
+import { absolute, site } from "../../lib/config";
+import { posts } from "../../lib/content";
+import { renderMarkdown } from "../../lib/markdown";
+
+export function getStaticPaths() {
+  return posts.map((post, index) => ({
+    params: { slug: post.slug },
+    props: { post, newer: posts[index - 1], older: posts[index + 1] },
+  }));
+}
+
+const { post, newer, older } = Astro.props;
+const body = await renderMarkdown(post.markdown);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.description,
+  url: absolute(post.path),
+  datePublished: post.publishedAt.replace(/Z$/, "+00:00"),
+  dateModified: post.updatedAt.replace(/Z$/, "+00:00"),
+  author: { "@type": "Person", name: site.author },
+};
+---
+<Base kind="post" title={post.title} description={post.description} path={post.path} section="/blog/" jsonLd={jsonLd}>
+<article class="article-page">
+  <header class="article-heading">
+    <a class="breadcrumb" href="/blog/">← Blog</a>
+    <h1>{post.title}</h1>
+    <div class="article-meta"><span>{site.author}</span><time datetime={post.createdDate}>{post.createdDate}</time>{site.comments.enabled && <a href="#comments-title">Discuss ↓</a>}</div>
+    <TagLinks tags={post.tags} />
+  </header>
+  <div class="reading-layout">
+    <div class="reading-main">
+      <div class="post-content" set:html={body} />
+      {(newer || older) && (
+        <nav class="article-end" aria-label="Article navigation">
+          <span aria-hidden="true">↳</span>
+          {newer && <a rel="prev" href={newer.path} aria-label={`Previous: ${newer.title}`}>Previous</a>}
+          {older && <a rel="next" href={older.path} aria-label={`Next: ${older.title}`}>Next</a>}
+        </nav>
+      )}
+      {site.comments.enabled && <Comments issueNumber={post.issueNumber} />}
+    </div>
+    <aside class="reading-margin" hidden>
+      <details class="toc"><summary>On this page</summary><nav data-toc aria-label="On this page"></nav></details>
+    </aside>
+  </div>
+</article>
+<Mermaid />
+</Base>

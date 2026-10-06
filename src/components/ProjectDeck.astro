@@ -1,0 +1,35 @@
+---
+import type { Project } from "../lib/projects";
+import { deckCovers } from "../site.config";
+
+interface Props {
+  projects: Project[];
+}
+
+const projects = Astro.props.projects.slice(0, 4);
+---
+<div class="project-deck" data-project-deck>
+  <button class="deck-close" type="button" aria-label="Close project preview" hidden><span aria-hidden="true">×</span> Close</button>
+  <ul class="deck-list">
+    {projects.map((project, index) => {
+      const position = index - (projects.length - 1) / 2;
+      const cover = deckCovers.includes(project.slug) ? `/assets/images/projects/${project.slug}.webp` : project.image;
+      return (
+        <li class="deck-slot" style={`--position: ${position}; --tilt: ${position * 4}deg; --drop: ${Math.abs(position) * 10}px; --order: ${index}`}>
+          <a class="deck-card" href={project.path} aria-labelledby={`deck-title-${project.slug}`} data-project-name={project.title}>
+            <span class="deck-cover">
+              {cover ? <img src={cover} alt="" width="1000" height="750" loading="lazy" decoding="async"> : <span class="deck-placeholder" aria-hidden="true">{project.title}</span>}
+            </span>
+            <span class="deck-meta"><span class="deck-title" id={`deck-title-${project.slug}`}>{project.title}</span>{project.language && <span class="deck-language">{project.language}</span>}</span>
+            <span class="deck-details" id={`deck-details-${project.slug}`}>
+              {project.summary && <span class="deck-summary">{project.summary}</span>}
+              <span class="deck-open" lang="en">Open project <span aria-hidden="true">↗</span></span>
+            </span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  <p class="deck-hint" id="deck-hint" lang="en" hidden>Click a card to lift it. Click again to open the project.</p>
+  <p class="visually-hidden" data-deck-status role="status" aria-live="polite"></p>
+</div>

@@ -1,0 +1,62 @@
+---
+import Intro from "../components/Intro.astro";
+import ProjectDeck from "../components/ProjectDeck.astro";
+import Base from "../layouts/Base.astro";
+import { site } from "../lib/config";
+import { posts, type Post } from "../lib/content";
+import { getProjects } from "../lib/projects";
+import { featuredPosts } from "../site.config";
+
+const featured = featuredPosts.flatMap((number) => {
+  const post = posts.find((item) => item.issueNumber === number);
+  if (!post) console.warn(`featuredPosts: Issue #${number} is not a published Blog post; it is left out`);
+  return post ? [post] : [];
+});
+const featuredProjects = (await getProjects()).filter((project) => project.featured);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Person", name: site.author, url: site.url },
+    { "@type": "WebSite", "@id": site.url, name: site.title, url: site.url, description: site.description },
+  ],
+};
+const lists: { id: string; title: string; posts: Post[]; all?: boolean }[] = [
+  ...(featured.length ? [{ id: "featured-title", title: "Featured writing", posts: featured }] : []),
+  { id: "recent-title", title: "Recent articles", posts: posts.slice(0, 5), all: posts.length > 0 },
+];
+---
+<Base kind="home" path="/" jsonLd={jsonLd}>
+<div class="home-light" aria-hidden="true">
+  <svg viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" stroke-width="5" stroke-linecap="round"><path d="M660 20C480 100 470 220 260 350M560 100C490 60 430 70 340 40M480 200C430 160 330 200 230 160M390 280C410 350 320 410 310 470"/></g>
+    <g fill="currentColor"><ellipse cx="492" cy="88" rx="60" ry="14" transform="rotate(25 492 88)"/><ellipse cx="407" cy="52" rx="56" ry="13" transform="rotate(-12 407 52)"/><ellipse cx="540" cy="166" rx="64" ry="16" transform="rotate(-55 540 166)"/><ellipse cx="411" cy="184" rx="62" ry="15" transform="rotate(18 411 184)"/><ellipse cx="308" cy="165" rx="60" ry="14" transform="rotate(-15 308 165)"/><ellipse cx="463" cy="263" rx="66" ry="16" transform="rotate(-48 463 263)"/><ellipse cx="363" cy="360" rx="62" ry="14" transform="rotate(-60 363 360)"/></g>
+  </svg>
+</div>
+<header class="home-heading">
+  <div class="home-title">
+    <h1>{site.title}</h1>
+    {site.profile.avatar && <a class="home-signature" href="/about/" aria-label={`About ${site.author}`}><img class="home-avatar" src={site.profile.avatar} alt="" width="88" height="88"></a>}
+  </div>
+  <Intro />
+</header>
+{lists.map((list) => (
+  <section class="home-section" aria-labelledby={list.id}>
+    <div class="section-heading"><h2 id={list.id}>{list.title}</h2>{list.all && <a href="/blog/">View all <span aria-hidden="true">→</span></a>}</div>
+    {list.posts.length > 0 ? (
+      <ul class="home-writing">
+        {list.posts.map((post) => (
+          <li><a href={post.path}><span>{post.title}</span><time datetime={post.createdDate}>{post.createdDate}</time></a></li>
+        ))}
+      </ul>
+    ) : (
+      <p class="muted">No published writing yet.</p>
+    )}
+  </section>
+))}
+{featuredProjects.length > 0 && (
+  <section class="home-section home-projects" aria-labelledby="projects-title">
+    <div class="section-heading"><h2 id="projects-title">Projects</h2><a href="/projects/">All projects <span aria-hidden="true">→</span></a></div>
+    <ProjectDeck projects={featuredProjects} />
+  </section>
+)}
+</Base>
