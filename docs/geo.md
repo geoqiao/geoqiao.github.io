@@ -41,7 +41,7 @@ Each project has a product page at `/projects/<slug>/`, written from `src/projec
 
 ## Local preview
 
-Requirements: Git, uv, Node.js 24 with pnpm, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the escaping version from the production workflow (`uses: geoqiao/escaping/export@…`), fetches it into `.scratch/geo/escaping-<version>`, and runs it the way the Action does: `uv run --locked` with Python 3.14 and an environment outside the checkout. `ESCAPING_SOURCE=/path/to/escaping` uses a local checkout instead. No hosting action is part of the helper.
+Requirements: Git, uv, Node.js 24 with pnpm, and GitHub CLI authenticated for read access to the site's Issues (or a `GITHUB_TOKEN` environment variable). The helper reads the escaping version from the production workflow (`uvx --from 'escpe==X.Y.Z'`) and runs that package from PyPI the same way. `ESCAPING_SOURCE=/path/to/escaping` uses a local checkout instead. No hosting action is part of the helper.
 
 From the site repository:
 

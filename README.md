@@ -43,14 +43,14 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 
 ## 构建与升级
 
-工作流的 `uses: geoqiao/escaping/export@<完整 commit SHA> # vX.Y.Z` 是 escaping 版本的唯一固定值，不跟随移动分支；升级时改为新版本 tag 对应的完整 commit SHA。
-escaping 的 export Action 用自身 lock 在 runner temp 安装 Python 3.14 环境并导出内容；导出格式见 [content export v1](https://github.com/geoqiao/escaping/blob/main/docs/contracts/content-export-v1.md)，站点只接受 `export_version: 1`。
+工作流里的 `uvx --from 'escpe==X.Y.Z'` 是 escaping 版本的唯一固定值；升级时改版本号。
+`uvx` 从 PyPI 安装这个版本到临时环境并导出内容，PyPI 上已发布的版本不可覆盖；导出格式见 [content export v1](https://github.com/geoqiao/escaping/blob/main/docs/contracts/content-export-v1.md)，站点只接受 `export_version: 1`。
 站点依赖由 `pnpm-lock.yaml` 固定，CI 使用 `pnpm install --frozen-lockfile`。
 
 | 环节 | 约定 |
 | --- | --- |
 | 测试 | 站点 unittest 在导出前运行：`uv run --no-project --python 3.14 --with pyyaml==6.0.3`；Markdown 清洗规则的测试在构建前运行：`pnpm test` |
-| 导出 | `geoqiao/escaping/export` Action 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `build/content/` |
+| 导出 | `escpe export` 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `build/content/` |
 | 构建 | `pnpm build` 生成整站（含 `/projects/<slug>/` 和 `redirects` 的旧地址页）到 `dist/`，并检查所有站内链接都指向已生成的页面或文件 |
 | 发布 | 分支可以构建，只有 main 的成功 build 可以部署；有 Issue 被跳过时部署照常进行，随后工作流标红并列出这些 Issue |
 
