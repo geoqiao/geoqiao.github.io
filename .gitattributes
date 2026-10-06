@@ -1,2 +1,2 @@
-# Preserve whitespace inside the original editor bundle, including JS string literals.
-theme/projects/article-studio.html -whitespace linguist-vendored
+# The exported content is the authors' Markdown, byte for byte: trailing spaces are line breaks.
+content/** -text -whitespace
