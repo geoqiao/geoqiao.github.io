@@ -20,4 +20,3 @@ I write mainly in Chinese about choosing tools, experimenting with workflows, an
 I also share small moments from everyday life.
 
 [GitHub ↗](https://github.com/geoqiao) · [RSS ↗](https://geoqiao.me/atom.xml)
-
