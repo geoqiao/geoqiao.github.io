@@ -2,7 +2,7 @@
 
 The site is an [Astro](https://astro.build/) project with its own design, **[Geo](docs/geo.md)**. Content is written in GitHub Issues; [escaping](https://github.com/geoqiao/escaping) exports the published Issues as Markdown and this repository builds every page from them. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
 
-这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/pages.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`build/content/`），再用 Astro 构建出 `dist/` 并上传为 GitHub Pages artifact。
+这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/pages.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建出 `dist/`，构建通过后把 `content/` 提交回 main，并上传 `dist/` 为 GitHub Pages artifact。`content/` 由 workflow 写入，不要手工修改。
 
 主要源码：
 
@@ -50,11 +50,14 @@ escaping 的通用契约允许省略部分元数据，但本站博客必须显�
 | 环节 | 约定 |
 | --- | --- |
 | 测试 | 站点 unittest 在导出前运行：`uv run --no-project --python 3.14 --with pyyaml==6.0.3`；Markdown 清洗规则的测试在构建前运行：`pnpm test` |
-| 导出 | `escaping-site export` 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `build/content/` |
+| 导出 | `escaping-site export` 读取根目录 `config.yaml`，校验 Issue 并把已发布内容写到 `content/` |
 | 构建 | `pnpm build` 生成整站（含 `/projects/<slug>/` 和 `redirects` 的旧地址页）到 `dist/`，并检查所有站内链接都指向已生成的页面或文件 |
+| 提交内容 | main 上构建通过且 `content/` 有变化时，workflow 以 `github-actions[bot]` 提交 `content: update from Issues`；内容没变就不提交，构建失败也不提交 |
 | 发布 | 分支可以构建，只有 main 的成功 build 可以部署；有 Issue 被跳过时部署照常进行，随后工作流标红并列出这些 Issue |
 
 本地预览与检查见 [Geo 说明](docs/geo.md)。
+
+`wrangler.jsonc` 把 `dist/` 作为 Cloudflare Workers 的静态资源部署，仓库里有了 `content/`，Cloudflare 只用 `pnpm build` 就能构建。`dist/_redirects`（构建时生成）让缺尾斜杠的地址 301 到带斜杠的页面，`public/_headers` 保留跨域读取，`wrangler.www.jsonc` 把 `www.geoqiao.me` 301 到主域名。
 
 升级前保留当前 Config、workflow、escaping 版本、lockfile 和成功的 Pages artifact。
 先推分支检查安装、构建和完整产物，再合入 main；上线后检查页面、旧链接、feed、

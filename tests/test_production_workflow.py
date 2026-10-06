@@ -28,7 +28,7 @@ class ProductionWorkflowTests(unittest.TestCase):
         build = jobs["build"]
         # Branch builds remain available; Issue events build only for the repository's own members.
         self.assertEqual(build["if"], "github.event_name != 'issues' || contains(fromJSON('[\"OWNER\",\"MEMBER\",\"COLLABORATOR\"]'), github.event.issue.author_association)")
-        self.assertEqual(build["permissions"], {"contents": "read", "issues": "read"})
+        self.assertEqual(build["permissions"], {"contents": "write", "issues": "read"})
         steps = build["steps"]
         for step in steps:
             self.assertNotIn("if", step)  # Default success(), never always().
@@ -38,14 +38,15 @@ class ProductionWorkflowTests(unittest.TestCase):
         by_name = {step["name"]: step for step in steps}
         required = [
             "Test site migration tooling", "Export the content", "Install site dependencies",
-            "Test the Markdown allowlist", "Build the site", "Upload Pages artifact",
+            "Test the Markdown allowlist", "Build the site", "Commit the content",
+            "Upload Pages artifact",
         ]
         positions = [list(by_name).index(name) for name in required]
         self.assertEqual(positions, sorted(positions))
         content = by_name["Export the content"]
         self.assertEqual(content["id"], "content")
         # One exact escaping version; exit status 2 (some Issues skipped) still builds the rest.
-        self.assertRegex(content["run"], r"uvx --python 3\.14 escaping-site@\d+\.\d+\.\d+ export --config config\.yaml \|\| status=\$\?\n")
+        self.assertRegex(content["run"], r"uvx --python 3\.14 escaping-site@\d+\.\d+\.\d+ export --config config\.yaml --output content \|\| status=\$\?\n")
         self.assertIn('if [ "$status" -eq 2 ]; then exit 0; fi\nexit "$status"', content["run"])
         self.assertEqual(content["env"], {"GITHUB_TOKEN": "${{ github.token }}"})
         # The lockfile decides what is installed; the site reads the directory the export wrote.
@@ -53,6 +54,12 @@ class ProductionWorkflowTests(unittest.TestCase):
         site = by_name["Build the site"]
         self.assertEqual(site["run"], "pnpm build")
         self.assertEqual(site["env"]["CONTENT_DIR"], "${{ steps.content.outputs.output }}")
+        # Only main commits the content, only when it changed, and only the content folder.
+        commit = by_name["Commit the content"]["run"]
+        self.assertIn('if [ "$GITHUB_REF" != "refs/heads/main" ]; then', commit)
+        self.assertIn("git add --all content\nif git diff --cached --quiet; then", commit)
+        self.assertNotIn("--force", commit)
+        self.assertFalse(steps[0]["with"]["persist-credentials"])
         self.assertEqual(by_name["Upload Pages artifact"]["with"]["path"], "dist")
         self.assertEqual(
             self.workflow["jobs"]["build"]["outputs"]["skipped-issues"],

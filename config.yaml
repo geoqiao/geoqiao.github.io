@@ -141,7 +141,7 @@ projects:
     order: 2
     fallback_metadata:
       language: Python
-      topics: [github-issues, static-site-generator, github-pages]
+      topics: [blog]
 
   - slug: md2xarticle
     title: md2xarticle
