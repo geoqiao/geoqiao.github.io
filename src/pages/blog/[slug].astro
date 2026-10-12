@@ -16,6 +16,12 @@ export function getStaticPaths() {
 
 const { post, newer, older } = Astro.props;
 const body = await renderMarkdown(post.markdown);
+if (/<h1[\s>]/.test(body)) {
+  // The page's <h1> is the Issue title; see "本站博客发布规范" in README.md.
+  const message = `Issue #${post.issueNumber} (${post.slug}): the body has a level-1 heading; start the body at ##`;
+  // Astro prints the page's path without a line break; an annotation must start its own line.
+  console.warn(process.env.GITHUB_ACTIONS ? `\n::warning title=Heading level::${message}` : message);
+}
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
