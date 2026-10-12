@@ -1,13 +1,13 @@
 ---
 issue_number: 18
 type: blog
-title: Python编辑器-我的VSCode配置
+title: VSCode Python 配置：插件、Ruff 格式化和 settings.json
 slug: my-vscode-setup-for-python
-description: VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。
+description: 我的 VSCode Python 配置：为什么选 VSCode，装了哪些插件（Jupyter、Rainbow CSV、Ruff 等），以及开启 Ruff 保存时格式化的 settings.json。
 created_date: '2023-12-10'
 update_date: '2023-12-10'
 published_at: '2023-12-10T07:14:08Z'
-updated_at: '2026-08-03T09:46:06Z'
+updated_at: '2026-10-12T15:26:05Z'
 tags:
 - name: python
   key: python
@@ -17,7 +17,7 @@ tags:
 
 VSCode 是一款由微软开发、非常流行的代码编辑器：功能强大、简单易用。
 
-## 为什么不是其他编辑器
+## 为什么选 VSCode 而不是 PyCharm 或 Jupyter
 
 可以编辑 Python 的编辑器很多，但是为什么选择 VSCode 呢？
 
@@ -53,7 +53,7 @@ brew install visual-studio-code
 4. **Ayu**：个人最喜欢的 VSCode theme。
 5. **Ruff**：Python 的 lint&format 工具，有类型检查个人感觉比 black 好用。需要在本地环境安装`ruff`。
 
-## 编辑配置
+## settings.json 配置（含 Ruff 格式化）
 
 在下载好插件之后，插件的有些功能需要在 VSCode 设置中开启，为了方便，我直接把设置的 setting.json 文件放在这里供参考：
 

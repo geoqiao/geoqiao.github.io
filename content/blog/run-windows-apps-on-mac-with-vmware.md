@@ -1,13 +1,13 @@
 ---
 issue_number: 15
 type: blog
-title: 总有一些 app 只能 Windows 用
+title: Mac 上运行 Windows 应用：我为什么选 VMware 虚拟机
 slug: run-windows-apps-on-mac-with-vmware
 description: 总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。
 created_date: '2023-09-24'
 update_date: '2023-09-24'
 published_at: '2023-09-24T14:02:41Z'
-updated_at: '2026-08-03T09:46:04Z'
+updated_at: '2026-10-12T15:25:59Z'
 tags:
 - name: windows
   key: windows
@@ -15,7 +15,7 @@ tags:
 
 总有一些 app 只有 Windows 版本，最近对象就碰到这样一个问题，不得已只能安装一个虚拟机了。
 
-## 结论
+## 结论：我选了 VMware
 
 1. 我最终选择了 VMware
 2. 现在体验最好的虚拟机还是 PD，如果有钱可以无脑选择 PD

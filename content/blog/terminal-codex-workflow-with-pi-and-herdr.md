@@ -1,13 +1,13 @@
 ---
 issue_number: 41
 type: blog
-title: What's on My Pi Agent?：把 90% 的 Codex Desktop 装进终端
+title: Pi + Herdr + Neovim：把 90% 的 Codex Desktop 装进终端
 slug: terminal-codex-workflow-with-pi-and-herdr
 description: 如果你熟悉终端和 Neovim，想把 Agent、编辑器与并行任务放进同一套工作流，这篇记录了我的 Pi + Herdr 配置分工。读完可以按自己的任务挑选插件，理解代码上下文、Side Chat 和子 Agent 如何配合；它不是开箱即用的 Codex Desktop 替代品。
 created_date: '2026-08-01'
 update_date: '2026-08-01'
 published_at: '2026-08-01T18:50:25Z'
-updated_at: '2026-09-10T05:25:53Z'
+updated_at: '2026-10-12T15:26:33Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -31,7 +31,7 @@ Codex Desktop 很顺手，只是我的 MacBook M1 PRO 跑不起它。四年没�
 
 Codex Desktop 一手包办的几件事，在这里被拆给了更适合终端的零件。
 
-## Trace
+## Codex Desktop 功能对照：Pi 用什么替代
 
 这篇记录的是我在 2026 年 8 月使用的组合，适合已经熟悉终端和 Neovim、愿意自己配置插件的人，不是一份一键安装教程。可以先看工作台、Agent 和编辑器的分工，再按自己的任务挑选后面的插件。
 
@@ -72,7 +72,7 @@ flowchart TD
 
 `pi-codex-compaction` 在使用 OpenAI Codex 模型时，把原生的上下文压缩能力接进 Pi。Pi 自带的 compaction 在超长任务里经常还是会撞上上下文上限；换成 Codex 的原生 compaction 后，长会话可以继续压缩和恢复，token 也更耐用。
 
-## PROS & CONS
+## 优点和不足
 
 优点很直接：
 

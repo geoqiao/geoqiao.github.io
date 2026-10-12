@@ -1,13 +1,13 @@
 ---
 issue_number: 62
 type: blog
-title: 2026 AI 编程订阅对比：Codex、Claude Code、Kimi 怎么选？
+title: 2026 AI 编程订阅（Coding Plan）对比：Codex、Claude Code、Kimi 怎么选？
 slug: ai-coding-subscriptions-api-value-comparison
-description: 2026 AI 编程订阅怎么选，哪个更划算？对比 Codex、Claude Code、Cursor、Kimi 等主流套餐的月费、Token 额度、每百万 Token 成本和 API 等价倍率，并以 DeepSeek API 价格为参照，结合模型能力与满额使用条件，判断是否值得订阅或升级。
+description: 2026 AI 编程订阅（Coding Plan）怎么选，哪个更划算？对比 Codex、Claude Code、Cursor、Kimi 等主流套餐的月费、Token 额度、每百万 Token 成本和 API 等价倍率，并以 DeepSeek API 价格为参照，结合模型能力与满额使用条件，判断是否值得订阅或升级。
 created_date: '2026-09-05'
 update_date: '2026-09-05'
 published_at: '2026-09-05T09:07:55Z'
-updated_at: '2026-09-10T05:25:57Z'
+updated_at: '2026-10-12T15:26:35Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -21,7 +21,7 @@ tags:
 
 [下载完整数据 CSV](https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/b88732f19bf0fb40f88fcbd823108de000272284/assets/charts/issue-62-fbac563730fb1e89.csv)（上游原始快照；倍率按文中公式计算）。
 
-## 主要套餐
+## ChatGPT、Claude、Kimi 套餐的每百万 token 单价
 
 **实际混合单价 = 月费 ÷ 月可用 token 数。** 每月按四周跑满计算，包含输入、输出和缓存；同套餐不同模型的额度不能相加。
 

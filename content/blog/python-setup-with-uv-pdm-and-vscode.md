@@ -3,11 +3,11 @@ issue_number: 27
 type: blog
 title: Python 环境配置从零开始： uv、pdm 和 VSCode 的最佳实践
 slug: python-setup-with-uv-pdm-and-vscode
-description: 前言
+description: 给 Python 新手的环境配置指南：用 uv 或 pdm 管理 Python 版本、虚拟环境和依赖，编辑器用 VSCode，五步完成从安装到添加依赖的配置。
 created_date: '2024-11-03'
 update_date: '2024-11-03'
 published_at: '2024-11-03T09:53:26Z'
-updated_at: '2026-08-03T09:46:21Z'
+updated_at: '2026-10-12T15:26:18Z'
 tags:
 - name: python
   key: python
@@ -15,7 +15,7 @@ tags:
   key: vscode
 ---
 
-## 前言
+## 这篇解决什么问题
 
 写过好多次 Python 包管理工具和编辑器选择的 issues 了，但是很散，这里集中整合一下，一次性解决学习 Python 的新手一定会碰到的 Python 安装、环境配置、编辑器选择的问题！
 
@@ -25,7 +25,7 @@ tags:
 
 编辑器推荐使用 VSCode。
 
-## 为什么要写这篇
+## 新手配置 Python 环境的三个难题
 
 我在学习 Python 之初遇到了三大难题：
 
@@ -108,7 +108,7 @@ uv remove scipy # 使用uv移除scipy
 
 刚开始全部默认配置即可。VSCode 会自动帮我们完成虚拟环境识别、智能补全、错误提示等功能。
 
-## 最后
+## 常见疑问
 
 类似 uv 和 pdm 这样的工具可以帮我们节省很多项目配置的时间，在正式学习 Python 之前先掌握他们的用法非常有必要。最后备注一些可能的疑问：
 

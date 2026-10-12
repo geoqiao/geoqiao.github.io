@@ -1,13 +1,13 @@
 ---
 issue_number: 67
 type: blog
-title: codex 旧王死，Paseo 新王立
+title: Paseo 使用一个月：多 Agent 分工、Profile 配置和手机远程接管
 slug: how-i-use-paseo
-description: 我如何用 Paseo 管理多 Agent、配置分工，并通过手机接续任务。
+description: Paseo 是什么、怎么用：用了一个月后，我记录它的界面、Agent Profile 分工、支持的 Agent，以及从开任务到手机跟进、验收的使用流程。
 created_date: '2026-09-09'
 update_date: '2026-09-09'
 published_at: '2026-09-08T17:17:48Z'
-updated_at: '2026-09-10T05:26:00Z'
+updated_at: '2026-10-12T15:26:37Z'
 tags:
 - name: pi
   key: pi
@@ -29,8 +29,8 @@ Paseo 同时拥有：
 
 这篇接着[六款桌面 Agent 工具的选择记录](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/)往下写：上一篇解释为什么选 Paseo，这篇记录选定之后怎么用。更早的 [Pi + Herdr + Neovim 终端组合](https://geoqiao.me/blog/terminal-codex-workflow-with-pi-and-herdr/)则是这次迁移的起点。
 
-## How Paseo works
-### The Userinterface
+## Paseo 是什么
+### 界面：Codex + Herdr + VSCode
 
 > Paseo = codex  +  Herdr + VSCode
 
@@ -39,7 +39,7 @@ Paseo 同时拥有：
 ![Paseo 多 Agent 分栏与代码编辑视图](https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/312ca83c49e997dbdea0d3a24d458061c52d440b/assets/issues/67/42bb236c6cc366be.png)
 
 
-### The agent-profile (Subagent)
+### Agent Profile：按职责给 Subagent 分工
 
 依托 agent-profile，主会话可以根据任务场景调起不同 subagent 完成任务，即使这些 agent 来自不同的 harness 。
 
@@ -48,13 +48,13 @@ Paseo 同时拥有：
 我按任务职责分档，不是每个任务都要走一遍：主 Agent 负责讨论和把关；查资料交给只读整理，边界清楚的任务交给执行实现，复杂问题交给复杂实现。重要结论再请另一套 harness 下的 Agent 独立复核，减少同一种思路的盲点。
 
 
-### Other features
+### 其他功能
 
 1. 内置 browser 、完成预览标记修改
 2. 支持 39+ agent： Claude code、codex、pi、grok、cursor、Hermes....
 3. 非常丝滑从来没有出现过断连的 mobile APP 远程体验
 
-## How I use 
+## 我怎么用 Paseo
 
 只需要打开 Settings -> agent -> enable paseo tools , 然后开始任务：
 
@@ -76,7 +76,7 @@ flowchart TD
 
 
 
-## The END
+## 为什么最后留在 Paseo
 
 cursor 和 codex 虽然也很强大，但是没有办法像 Herdr 那样自由布局 Tab 和 panel。Herdr 虽好用，但是对于我这种非 coding 背景的用户来说，还是太难操作了。
 

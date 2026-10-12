@@ -3,17 +3,17 @@ issue_number: 30
 type: blog
 title: 我喜欢冬天的下午走路去成都的茶馆喝茶
 slug: winter-walks-to-chengdu-teahouses
-description: 记录一下
+description: 带妈妈去杭州、苏州、上海和成都走了一圈之后的记录：我也可以做旅游规划，很喜欢成都的茶馆文化，比起历史文化景点更喜欢自然景点。
 created_date: '2025-02-05'
 update_date: '2025-02-05'
 published_at: '2025-02-05T12:39:28Z'
-updated_at: '2026-08-03T09:44:12Z'
+updated_at: '2026-10-12T15:26:22Z'
 tags:
 - name: travel
   key: travel
 ---
 
-## 记录一下
+## 带妈妈出去走走
 
 
 今年的计划完成了一大项：带妈妈出去走走。

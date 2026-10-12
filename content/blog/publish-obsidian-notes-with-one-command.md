@@ -3,11 +3,11 @@ issue_number: 36
 type: blog
 title: 从 Obsidian 到博客：我如何用一条命令把笔记变成网站
 slug: publish-obsidian-notes-with-one-command
-description: 从 Obsidian 到博客：我如何用一条命令把笔记变成网站
+description: 我在 Obsidian 里写完文章，对 AI 说一句“发出去”，博客就自动更新。这篇拆解三层工作流：Obsidian 负责写作，Claude Code 负责整理和发布，Escaping 负责构建部署。
 created_date: '2026-04-18'
 update_date: '2026-04-18'
 published_at: '2026-04-18T12:41:36Z'
-updated_at: '2026-09-10T05:25:51Z'
+updated_at: '2026-10-12T15:26:31Z'
 tags:
 - name: claude-code
   key: claude-code
@@ -21,13 +21,11 @@ tags:
   key: workflow
 ---
 
-# 从 Obsidian 到博客：我如何用一条命令把笔记变成网站
-
 > **TL;DR**：我在 Obsidian 里写完文章，对 AI 说"发出去"，博客就自动更新了。
 
 ---
 
-## 我的困境
+## 问题：Obsidian 里的内容只能自己看
 
 我用 Obsidian 做本地知识库已经两年了。它完美满足了我对写作工具的所有要求：本地优先、Markdown 语法、双向链接、标签系统、跨设备同步。
 
@@ -62,7 +60,7 @@ flowchart TD
 
 **Obsidian 负责内容生产，AI 负责整理与发布，我负责审核把关。**
 
-## 各层拆解
+## 三层分工
 
 ### 第一层：Obsidian —— 内容的源头
 

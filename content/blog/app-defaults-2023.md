@@ -3,17 +3,17 @@ issue_number: 17
 type: blog
 title: App Defaults 2023
 slug: app-defaults-2023
-description: 背景
+description: 我的 App Defaults 2023 清单：在 macOS 上日常使用的邮件、笔记、日历、RSS、浏览器、密码管理、编辑器、启动器等默认应用。
 created_date: '2023-11-11'
 update_date: '2023-11-11'
 published_at: '2023-11-11T09:01:56Z'
-updated_at: '2026-08-02T10:03:30Z'
+updated_at: '2026-10-12T15:26:03Z'
 tags:
 - name: app-defaults
   key: app-defaults
 ---
 
-# 背景
+## 为什么更新这份清单
 
 一段时间之前写过一篇[what's on my mac](https://github.com/geoqiao/geoqiao.github.io/issues/9)，推荐过一些自己使用的 Mac 应用。
 
@@ -21,7 +21,7 @@ tags:
 
 这次一些软件发生了变化，对之前的文章做一个更新。
 
-# App Defaults 2023
+## 我的 App Defaults 清单
 
 - 💾 **Operating System**: macOS
 - 📬 **Mail client**: mail.app
@@ -40,6 +40,6 @@ tags:
 - 🪄 **Launcher:** [Raycast](https://www.raycast.com/)
 - 📖 **Translation app:** [Easydict](https://github.com/tisfeng/Easydict)
 
-# 总结
+## 更多常用软件
 
 以上就是我目前高频使用的软件了，还有很多没写上去，大家可以参考 [what's on my mac](https://github.com/geoqiao/geoqiao.github.io/issues/9)。

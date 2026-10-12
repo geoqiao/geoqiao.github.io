@@ -7,7 +7,7 @@ description: escaping 的工作原理，以及如何用 GitHub Issues 写作、�
 created_date: '2026-04-05'
 update_date: '2026-04-05'
 published_at: '2026-04-05T09:48:06Z'
-updated_at: '2026-09-09T14:59:31Z'
+updated_at: '2026-10-12T15:26:26Z'
 tags:
 - name: escaping
   key: escaping
@@ -17,7 +17,7 @@ tags:
 
 > “**People Die, but Long Live GitHub**” -- [gitblog](https://github.com/yihong0618/gitblog)
 
-# Escaping 🚀
+## Escaping 是什么
 
 [Escaping](https://github.com/geoqiao/escaping) 是一个极致简洁、自动化程度极高的个人博客框架。它将 GitHub Issues 作为后端编辑器，利用 GitHub Actions 自动触发构建，并最终通过 GitHub Pages 进行分发。
 
@@ -79,7 +79,7 @@ flowchart TD
 - [gitblog](https://github.com/yihong0618/gitblog) - 用 GitHub Issues 写博客。
 - [Gmeek](https://github.com/Meekdai/Gmeek) - 提供了极简的构建思路。
 
-## 最后
+## 项目名字的由来
 
 去年 11 月搬家，新出租屋离地铁站远了不少。电瓶车充电麻烦，于是买了辆二手自行车代步。
 

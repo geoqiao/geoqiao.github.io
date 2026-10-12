@@ -3,11 +3,11 @@ issue_number: 32
 type: blog
 title: Vibe Coding 实战后感 - github_blog with Trae
 slug: vibe-coding-github-blog-with-trae
-description: TL:DR
+description: 我用 Trae IDE 给 github_blog 项目重做了前端，全程 vibe coding，没有手写一行代码。记录为什么选 Trae、两小时的过程，以及对上下文、提示词、回滚和环境隔离的体会。
 created_date: '2026-03-21'
 update_date: '2026-03-21'
 published_at: '2026-03-21T09:54:26Z'
-updated_at: '2026-09-05T11:16:50Z'
+updated_at: '2026-10-12T15:26:24Z'
 tags:
 - name: python
   key: python
@@ -17,7 +17,7 @@ tags:
   key: vscode
 ---
 
-## TL:DR
+## 结论：全程 vibe coding，没有手写代码
 
 我使用 Trae IDE 对我的 github_blog 项目做了一些迭代。与之前不同的是，这次完全`vibe coding`，没有手写一行代码。
 
@@ -45,7 +45,7 @@ tags:
 
 我当然很不满意呀！
 
-## 怎么做
+## 用 Trae 重写前端
 
 当然是让 AI 来帮我写前端！
 
@@ -66,7 +66,7 @@ tags:
 
 <img width="3024" height="1964" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/32/091ccbc5a8248f37.png" />
 
-## 回顾
+## 三点体会
 
 ### 自己确实落伍了
 

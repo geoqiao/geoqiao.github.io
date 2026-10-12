@@ -1,13 +1,13 @@
 ---
 issue_number: 14
 type: blog
-title: 'Coke Machine Challenge '
+title: CS50P Coke Machine 练习：用 Python 循环实现可乐售卖机
 slug: coke-machine-challenge
-description: 什么是 Coke Machine
+description: Coke Machine 是 CS50P 课程 loop 章节的课后练习：用 Python 循环实现一台只收 25、10、5 美分硬币的可乐售卖机。这篇记录任务拆解、分步实现和完整代码。
 created_date: '2023-09-03'
 update_date: '2023-09-03'
 published_at: '2023-09-03T13:02:25Z'
-updated_at: '2026-08-02T10:03:22Z'
+updated_at: '2026-10-12T15:25:58Z'
 tags:
 - name: python
   key: python

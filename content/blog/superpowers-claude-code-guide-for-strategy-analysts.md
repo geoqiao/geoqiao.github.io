@@ -3,11 +3,11 @@ issue_number: 35
 type: blog
 title: 从 Superpowers 学习高质量 AI 协作：一份给策略分析师的 Claude Code 指南
 slug: superpowers-claude-code-guide-for-strategy-analysts
-description: 一、Superpowers 简介
+description: Superpowers 是一套 agentic skills 框架。这篇讲它的设计哲学和工作流，给数据分析人员 5 个落地实践，以及把 MCP-SQL 查询与分析解耦的省 token 做法，并说明如何在 Claude Code 中安装使用。
 created_date: '2026-04-18'
 update_date: '2026-04-18'
 published_at: '2026-04-18T12:09:41Z'
-updated_at: '2026-09-10T05:25:49Z'
+updated_at: '2026-10-12T15:26:28Z'
 tags:
 - name: ai-workflow
   key: ai-workflow

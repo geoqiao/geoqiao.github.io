@@ -1,13 +1,13 @@
 ---
 issue_number: 26
 type: blog
-title: 如何对连续型数据进行分箱 - Python
+title: Python 连续型数据怎么分箱：用 optbinning 做最优分箱
 slug: optimal-binning-for-continuous-data-in-python
 description: 在做数据分析时，经常要对连续型数据进行分箱。面临的主要问题是：怎么分箱才是最优的？
 created_date: '2024-10-26'
 update_date: '2024-10-26'
 published_at: '2024-10-26T09:03:51Z'
-updated_at: '2026-09-05T11:16:44Z'
+updated_at: '2026-10-12T15:26:16Z'
 tags:
 - name: data-analysis
   key: data-analysis
@@ -99,7 +99,7 @@ binning_result = optb.binning_table.build() #使用build方法会输出为一个
 
 其中`bin`列就是找到的最优区间了；`IV`（Information Value）是我们在进行信用卡数据分析时用到的一个非常重要的指标，反映了特征与目标之间的相关性，后续有机会分箱评分卡模型制作的时候我会再仔细写。
 
-## 结语
+## 核心代码只有三行
 
 是不是非常简单！核心代码其实就三行：实例化分箱器、fit、输出分箱结果。
 

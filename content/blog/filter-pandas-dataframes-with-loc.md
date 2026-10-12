@@ -1,13 +1,13 @@
 ---
 issue_number: 25
 type: blog
-title: 不要纠结了！在Pandas中数据筛选就用它 - Python
+title: Pandas 数据筛选就用 .loc：条件、多条件和行列筛选
 slug: filter-pandas-dataframes-with-loc
-description: TL;DR
+description: Pandas 筛选 DataFrame 的方法很多，我建议统一用 .loc：能同时筛选行和列，支持多条件、区间和变量条件。文中给出示例代码，也说明 .loc 的两个缺点。
 created_date: '2024-10-07'
 update_date: '2024-10-07'
 published_at: '2024-10-07T06:42:00Z'
-updated_at: '2026-08-03T09:46:16Z'
+updated_at: '2026-10-12T15:26:14Z'
 tags:
 - name: data-analysis
   key: data-analysis
@@ -15,11 +15,11 @@ tags:
   key: python
 ---
 
-## TL;DR
+## 结论：筛选统一用 .loc
 
 建议使用 `DataFrame.loc` 方法，支持类似 SQL 中的`where`条件对`rows`筛选，也支持对`column`进行筛选。
 
-## The Zen of Python
+## Pandas 的筛选方法太多
 
 如果在 Python 文件中输入 `import this`，便可以看到 Python 之禅的全文。其中有一条：
 
@@ -97,6 +97,6 @@ df.loc[(df["Age"] > n) & (df["Gender"] == "Male"), ["Name","Salary"]]
 
 2. **复杂条件可读性差**：当涉及多个复杂条件时，使用布尔索引结合`.loc`可能导致代码变得冗长且难以阅读。
 
-## 结语
+## 总结：90% 的筛选场景用 .loc
 
 综上，基本上`.loc`方法基本可以满足日常工作中会碰到的 90%以上的筛选场景，不用纠结，选`.loc`准没错！

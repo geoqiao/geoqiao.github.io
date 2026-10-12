@@ -7,7 +7,7 @@ description: 好长一段时间了，工作上事情很多，很烦。也很久�
 created_date: '2024-10-03'
 update_date: '2024-10-03'
 published_at: '2024-10-03T11:12:43Z'
-updated_at: '2026-08-03T09:46:14Z'
+updated_at: '2026-10-12T15:26:12Z'
 tags:
 - name: python
   key: python
@@ -23,11 +23,11 @@ tags:
 
 2.  就是为主题增加配置文件的功能，目的是为了其他人使用（当然，大概率可能也没有其他人用），这也是写这篇 blog 要讲的主题。
 
-## 正文
+## 为什么要加配置文件
 
 其实增加配置文件的功能想了很久，因为可以减少别人使用的成本，并且满足自己的虚荣心。
 
-## why YAML？
+## 为什么选 YAML
 
 其实这部分决策起来很快，主要有 4 个原因：
 
@@ -75,7 +75,7 @@ CONFIG = liad_config()
 
 读取文件之后，只要使用 dict 的方法读取相应的 value 就行，比如读取博客的标题就是：`CONFIG["blog"]["title"]`，这样就会输出所对应的 value`GeoQiao's Blog`。
 
-## 剩下的
+## 把配置写入 Jinja2 模板
 
 剩下的就比较简单了，只要 1. 在模板中把相应的变量用符合 Jinja2 的语法写入，2. 并把读取到的配置变量传入给 HTML 模板 即可
 
@@ -105,7 +105,7 @@ def render_blog_index(issues: PaginatedList[Issue]) -> str:
 	)
 ```
 
-## 最后
+## 用这个项目搭建博客的步骤
 
 配置文件功能增加后，使用这个项目搭建 GitHub Pages 博客会变得相对比较简单：
 

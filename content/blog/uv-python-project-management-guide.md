@@ -1,13 +1,13 @@
 ---
 issue_number: 23
 type: blog
-title: uv - GitHub 20k star 的终极 Python 项目管理工具
+title: uv 是什么、怎么用：Python 版本、依赖和项目管理
 slug: uv-python-project-management-guide
-description: uv 是什么
+description: uv 是 Astral 开发的 Python 项目管理和包管理工具。这篇从新手安装 Python、安装三方库的两个难题讲起，介绍 uv 如何管理 Python 版本和项目依赖，以及我为什么没选 conda 和 pdm。
 created_date: '2024-09-08'
 update_date: '2024-09-08'
 published_at: '2024-09-08T07:52:02Z'
-updated_at: '2026-08-03T09:46:12Z'
+updated_at: '2026-10-12T15:26:11Z'
 tags:
 - name: python
   key: python
@@ -33,7 +33,7 @@ tags:
 
 再搜一圈教程下来，发现又要用`pyenv`管理 Python 版本，还得结合`pip`解决依赖冲突，命令行里面还得随时想着有没有激活虚拟环境！真服了，我可是刚入门的小白！
 
-## uv - Python&依赖&项目管理
+## uv 的两个核心功能
 
 ### 功能一：管理 Python 版本
 
@@ -66,7 +66,7 @@ conda 是我第一个接触的 Python 管理工具，对我而言有几个小痛
 1. 社区对于包的最新版本更新较慢：有时无法第一时间尝鲜某个新包的新功能（比如 pandas2.0 的 pyarrow 后端
 2. 依赖解析慢且有一些小 bug：慢是显而易见的，bug 我没有仔细研究过，但之前经常碰到 wordcloud 库有时无法安装，有时又可以正常安装的问题（或许跟我刚开始不熟悉所以经常卸载重装有关
 
-## 最后
+## 更多用法
 
 这里只是介绍了 uv 的一些常用功能，对于如何使用大家可以参考[rye 推荐](https://geoqiao.github.io/contents/blog/1.html)以及[官方文档](https://docs.astral.sh/uv/)
 

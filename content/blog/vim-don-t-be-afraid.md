@@ -1,13 +1,13 @@
 ---
 issue_number: 16
 type: blog
-title: Vim？ Don't be afraid ！
+title: Vim 不可怕：只学修改、保存、退出三条命令
 slug: vim-don-t-be-afraid
 description: 作为一名初学者，遇到问题时经常 Google 相关教程。不可避免的，某些教程默认读者会使用 Vim。
 created_date: '2023-10-22'
 update_date: '2023-10-22'
 published_at: '2023-10-22T06:52:44Z'
-updated_at: '2026-08-02T10:03:27Z'
+updated_at: '2026-10-12T15:26:01Z'
 tags:
 - name: vim
   key: vim
@@ -47,7 +47,7 @@ Vim 简单来说就是一个编辑器，在终端中输入`vim`就可以打开�
 
 > tips：`:wq<Enter>`可以保存并退出 Vim
 
-## 结语
+## 什么时候用 Vim
 
 使用 Vim 在终端中临时修改文件的效率高很多，所以经常在教程中碰到。它同时也是一款传说中无所不能的代码编辑器，不过我并不推荐使用。对于像我这样的初学者，VSCode 更加简单好用。
 

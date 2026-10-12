@@ -3,11 +3,11 @@ issue_number: 20
 type: blog
 title: 基于 fastAPI 的 CRUD 练习- RSS 订阅管理
 slug: build-an-rss-manager-with-fastapi
-description: 背景
+description: 用 FastAPI、SQLite 和 SQLAlchemy 做一个 RSS 订阅管理的 CRUD 练习：创建数据库、定义增删查函数、写接口，并在本地运行预览。
 created_date: '2024-05-10'
 update_date: '2024-05-10'
 published_at: '2024-05-10T15:41:01Z'
-updated_at: '2026-09-05T11:16:40Z'
+updated_at: '2026-10-12T15:26:07Z'
 tags:
 - name: python
   key: python
@@ -15,14 +15,14 @@ tags:
   key: rss
 ---
 
-# 背景
+## 为什么做这个 RSS 订阅管理练习
 
 最近两三年，我逐渐卸载了抖音、微博等社交媒体，主要从RSS订阅获取信息。卸载部分社交媒体让我有了一点时间做其他事情，比如听播客、学Python、阅读......
 
 这个练习是我的[CS50P](https://cs50.harvard.edu/python/2022/)final project的延续，主要目的是学习一些web的开发框架、使用Python操作数据库。
 
 
-## why fastAPI
+### 为什么选 FastAPI
 
 对比了Django 还有 Flask：
 
@@ -30,19 +30,19 @@ tags:
 2. Flask感觉有点乱，主要命令行我没有弄明白
 3. fastAPI对type hints的支持很好，感觉也更简单
 
-## why SQLite
+### 为什么选 SQLite
 
 SQLite只有一个文件，操作起来很简单，也不用配置什么环境
 
-# 思路
+## 实现思路
 我想实现对RSS订阅源的添加、查询、删除功能，所以思路很简单
 1. 创建一个SQLite数据库，要包含`订阅链接`、`标题`、`tag`、`网址`、`添加时间`等字段
 2. 定义CRUD函数
 3. 将函数返回值给到fastAPI，并渲染前端页面
 
-# 上手开干
+## 实现步骤
 
-## 创建数据库
+### 创建数据库
 
 这里我使用SQLAlchemy库来实现，搜索中推荐这个库的文章很多，ORM支持很不错
 
@@ -69,7 +69,7 @@ class Subscription(Base):
         return f"Feed(id={self.id!r}, url={self.url!r},title={self.title},tag={self.tag!r},link={self.link!r})"
 ```
 
-## 定义CRUD函数
+### 定义 CRUD 函数
 
 这里主要学习了SQLAlchemy的ORM查询方法。
 
@@ -90,7 +90,7 @@ def get_feed_by_id(feed_id: int):
 ```
 
 
-## fastAPI接口
+### FastAPI 接口
 
 其实fastAPI部分很好写，只要我们获取到返回值，并且传给前端页面就好了
 
@@ -104,7 +104,7 @@ async def get_rss_feeds(request: Request):
 
 ```
 
-## 命令行运行程序
+### 命令行运行程序
 
 通过命令行运行，在 http://127.0.0.1:8000 预览程序
 

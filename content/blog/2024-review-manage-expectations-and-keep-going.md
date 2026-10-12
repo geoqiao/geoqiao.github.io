@@ -3,11 +3,11 @@ issue_number: 29
 type: blog
 title: 2024年终总结：控制预期，坚持下去
 slug: 2024-review-manage-expectations-and-keep-going
-description: 好久不见!
+description: 2024 年终总结：回顾这一年的 Python 学习、工作、感情和生活，以及还没做完的事。做事要控制难度、控制预期，然后坚持下去。
 created_date: '2024-12-31'
 update_date: '2024-12-31'
 published_at: '2024-12-31T15:42:13Z'
-updated_at: '2026-08-03T09:44:10Z'
+updated_at: '2026-10-12T15:26:20Z'
 tags:
 - name: summary
   key: summary

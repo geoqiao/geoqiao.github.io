@@ -3,17 +3,17 @@ issue_number: 21
 type: blog
 title: 使用 Python 和 GitHub Pages 搭建个人博客
 slug: build-a-python-blog-on-github-pages
-description: 背景
+description: 用 Python 读取 GitHub Issues、用 marko 转成 HTML、套上模板，再由 GitHub Actions 自动发布到 GitHub Pages：记录我从零搭建个人博客的思路和实现。
 created_date: '2024-05-12'
 update_date: '2024-05-12'
 published_at: '2024-05-12T09:14:39Z'
-updated_at: '2026-08-03T09:46:10Z'
+updated_at: '2026-10-12T15:26:09Z'
 tags:
 - name: python
   key: python
 ---
 
-# 背景
+## 为什么自己写博客
 
 我偶尔有写点什么的欲望，加上 yihong 老师 [gitblog](https://github.com/yihong0618/gitblog) 项目的激励，于是产生了写一个个人博客页面的想法。
 
@@ -21,17 +21,17 @@ tags:
 
 于是我尝试学习 Python 的基本概念，而不仅仅局限于 Pandas 和 sklearn。这个项目便是我目前学习的成果。
 
-## why GitHub Pages
+### 为什么选 GitHub Pages
 
 1. 不用买域名
 2. 不用买服务器
 3. 是一个网页，可以满足分享欲望
 
-## why Python
+### 为什么用 Python
 
 实际上，GitHub Pages 提供了非常丰富的支持，也许使用 JavaScript 的框架可以更快更好的完成这个项目。但是，我只会写一点基础的 Python，其他语言完全不会。
 
-# 思路
+## 实现思路
 
 为了满足写博客的需求，我的思路非常简单：
 
@@ -41,9 +41,9 @@ tags:
 4. 将渲染后的 HTML 上传到 GitHub Pages
 5. 整个过程自动化，我只想写 issue，其他的工作全部自动完成
 
-# 马上开干
+## 实现步骤
 
-## 读取 GitHub Issues
+### 读取 GitHub Issues
 
 这个环节非常简单，GitHub 提供了一个非常简单使用的 Python 库：PyGithub。只需要设置好 GitHub Token，便可以很轻易的读取到 issues 的内容
 
@@ -69,7 +69,7 @@ issue.updated_at # 获取创建时间
 issue.body # 获取正文内容
 ```
 
-## 将 issue 转换为 HTML
+### 将 issue 转换为 HTML
 
 GitHub 有使用一个官方接口，可以将 markdown 格式的文本转换为 HTML，但是每次转换请求这个 API 的速度很慢，所以我使用了`marko`库。
 
@@ -83,7 +83,7 @@ def markdown2html(mdstr: str):
     return html
 ```
 
-## HTML 模板
+### HTML 模板
 
 我对于 CSS 和 JavaScript 一窍不通，所以这部分内容我是参考了 yihong 老师的 [GitHub Pages](https://yihong0618.github.io/gitblog/)，从页面的 HTML 源码中发现了可用的 CSS 和 JavaScript 代码，并且模仿页面的 HTML，这样拼凑出来的一个页面。
 
@@ -91,7 +91,7 @@ def markdown2html(mdstr: str):
 
 当然，这个模板的搭建过程中 [perplexity](https://www.perplexity.ai) 帮了我非常多的忙。`perplexity`非常强大，可以将我得到的前端代码作为文件上传，ai 帮我解读每个 CSS 和 JavaScript 的作用。免费版本已经足够我的使用，非常推荐！
 
-## GitHub Actions 自动化
+### GitHub Actions 自动化
 
 在主体代码全部实现后，接下来就是将整个过程自动化。这一步可以交给强大的 GitHub Actions 完成。它会帮我监控 issue 的变化：一旦有 issue 添加、编辑等动作，actions 会帮我自动执行我的 Python 代码，并将输出的 HTML 文件上传至 GitHub Pages 仓库。
 
