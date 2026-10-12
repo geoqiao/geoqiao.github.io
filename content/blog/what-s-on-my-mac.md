@@ -7,7 +7,7 @@ description: 和大多数人一样，拿到一台MacBook第一件事就是找各
 created_date: '2023-07-29'
 update_date: '2023-07-29'
 published_at: '2023-07-29T06:20:29Z'
-updated_at: '2026-08-02T10:03:10Z'
+updated_at: '2026-10-12T15:25:48Z'
 tags:
 - name: macos
   key: macos
@@ -56,7 +56,7 @@ rss源：RSSHub Radar
 
 Trancy：YouTube神器、英语学习神器（YouTube有很多公开课，比如CS50P等等）
 
-# 其他
+## 其他
 微信、telegram、VSCode、Chrome。。。
 
 office 被我卸载了，因为想学 pandas，强迫自己用 pandas 读表

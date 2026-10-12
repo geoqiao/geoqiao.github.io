@@ -3,17 +3,17 @@ issue_number: 13
 type: blog
 title: 我的第一个完整的机器学习项目-Titanic总结
 slug: my-first-titanic-machine-learning-project
-description: 背景 最近一直在学习Python，尝试使用Python解决一些工作上的问题。这里记录参加这次比赛的心得总结，并会给出我的代码示例(rank：top16%)
+description: 记录我第一次参加 Kaggle Titanic 比赛的过程和收获：三次提交，尝试 XGBoost、随机森林和决策树，排名从 12000 名提升到 2300 名（top 16%），附代码示例。
 created_date: '2023-08-31'
 update_date: '2023-08-31'
 published_at: '2023-08-31T13:47:47Z'
-updated_at: '2026-08-03T09:46:01Z'
+updated_at: '2026-10-12T15:25:56Z'
 tags:
 - name: python
   key: python
 ---
 
-## 背景
+## Titanic 比赛是什么
 最近一直在学习Python，尝试使用Python解决一些工作上的问题。这里记录参加这次比赛的心得总结，并会给出我的[代码示例(rank：top16%)](https://github.com/geoqiao/Python_DA_100_day/blob/main/kaggle_competition/titanic.py)
 
 Titanic是一个机器学习的入门级分类问题的比赛，数据集记录了titanic乘客的一些信息如性别、票价、船舱等级等信息。数据集被分成train_data 和 test_data两部分。参赛者需要根据train_data的数据信息，利用模型对数据集进行学习，并且预测test_data中乘客是否最终幸存。
@@ -25,7 +25,7 @@ titanic数据集的优势是：
 4. 官方有详细的置顶示例项目，基本上如何参加比赛、提交代码、提交预测都有提到，对kaggle新手十分友好
 6. 简单，不会劝退机器学习新手
 
-## 比赛过程
+## 三次提交的过程
 整个比赛过程，我总共提交了三次，以下是我的参赛过程。
 1. 第一次提交-熟悉比赛流程：  
     在第一次提交之前，我决定使用XGBoost模型来熟悉比赛的整体流程。这有助于我了解数据集的特征、目标变量以及评估指标。熟悉比赛流程对于理解后续的模型选择和优化非常重要。
@@ -51,7 +51,7 @@ titanic数据集的优势是：
 3. 在test_data没有标签的情况下，训练集也可以二次拆分为训练集和测试集，用来在比较模型在不同训练集的表现。
 4. 当然，引入KFold 和 cross_val_score也可以解决问题。
 
-# 下一步计划
+## 下一步计划
 1. 将学习到的经验应用的工作中的分类问题：预测客户是否会按时还款
 2. Python基础：写干净的代码真的很重要，比如这个代码示例，第二次看我已经优点头疼了，函数为什么要那么定义。
 3. 写一篇机器学习相关概念的解释blog，例如：kmeans、SVM、随机森林、决策数、XGBoost、

@@ -7,7 +7,7 @@ description: rye是一个 Python 的包管理器，可以更轻松的管理 Pyth
 created_date: '2024-01-06'
 update_date: '2024-01-06'
 published_at: '2024-01-06T07:38:36Z'
-updated_at: '2026-09-06T17:56:03Z'
+updated_at: '2026-10-12T15:25:38Z'
 tags:
 - name: python
   key: python
@@ -137,6 +137,6 @@ rye install ruff
 rye uninstall ruff
 ```
 
-## 最后
+## 其他功能和官方文档
 
 rye 还支持一些常规的操作，比如接管全局 python、升级项目中某个依赖或者所有依赖的版本、构建/发布包等等功能，可以通过[官方文档](https://rye-up.com/guide/)查看。

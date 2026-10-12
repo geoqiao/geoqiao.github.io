@@ -1,19 +1,19 @@
 ---
 issue_number: 3
 type: blog
-title: with_sql _as_english
+title: 把 SQL 当英语读：select、from、where 和 left join
 slug: learn-sql-in-plain-english
-description: 描述
+description: 学 SQL 的经验分享：知道 select、from、where、left join 这几个英文单词的意思，再把 left join 当成 Excel 的 vlookup，就能读懂 SQL 代码。
 created_date: '2023-07-15'
 update_date: '2023-07-15'
 published_at: '2023-07-15T03:09:11Z'
-updated_at: '2026-08-03T09:45:41Z'
+updated_at: '2026-10-12T15:25:42Z'
 tags:
 - name: sql
   key: sql
 ---
 
-## 描述
+## 这篇分享什么
 
 1. 分享自己学习 SQL 的经验。
 2. `WITH 临时表名 AS 子查询` 是 SQL 中一个常用的语法，这篇分享会介绍这个语法。

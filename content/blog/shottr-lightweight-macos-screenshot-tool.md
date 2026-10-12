@@ -3,11 +3,11 @@ issue_number: 10
 type: blog
 title: Shottr- 原生、轻巧且功能强大的免费macOS截图工具
 slug: shottr-lightweight-macos-screenshot-tool
-description: '| Shottr官网'
+description: Shottr 是一款免费的 macOS 截图工具。这篇记录我的使用体验：区域截图、顺序标记、免费的滚动截图、按 Delete 打码、快捷键 OCR 和贴图。
 created_date: '2023-07-29'
 update_date: '2023-07-29'
 published_at: '2023-07-29T06:28:23Z'
-updated_at: '2026-08-03T09:45:52Z'
+updated_at: '2026-10-12T15:25:50Z'
 tags:
 - name: macos
   key: macos

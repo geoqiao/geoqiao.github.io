@@ -3,23 +3,23 @@ issue_number: 8
 type: blog
 title: 基于 GitHub issues 的个人 blog 搭建
 slug: github-issues-blog-setup-guide
-description: 背景 我最近碰到了以下问题： 1. 偶尔想写点东西，想有一个个人 blog 2. 不懂代码：听到部署、买域名、备案、服务器这些词就头疼想逃避 3. 不想花钱：买服务器、域名一年好几百甚至可能上千
+description: 不懂代码、不想花钱也能有个人博客：基于 yihong0618 的 gitblog 项目，用 GitHub Issues 写文章，附操作教程链接和一处需要补充的设置。
 created_date: '2023-07-18'
 update_date: '2023-07-18'
 published_at: '2023-07-18T13:10:40Z'
-updated_at: '2026-08-03T09:45:49Z'
+updated_at: '2026-10-12T15:25:46Z'
 tags:
 - name: python
   key: python
 ---
 
-## 背景
+## 为什么想要一个免费的个人博客
 我最近碰到了以下问题：
 1. 偶尔想写点东西，想有一个个人 blog
 2. 不懂代码：听到部署、买域名、备案、服务器这些词就头疼想逃避
 3. 不想花钱：买服务器、域名一年好几百甚至可能上千
 
-## 解决方案
+## 方案：gitblog + GitHub Issues
 基于[yihong0618](https://github.com/yihong0618)的 gitblog 项目，在 GitHub 上搭建一个基于 issues 的个人博客。
 
 **这个方法有以下几个优点：**
@@ -36,5 +36,5 @@ tags:
 
 不过需要补充一点，按教程操作完成后需要把 GitHub Action 的读写权限打开。操作方式为 Settings - Actions - General - 勾选 Read and write permissions - save，如下图所示：
 
-## 结语
+## 致谢
 以上就是全部内容，非常感谢 @yihong0618 老师的代码。

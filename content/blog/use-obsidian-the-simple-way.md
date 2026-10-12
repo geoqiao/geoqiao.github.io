@@ -1,13 +1,13 @@
 ---
 issue_number: 12
 type: blog
-title: 重器轻用-Obsidian
+title: 重器轻用：我如何简单地用 Obsidian
 slug: use-obsidian-the-simple-way
-description: 什么是 Obsidian
+description: Obsidian 是本地存储、用 Markdown 写作的笔记工具。这篇讲我为什么用它，以及精简后的用法：不用模板，只装 memos 和 PanGu 两个插件，加上双向链接。
 created_date: '2023-08-19'
 update_date: '2023-08-19'
 published_at: '2023-08-19T07:57:20Z'
-updated_at: '2026-08-03T09:45:56Z'
+updated_at: '2026-10-12T15:25:54Z'
 tags:
 - name: obsidian
   key: obsidian

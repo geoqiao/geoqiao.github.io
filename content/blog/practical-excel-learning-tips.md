@@ -1,19 +1,19 @@
 ---
 issue_number: 2
 type: blog
-title: excel 学习经验分享
+title: Excel 学习经验：把函数当方程，用好数据透视表
 slug: practical-excel-learning-tips
-description: 描述 1. 这是一个分享个人 excel 经验的文档。
+description: 分享我学 Excel 的两个思路：把函数理解成 y=x+2 这样的方程，再用数据透视表的拖、拉、拽完成分析。这些思路同样能用在 SQL 和 Python 的学习中。
 created_date: '2023-07-15'
 update_date: '2023-07-15'
 published_at: '2023-07-15T02:54:59Z'
-updated_at: '2026-08-03T09:45:39Z'
+updated_at: '2026-10-12T15:25:40Z'
 tags:
 - name: excel
   key: excel
 ---
 
-## 描述
+## 这篇分享什么
 1. 这是一个分享个人 excel 经验的文档。
 
 2. 不分享特定函数的使用方法；实际上，你可以在百度/谷歌轻松搜索到答案。

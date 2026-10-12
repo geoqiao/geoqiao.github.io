@@ -7,7 +7,7 @@ description: 学习 Python 第一步就是需要安装一个 Python 环境，这
 created_date: '2023-07-30'
 update_date: '2023-07-30'
 published_at: '2023-07-30T11:09:46Z'
-updated_at: '2026-08-03T09:45:54Z'
+updated_at: '2026-10-12T15:25:52Z'
 tags:
 - name: python
   key: python
@@ -39,7 +39,7 @@ tags:
 
 对于安装游戏、卸载游戏我相当在行，想安装在 D 盘，绝不会让游戏安装到 C 盘。
 
-### 为什么讲到这个呢？
+### 安装 Anaconda 和装游戏一样简单
 
 因为**安装 Anaconda 的过程**，就像给电脑安装游戏一样简单。
 
