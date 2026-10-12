@@ -1,13 +1,13 @@
 ---
 issue_number: 91
 type: blog
-title: What's on My Pi Agent?（2026-10）：Paseo + Pi，插件只剩 6 个
+title: Pi Agent 配置清单（2026-10）：Paseo + Pi + Claude，只留 6 个插件
 slug: whats-on-my-pi-agent-october-2026
 description: 8 月我用 Pi + Herdr + Neovim 在终端里搭了一套 Codex Desktop，两个月后换成了 Paseo + Pi，主力模型也从 GPT 换成 Claude。这篇按功能对照哪些插件被取代、Claude 订阅怎么接进 Pi、内置 Code Mode 的补测结果、六档模型分工，以及还装着的 6 个插件。
 created_date: '2026-10-01'
 update_date: '2026-10-01'
 published_at: '2026-10-01T16:31:12Z'
-updated_at: '2026-10-02T06:08:35Z'
+updated_at: '2026-10-12T15:26:43Z'
 tags:
 - name: ai-workflow
   key: ai-workflow

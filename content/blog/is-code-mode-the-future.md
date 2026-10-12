@@ -1,13 +1,13 @@
 ---
 issue_number: 73
 type: blog
-title: Is Code Mode the Future? 64% Lower Cost on a Long-Running Task
+title: Pi Code Mode 实测：长任务 token 减少 75%，费用降 64%
 slug: is-code-mode-the-future
 description: 在Long-Running 任务中，PI + Code Mode 对比原生工具，累计 token 减少 75%，固定单价估算费用降低 64%；而 PI + 原生工具的 token 消耗是前者的 4 倍，账单消耗是前者的 3 倍。
 created_date: '2026-09-10'
 update_date: '2026-09-10'
 published_at: '2026-09-10T15:42:23Z'
-updated_at: '2026-09-10T15:54:38Z'
+updated_at: '2026-10-12T15:26:39Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -19,7 +19,7 @@ tags:
 
 > **在Long-Running 任务中，PI + Code Mode 对比原生工具，累计 token 减少 75%，固定单价估算费用降低 64%；而 PI + 原生工具的 token 消耗是前者的 4 倍，账单消耗是前者的 3 倍。**
 
-## 1. 背景
+## 1. 测了什么：三组 Harness 做同一个博客主题任务
 
 GPT 6 Astra 发布后，我以自己的个人博客项目为例，做了三组对比：**Codex + GPT 6 Astra、Pi + GPT 6 Astra，以及 Claude Code + Opus 5**。三组的推理档位都设为 High。
 
