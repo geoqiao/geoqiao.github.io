@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 100,
+      "slug": "why-mcp-costs-tokens-and-why-pi-changed-its-mind",
+      "path": "blog/why-mcp-costs-tokens-and-why-pi-changed-its-mind.md"
+    },
+    {
       "issue_number": 91,
       "slug": "whats-on-my-pi-agent-october-2026",
       "path": "blog/whats-on-my-pi-agent-october-2026.md"
