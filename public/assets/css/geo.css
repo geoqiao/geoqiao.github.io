@@ -13,6 +13,20 @@
   font-weight: 600 900;
   font-display: swap;
 }
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-latin-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+}
 :root {
   --canvas: #faf9f6;
   --paper: #f1efeb;
@@ -23,7 +37,7 @@
   --accent: #a72f6a;
   --selection: #ead6e0;
   --reading-width: 704px;
-  --display: Spectral, "Songti SC", Georgia, serif;
+  --display: Spectral, "Noto Serif SC", "Songti SC", Georgia, serif;
   --object-shadow: 0 2px 3px #29272508, 0 14px 32px #29272512;
   --raised-shadow: 0 5px 12px #29272512, 0 26px 60px #29272524;
 }
