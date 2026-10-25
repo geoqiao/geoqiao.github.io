@@ -8,7 +8,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { bundledLanguages, codeToHast } from "shiki";
 import { unified } from "unified";
-import { visit } from "unist-util-visit";
+import { SKIP, visit } from "unist-util-visit";
 import { xcodeLight } from "./xcode-light.ts";
 
 // Issue bodies are authored Markdown with raw HTML. Everything outside this
@@ -100,6 +100,22 @@ function linksAndImages() {
   };
 }
 
+/** A wide table scrolls inside its own keyboard-focusable region instead of being cut off. */
+function scrollableTables() {
+  return (tree: Root) => {
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName !== "table" || !parent || index === undefined) return;
+      parent.children[index] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["table-scroll"], role: "region", tabIndex: 0, ariaLabel: "Table, scroll horizontally" },
+        children: [node],
+      };
+      return SKIP;
+    });
+  };
+}
+
 function languageOf(code: Element): string | undefined {
   const classes = code.properties.className;
   if (!Array.isArray(classes)) return undefined;
@@ -146,6 +162,7 @@ const processor = unified()
   .use(taskListText)
   .use(rehypeSanitize, schema)
   .use(linksAndImages)
+  .use(scrollableTables)
   .use(syntax)
   .use(rehypeStringify);
 
