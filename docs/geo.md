@@ -23,7 +23,7 @@ Every address the site had under escaping's own renderer is kept. `node scripts/
 - `src/components/Intro.astro`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
 - `src/pages/index.astro`: identity, featured writing (`featuredPosts` in `src/site.config.ts`), the five newest posts, and the project section.
 - `src/components/ProjectDeck.astro`: real project links with optional desktop previews.
-- `public/assets/css/geo.css`: Geo's shared palette, Spectral typefaces, left navigation, and top controls.
+- `public/assets/css/geo.css`: Geo's shared palette, Spectral and JetBrains Mono typefaces, left navigation, and top controls.
 - `public/assets/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
 - `public/assets/js/home.js`: one selected card, switch/dismiss/navigation behavior, measured positioning, and interruptible scroll assistance. It loads only on Home.
 - `public/assets/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key. `site.js` also handles the compact navigation disclosure, Escape/outside dismissal, and focus when crossing the navigation breakpoint.
@@ -34,7 +34,7 @@ Every address the site had under escaping's own renderer is kept. `node scripts/
 
 Dark mode uses a green accent drawn from the green stroke in the profile mark (`#4faf90`) for tags, navigation markers, general links, and focus outlines. Light mode uses its original pink accent (`#a72f6a`) and pale pink selection. Homepage annotation notes, arrows, link highlights, and hover colors keep their blue/green/purple hues in both appearances; dark mode uses lighter shades of them (`#6f9ad6`, `#4fa874`, `#b087cf`) so they stay readable. Mobile retains the colored link highlights while hiding the decorative notes and arrows. The shared palette belongs to `geo.css`; `home.css` owns the annotation colors. Both support system appearance without JavaScript and neutral print colors.
 
-The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral and Shantell Sans are self-hosted from Fontsource 5.3.0; OFL notices are alongside the font files.
+The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral, Shantell Sans, JetBrains Mono (5.3.0) and Noto Serif SC (5.3.1) are self-hosted from Fontsource; OFL notices are alongside the font files. Noto Serif SC follows Spectral for Chinese headings. `public/assets/css/noto-serif-sc.css` keeps Google Fonts' 400 and 600 slices with their `unicode-range`, so a page downloads only the slices its headings use (30–54 KB for the site's Chinese articles); `Base.astro` links it on posts and on pages with a Chinese title.
 
 Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
 

@@ -17,6 +17,8 @@ interface Props {
 }
 
 const { kind = "page", title = site.title, description = site.description, path, section, jsonLd } = Astro.props;
+// Chinese headings use self-hosted Noto Serif SC; its many slices keep the rules out of other pages.
+const cjkHeadings = kind === "post" || /\p{Script=Han}/u.test(title);
 const canonical = path ? absolute(path) : null;
 const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
 ---
@@ -50,11 +52,13 @@ const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
   {googleSearchConsole && <meta name="google-site-verification" content={googleSearchConsole}>}
   <link rel="icon" href={site.profile.avatar || "/assets/images/favicon.png"}>
   <link rel="alternate" type="application/atom+xml" title={site.title} href="/atom.xml">
+  <link rel="preload" href="/assets/fonts/jetbrains-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline src="/assets/js/appearance.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="/assets/css/search.css">
   <link rel="stylesheet" href="/assets/css/geo.css">
+  {cjkHeadings && <link rel="stylesheet" href="/assets/css/noto-serif-sc.css">}
   {kind === "home" && (
     <Fragment>
       <link rel="preload" href="/assets/fonts/shantell-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
