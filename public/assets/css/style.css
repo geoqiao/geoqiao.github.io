@@ -8,7 +8,6 @@
   --muted: #626262;
   --line: #d8d8d8;
   --boundary: #858585;
-  --diagram-filter: none;
   --reading-width: 704px;
   --column-gap: 40px;
   --toc-width: clamp(160px, calc((100vw - var(--reading-width)) / 2 - var(--column-gap) - 24px), 320px);
@@ -28,7 +27,6 @@
   --ink: #eeeeee;
   --muted: #b0b0b0;
   --line: #414141;
-  --diagram-filter: invert(1);
   --code-bg: #1b1d22;
   --code-top: #202329;
 }
@@ -42,8 +40,7 @@
     --ink: #eeeeee;
     --muted: #b0b0b0;
     --line: #414141;
-    --diagram-filter: invert(1);
-    --code-bg: #1b1d22;
+      --code-bg: #1b1d22;
     --code-top: #202329;
   }
 }
@@ -196,11 +193,25 @@ main { min-height: calc(100svh - 220px); }
 .post-content th:last-child, .post-content td:last-child { padding-right: 0; }
 .post-content th { font-weight: 600; border-bottom-color: var(--muted); }
 .post-content th:not([align]) { text-align: left; }
-.post-content pre.mermaid { background: var(--paper); white-space: normal; text-align: center; }
-/* Fixed neutral SVG colors invert with the page, without rerendering or changing the shared loader. */
-.post-content pre.mermaid svg { width: max(100%, 560px); max-width: 100%; height: auto; filter: var(--diagram-filter); }
-/* Override Mermaid's ID-scoped #999 node strokes: both polarities must meet 3:1. */
-.post-content pre.mermaid .node :is(rect, circle, ellipse, polygon, path) { stroke: #777 !important; }
+/* Diagrams are drawn at build time (src/lib/diagram.ts). Their colors are variables, so a theme change repaints them.
+ * The renderer reads --line, --accent, --surface and --border; the first two and --border are set here so
+ * edges and node outlines stay at 3:1 against the surface in both themes. */
+.diagram {
+  --line: color-mix(in srgb, var(--ink) 55%, var(--paper));
+  --accent: color-mix(in srgb, var(--ink) 75%, var(--paper));
+  --border: color-mix(in srgb, var(--ink) 55%, var(--paper));
+  --surface: var(--canvas);
+  max-width: 100%;
+  padding: 24px 16px;
+  overflow-x: auto;
+  background: var(--paper);
+  border-radius: 6px;
+  scrollbar-width: thin;
+}
+.diagram svg { display: block; width: min(var(--natural-width), max(100%, 40rem)); height: auto; margin-inline: auto; }
+.diagram-source { margin-top: .75rem; font-size: .8rem; color: var(--muted); }
+.diagram-source summary { display: inline-block; min-height: 24px; }
+.diagram-source[open] summary { margin-bottom: .75rem; }
 .post-content input[type="checkbox"] { width: 1em; height: 1em; }
 .article-end { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 56px 0; color: var(--muted); font-size: .8rem; }
 .article-end > a + a:last-child:not([rel]),
@@ -247,7 +258,7 @@ main { min-height: calc(100svh - 220px); }
   a, button { transition: color .16s ease, background-color .16s ease; }
 }
 @media print {
-  :root, :root:not([data-theme]), :root[data-theme="dark"] { color-scheme: light; --canvas: white; --paper: white; --ink: black; --muted: black; --rail: white; --feature: white; --accent: black; --line: #858585; --boundary: #858585; --diagram-filter: none; --code-bg: white; --code-top: white; }
+  :root, :root:not([data-theme]), :root[data-theme="dark"] { color-scheme: light; --canvas: white; --paper: white; --ink: black; --muted: black; --rail: white; --feature: white; --accent: black; --line: #858585; --boundary: #858585; --code-bg: white; --code-top: white; }
   .site-header, .home-tools, .home-light, .site-footer, .reading-margin, .comments-section, .code-tools, .article-end, .skip-link { display: none !important; }
   .site-surface, .home .site-surface { width: 100%; margin: 0; padding: 0; }
   .reading-layout { display: block; width: 100%; }

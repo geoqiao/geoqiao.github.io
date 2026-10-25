@@ -377,7 +377,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 )
                 self.assertGreater(len(colors), 1, colors)
                 self.assertIn(comment, colors)
-                expect(page.locator("pre.mermaid svg").first).to_be_visible()
+                expect(page.locator(".diagram svg").first).to_be_visible()
                 expect(page.locator("[data-toc] a").first).to_be_attached()
                 container = page.locator("#comments-container")
                 self.assertRegex(container.get_attribute("data-issue-number"), r"^[0-9]+$")
