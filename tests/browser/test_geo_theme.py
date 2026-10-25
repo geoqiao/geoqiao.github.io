@@ -58,7 +58,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
         finally:
             context.close()
 
-    def test_card_preview_and_navigation(self):
+    def test_card_lifts_on_hover_and_opens_in_one_step(self):
         with self.page() as page:
             deck = page.locator("[data-project-deck]")
             expect(deck).to_have_class(re.compile("deck-enhanced"))
@@ -70,31 +70,26 @@ class GeoThemeBrowserTests(unittest.TestCase):
             expect(popup.value).to_have_url(self.origin + destination)
             popup.value.close()
             page.bring_to_front()
-            expect(card).to_have_attribute("aria-expanded", "false")
-            card.click()
-            expect(card).to_have_attribute("aria-expanded", "true")
-            self.assertEqual(page.url, self.origin + "/")
+            page.mouse.move(0, 0)
+            expect(page.locator(".deck-details").last).not_to_be_visible()
+            card.hover()
             expect(page.locator(".deck-details").last).to_be_visible()
             card.click()
             page.wait_for_url(self.origin + destination)
             expect(page.locator("main")).to_be_visible()
 
-    def test_switch_keyboard_dismiss_and_reinitialization(self):
+    def test_keyboard_focus_lifts_a_card_and_enter_opens_it(self):
         with self.page() as page:
             page.add_script_tag(url=self.origin + "/assets/js/home.js")
             cards = page.locator(".deck-card")
             cards.last.focus()
+            page.keyboard.press("Tab")
+            page.keyboard.press("Shift+Tab")
+            expect(cards.last).to_be_focused()
+            expect(page.locator(".deck-details").last).to_be_visible()
+            destination = cards.last.get_attribute("href")
             page.keyboard.press("Enter")
-            expect(cards.last).to_have_attribute("aria-expanded", "true")
-            cards.first.click()
-            expect(cards.first).to_have_attribute("aria-expanded", "true")
-            expect(cards.last).to_have_attribute("aria-expanded", "false")
-            page.get_by_role("button", name="Close project preview").click()
-            expect(cards.first).to_be_focused()
-            expect(cards.first).to_have_attribute("aria-expanded", "false")
-            cards.first.press("Enter")
-            page.keyboard.press("Escape")
-            expect(cards.first).to_have_attribute("aria-expanded", "false")
+            page.wait_for_url(self.origin + destination)
 
     def test_mobile_reduced_motion_and_resize(self):
         with self.page() as page:
@@ -103,7 +98,7 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 page.set_viewport_size({"width": width, "height": 1000})
                 self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
             page.set_viewport_size({"width": 1440, "height": 1000})
-            cards.last.click()
+            cards.last.hover()
             page.set_viewport_size({"width": 390, "height": 844})
             expect(page.locator("[data-project-deck]")).not_to_have_class(re.compile("deck-enhanced"))
             self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), 390)
@@ -194,21 +189,6 @@ class GeoThemeBrowserTests(unittest.TestCase):
             page.set_viewport_size({"width": 1440, "height": 1000})
             expect(header).not_to_have_class(re.compile("is-hidden"))
 
-    def test_search_escape_preserves_project_preview(self):
-        with self.page() as page:
-            card = page.locator(".deck-card").last
-            card.focus()
-            card.press("Enter")
-            expect(card).to_have_attribute("aria-expanded", "true")
-            page.keyboard.press("ControlOrMeta+k")
-            expect(page.get_by_role("dialog")).to_be_visible()
-            page.keyboard.press("Escape")
-            expect(page.get_by_role("dialog")).not_to_be_visible()
-            expect(card).to_have_attribute("aria-expanded", "true")
-            expect(card).to_be_focused()
-            page.keyboard.press("Escape")
-            expect(card).to_have_attribute("aria-expanded", "false")
-
     def test_navigation_layout_and_keyboard_disclosure(self):
         with self.page() as page:
             controls = (".search-toggle", ".theme-toggle")
@@ -291,29 +271,18 @@ class GeoThemeBrowserTests(unittest.TestCase):
                     page.goto(self.origin + "/blog/")
                     self.assertEqual(palette(), [accent, selection])
 
-    def test_runtime_motion_change_and_scroll_interrupt(self):
+    def test_runtime_motion_change_turns_the_fan_on_and_off(self):
         with self.page() as page:
             deck = page.locator("[data-project-deck]")
             card = page.locator(".deck-card").last
             card.focus()
-            card.press("Enter")
-            page.get_by_role("button", name="Close project preview").focus()
             page.emulate_media(reduced_motion="reduce")
             expect(deck).not_to_have_class(re.compile("deck-enhanced"))
             expect(card).to_be_focused()
             expect(page.locator(".deck-details").last).to_be_visible()
-            self.assertIsNone(card.get_attribute("aria-expanded"))
             page.emulate_media(reduced_motion="no-preference")
             expect(deck).to_have_class(re.compile("deck-enhanced"))
-            card.press("Enter")
-            # Let opening assistance finish, then interrupt the closing glide.
-            page.wait_for_timeout(550)
-            page.keyboard.press("Escape")
-            page.keyboard.press("Home")
-            page.wait_for_function("window.scrollY === 0")
-            page.wait_for_timeout(550)
-            self.assertEqual(page.evaluate("window.scrollY"), 0)
-
+            expect(card).to_be_focused()
 
     def test_product_catalog_pages_and_shared_logo(self):
         with self.page() as page:
