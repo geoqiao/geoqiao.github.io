@@ -25,7 +25,7 @@ The implemented pages preserve the approved product-landings-v2 prototype. Produ
 | pi-ask recording | Original README terminal recording, 1182 × 656, 54.78 seconds; actual playback controls |
 | pi-usage | Original `pi-tools` dashboard screenshot; visual crop with a link to the full image |
 | escaping | Live `https://geoqiao.me/` iframe; full-screen and external-open actions |
-| Article Studio | Actual original-editor browser capture at 1180 × 885, resized to 1000 × 750 WebP; opens md2xarticle.com |
+| md2xarticle | Actual original-editor browser capture at 1180 × 885, resized to 1000 × 750 WebP; opens md2xarticle.com |
 | Table / Mermaid | PNGs actually exported by that original editor; no reconstructed UI |
 | Activity | Crop of the plugin's real renderer comparison preview, with synthetic data; not a live Paseo capture |
 | Math | Original synthetic React Native Web renderer preview, retaining its component-preview label |
