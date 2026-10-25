@@ -7,7 +7,7 @@ description: 真实请求由本机的 claude -p 发出。Pi 的工具变成 MCP 
 created_date: '2026-10-25'
 update_date: '2026-10-25'
 published_at: '2026-10-25T13:48:04Z'
-updated_at: '2026-10-25T14:07:07Z'
+updated_at: '2026-10-25T14:19:42Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -16,6 +16,8 @@ tags:
 - name: pi
   key: pi
 ---
+
+> 金风玉露一相逢，便胜却人间无数。——秦观《鹊桥仙》（[原文](https://zh.wikisource.org/zh-hans/鵲橋仙_(秦觀))）
 
 > **Magpie 不直接调 Anthropic 的接口，而是在本机开一个用你自己订阅登录的 `claude -p`，让它替 Pi 去问。Pi 的工具包成 MCP 工具交给它，Pi 的系统提示词拼在用户的话前面，压缩和会话历史都留在 Pi。**
 
