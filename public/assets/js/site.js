@@ -155,14 +155,12 @@
     }
   }
 
-  body.querySelectorAll("pre, table").forEach((element) => {
+  body.querySelectorAll("pre").forEach((element) => {
     element.tabIndex = 0;
-    if (element.tagName === "PRE") element.setAttribute("role", "region");
-    element.setAttribute("aria-label", element.tagName === "TABLE"
-      ? "Table, scroll horizontally"
-      : element.querySelector(".language-mermaid") || element.classList.contains("mermaid")
-        ? "Diagram, scroll horizontally"
-        : "Code, scroll horizontally");
+    element.setAttribute("role", "region");
+    element.setAttribute("aria-label", element.querySelector(".language-mermaid") || element.classList.contains("mermaid")
+      ? "Diagram, scroll horizontally"
+      : "Code, scroll horizontally");
   });
   body.querySelectorAll("pre > code:not(.language-mermaid)").forEach((code) => {
     const pre = code.parentElement;

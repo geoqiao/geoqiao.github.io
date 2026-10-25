@@ -63,3 +63,9 @@ test("fenced code is colored; diagrams and unknown languages stay as written", a
   assert.match(html, /<pre><code class="language-mermaid">graph TD; A-->B\n<\/code><\/pre>/);
   assert.match(html, /<pre><code class="language-nosuchlanguage">&#x3C;b>raw&#x3C;\/b>\n<\/code><\/pre>/);
 });
+
+test("a table scrolls inside a focusable region", async () => {
+  const html = await renderMarkdown("| Plan | Price |\n| --- | ---: |\n| Plus | 20 |");
+  assert.match(html, /<div class="table-scroll" role="region" tabindex="0" aria-label="Table, scroll horizontally"><table>/);
+  assert.match(html, /<td align="right">20<\/td><\/tr>\s*<\/tbody>\s*<\/table><\/div>/);
+});

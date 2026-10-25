@@ -175,10 +175,27 @@ main { min-height: calc(100svh - 220px); }
 .post-content pre::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 999px; }
 .post-content pre::-webkit-scrollbar-button { display: none; }
 .post-content pre::-webkit-scrollbar-corner { background: transparent; }
-.post-content table { display: block; max-width: 100%; overflow-x: auto; overflow-wrap: normal; border-collapse: collapse; font: .875rem/1.75 var(--sans); white-space: normal; }
-.post-content th, .post-content td { padding: 8px 10px; border: 1px solid var(--boundary); min-width: 120px; }
-.post-content th { background: var(--code-top); text-align: left; font-weight: 600; }
-.post-content td { background: var(--paper); }
+/* Only rules between rows; the header is set apart by weight and a darker rule. The fades at the
+ * edges appear only on the side that still has content to scroll to. */
+.table-scroll {
+  --fade: var(--canvas);
+  --edge: color-mix(in srgb, var(--ink) 16%, transparent);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  background:
+    linear-gradient(to right, var(--fade) 30%, transparent) left center / 32px 100% no-repeat local,
+    linear-gradient(to left, var(--fade) 30%, transparent) right center / 32px 100% no-repeat local,
+    linear-gradient(to right, var(--edge), transparent) left center / 14px 100% no-repeat scroll,
+    linear-gradient(to left, var(--edge), transparent) right center / 14px 100% no-repeat scroll;
+}
+.post-content blockquote .table-scroll { --fade: var(--paper); }
+.post-content table { width: 100%; border-collapse: collapse; font: .875rem/1.7 var(--sans); font-variant-numeric: tabular-nums; overflow-wrap: normal; }
+.post-content th, .post-content td { min-width: 8.5rem; padding: 10px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.post-content th:first-child, .post-content td:first-child { padding-left: 0; }
+.post-content th:last-child, .post-content td:last-child { padding-right: 0; }
+.post-content th { font-weight: 600; border-bottom-color: var(--muted); }
+.post-content th:not([align]) { text-align: left; }
 .post-content pre.mermaid { background: var(--paper); white-space: normal; text-align: center; }
 /* Fixed neutral SVG colors invert with the page, without rerendering or changing the shared loader. */
 .post-content pre.mermaid svg { width: max(100%, 560px); max-width: 100%; height: auto; filter: var(--diagram-filter); }
@@ -238,7 +255,8 @@ main { min-height: calc(100svh - 220px); }
   .post-content { font-size: 11pt; }
   .post-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
   .post-content .syntax span { color: inherit !important; background: transparent !important; }
-  .post-content table { display: table; table-layout: fixed; width: 100%; overflow-wrap: anywhere; font-size: 9pt; }
+  .table-scroll { overflow: visible; background: none; }
+  .post-content table { table-layout: fixed; overflow-wrap: anywhere; font-size: 9pt; }
   .post-content th, .post-content td { min-width: 0; }
   .post-content img, .post-content blockquote { break-inside: avoid; }
   .post-content h2, .post-content h3 { break-after: avoid; }
