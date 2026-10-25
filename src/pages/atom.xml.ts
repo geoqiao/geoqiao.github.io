@@ -27,7 +27,7 @@ export const GET: APIRoute = async () => {
         `<link rel="alternate" type="text/html" href="${attribute(url)}" />` +
         `<summary>${text(post.description)}</summary>` +
         `<published>${post.publishedAt}</published><updated>${post.updatedAt}</updated>` +
-        `<content type="html">${text(await renderMarkdown(post.markdown))}</content></entry>`
+        `<content type="html">${text(await renderMarkdown(post.markdown, { feed: true }))}</content></entry>`
       );
     }),
   );

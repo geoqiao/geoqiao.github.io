@@ -1,3 +1,5 @@
 allowBuilds:
   esbuild: true
   workerd: true
+patchedDependencies:
+  beautiful-mermaid: patches/beautiful-mermaid.patch

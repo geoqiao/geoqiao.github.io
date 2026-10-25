@@ -9,6 +9,7 @@ import remarkRehype from "remark-rehype";
 import { bundledLanguages, codeToHast } from "shiki";
 import { unified } from "unified";
 import { SKIP, visit } from "unist-util-visit";
+import { renderDiagram } from "./diagram.ts";
 import { xcodeLight } from "./xcode-light.ts";
 
 // Issue bodies are authored Markdown with raw HTML. Everything outside this
@@ -123,6 +124,28 @@ function languageOf(code: Element): string | undefined {
   return name?.slice("language-".length);
 }
 
+/** Draw Mermaid fences at build time. A source the renderer cannot draw stays as code. */
+function diagrams({ draw }: { draw: boolean }) {
+  return (tree: Root) => {
+    if (!draw) return;
+    let count = 0;
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName !== "pre" || !parent || index === undefined) return;
+      const code = node.children.find((child): child is Element => child.type === "element" && child.tagName === "code");
+      if (!code || languageOf(code)?.toLowerCase() !== "mermaid") return;
+      const source = toString(code);
+      const html = renderDiagram(source, `diagram-${++count}`);
+      if (!html) {
+        const line = source.trim().split("\n", 1)[0];
+        console.warn(process.env.GITHUB_ACTIONS ? `\n::warning title=Diagram::Cannot draw the Mermaid diagram that starts "${line}"; it is shown as code` : `Cannot draw the Mermaid diagram that starts "${line}"; it is shown as code`);
+        return;
+      }
+      parent.children[index] = { type: "raw", value: html } as unknown as ElementContent;
+      return SKIP;
+    });
+  };
+}
+
 /** Color fenced code at build time. Mermaid and unknown languages stay plain text. */
 function syntax() {
   return async (tree: Root) => {
@@ -154,26 +177,33 @@ function syntax() {
   };
 }
 
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkRehype, { allowDangerousHtml: true })
-  .use(rehypeRaw)
-  .use(taskListText)
-  .use(rehypeSanitize, schema)
-  .use(linksAndImages)
-  .use(scrollableTables)
-  .use(syntax)
-  .use(rehypeStringify);
+// The diagrams' markup is built by diagram.ts after the allowlist has run, so it is written as raw HTML.
+// A feed reader cannot read the page's CSS variables, so the feed keeps each diagram's source as code.
+function createProcessor(drawDiagrams: boolean) {
+  return unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(taskListText)
+    .use(rehypeSanitize, schema)
+    .use(linksAndImages)
+    .use(scrollableTables)
+    .use(diagrams, { draw: drawDiagrams })
+    .use(syntax)
+    .use(rehypeStringify, { allowDangerousHtml: true });
+}
 
+const processors = { page: createProcessor(true), feed: createProcessor(false) };
 const cache = new Map<string, Promise<string>>();
 
-/** Sanitized HTML of an Issue body. */
-export function renderMarkdown(markdown: string): Promise<string> {
-  let html = cache.get(markdown);
+/** Sanitized HTML of an Issue body, for a page or (with `feed`) for the Atom feed. */
+export function renderMarkdown(markdown: string, { feed = false } = {}): Promise<string> {
+  const key = `${feed ? "feed" : "page"}:${markdown}`;
+  let html = cache.get(key);
   if (!html) {
-    html = processor.process(markdown).then(String);
-    cache.set(markdown, html);
+    html = processors[feed ? "feed" : "page"].process(markdown).then(String);
+    cache.set(key, html);
   }
   return html;
 }

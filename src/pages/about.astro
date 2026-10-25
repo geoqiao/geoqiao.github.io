@@ -1,6 +1,5 @@
 ---
 import Comments from "../components/Comments.astro";
-import Mermaid from "../components/Mermaid.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import Base from "../layouts/Base.astro";
 import { absolute, site } from "../lib/config";
@@ -33,5 +32,4 @@ const jsonLd = {
   <div class="article-end"><a href="/">Back to Home</a><a href="#top">Back to top ↑</a></div>
   {site.comments.enabled && <Comments issueNumber={about.issueNumber} />}
 </article>
-<Mermaid />
 </Base>

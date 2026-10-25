@@ -11,7 +11,7 @@ The site is an [Astro](https://astro.build/) project in this repository. escapin
 - `src/integrations/check-links.mjs` fails the build when a page links to an address of this site that was not built.
 - `src/pages/[...file].ts` writes `_redirects` from `config.yaml` `redirects`: each old address, with or without its closing slash, moves permanently (301) to its page in one step. `src/integrations/slash-redirects.mjs` then adds a line for each page, so that an address without its closing slash moves permanently (301) to the page.
 - `src/site.config.ts` holds the presentation choices: featured posts, the escaping footer link, comment colors.
-- `public/assets/` is published as `/assets/` unchanged. `public/assets/escaping/` is a copy of escaping's comments and Mermaid scripts (escaping v0.5.1); the site owns it now.
+- `public/assets/` is published as `/assets/` unchanged. `public/assets/escaping/` is a copy of escaping's comments script (escaping v0.5.1); the site owns it now. Mermaid diagrams are drawn at build time by `src/lib/diagram.ts` (beautiful-mermaid, pinned and patched in `patches/`), so no diagram script is shipped.
 
 The design's MIT notice, inherited from Quiet, is [geo-license.txt](geo-license.txt).
 

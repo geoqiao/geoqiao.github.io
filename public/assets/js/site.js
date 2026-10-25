@@ -158,8 +158,8 @@
   body.querySelectorAll("pre").forEach((element) => {
     element.tabIndex = 0;
     element.setAttribute("role", "region");
-    element.setAttribute("aria-label", element.querySelector(".language-mermaid") || element.classList.contains("mermaid")
-      ? "Diagram, scroll horizontally"
+    element.setAttribute("aria-label", element.querySelector(".language-mermaid")
+      ? "Diagram source, scroll horizontally"
       : "Code, scroll horizontally");
   });
   body.querySelectorAll("pre > code:not(.language-mermaid)").forEach((code) => {

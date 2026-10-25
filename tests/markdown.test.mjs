@@ -54,14 +54,31 @@ test("task items show their state as text", async () => {
   assert.match(html, /☐ open/);
 });
 
-test("fenced code is colored; diagrams and unknown languages stay as written", async () => {
+test("fenced code is colored; unknown languages stay as written", async () => {
   const html = await renderMarkdown(
-    ["```python", "x = 1  # one", "```", "", "```mermaid", "graph TD; A-->B", "```", "", "```nosuchlanguage", "<b>raw</b>", "```"].join("\n"),
+    ["```python", "x = 1  # one", "```", "", "```nosuchlanguage", "<b>raw</b>", "```"].join("\n"),
   );
   assert.match(html, /<pre><code class="language-python syntax"><span class="line">/);
   assert.match(html, /--shiki-light:#177500/);
-  assert.match(html, /<pre><code class="language-mermaid">graph TD; A-->B\n<\/code><\/pre>/);
   assert.match(html, /<pre><code class="language-nosuchlanguage">&#x3C;b>raw&#x3C;\/b>\n<\/code><\/pre>/);
+});
+
+test("a Mermaid fence becomes an SVG with its source kept; the feed keeps only the source", async () => {
+  const markdown = ["```mermaid", "flowchart TD", "  accTitle: Two steps", "  accDescr: A leads to B.", "  A[Start] --> B[<img src=x onerror=alert(1)>]", "```"].join("\n");
+  const page = await renderMarkdown(markdown);
+  assert.match(page, /<div class="diagram" role="region" tabindex="0" aria-label="Diagram, scroll horizontally"><svg [^>]*role="img"/);
+  assert.match(page, /<title[^>]*>Two steps<\/title>/);
+  assert.match(page, /<details class="diagram-source"><summary>Diagram source<\/summary><pre><code class="language-mermaid">/);
+  assert.doesNotMatch(page, /<img/);
+  const feed = await renderMarkdown(markdown, { feed: true });
+  assert.doesNotMatch(feed, /<svg/);
+  assert.match(feed, /<pre><code class="language-mermaid">flowchart TD/);
+});
+
+test("a Mermaid source the renderer cannot draw stays as code", async () => {
+  const html = await renderMarkdown(["```mermaid", "not a diagram at all", "```"].join("\n"));
+  assert.match(html, /<pre><code class="language-mermaid">not a diagram at all\n<\/code><\/pre>/);
+  assert.doesNotMatch(html, /<svg/);
 });
 
 test("a table scrolls inside a focusable region", async () => {
