@@ -7,7 +7,7 @@ description: 真实请求由本机的 claude -p 发出。Pi 的工具变成 MCP 
 created_date: '2026-10-25'
 update_date: '2026-10-25'
 published_at: '2026-10-25T13:48:04Z'
-updated_at: '2026-10-25T13:48:04Z'
+updated_at: '2026-10-25T14:07:07Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -23,7 +23,9 @@ tags:
 
 我在 Pi 里写代码，模型用 Claude 订阅（配置见 [10 月的配置清单](https://geoqiao.me/blog/whats-on-my-pi-agent-october-2026/)）。
 
-2026 年 4 月起，Claude 订阅额度不能再给 OpenClaw 这类第三方 harness 用（[TechCrunch](https://techcrunch.com/2026/04/04/anthropic-says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support/)），Pi 也属于这一类。[Magpie](https://usemagpie.ai) 的办法是：Pi 不直接拿订阅去请求，而是交给本机的 Claude Code 去问。
+Pi 自己也能用订阅登录，但它会提示：第三方 harness 的用量走额外付费，按 token 计费，不占订阅额度。2026 年 4 月起，OpenClaw 这类工具都是这样（[TechCrunch](https://techcrunch.com/2026/04/04/anthropic-says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support/)）。
+
+[帮助中心](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) 2026-10-07 的更新写明：`claude -p` 仍然用订阅额度。[Magpie](https://usemagpie.ai) 的办法就是：Pi 不直接拿订阅去请求，而是交给本机的 `claude -p` 去问。
 
 ```mermaid
 flowchart LR
@@ -144,7 +146,7 @@ Claude Code 的进程和会话文件都是临时的，闲置一小时后清掉�
 
 **`claude -p` 逻辑上符合 Anthropic 的政策：Pi 可以用 Claude 订阅，会话也统一由 Pi 管。**
 
-- [帮助中心](https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans)写明：用订阅登录时，`claude -p` 的用量算进订阅额度。
+- [帮助中心](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) 2026-10-07 的更新写明：仍然可以用订阅额度跑 `claude -p`。
 - [Claude Code 合规页](https://code.claude.com/docs/en/legal-and-compliance)禁止第三方经手订阅凭据、替用户转发请求，但不妨碍用户用自己的订阅登录未修改的 Claude Code。
 - Magpie 正是这样：运行本机没改过的 `claude`，登录走 `claude auth login`，令牌留在 Claude Code 里，请求由 Claude Code 发出。
 
