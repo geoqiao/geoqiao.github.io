@@ -187,6 +187,7 @@ main { min-height: calc(100svh - 220px); }
     linear-gradient(to left, var(--edge), transparent) right center / 14px 100% no-repeat scroll;
 }
 .post-content blockquote .table-scroll { --fade: var(--paper); }
+.post-content :is(td, th) code { white-space: nowrap; }
 .post-content table { width: 100%; border-collapse: collapse; font: .875rem/1.7 var(--sans); font-variant-numeric: tabular-nums; overflow-wrap: normal; }
 .post-content th, .post-content td { min-width: 8.5rem; padding: 10px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .post-content th:first-child, .post-content td:first-child { padding-left: 0; }
@@ -280,6 +281,7 @@ main { min-height: calc(100svh - 220px); }
   .post-content .syntax span { color: inherit !important; background: transparent !important; }
   .table-scroll { overflow: visible; background: none; }
   .post-content table { table-layout: fixed; overflow-wrap: anywhere; font-size: 9pt; }
+  .post-content :is(td, th) code { white-space: normal; }
   .post-content th, .post-content td { min-width: 0; }
   .post-content img, .post-content blockquote { break-inside: avoid; }
   .post-content h2, .post-content h3 { break-after: avoid; }
