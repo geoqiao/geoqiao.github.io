@@ -45,9 +45,8 @@ const jsonLd = {
       <div class="post-content" set:html={body} />
       {(newer || older) && (
         <nav class="article-end" aria-label="Article navigation">
-          <span aria-hidden="true">↳</span>
-          {newer && <a rel="prev" href={newer.path} aria-label={`Previous: ${newer.title}`}>Previous</a>}
-          {older && <a rel="next" href={older.path} aria-label={`Next: ${older.title}`}>Next</a>}
+          {newer && <a class="article-step" rel="prev" href={newer.path}><span class="article-step-label"><span aria-hidden="true">← </span>Previous</span><span class="article-step-title">{newer.title}</span><time datetime={newer.createdDate}>{newer.createdDate}</time></a>}
+          {older && <a class="article-step" rel="next" href={older.path}><span class="article-step-label">Next<span aria-hidden="true"> →</span></span><span class="article-step-title">{older.title}</span><time datetime={older.createdDate}>{older.createdDate}</time></a>}
         </nav>
       )}
       {site.comments.enabled && <Comments issueNumber={post.issueNumber} />}
