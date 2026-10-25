@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 102,
+      "slug": "how-magpie-connects-claude-subscription-to-pi",
+      "path": "blog/how-magpie-connects-claude-subscription-to-pi.md"
+    },
+    {
       "issue_number": 100,
       "slug": "why-mcp-costs-tokens-and-why-pi-changed-its-mind",
       "path": "blog/why-mcp-costs-tokens-and-why-pi-changed-its-mind.md"
