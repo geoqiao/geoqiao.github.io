@@ -14,11 +14,12 @@ interface Props {
   /** The navigation item this page belongs to. */
   section?: string;
   jsonLd?: unknown;
+  /** An article's subset of Noto Serif SC (see lib/title-font.ts), as its name under /assets/fonts/title/. */
+  titleFont?: string;
 }
 
-const { kind = "page", title = site.title, description = site.description, path, section, jsonLd } = Astro.props;
-// Chinese headings use self-hosted Noto Serif SC; its many slices keep the rules out of other pages.
-const cjkHeadings = kind === "post" || /\p{Script=Han}/u.test(title);
+const { kind = "page", title = site.title, description = site.description, path, section, jsonLd, titleFont } = Astro.props;
+const titleFontHref = titleFont && `/assets/fonts/title/${titleFont}.woff2`;
 const canonical = path ? absolute(path) : null;
 const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
 ---
@@ -58,7 +59,12 @@ const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
   <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="/assets/css/search.css">
   <link rel="stylesheet" href="/assets/css/geo.css">
-  {cjkHeadings && <link rel="stylesheet" href="/assets/css/noto-serif-sc.css">}
+  {titleFontHref && (
+    <Fragment>
+      <link rel="preload" href={titleFontHref} as="font" type="font/woff2" crossorigin>
+      <style set:html={`@font-face{font-family:"Noto Serif SC";src:url(${titleFontHref}) format("woff2");font-weight:600 900;font-display:swap}`}></style>
+    </Fragment>
+  )}
   {kind === "home" && (
     <Fragment>
       <link rel="preload" href="/assets/fonts/shantell-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>

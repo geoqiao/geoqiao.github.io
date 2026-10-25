@@ -37,7 +37,8 @@
   --accent: #a72f6a;
   --selection: #ead6e0;
   --reading-width: 704px;
-  --display: Spectral, "Noto Serif SC", "Songti SC", Georgia, serif;
+  --display: Spectral, "Songti SC", Georgia, serif;
+  --title: Spectral, "Noto Serif SC", "Songti SC", Georgia, serif;
   --object-shadow: 0 2px 3px #29272508, 0 14px 32px #29272512;
   --raised-shadow: 0 5px 12px #29272512, 0 26px 60px #29272524;
 }
@@ -69,6 +70,8 @@
 }
 .page-heading h1 { font-size: 2.5rem; font-weight: 400; }
 .article-heading h1 { font-weight: 600; }
+/* Only an article's own headings use Noto Serif SC (a per-page subset, see src/lib/title-font.ts). */
+.article-heading h1, .post-content :is(h1, h2, h3) { font-family: var(--title); }
 .entry h2 { font-family: var(--sans); }
 /* Inner-page controls share Home's size, reading-column edge, and top offset. */
 .site-header { position: relative; z-index: 15; width: min(var(--reading-width), calc(100% - 48px)); margin: 24px auto 0; }
