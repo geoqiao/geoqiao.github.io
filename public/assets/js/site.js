@@ -190,3 +190,16 @@
     block.append(bar, pre);
   });
 })();
+
+// Name the link that opens an article so its title can glide into the heading (style.css names the heading).
+// Only one element carries the name at a time. Without a transition (reduced motion, no support) this does nothing.
+addEventListener("pageswap", (event) => {
+  if (!event.viewTransition || !event.activation?.entry) return;
+  const { pathname } = new URL(event.activation.entry.url);
+  if (!/^\/blog\/[^/]+\/$/.test(pathname)) return;
+  const link = [...document.querySelectorAll(".entry h2 a, .home-writing a")].find((a) => a.pathname === pathname);
+  const title = link?.closest(".home-writing") ? link.firstElementChild : link;
+  if (!title) return;
+  title.style.viewTransitionName = "post-title";
+  event.viewTransition.finished.finally(() => { title.style.viewTransitionName = ""; });
+});

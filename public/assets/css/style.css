@@ -264,6 +264,10 @@ main { min-height: calc(100svh - 220px); }
 }
 @media (prefers-reduced-motion: no-preference) {
   a, button { transition: color .16s ease, background-color .16s ease; }
+  /* A light cross-fade between pages. The title of the article just opened (see site.js) glides to the heading. */
+  @view-transition { navigation: auto; }
+  ::view-transition-group(*) { animation-duration: 220ms; animation-timing-function: cubic-bezier(.32, .72, 0, 1); }
+  .article-heading h1 { view-transition-name: post-title; }
 }
 @media print {
   :root, :root:not([data-theme]), :root[data-theme="dark"] { color-scheme: light; --canvas: white; --paper: white; --ink: black; --muted: black; --rail: white; --feature: white; --accent: black; --line: #858585; --boundary: #858585; --code-bg: white; --code-top: white; }
