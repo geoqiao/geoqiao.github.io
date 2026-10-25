@@ -89,8 +89,6 @@
 .home-writing time { flex-shrink: 0; white-space: nowrap; font-size: .6875rem; color: var(--muted); }
 .home-projects { margin-top: 88px; }
 .project-deck {
-  --retreat: 330px;
-  --lift-scale: 1.32;
   position: relative;
   width: min(var(--stage-width), calc(100vw - 64px));
   margin-left: calc((100% - min(var(--stage-width), 100vw - 64px)) / 2);
@@ -119,29 +117,18 @@
 .deck-details { display: block; padding: 4px 8px 12px; }
 .deck-summary { display: block; font-size: .8125rem; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
 .deck-open { display: block; margin-top: 14px; font: .8125rem/1.5 var(--sans); color: var(--accent); }
-.deck-hint { margin: 24px 0 0; font: 400 1.125rem/1.7 var(--hand); color: var(--muted); text-align: center; }
-.deck-close { position: absolute; right: 0; top: -26px; z-index: 20; display: flex; align-items: center; gap: 6px; min-height: 44px; border: 0; padding: 4px 12px; border-radius: 24px; font-size: .8125rem; background: var(--paper); }
-.deck-close span { font-size: 1.4rem; line-height: 1; }
 .home .site-footer { margin-top: 100px; padding-bottom: 44px; }
 
-/* Only the successfully wired desktop controller opts into the fan. */
-.deck-enhanced { transition: padding-bottom 320ms cubic-bezier(.32, .72, 0, 1); }
+/* Only the successfully wired desktop controller opts into the fan. A card lifts on hover or keyboard focus and opens on one click. */
 .deck-enhanced .deck-list { display: flex; justify-content: center; gap: 0; padding: 30px 0 32px; }
 .deck-enhanced .deck-slot { flex: 0 0 280px; height: 277px; margin-left: -56px; z-index: var(--order); }
 .deck-enhanced .deck-slot:first-child { margin-left: 0; }
 .deck-enhanced .deck-card { position: absolute; top: 0; left: 0; width: 100%; transform: translateY(var(--drop)) rotate(var(--tilt)); transition: transform 320ms cubic-bezier(.32, .72, 0, 1), box-shadow 320ms ease; }
 .deck-enhanced .deck-meta { min-height: 62px; }
-.deck-enhanced .deck-slot:focus-within { z-index: 8; }
-.deck-enhanced:not(.deck-opened) .deck-card:hover { transform: translateY(var(--drop)) rotate(var(--tilt)) scale(1.045); box-shadow: var(--raised-shadow); }
-.deck-enhanced:not(.deck-opened) .deck-card:focus-visible { transform: translateY(var(--drop)) rotate(var(--tilt)) scale(1.045); }
-.deck-enhanced.deck-opened { padding-bottom: var(--retreat); }
-.deck-opened .deck-slot:not(.is-selected) .deck-card { transform: translate(calc(var(--position) * -30px), calc(var(--drop) + var(--retreat))) rotate(var(--tilt)) scale(.85); }
-.deck-opened .deck-slot:not(.is-selected) .deck-card:hover { box-shadow: var(--raised-shadow); }
-.deck-opened .deck-slot.is-selected { z-index: 10; }
-.deck-opened .is-selected .deck-card { transform: translate(var(--lift-x), var(--lift-y)) rotate(0deg) scale(var(--lift-scale)); box-shadow: var(--raised-shadow); }
-.deck-opened .deck-hint { transform: translateY(var(--retreat)); }
-.deck-enhanced .deck-hint { transition: transform 320ms cubic-bezier(.32, .72, 0, 1); }
-.deck-opened .is-selected .deck-details { animation: geo-detail 240ms 120ms both; }
+.deck-enhanced .deck-slot:is(:hover, :focus-within) { z-index: 8; }
+.deck-enhanced .deck-card:is(:hover, :focus-visible) { transform: translateY(var(--drop)) rotate(var(--tilt)) scale(1.045); box-shadow: var(--raised-shadow); }
+.deck-enhanced .deck-details { display: none; }
+.deck-enhanced .deck-card:is(:hover, :focus-visible) .deck-details { display: block; animation: geo-detail 240ms 120ms both; }
 
 @media (prefers-reduced-motion: no-preference) {
   .home-title { animation: geo-arrive 450ms both; }
@@ -194,13 +181,12 @@
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 600px) { .deck-list { grid-template-columns: 1fr; } }
 @media print {
-  .annotation-note, .annotation-arrow, .deck-close, .deck-hint { display: none; }
+  .annotation-note, .annotation-arrow { display: none; }
   .home-heading { margin-bottom: 32px; }
   .home-intro, .project-deck { width: 100%; margin-left: 0; }
   .home-intro { margin-top: 24px; text-align: left; }
-  .deck-enhanced.deck-opened { padding-bottom: 0; }
   .deck-enhanced .deck-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .deck-enhanced .deck-slot { margin: 0; height: auto; }
   .deck-enhanced .deck-slot .deck-card { position: static; transform: none; box-shadow: none; border: 1px solid var(--line); break-inside: avoid; }
-  .deck-details[hidden] { display: block !important; }
+  .deck-enhanced .deck-details { display: block; }
 }

@@ -36,7 +36,7 @@ Dark mode uses a green accent drawn from the green stroke in the profile mark (`
 
 The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral, Shantell Sans, JetBrains Mono (5.3.0) and Noto Serif SC (5.3.1) are self-hosted from Fontsource; OFL notices are alongside the font files. Noto Serif SC follows Spectral for Chinese headings. `public/assets/css/noto-serif-sc.css` keeps Google Fonts' 400 and 600 slices with their `unicode-range`, so a page downloads only the slices its headings use (30–54 KB for the site's Chinese articles); `Base.astro` links it on posts and on pages with a Chinese title.
 
-Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its existing interaction and screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
+Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
 
 Each project has a product page at `/projects/<slug>/`, written from `src/project-pages/<slug>.html`. Every project in `config.yaml` therefore needs its own file there; the build fails without it. The pages are listed in search and the sitemap. md2xarticle is a website-only project with an explicit `slug`. Maintenance, media provenance and compatibility limits are documented in [product homepages](product-homepages.md).
 
@@ -60,7 +60,7 @@ The helper runs `escaping-site export` into `build/content/` (its own export; it
 
 ## Interaction contract
 
-On a wide screen with a fine pointer and normal motion, the deck fans out. First click/Enter selects and lifts a card; the next activation follows its link. Another card changes the preview. Close, Escape, or a click outside the cards dismisses it. Cmd/Ctrl-click and middle-click keep ordinary link behavior. An explicit Close returns focus to the selected card.
+On a wide screen with a fine pointer and normal motion, the deck fans out. A card lifts and shows its summary on hover or keyboard focus, and one click or Enter follows its link. Cmd/Ctrl-click and middle-click keep ordinary link behavior. Otherwise the deck is a plain grid, or a swipe row below 1000px.
 
 Below 1000 CSS pixels, cards use a swipeable row. Wide touch-only screens use a flat grid. Both open projects with one activation. Reduced motion uses a static grid and disables animated annotations, backgrounds, and assisted scrolling. Without JavaScript, or if Home's script fails, full cards and links remain usable. Fewer than three cards also stays a normal grid.
 
@@ -81,4 +81,4 @@ git diff --check
 
 If browser executables are missing, install them using `uv run --no-project --python 3.14 --with playwright==1.62.0 playwright install chromium webkit`.
 
-The browser suite exercises the real generated site: article code colors, diagrams, contents and comment binding, an old-address page, selection and navigation, keyboard dismissal/switching, repeated initialization, responsive navigation and focus, control alignment, runtime motion changes, interrupted scrolling, no-JavaScript/failed-script fallback, search, and persisted appearance. It also checks the distinct light/dark palettes with and without scripts. Visually inspect annotation placement, covers, both color schemes, long article pages, and intermediate widths when changing the design. Browser checks are separate from the existing dependency-light production unittest discovery.
+The browser suite exercises the real generated site: article code colors, diagrams, contents and comment binding, an old-address page, selection and navigation, card lift on hover and keyboard focus, repeated initialization, responsive navigation and focus, control alignment, runtime motion changes, no-JavaScript/failed-script fallback, search, and persisted appearance. It also checks the distinct light/dark palettes with and without scripts. Visually inspect annotation placement, covers, both color schemes, long article pages, and intermediate widths when changing the design. Browser checks are separate from the existing dependency-light production unittest discovery.

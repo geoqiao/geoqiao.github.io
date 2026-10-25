@@ -9,7 +9,6 @@ interface Props {
 const projects = Astro.props.projects.slice(0, 4);
 ---
 <div class="project-deck" data-project-deck>
-  <button class="deck-close" type="button" aria-label="Close project preview" hidden><span aria-hidden="true">×</span> Close</button>
   <ul class="deck-list">
     {projects.map((project, index) => {
       const position = index - (projects.length - 1) / 2;
@@ -30,6 +29,4 @@ const projects = Astro.props.projects.slice(0, 4);
       );
     })}
   </ul>
-  <p class="deck-hint" id="deck-hint" lang="en" hidden>Click a card to lift it. Click again to open the project.</p>
-  <p class="visually-hidden" data-deck-status role="status" aria-live="polite"></p>
 </div>
