@@ -259,7 +259,7 @@ main { min-height: calc(100svh - 220px); }
 }
 @media print {
   :root, :root:not([data-theme]), :root[data-theme="dark"] { color-scheme: light; --canvas: white; --paper: white; --ink: black; --muted: black; --rail: white; --feature: white; --accent: black; --line: #858585; --boundary: #858585; --code-bg: white; --code-top: white; }
-  .site-header, .home-tools, .home-light, .site-footer, .reading-margin, .comments-section, .code-tools, .article-end, .skip-link { display: none !important; }
+  .site-header, .home-tools, .site-footer, .reading-margin, .comments-section, .code-tools, .article-end, .skip-link { display: none !important; }
   .site-surface, .home .site-surface { width: 100%; margin: 0; padding: 0; }
   .reading-layout { display: block; width: 100%; }
   main { min-height: 0; }
