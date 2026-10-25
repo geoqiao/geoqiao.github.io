@@ -88,9 +88,6 @@
 .home-writing a > span { min-width: 0; overflow-wrap: anywhere; transition: color 160ms ease; }
 .home-writing time { flex-shrink: 0; white-space: nowrap; font-size: .6875rem; color: var(--muted); }
 .home-projects { margin-top: 88px; }
-.home-light { position: absolute; z-index: -1; top: 0; right: 0; width: min(70vw, 850px); height: 640px; overflow: hidden; pointer-events: none; color: var(--ink); opacity: .045; mask-image: linear-gradient(#000, transparent); }
-.home-light svg { width: 100%; height: 100%; filter: blur(12px); transform-origin: 100% 0; }
-:root[data-theme="dark"] .home-light { display: none; }
 .project-deck {
   --retreat: 330px;
   --lift-scale: 1.32;
@@ -147,7 +144,6 @@
 .deck-opened .is-selected .deck-details { animation: geo-detail 240ms 120ms both; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .home-light svg { animation: geo-light 14s ease-in-out infinite alternate; }
   .home-title { animation: geo-arrive 450ms both; }
   .annotation-word { animation: geo-mark 900ms calc(300ms + var(--delay)) both; }
   .annotation-arrow path { stroke-dasharray: 110; animation: geo-draw 900ms calc(300ms + var(--delay)) both; }
@@ -156,7 +152,6 @@
   .annotation-link:is(:hover, :focus-visible) .annotation-note { animation: geo-note 900ms calc(300ms + var(--delay)) both, geo-wiggle 700ms ease-in-out infinite; }
 }
 @keyframes geo-arrive { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
-@keyframes geo-light { from { transform: rotate(-3deg) translateY(-8px); } to { transform: rotate(3deg) translateY(8px); } }
 @keyframes geo-mark { 0% { background-size: 0 100%; } 24%, 100% { background-size: 100% 100%; } }
 @keyframes geo-draw { 0%, 24% { stroke-dashoffset: 110; opacity: 0; } 28% { opacity: 1; } 65%, 100% { stroke-dashoffset: 0; opacity: 1; } }
 @keyframes geo-note { 0%, 65% { opacity: 0; } 90%, 100% { opacity: 1; } }
@@ -198,9 +193,6 @@
   .deck-slot { min-width: 0; }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 600px) { .deck-list { grid-template-columns: 1fr; } }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .home-light { display: none; }
-}
 @media print {
   .annotation-note, .annotation-arrow, .deck-close, .deck-hint { display: none; }
   .home-heading { margin-bottom: 32px; }
