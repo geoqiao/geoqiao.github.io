@@ -5,6 +5,7 @@ import Base from "../../layouts/Base.astro";
 import { absolute, site } from "../../lib/config";
 import { posts } from "../../lib/content";
 import { renderMarkdown } from "../../lib/markdown";
+import { titleFont } from "../../lib/title-font";
 
 export function getStaticPaths() {
   return posts.map((post, index) => ({
@@ -15,6 +16,7 @@ export function getStaticPaths() {
 
 const { post, newer, older } = Astro.props;
 const body = await renderMarkdown(post.markdown);
+const font = await titleFont(post);
 if (/<h1[\s>]/.test(body)) {
   // The page's <h1> is the Issue title; see "本站博客发布规范" in README.md.
   const message = `Issue #${post.issueNumber} (${post.slug}): the body has a level-1 heading; start the body at ##`;
@@ -32,7 +34,7 @@ const jsonLd = {
   author: { "@type": "Person", name: site.author },
 };
 ---
-<Base kind="post" title={post.title} description={post.description} path={post.path} section="/blog/" jsonLd={jsonLd}>
+<Base kind="post" title={post.title} description={post.description} path={post.path} section="/blog/" jsonLd={jsonLd} titleFont={font?.name}>
 <article class="article-page">
   <header class="article-heading">
     <a class="breadcrumb" href="/blog/">← Blog</a>
