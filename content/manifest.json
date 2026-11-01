@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 104,
+      "slug": "reflections-on-turning-thirty",
+      "path": "blog/reflections-on-turning-thirty.md"
+    },
+    {
       "issue_number": 102,
       "slug": "how-magpie-connects-claude-subscription-to-pi",
       "path": "blog/how-magpie-connects-claude-subscription-to-pi.md"
