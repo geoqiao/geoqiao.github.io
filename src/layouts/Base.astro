@@ -22,6 +22,7 @@ const { kind = "page", title = site.title, description = site.description, path,
 const titleFontHref = titleFont && `/assets/fonts/title/${titleFont}.woff2`;
 const canonical = path ? absolute(path) : null;
 const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
+const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url).href : null;
 ---
 <!DOCTYPE html>
 <html lang={site.language}>
@@ -36,16 +37,18 @@ const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
   <meta property="og:description" content={description}>
   {canonical && <meta property="og:url" content={canonical}>}
   <meta property="og:type" content={kind === "post" ? "article" : "website"}>
-  {socialImage ? (
+  {socialImage && (
     <Fragment>
       <meta property="og:image" content={socialImage}>
       {socialImageAlt && <meta property="og:image:alt" content={socialImageAlt}>}
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:image" content={socialImage}>
-      {socialImageAlt && <meta name="twitter:image:alt" content={socialImageAlt}>}
     </Fragment>
-  ) : (
-    <meta name="twitter:card" content="summary">
+  )}
+  <meta name="twitter:card" content="summary">
+  {twitterImage && (
+    <Fragment>
+      <meta name="twitter:image" content={twitterImage}>
+      <meta name="twitter:image:alt" content={`${site.author} 的头像`}>
+    </Fragment>
   )}
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
