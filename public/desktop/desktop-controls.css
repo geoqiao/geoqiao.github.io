@@ -95,3 +95,4 @@
  .mac-native .social-dock{position:relative;inset:auto;transform:none;width:100%;margin:20px auto 0}
  .phone-app-open .system-menu-left{visibility:visible}
 }
+@media(max-width:760px){.mac-native .route-window,.mac-native .route-window.maximized{top:40px!important;bottom:0!important;height:calc(100dvh - 40px)!important}}
