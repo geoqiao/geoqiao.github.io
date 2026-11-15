@@ -14,7 +14,7 @@ const { posts, descriptions = false } = Astro.props;
     <article class="entry">
       <time datetime={post.createdDate}>{post.createdDate}</time>
       <div class="entry-copy">
-        <h2><a href={post.path}>{post.title} <span class="entry-arrow" aria-hidden="true">↗</span></a></h2>
+        <h2><a href={post.path}>{post.title}</a></h2>
         {descriptions && post.description && <p class="entry-description">{post.description}</p>}
         <TagLinks tags={post.tags} />
       </div>
