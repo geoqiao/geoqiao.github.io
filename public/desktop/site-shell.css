@@ -52,3 +52,8 @@ html,body[data-variant=B]{min-height:100%;height:auto}.mac.mac-native{min-height
 }
 
 @media(max-width:760px){.native-finder .finder-tabs{display:none}}
+@media(max-width:760px){
+ .mac-native .finder-sidebar button[data-section]{font-size:12px;padding:8px 10px;gap:6px;flex-shrink:0}
+ .mac-native .finder-sidebar button[data-section] svg{width:16px;height:16px;flex-shrink:0}
+ .mac-native .finder-sidebar button:is([data-section=featured],[data-section=all],[data-section=projects],[data-section=social]){order:-1}
+}
