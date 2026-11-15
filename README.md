@@ -76,3 +76,13 @@ sitemap 和静态资源。构建成功不代替线上检查。
 ## 浏览器支持
 
 开发目标为当前稳定版 Chrome、Edge、Firefox 和 Safari（含 iOS Safari）。文章与基础导航保持静态可读；搜索等增强交互使用渐进增强，新 API 保留必要的轻量回退。实际验证浏览器随改动记录。
+
+## 桌面首页
+
+首页使用 Finder 作为文章入口，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/pages/index.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`public/desktop/` 包含桌面交互与独立资源。文章原地址、归档、Atom 和 sitemap 保持现有发布流程。
+
+桌面 Finder 单击选择、双击或 Enter 阅读；手机直接点击阅读，底部保留五个主要入口，Paseo／Magpie／Pi 从首页应用入口打开。浏览器 Back 返回桌面。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
+
+Pi 图标取自 pi.dev 的官方 SVG，Dock 外框按其他图标的可见尺寸留白。MyGo 使用从本机应用下载的 124.67 秒 MP3，打开播放器尝试播放，也提供独立音频链接。网页播放与解码检查通过；用户此前在 Ego Lite 未听到声音，设备实际听感仍待确认。
+
+发布前验证：Astro check、8 个现有测试、全站构建及站内链接检查；Chrome 桌面和 390px 手机视口覆盖 Finder、阅读与返回、应用入口、深浅主题、图表和播放状态。无 JavaScript 时首页提供文章链接列表。
