@@ -77,8 +77,11 @@ document.querySelector('#native-finder').addEventListener('click',event=>{
 
 const widgetRail=document.createElement('div');
 widgetRail.className='home-widget-rail';
-widgetRail.innerHTML=`<section class="home-widget projects-widget"><header><span>Projects</span><button data-home-section="projects">View all ↗</button></header>${BLOG.projects.slice(0,3).map(p=>`<a class="widget-project" href="${p.url}" target="_blank" rel="noopener"><span>${esc(p.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</section><section class="home-widget follow-widget"><header><span>Follow Me</span></header><nav aria-label="Follow Geo">${followLinks.map(p=>`<a href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><img src="${socialIcon(p)}" alt=""><span>${p.name}</span></a>`).join('')}</nav></section>`;
-document.querySelector('.spring-widget').after(widgetRail);
+widgetRail.innerHTML=`<section class="home-widget projects-widget"><header><span>Projects</span><button data-home-section="projects">View all ↗</button></header>${BLOG.projects.map(p=>`<a class="widget-project" href="${p.url}" target="_blank" rel="noopener"><span>${esc(p.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</section><section class="home-widget follow-widget"><header><span>Follow Me</span></header><nav aria-label="Follow Geo">${followLinks.map(p=>`<a href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><img src="${socialIcon(p)}" alt=""><span>${p.name}</span></a>`).join('')}</nav></section>`;
+const latestWidget=document.createElement('section');
+latestWidget.className='home-widget latest-widget';
+latestWidget.innerHTML=`<header><span>Latest</span><a href="/blog/">All Articles ›</a></header>${[...BLOG.posts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3).map(p=>`<a class="spring-note" href="${p.url}"><span>${esc(p.title)}</span><time>${p.date}</time><p class="widget-excerpt">${esc(p.description)}</p></a>`).join('')}`;
+document.querySelector('.spring-widget').after(latestWidget,widgetRail);
 document.addEventListener('click',event=>{
   const trigger=event.target.closest('[data-home-section]');
   if(trigger){openNative('finder');navigateFinder(trigger.dataset.homeSection);}
