@@ -2,18 +2,17 @@
 import { absolute, site } from "../lib/config";
 import { posts } from "../lib/content";
 import { getProjects } from "../lib/projects";
-import { renderMarkdown } from "../lib/markdown";
 import { scriptJson } from "../lib/html";
 import { featuredPosts } from "../site.config";
 interface Props { kind?: "home" | "post" | "page"; title?: string; description?: string; path?: string; section?: string; jsonLd?: unknown; titleFont?: string; archiveStart?: number; }
 const {kind='home',title=site.title,description=site.description,path, jsonLd, archiveStart}=Astro.props;
 const canonical=path ? absolute(path) : kind === 'home' ? site.url : null;
-const desktopPosts = await Promise.all(posts.map(async post => ({
+const desktopPosts = posts.map(post => ({
   title: post.title, description: post.description, date: post.createdDate,
   tags: post.tags.map(tag => tag.name), url: post.path, issueNumber: post.issueNumber,
-  featured: featuredPosts.includes(post.issueNumber), markdown: post.markdown,
-  html: await renderMarkdown(post.markdown),
-})));
+  featured: featuredPosts.includes(post.issueNumber),
+}));
+const currentPost = kind === "post" ? posts.find(post => post.path === path) : undefined;
 const desktopProjects = (await getProjects()).filter(p => p.featured).map(p => ({
   title:p.title, summary:p.summary, url:p.path, image:p.image,
 }));
@@ -37,6 +36,7 @@ const scripts = ['app','reader','track','desktop-apps','obsidian-workspace','nat
 {styles.map(name => <link rel="stylesheet" href={`/desktop/${name}.css`} />)}
 <link rel="stylesheet" href="/assets/css/syntax.css">
 <script is:inline set:html={`window.BLOG=${scriptJson(blogData)};window.DESKTOP_ROUTE=${scriptJson({kind,title,path:path || "/",archiveStart})};if(/^\\/blog\\/(?:page\\/\\d+\\/)?$/.test(location.pathname))document.documentElement.classList.add("finder-route");`}></script>
+{currentPost && <script is:inline id="article-source" type="application/json" set:html={scriptJson(currentPost.markdown)} />}
 {scripts.map(name => <script is:inline src={`/desktop/${name}.js`} defer></script>)}
 <script is:inline type="application/ld+json" set:html={scriptJson(jsonLd || {"@context":"https://schema.org","@type":"WebSite",name:site.title,url:site.url,description:site.description})}></script>
 </head>
