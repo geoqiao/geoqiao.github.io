@@ -26,7 +26,7 @@ function showArchive(reset=false){
   routeWindow?.setAttribute('hidden','');
   openNative('finder');
   if(reset||section!=='all'){section='all';query='';updateFinder();}
-  document.title='全部文章 · Geo Qiao';
+  document.title='All Articles · Geo Qiao';
 }
 window.openArticle=index=>{
   const post=BLOG.posts[index];if(!post)return;
@@ -58,7 +58,7 @@ function restoreDesktopRoute(){
     if(isArchive(location.pathname))showArchive();
     else if(location.pathname==='/'){
       routeWindow?.setAttribute('hidden','');
-      document.title='Geo Qiao';
+      document.title='Geo’s Blog';
     }else{
       routeWindow?.removeAttribute('hidden');
       document.title=initialRoute.title+' · Geo Qiao';
@@ -89,7 +89,6 @@ document.addEventListener('click',event=>{
     event.preventDefault();
     if(location.pathname!==url.pathname)history.pushState(null,'',url.pathname);
     showArchive(true);
-    document.getElementById('finder-search')?.focus({preventScroll:true});
   }
 });
 if(isArchive(initialRoute.path)){

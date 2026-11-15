@@ -79,9 +79,9 @@ sitemap 和静态资源。构建成功不代替线上检查。
 
 ## MacOS 主题
 
-首页使用 Finder 作为文章入口，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/layouts/Desktop.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`Base.astro` 将归档、标签、项目列表和关于页放进同一桌面窗口。文章直接使用原 `/blog/<slug>/` 地址，刷新与浏览器前进／后退对应当前文章；静态 HTML 保留正文、元数据与原有重定向，Atom 和 sitemap 保持原发布流程。独立项目产品页保留各自品牌设计。
+首页以 Geo’s Blog 的 Featured、Projects、Follow Me widgets 展示内容，Finder 用于浏览完整文章列表，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/layouts/Desktop.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`Base.astro` 将归档、标签、项目列表和关于页放进同一桌面窗口。文章直接使用原 `/blog/<slug>/` 地址，刷新与浏览器前进／后退对应当前文章；静态 HTML 保留正文、元数据与原有重定向，Atom 和 sitemap 保持原发布流程。独立项目产品页保留各自品牌设计。
 
-桌面 Finder 单击选择、双击或 Enter 阅读；手机首页使用精选笔记卡片与应用网格，应用打开为全屏窗口，提供明确的返回桌面入口。手机版底部社交 Dock 包含 Twitter/X、抖音、视频号、GitHub；桌面版账号快捷方式与文件夹共用右侧网格。Finder 提供 Featured／全部文章／Projects／关注我标签页、键盘左右键切换及同步侧栏，首页只打开 Finder。社交图标使用官方原始资源，来源见 `public/desktop/assets/apps/SOURCES.md`。抖音公开主页从已登录创作者后台核实（账号 geoqiao，名称 Geo还没学）；视频号 `/channels/` 展示该账号已发布作品的官方二维码及分享链接，注明扫码进入作品后点头像查看主页。二维码取得于 2026-11-15，对应 T3 Code 与 Paseo 一期。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
+桌面 Finder 单击选择、双击或 Enter 阅读；手机首页使用精选笔记卡片与应用网格，应用打开为全屏窗口，提供明确的返回桌面入口。手机版底部社交 Dock 包含 Twitter/X、抖音、视频号、GitHub；桌面版 Follow Me widget 包含社交链接和 RSS。Finder 提供 Featured／All Articles／Projects／Follow Me 导航、键盘左右键切换及同步侧栏；首页默认不打开窗口。Dock 使用英文 App 名称且不显示状态点，进入 All Articles 不主动聚焦搜索框。社交图标使用官方原始资源，来源见 `public/desktop/assets/apps/SOURCES.md`。抖音公开主页从已登录创作者后台核实（账号 geoqiao，名称 Geo还没学）；视频号 `/channels/` 展示该账号已发布作品的官方二维码及分享链接，注明扫码进入作品后点头像查看主页。二维码取得于 2026-11-15，对应 T3 Code 与 Paseo 一期。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
 
 Pi 图标取自 pi.dev 的官方 SVG，Dock 外框按其他图标的可见尺寸留白。MyGo 使用从本机应用下载的 124.67 秒 MP3，页面加载时尝试有声播放，浏览器拦截时在首次点击或 Enter／空格后启动；菜单栏提供独立暂停／播放控制，主动暂停后不会因后续点击重新启动，也提供独立音频链接。网页播放与解码检查通过；用户此前在 Ego Lite 未听到声音，设备实际听感仍待确认。自动播放验证覆盖 Chromium 默认拦截／首次手势恢复，以及测试浏览器允许自动播放的两条路径。
 
