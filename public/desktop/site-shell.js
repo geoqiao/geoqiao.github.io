@@ -1,7 +1,8 @@
 // The phone desktop keeps apps discoverable without shrinking desktop windows.
 const appTile=(label,src,attrs)=>`<button class="spring-app" ${attrs}><img src="${src}" alt=""><span>${label}</span></button>`;
 const socialApps=[{name:'Twitter / X',id:'twitter',url:'https://twitter.com/geoqiao'},{name:'抖音',id:'douyin',url:'https://www.douyin.com/user/MS4wLjABAAAAdyqgUdRPLiCRML4eqTzRw1yAD0tC4TMzZtzHAA8CRjAA4AQkhP_sLLiiGADSWdZa'},{name:'视频号',id:'weixin',url:'/channels/'},{name:'GitHub',id:'github',url:'https://github.com/geoqiao'}];
-const socialMarkup=()=>socialApps.map(p=>`<a class="spring-app" href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><span class="social-icon social-${p.id}">${p.id==='twitter'?'𝕏':p.id==='weixin'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 12C7 2 1 2 4 13s6 5 8-1Zm0 0C17 2 23 2 20 13s-6 5-8-1Z"/></svg>':p.id==='douyin'?'<span class="douyin-note">♪</span>':'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>'}</span><span>${p.name}</span></a>`).join('');
+const socialIcon=p=>`/desktop/assets/apps/${p.id}.${p.id==='weixin'?'svg':'jpg'}`;
+const socialMarkup=()=>socialApps.map(p=>`<a class="spring-app social-app" href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><img class="social-artwork social-${p.id}" src="${socialIcon(p)}" alt=""><span>${p.name}</span></a>`).join('');
 const desktop=document.querySelector('.mac-native');
 document.querySelector('.mobile-welcome')?.remove();
 const featured=BLOG.posts.filter(p=>p.featured).sort((a,b)=>BLOG.featured.indexOf(a.issueNumber)-BLOG.featured.indexOf(b.issueNumber)).slice(0,2);
@@ -13,3 +14,39 @@ document.querySelector('.phone-home').addEventListener('click',showPhoneHome);
 document.addEventListener('click',e=>{if(innerWidth<=760&&e.target.closest('[data-window-close],[data-window-min]'))showPhoneHome();});
 if(innerWidth<=760)showPhoneHome();
 matchMedia('(max-width:760px)').addEventListener('change',event=>{if(event.matches)showPhoneHome();else{document.body.classList.remove('phone-app-open');document.querySelector('.springboard')?.removeAttribute('inert');document.querySelectorAll('.mobile-inactive').forEach(w=>w.classList.remove('mobile-inactive'));}});
+
+// Desktop aliases share the same grid as folders; phones retain the compact Dock.
+document.querySelector('.native-desktop').insertAdjacentHTML('beforeend',socialMarkup());
+for(const name of ['terminal','note']){document.getElementById('native-'+name).hidden=true;document.querySelector(`[data-native-app="${name}"]`)?.classList.remove('running');}
+finderNames.social='关注我';
+const baseFinderSidebar=nativeSidebar;
+nativeSidebar=()=>baseFinderSidebar().replace(/<a class="sidebar-link" href="https:\/\/github.com\/geoqiao"[^>]*>.*?<\/a>/,'').replace('</aside>',`<p class="sidebar-label">我的账号</p><button data-section="social" class="${section==='social'?'active':''}">${icon('person')}关注我</button>${socialApps.map(p=>`<a class="sidebar-link social-sidebar" href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><img src="${socialIcon(p)}" alt="">${p.name}</a>`).join('')}</aside>`);
+const baseFinderContent=nativeFinderContent;
+nativeFinderContent=()=>section==='social'?`${nativeSidebar()}<section class="finder-social-list" aria-label="社交账号">${socialApps.filter(p=>p.name.toLowerCase().includes(query.toLowerCase())).map(p=>`<a class="finder-social-item" href="${p.url}" ${p.id==='weixin'?'':'target="_blank" rel="noopener"'}><img class="social-artwork social-${p.id}" src="${socialIcon(p)}" alt=""><span>${p.name}</span><small>${p.id==='douyin'||p.id==='weixin'?'Geo还没学':'geoqiao'} ↗</small></a>`).join('')}</section>`:baseFinderContent();
+const finderTabs=[['featured','Featured'],['all','全部文章'],['projects','Projects'],['social','关注我']];
+document.querySelector('.native-finder-toolbar').insertAdjacentHTML('afterend',`<div class="finder-tabs" role="tablist" aria-label="访达标签页">${finderTabs.map(([id,label])=>`<button role="tab" id="finder-tab-${id}" data-section="${id}" aria-selected="${section===id}" tabindex="${section===id?0:-1}">${label}</button>`).join('')}</div>`);
+const baseUpdateFinder=updateFinder;
+updateFinder=()=>{baseUpdateFinder();const body=document.querySelector('.finder-body');body.setAttribute('role','tabpanel');body.setAttribute('aria-label',finderNames[section]);document.querySelector('.native-finder').classList.toggle('social-view',section==='social');document.querySelectorAll('.finder-tabs [role=tab]').forEach(tab=>{const active=tab.dataset.section===(['life','tech'].includes(section)?'all':section);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});if(section==='social')document.querySelector('.finder footer>span:last-child').textContent=socialApps.filter(p=>p.name.toLowerCase().includes(query.toLowerCase())).length+' 个账号';};
+document.querySelector('.finder-tabs').addEventListener('keydown',event=>{const tabs=[...event.currentTarget.querySelectorAll('[role=tab]')];let index=tabs.indexOf(document.activeElement);if(index<0)return;if(event.key==='ArrowRight')index=(index+1)%tabs.length;else if(event.key==='ArrowLeft')index=(index+tabs.length-1)%tabs.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=tabs.length-1;else return;event.preventDefault();navigateFinder(tabs[index].dataset.section);tabs[index].focus();tabs[index].scrollIntoView({block:'nearest',inline:'nearest'});});
+updateFinder();
+
+// Attempt audible playback on arrival; recover from the browser's gesture gate.
+const musicQuick=document.createElement('button');
+musicQuick.className='music-quick-toggle';
+musicQuick.setAttribute('aria-label','播放背景音乐');
+musicQuick.title=MUSIC_TRACK.title;
+musicQuick.textContent='♫ 播放音乐';
+document.querySelector('.system-menu-right').prepend(musicQuick);
+let waitingForMusicGesture=true;
+function syncBackgroundMusic(){musicQuick.textContent=music.paused?'♫ 播放音乐':'Ⅱ 音乐';musicQuick.setAttribute('aria-label',music.paused?'播放背景音乐':'暂停背景音乐');musicQuick.setAttribute('aria-pressed',String(!music.paused));}
+function stopMusicGestureWatch(){waitingForMusicGesture=false;window.removeEventListener('click',resumeBackgroundMusic,true);window.removeEventListener('keydown',resumeBackgroundMusic,true);}
+function resumeBackgroundMusic(event){if(!waitingForMusicGesture||event?.target.closest('.music-quick-toggle,#music-play'))return;if(event?.type==='keydown'&&(event.ctrlKey||event.metaKey||event.altKey||!['Enter',' '].includes(event.key)))return;music.play().then(stopMusicGestureWatch).catch(()=>{syncBackgroundMusic();});}
+musicQuick.addEventListener('click',()=>{stopMusicGestureWatch();if(music.paused)startRequestedMusic();else music.pause();});
+music.addEventListener('playing',()=>{stopMusicGestureWatch();syncBackgroundMusic();});
+music.addEventListener('pause',syncBackgroundMusic);
+music.addEventListener('ended',syncBackgroundMusic);
+window.addEventListener('click',resumeBackgroundMusic,true);
+window.addEventListener('keydown',resumeBackgroundMusic,true);
+music.autoplay=true;
+music.preload='auto';
+resumeBackgroundMusic();
