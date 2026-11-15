@@ -79,7 +79,7 @@ sitemap 和静态资源。构建成功不代替线上检查。
 
 ## MacOS 主题
 
-首页以 Geo’s Blog 的 Featured、Latest、Projects、Follow Me widgets 展示内容，Finder 用于浏览完整文章列表，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/layouts/Desktop.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`Base.astro` 将归档、标签、项目列表和关于页放进同一桌面窗口。文章直接使用原 `/blog/<slug>/` 地址，刷新与浏览器前进／后退对应当前文章；静态 HTML 保留正文、元数据与原有重定向，Atom 和 sitemap 保持原发布流程。独立项目产品页保留各自品牌设计。
+首页以 Geo’s Blog 的 Featured、Latest、Projects、Follow Me widgets 展示内容，Finder 用于浏览完整文章列表，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/layouts/Desktop.astro` 从同一份 `content/` 生成轻量文章目录，正文由文章页的 `renderMarkdown()` 渲染；首页按需读取文章原地址的正文和 Markdown，在当前页面内缓存，直达文章复用页面已有正文；`Base.astro` 将归档、标签、项目列表和关于页放进同一桌面窗口。文章直接使用原 `/blog/<slug>/` 地址，刷新与浏览器前进／后退对应当前文章；静态 HTML 保留正文、元数据与原有重定向，Atom 和 sitemap 保持原发布流程。独立项目产品页保留各自品牌设计。
 
 桌面 Finder 单击选择、双击或 Enter 阅读；手机首页使用 Featured／Latest 切换卡片与应用网格，短屏减少文章预览数量，应用打开为全屏窗口，使用红黄绿窗口控件关闭、最小化与放大。手机版社交 Dock 固定在可见页面底部，首页内容在底栏上方独立滚动，包含 Twitter/X、抖音、视频号、GitHub；桌面版 Follow Me widget 包含社交链接和 RSS。Finder 提供 Featured／All Articles／Projects／Follow Me 导航、键盘左右键切换及同步侧栏；首页默认不打开窗口。Projects 与 Follow Me 在桌面首页上下排列，Projects 内部按宽度并列展示；首页滚动区域止于 Dock 上方，避免内容被遮挡。绿色按钮铺满菜单栏下方的可用屏幕，Dock 收到底边并可悬停唤回。Dock 使用明确的深浅底色和英文 App 名称，不显示状态点，进入 All Articles 不主动聚焦搜索框。社交图标使用官方原始资源，来源见 `public/desktop/assets/apps/SOURCES.md`。抖音公开主页从已登录创作者后台核实（账号 geoqiao，名称 Geo还没学）；视频号 `/channels/` 展示该账号已发布作品的官方二维码及分享链接，注明扫码进入作品后点头像查看主页。二维码取得于 2026-11-15，对应 T3 Code 与 Paseo 一期。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
 
@@ -88,3 +88,5 @@ sitemap 和静态资源。构建成功不代替线上检查。
 Pi 图标取自 pi.dev 的官方 SVG，Dock 外框按其他图标的可见尺寸留白。MyGo 使用从本机应用下载的 124.67 秒 MP3，页面加载时尝试有声播放，浏览器拦截时在首次点击或 Enter／空格后启动；菜单栏提供独立暂停／播放控制，主动暂停后不会因后续点击重新启动，也提供独立音频链接。网页播放与解码检查通过；用户此前在 Ego Lite 未听到声音，设备实际听感仍待确认。自动播放验证覆盖 Chromium 默认拦截／首次手势恢复，以及测试浏览器允许自动播放的两条路径。
 
 发布前验证：Astro check、8 个现有测试、全站构建及站内链接检查；Chrome 桌面和 320／390px 手机视口覆盖首页、归档、标签、关于、项目列表和视频号入口；验收原文章直达、阅读与返回、应用入口和深浅主题。无 JavaScript 时首页提供文章链接列表，文章原地址仍展示静态正文。
+
+性能验证（2026-11-15）：首页 HTML 从 827,215 B 降至 29,319 B，相同 gzip 压缩从 150,403 B 降至 10,345 B。44 篇文章正文与 Markdown 逐篇一致；首页主要组件的坐标和尺寸保持一致。未展示的壁纸预览与唱片封面使用原生图片懒加载；Dock 在每帧内先统一读取位置再更新缩放。Chromium 检查覆盖按需读取、缓存复用、文章直达、源码、前进后退、快速切换、加载失败回退与手机阅读。

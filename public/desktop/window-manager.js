@@ -92,13 +92,26 @@ document.addEventListener('click',event=>{
 
 // Measure fixed button positions, so magnification cannot move its own target.
 const magnifyingDock=document.querySelector('.native-dock');
-const resetDock=()=>magnifyingDock.querySelectorAll('button').forEach(b=>b.style.removeProperty('--dock-scale'));
+let dockFrame=0,dockPointerX=0;
+const dockReducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+const resetDock=()=>{
+  cancelAnimationFrame(dockFrame);dockFrame=0;
+  magnifyingDock.querySelectorAll('button').forEach(b=>b.style.removeProperty('--dock-scale'));
+};
 magnifyingDock.addEventListener('pointermove',event=>{
-  if(event.pointerType==='touch'||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  magnifyingDock.querySelectorAll('button').forEach(button=>{
-    const box=button.getBoundingClientRect();
-    const distance=Math.abs(event.clientX-box.left-box.width/2);
-    button.style.setProperty('--dock-scale',String(1+.25*Math.max(0,1-distance/95)**2));
+  if(event.pointerType==='touch'||dockReducedMotion.matches)return;
+  dockPointerX=event.clientX;
+  if(dockFrame)return;
+  dockFrame=requestAnimationFrame(()=>{
+    dockFrame=0;
+    const buttons=[...magnifyingDock.querySelectorAll('button')];
+    const scales=buttons.map(button=>{
+      const box=button.getBoundingClientRect();
+      const distance=Math.abs(dockPointerX-box.left-box.width/2);
+      return String(1+.25*Math.max(0,1-distance/95)**2);
+    });
+    buttons.forEach((button,i)=>button.style.setProperty('--dock-scale',scales[i]));
   });
 });
 magnifyingDock.addEventListener('pointerleave',resetDock);
+dockReducedMotion.addEventListener('change',resetDock);
