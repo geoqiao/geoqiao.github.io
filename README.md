@@ -72,3 +72,7 @@ sitemap 和静态资源。构建成功不代替线上检查。
 回滚通过新 revert commit 成套恢复已验证的 Config、workflow、站点源码与 escaping 版本，
 不能只回退 pin。先核对期间的代码和 Issue 变化，以及当前内容对旧版本的兼容性；
 代码回滚不会撤销 Issue 编辑。保留成功产物，不覆盖期间的新内容。
+
+## 浏览器支持
+
+开发目标为当前稳定版 Chrome、Edge、Firefox 和 Safari（含 iOS Safari）。文章与基础导航保持静态可读；搜索等增强交互使用渐进增强，新 API 保留必要的轻量回退。实际验证浏览器随改动记录。
