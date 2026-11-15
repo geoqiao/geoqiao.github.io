@@ -46,3 +46,7 @@
 }
 :root[data-theme=dark] .native-dock .dock-label{color:#f4f4f5;text-shadow:0 1px 3px #0008}
 @media(max-width:360px){.mac-native .finder-sidebar button[data-section]{font-size:10px;padding:8px 4px;gap:3px}}
+/* Search focus stays attached to the field, without the global orange outline. */
+#finder-search:focus,#obs-search:focus{outline:none;border-color:#6b94bd;box-shadow:0 0 0 1px #6b94bd55}
+:root[data-theme=dark] #finder-search:focus,:root[data-theme=dark] #obs-search:focus{border-color:#8cb5df;box-shadow:0 0 0 1px #8cb5df55}
+@media(forced-colors:active){#finder-search:focus,#obs-search:focus{outline:1px solid Highlight;outline-offset:1px}}
