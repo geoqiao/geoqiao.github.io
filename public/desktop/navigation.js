@@ -95,6 +95,6 @@ document.addEventListener('click',event=>{
 if(isArchive(initialRoute.path)){
   showArchive(true);
   const row=BLOG.posts.findIndex(p=>p.issueNumber===initialRoute.archiveStart);
-  if(row>=0){selected=row;updateFinder();document.querySelector(`[data-select="${row}"]`)?.scrollIntoView({block:'nearest'});}
+  if(row>=0){document.querySelector(`[data-select="${row}"]`)?.scrollIntoView({block:'nearest'});}
 }
 restoreDesktopRoute();
