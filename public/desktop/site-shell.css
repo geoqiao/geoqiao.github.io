@@ -21,3 +21,12 @@ html,body[data-variant=B]{min-height:100%;height:auto}.mac.mac-native{min-height
 
 /* Archive HTML remains available without JavaScript; Finder owns its live view. */
 .finder-route #route-window{display:none}
+
+@media(min-width:761px){
+ body #reader.obsidian-workspace{position:fixed;inset:auto;left:max(60px,calc((100vw - 1260px)/2));top:64px;margin:0;width:min(1260px,calc(100vw - 120px));height:calc(100dvh - 190px);min-height:360px}
+ #reader .reader-bar{cursor:default;touch-action:none}
+ .mac-native :is(.window,#reader,#route-window):not(.window-active){box-shadow:0 8px 24px #0003}
+ .mac-native .window:not(.window-active) .traffic button{background:#b5b5b5;border-color:#9996}
+ .mac-native .window:not(.window-active) :is(.window-title,.finder-location){color:var(--muted,#888)}
+ .native-dock button[aria-current=true]::before{content:'';position:absolute;bottom:-5px;left:calc(50% - 3px);width:6px;height:6px;border-radius:50%;background:var(--ink,#222)}
+}

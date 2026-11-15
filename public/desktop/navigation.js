@@ -71,6 +71,7 @@ window.addEventListener('popstate',()=>{
   restoreDesktopRoute();
 });
 readingWindow.addEventListener('close',()=>{
+  if(readingWindow.open)return;
   if(BLOG.posts.some(p=>p.url===location.pathname)){
     if(history.state?.desktopArticle)history.back();
     else{history.replaceState(null,'',articleReturnUrl);showArchive(true);}
