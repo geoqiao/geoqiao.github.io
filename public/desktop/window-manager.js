@@ -58,3 +58,47 @@ readerBreakpoint.addEventListener('change',()=>{
   raiseWindow(readingWindow);
 });
 raiseWindow(document.getElementById('native-finder'));
+
+// Window controls share one lifecycle; minimizing preserves the open document.
+readingWindow.querySelector('.reader-back').outerHTML=traffic('reader');
+if(pageWindow){pageWindow.querySelector('.route-lights').outerHTML=traffic('route-window');}
+function restoreReader(){
+  if(!window.readerMinimized)return false;
+  window.readerMinimized=false;
+  if(innerWidth<=760)readingWindow.showModal();else readingWindow.show();
+  raiseWindow(readingWindow);
+  scrollport.focus({preventScroll:true});
+  return true;
+}
+document.addEventListener('click',event=>{
+  const control=event.target.closest('[data-window-close],[data-window-min],[data-window-max]');
+  if(!control)return;
+  const id=control.dataset.windowClose||control.dataset.windowMin||control.dataset.windowMax;
+  if(!['reader','route-window'].includes(id))return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const panel=document.getElementById(id);
+  if(control.hasAttribute('data-window-max')){panel.classList.toggle('maximized');raiseWindow(panel);return;}
+  if(id==='reader'){
+    if(control.hasAttribute('data-window-min')){window.readerMinimized=true;HTMLDialogElement.prototype.close.call(readingWindow);}
+    else readingWindow.close();
+  }else{
+    panel.hidden=true;
+    if(control.hasAttribute('data-window-min')){
+      const button=document.createElement('button');button.className='minimized-page';button.innerHTML='<img class="native-icon" src="/desktop/assets/macos/safari.png" alt=""><span class="dock-label">'+esc(document.title.split(' · ')[0])+'</span>';button.setAttribute('aria-label','Restore '+document.title);const mobileButton=button.cloneNode(true);mobileButton.className='spring-app minimized-page';const restorePage=()=>{panel.hidden=false;raiseWindow(panel);button.remove();mobileButton.remove();};button.onclick=restorePage;mobileButton.onclick=restorePage;document.querySelector('.native-dock').append(button);document.querySelector('.spring-grid').append(mobileButton);
+    }else{history.replaceState(null,'','/');document.title='Geo’s Blog';}
+  }
+  if(innerWidth<=760)showPhoneHome();
+},true);
+
+// Measure fixed button positions, so magnification cannot move its own target.
+const magnifyingDock=document.querySelector('.native-dock');
+const resetDock=()=>magnifyingDock.querySelectorAll('button').forEach(b=>b.style.removeProperty('--dock-scale'));
+magnifyingDock.addEventListener('pointermove',event=>{
+  if(event.pointerType==='touch'||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  magnifyingDock.querySelectorAll('button').forEach(button=>{
+    const box=button.getBoundingClientRect();
+    const distance=Math.abs(event.clientX-box.left-box.width/2);
+    button.style.setProperty('--dock-scale',String(1+.25*Math.max(0,1-distance/95)**2));
+  });
+});
+magnifyingDock.addEventListener('pointerleave',resetDock);

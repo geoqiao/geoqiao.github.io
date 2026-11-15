@@ -1,0 +1,98 @@
+/* One stable Dock footprint; only artwork magnifies around its bottom edge. */
+.mac-native .native-dock>button,.mac-native .native-dock>button:hover,.mac-native .native-dock>button:has(+button:hover),.mac-native .native-dock>button:hover+button{transform:none}
+.mac-native .native-dock>button img.native-icon{width:40px;height:40px;margin:0;transform:scale(var(--dock-scale,1));transform-origin:center bottom;transition:transform .12s ease-out}
+.mac-native .native-dock>button[data-extra-app=pi] img.native-icon{width:34px;height:34px;margin:3px}
+.native-dock .dock-tooltip{display:none}
+.mac-native .native-dock{height:auto;align-items:center}
+.mac-native .native-dock>button{display:flex;align-items:center;justify-content:end;flex-direction:column;flex-shrink:0}
+.obs-group-toggle{font-weight:500!important;color:var(--muted)!important}
+.obs-group-toggle .disclosure{flex:0 0 12px;transition:transform .15s}
+.obs-group-toggle[aria-expanded=false] .disclosure{transform:rotate(-90deg)}
+.obs-group+.obs-group{margin-top:10px}
+.obs-group [hidden]{display:none!important}
+#obs-file-list .obs-group-toggle:focus:not(:focus-visible){outline:none}
+.reader-bar .traffic,.route-toolbar .traffic{display:flex;flex-shrink:0;gap:8px;padding:0 8px}
+#reader .reader-bar .traffic button,.route-toolbar .traffic button{width:12px;height:12px;min-width:12px;padding:0;border-radius:50%;display:grid;place-items:center}
+#reader .traffic button:nth-child(1),.route-toolbar .traffic button:nth-child(1){background:#ff5f57;border:1px solid #e0443e}
+#reader .traffic button:nth-child(2),.route-toolbar .traffic button:nth-child(2){background:#febc2e;border:1px solid #dea123}
+#reader .traffic button:nth-child(3),.route-toolbar .traffic button:nth-child(3){background:#28c840;border:1px solid #1aab29}
+#reader .traffic button span,.route-toolbar .traffic button span{font-size:10px;line-height:10px;color:#0008;opacity:0}
+#reader .traffic:hover span,.route-toolbar .traffic:hover span{opacity:1}
+#reader.maximized,.route-window.maximized{inset:34px 8px 100px!important;width:calc(100% - 16px)!important;height:calc(100dvh - 134px)!important;max-width:none;max-height:none;margin:0}
+.phone-home{display:none!important}
+.latest-widget{background:var(--paper,#fff);color:var(--ink,#222);padding:24px;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.latest-widget>header{display:flex;justify-content:space-between;font-size:13px;font-weight:600}
+.latest-widget>header a{font-size:12px;font-weight:400;color:var(--link);text-decoration:none}
+@media(min-width:761px){
+ .mac-native .springboard{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1080px}
+ .home-widget-rail{display:contents}
+ .spring-widget .spring-note{padding:18px 0}
+ .spring-widget .spring-note>span{font-size:17px}
+ .latest-widget .spring-note{padding:14px 0;gap:6px}
+ .latest-widget .spring-note>span{font-size:15px;line-height:1.55}
+ .latest-widget .widget-excerpt{-webkit-line-clamp:1}
+ .projects-widget,.follow-widget{align-self:stretch}
+ .projects-widget .widget-project{padding:9px 0}
+}
+@media(max-width:760px){
+ .latest-widget{padding:18px;margin:16px 0 24px;border-radius:24px;background:var(--paper)}
+ .latest-widget .spring-note{padding:14px 0;color:var(--ink);text-decoration:none;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line)}
+ .latest-widget .spring-note:last-child{border:0}
+ .latest-widget .spring-note>span{font-size:14px;line-height:1.6;font-weight:500}
+ .latest-widget time{font-size:11px;color:var(--muted)}
+ .mac-native .window .traffic{display:flex;gap:6px;flex-shrink:0;padding:0 4px}
+ .mac-native .window .traffic button{width:12px;height:12px;min-width:12px}
+ .native-finder-toolbar{gap:8px}
+ .native-finder-toolbar .finder-location{min-width:0}
+ #reader .reader-bar .traffic{gap:6px;padding:0 3px}
+ #reader.maximized,.route-window.maximized{inset:34px 0 0!important;width:100%!important;height:calc(100dvh - 34px)!important}
+}
+@media(prefers-reduced-motion:reduce){.mac-native .native-dock>button img.native-icon{transition:none;transform:none}}
+.palette-trigger{display:flex;gap:10px;align-items:center;padding:8px 12px;background:#ffffff35;border:1px solid #ffffff55;border-radius:10px;color:white;font-size:12px}
+.palette-trigger kbd{opacity:.8;font:inherit}
+#search-palette{position:fixed;inset:12vh auto auto 50%;transform:translateX(-50%);margin:0;width:min(900px,calc(100vw - 32px));max-width:none;max-height:80dvh;padding:0;border:1px solid #b6b6b680;border-radius:24px;background:#f7f7f9ed;color:#262626;box-shadow:0 24px 80px #0005,0 1px 4px #0003;backdrop-filter:blur(35px) saturate(120%);font-family:-apple-system,BlinkMacSystemFont,sans-serif;overflow:hidden;overscroll-behavior:contain}
+#search-palette[open]{display:flex;flex-direction:column}
+#search-palette::backdrop{background:#0002;overscroll-behavior:contain;overflow:hidden}
+#search-palette button{color:inherit;cursor:pointer}
+.palette-header{display:flex;align-items:center;gap:12px;padding:18px 22px}
+.palette-header>button{font:34px/1 -apple-system,sans-serif;color:#777!important;padding:0 4px}
+#palette-query{flex:1;width:0;min-width:0;border:0;background:transparent;box-shadow:none;padding:0;font:24px/1.4 -apple-system,sans-serif;color:inherit;outline:none}
+#palette-query:focus{outline:none;box-shadow:none}
+#palette-type{border:0;background:transparent;color:inherit;font:500 14px/1.5 -apple-system,sans-serif;max-width:115px}
+.palette-body{display:grid;grid-template-columns:38% minmax(0,1fr);height:min(480px,58dvh);min-height:0}
+.palette-list{overflow:auto;overscroll-behavior:contain;padding:4px 10px;border-right:1px solid #8883}
+#palette-heading{color:#888;font-size:12px;font-weight:600;margin:0 8px 8px}
+#palette-results>[role=option]{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;cursor:default;min-width:0}
+#palette-results>[aria-selected=true]{background:#8883}
+#palette-results img{width:24px;height:28px;object-fit:contain;flex-shrink:0}
+#palette-results span{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#palette-results small{display:none}
+#palette-preview{padding:12px 16px;overflow:auto;overscroll-behavior:contain}
+.palette-art{height:210px;display:grid;place-items:center;border:1px solid #8883;border-radius:12px;background:#ffffff30}
+.palette-art>img{width:110px;height:110px;object-fit:contain;border-radius:14px}
+.palette-paper{width:124px;height:168px;overflow:hidden;box-shadow:0 2px 6px #0004;border-radius:4px 16px 4px 4px;background:white;color:#333;padding:16px;font-size:6px;line-height:1.8}
+.palette-paper strong{display:block;margin-top:12px;font-size:8px}.palette-paper p{margin-top:14px}.palette-paper small{font-size:5px;letter-spacing:.1em}
+#palette-preview h3{font-size:12px;color:#888;margin:12px 0 6px}#palette-preview dl{font-size:11px;margin:0}#palette-preview dl>div{display:flex;gap:12px;justify-content:space-between;border-bottom:1px solid #8883;padding:6px 0}#palette-preview dt{color:#888;flex-shrink:0}#palette-preview dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.palette-description{font-size:12px;line-height:1.7;color:#777}
+.palette-footer{display:flex;align-items:center;gap:10px;padding:10px 14px;flex-shrink:0}
+#palette-count{margin-right:auto;color:#888;font-size:11px}
+.palette-footer button{border:1px solid #8883;border-radius:20px;padding:8px 12px;font-size:12px;background:#ffffff30}
+.palette-footer kbd{font:11px -apple-system,sans-serif;border:1px solid #8884;border-radius:4px;padding:1px 4px;margin-left:4px}
+#palette-preview-toggle{display:none}#palette-empty{padding:12px;color:#777;font-size:13px}
+:root[data-theme=dark] #search-palette{background:#242426ed;color:#eee;border-color:#ffffff30}
+:root[data-theme=dark] .palette-art,:root[data-theme=dark] .palette-footer button{background:#ffffff08}
+:root[data-theme=dark] .palette-description{color:#aaa}
+@media(max-width:760px){
+ .palette-trigger{font-size:10px;padding:7px;margin-left:auto}.palette-trigger kbd{display:none}.spring-profile>a{display:none}
+ #search-palette{top:8vh;width:calc(100vw - 20px);border-radius:20px;max-height:80dvh}
+ .palette-header{gap:8px;padding:14px 12px}#palette-query{font-size:16px}#palette-type{font-size:11px;max-width:82px}
+ .palette-body{display:block;height:50dvh}.palette-list{height:100%;border:0}#palette-preview{display:none;height:100%}
+ #palette-preview-toggle{display:block}#search-palette.show-preview .palette-list{display:none}#search-palette.show-preview #palette-preview{display:block}
+ .palette-footer{gap:5px;padding:8px}.palette-footer button{font-size:11px;padding:7px 9px}
+}
+@media(max-width:760px){
+ .mac.mac-native{padding-bottom:24px;background-attachment:scroll}
+ .mac-native .social-dock{position:relative;inset:auto;transform:none;width:100%;margin:20px auto 0}
+ .phone-app-open .system-menu-left{visibility:visible}
+}
+@media(max-width:760px){.mac-native .route-window,.mac-native .route-window.maximized{top:40px!important;bottom:0!important;height:calc(100dvh - 40px)!important}}

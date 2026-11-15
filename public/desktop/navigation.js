@@ -8,6 +8,7 @@ if(initialRoute.kind==='post'||isArchive(initialRoute.path))routeWindow?.remove(
 let restoringArticle=false;
 let articleReturnUrl=initialRoute.kind==='post'?'/blog/':location.pathname+location.search;
 let closingReader=false;
+window.readerMinimized=false;
 const nativeReaderClose=readingWindow.close.bind(readingWindow);
 function readerMotion(enter){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return Promise.resolve();
@@ -21,7 +22,7 @@ readingWindow.close=async value=>{
   nativeReaderClose(value);
   closingReader=false;
 };
-readingWindow.addEventListener('cancel',event=>{event.preventDefault();readingWindow.close();});
+readingWindow.addEventListener('cancel',event=>{if(event.defaultPrevented)return;event.preventDefault();readingWindow.close();});
 function showArchive(reset=false){
   routeWindow?.setAttribute('hidden','');
   openNative('finder');
@@ -30,7 +31,8 @@ function showArchive(reset=false){
 }
 window.openArticle=index=>{
   const post=BLOG.posts[index];if(!post)return;
-  const entering=!readingWindow.open;
+  const entering=!readingWindow.open&&!window.readerMinimized;
+  window.readerMinimized=false;
   if(entering&&!restoringArticle)articleReturnUrl=location.pathname+location.search;
   openDesktopArticle(index);
   routeWindow?.setAttribute('hidden','');
@@ -54,6 +56,7 @@ function restoreDesktopRoute(){
     if(legacy)history.replaceState(history.state,'',BLOG.posts[index].url);
     else scrollToArticleHash(location.hash);
   }else{
+    window.readerMinimized=false;
     if(readingWindow.open)readingWindow.close();
     if(isArchive(location.pathname))showArchive();
     else if(location.pathname==='/'){
@@ -71,7 +74,7 @@ window.addEventListener('popstate',()=>{
   restoreDesktopRoute();
 });
 readingWindow.addEventListener('close',()=>{
-  if(readingWindow.open)return;
+  if(readingWindow.open||window.readerMinimized)return;
   if(BLOG.posts.some(p=>p.url===location.pathname)){
     if(history.state?.desktopArticle)history.back();
     else{history.replaceState(null,'',articleReturnUrl);showArchive(true);}

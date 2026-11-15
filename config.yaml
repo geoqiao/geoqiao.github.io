@@ -168,3 +168,14 @@ projects:
     order: 4
     fallback_metadata:
       language: TypeScript
+
+  - slug: boji-club
+    title: Boji Club
+    website: https://boji-club.geoqiao.me/
+    summary: 薄肌俱乐部，把训练经验和常见问题整理成可搜索的健身知识库。
+    image: /assets/images/projects/boji-club.svg
+    links:
+      - name: 访问薄肌俱乐部
+        url: https://boji-club.geoqiao.me/
+    featured: true
+    order: 5
