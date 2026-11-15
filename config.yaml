@@ -43,6 +43,10 @@ profile:
       url: https://github.com/geoqiao
     - name: Twitter/X
       url: https://twitter.com/geoqiao
+    - name: 视频号
+      url: /channels/
+    - name: 抖音
+      url: https://www.douyin.com/user/MS4wLjABAAAAdyqgUdRPLiCRML4eqTzRw1yAD0tC4TMzZtzHAA8CRjAA4AQkhP_sLLiiGADSWdZa
 
 # ============================================
 # About Issue 选择（必填）
