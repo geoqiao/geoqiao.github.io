@@ -50,3 +50,5 @@ html,body[data-variant=B]{min-height:100%;height:auto}.mac.mac-native{min-height
  .mac-native .native-dock{height:auto;min-height:96px;align-items:center;box-sizing:border-box}
  .mac-native .native-dock>button img.native-icon{margin:0;flex-shrink:0}
 }
+
+@media(max-width:760px){.native-finder .finder-tabs{display:none}}
