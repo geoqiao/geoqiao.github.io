@@ -77,12 +77,12 @@ sitemap 和静态资源。构建成功不代替线上检查。
 
 开发目标为当前稳定版 Chrome、Edge、Firefox 和 Safari（含 iOS Safari）。文章与基础导航保持静态可读；搜索等增强交互使用渐进增强，新 API 保留必要的轻量回退。实际验证浏览器随改动记录。
 
-## 桌面首页
+## MacOS 主题
 
-首页使用 Finder 作为文章入口，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/pages/index.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`public/desktop/` 包含桌面交互与独立资源。文章原地址、归档、Atom 和 sitemap 保持现有发布流程。
+首页使用 Finder 作为文章入口，在 Obsidian 式阅读窗口中展示正文、大纲、评论和多标签。`src/layouts/Desktop.astro` 在构建时从同一份 `content/` 与 `renderMarkdown()` 生成数据；`Base.astro` 将归档、标签、项目列表和关于页放进同一桌面窗口。文章直接使用原 `/blog/<slug>/` 地址，刷新与浏览器前进／后退对应当前文章；静态 HTML 保留正文、元数据与原有重定向，Atom 和 sitemap 保持原发布流程。独立项目产品页保留各自品牌设计。
 
-桌面 Finder 单击选择、双击或 Enter 阅读；手机直接点击阅读，底部保留五个主要入口，Paseo／Magpie／Pi 从首页应用入口打开。浏览器 Back 返回桌面。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
+桌面 Finder 单击选择、双击或 Enter 阅读；手机首页使用精选笔记卡片与应用网格，应用打开为全屏窗口，提供明确的返回桌面入口。底部社交 Dock 包含 Twitter/X、抖音、视频号、GitHub。抖音公开主页从已登录创作者后台核实（账号 geoqiao，名称 Geo还没学）；视频号 `/channels/` 展示该账号已发布作品的官方二维码及分享链接，注明扫码进入作品后点头像查看主页。二维码取得于 2026-11-15，对应 T3 Code 与 Paseo 一期。Light／Dark、侧栏、Mermaid、图片与评论在阅读器内可用。工具应用展示个人工作流和相关文章，以交互演示呈现。
 
 Pi 图标取自 pi.dev 的官方 SVG，Dock 外框按其他图标的可见尺寸留白。MyGo 使用从本机应用下载的 124.67 秒 MP3，打开播放器尝试播放，也提供独立音频链接。网页播放与解码检查通过；用户此前在 Ego Lite 未听到声音，设备实际听感仍待确认。
 
-发布前验证：Astro check、8 个现有测试、全站构建及站内链接检查；Chrome 桌面和 390px 手机视口覆盖 Finder、阅读与返回、应用入口、深浅主题、图表和播放状态。无 JavaScript 时首页提供文章链接列表。
+发布前验证：Astro check、8 个现有测试、全站构建及站内链接检查；Chrome 桌面和 320／390px 手机视口覆盖首页、归档、标签、关于、项目列表和视频号入口；验收原文章直达、阅读与返回、应用入口和深浅主题。无 JavaScript 时首页提供文章链接列表，文章原地址仍展示静态正文。
