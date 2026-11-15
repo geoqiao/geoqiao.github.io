@@ -18,7 +18,7 @@ const desktopProjects = (await getProjects()).filter(p => p.featured).map(p => (
   title:p.title, summary:p.summary, url:p.path, image:p.image,
 }));
 const blogData = { posts:desktopPosts, projects:desktopProjects, total:posts.length, featured:featuredPosts };
-const styles = ['style','macos','desktop-apps','reader','obsidian-workspace','native-experiences','site-shell'];
+const styles = ['style','macos','desktop-apps','reader','obsidian-workspace','native-experiences','site-shell','home-widgets'];
 const scripts = ['app','reader','track','desktop-apps','obsidian-workspace','native-experiences','site-shell','window-manager','navigation'];
 ---
 <!doctype html>

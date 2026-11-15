@@ -19,12 +19,12 @@ raiseWindow=function(panel){
   activeWindow=panel;
   document.querySelectorAll('.native-dock button').forEach(b=>b.removeAttribute('aria-current'));
   const dock=appDock(panel);dock?.setAttribute('aria-current','true');dock?.classList.add('running');
-  const name=panel.id==='reader'?'Obsidian':({finder:'访达',safari:'Safari',mygo:'MyGo Music',paseo:'Paseo',magpie:'Magpie',pi:'Pi',preferences:'系统设置',note:'备忘录',terminal:'终端'})[panel.id.replace('native-','')]||'Geo';
+  const name=panel.id==='reader'?'Obsidian':({finder:'Finder',safari:'Safari',mygo:'MyGo Music',paseo:'Paseo',magpie:'Magpie',pi:'Pi',preferences:'Settings',note:'Notes',terminal:'Terminal'})[panel.id.replace('native-','')]||'Geo';
   const label=document.querySelector('.app-menu');if(label)label.textContent=name;
 };
 function activateNextWindow(){
   const next=managedWindows().filter(windowVisible).sort((a,b)=>Number(b.style.zIndex)-Number(a.style.zIndex))[0];
-  if(next){raiseWindow(next);next.tabIndex=-1;next.focus({preventScroll:true});}
+  if(next){raiseWindow(next);next.tabIndex=-1;next.focus({preventScroll:true});}else{activeWindow=null;const label=document.querySelector('.app-menu');if(label)label.textContent='Geo’s Blog';}
 }
 desktopSurface.addEventListener('pointerdown',event=>{const panel=event.target.closest('.window,#reader,#route-window');if(panel)raiseWindow(panel);},true);
 desktopSurface.addEventListener('focusin',event=>{const panel=event.target.closest('.window,#reader,#route-window');if(panel)raiseWindow(panel);});
