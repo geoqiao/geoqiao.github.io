@@ -1,12 +1,13 @@
 // Reading study: article identity and comments stay bound to the source blog.
 let appearance='system',readingPost=null,returnFocus=null,commentObserver=null,commentTimeout=null;
+try{const saved=localStorage.getItem('geo-theme');if(['light','dark'].includes(saved))appearance=saved;}catch{}
 const systemTheme=matchMedia('(prefers-color-scheme: dark)');
 const readingWindow=document.getElementById('reader');
 const scrollport=readingWindow.querySelector('.reader-scroll');
 const outline=document.getElementById('outline-links');
 let headings=[];
 window.syncAppearance=()=>{const dark=appearance==='dark'||appearance==='system'&&systemTheme.matches;document.documentElement.dataset.theme=dark?'dark':'light';document.documentElement.style.colorScheme=dark?'dark':'light';document.querySelectorAll('.theme-picker').forEach(s=>s.value=appearance);const frame=document.querySelector('#discussion-embed iframe');frame?.contentWindow?.postMessage({type:'set-theme',theme:dark?'photon-dark':'github-light'},'https://utteranc.es');};
-window.setAppearance=value=>{appearance=value;window.syncAppearance();};
+window.setAppearance=value=>{appearance=value;try{if(value==='system')localStorage.removeItem('geo-theme');else localStorage.setItem('geo-theme',value);}catch{}window.syncAppearance();};
 systemTheme.addEventListener('change',window.syncAppearance);
 document.addEventListener('change',e=>{if(e.target.matches('.theme-picker'))window.setAppearance(e.target.value);});
 window.syncAppearance();
