@@ -50,3 +50,26 @@ window.addEventListener('keydown',resumeBackgroundMusic,true);
 music.autoplay=true;
 music.preload='auto';
 resumeBackgroundMusic();
+
+// Keep the Dock focused on browsing, reading, favourite apps and settings.
+const mainDock=document.querySelector('.native-dock');
+const dockGroups=[
+  [['native','writing','访达'],['extra','obsidian','文章'],['extra','mygo','音乐']],
+  [['extra','paseo','Paseo'],['extra','magpie','Magpie'],['extra','pi','Pi']],
+  [['native','preferences','设置']]
+];
+const dockItems=dockGroups.map(group=>group.map(([kind,id,label])=>{
+  const button=mainDock.querySelector(`[data-${kind}-app="${id}"]`);
+  button.setAttribute('aria-label',label==='文章'?'Obsidian · 阅读文章':label==='音乐'?'MyGo Music · 音乐':label);
+  button.insertAdjacentHTML('beforeend',`<span class="dock-label">${label}</span>`);
+  return button;
+}));
+mainDock.replaceChildren();
+dockItems.forEach((items,index)=>{
+  if(index){const divider=document.createElement('span');divider.className='dock-separator';divider.setAttribute('aria-hidden','true');mainDock.append(divider);}
+  mainDock.append(...items);
+});
+document.querySelector('#native-finder').addEventListener('click',event=>{
+  if(!event.target.matches('.finder-list,.finder-body'))return;
+  selected=-1;projectSelected=-1;updateFinder();
+});
