@@ -88,3 +88,14 @@ document.addEventListener('click',event=>{
 });
 
 document.querySelector('.app-menu').textContent='Geo’s Blog';
+
+// Phones use one switchable notes widget, leaving room for the app grid.
+const mobileNotesTabs=document.createElement('nav');
+mobileNotesTabs.className='mobile-notes-tabs';mobileNotesTabs.setAttribute('role','tablist');mobileNotesTabs.setAttribute('aria-label','Home articles');
+mobileNotesTabs.innerHTML='<button role="tab" data-mobile-notes="featured" aria-selected="true" aria-controls="home-featured">Featured</button><button role="tab" data-mobile-notes="latest" aria-selected="false" aria-controls="home-latest" tabindex="-1">Latest</button><a href="/blog/">All Articles ›</a>';
+document.querySelector('.spring-widget').id='home-featured';latestWidget.id='home-latest';
+document.querySelector('.spring-widget').before(mobileNotesTabs);
+const homeBoard=document.querySelector('.springboard');homeBoard.dataset.mobileNotes='featured';
+function selectMobileNotes(value){homeBoard.dataset.mobileNotes=value;mobileNotesTabs.querySelectorAll('button').forEach(b=>{const active=b.dataset.mobileNotes===value;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});}
+mobileNotesTabs.addEventListener('click',event=>{const b=event.target.closest('button');if(b)selectMobileNotes(b.dataset.mobileNotes);});
+mobileNotesTabs.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const next=event.key==='Home'?'featured':event.key==='End'?'latest':homeBoard.dataset.mobileNotes==='featured'?'latest':'featured';selectMobileNotes(next);mobileNotesTabs.querySelector(`[data-mobile-notes="${next}"]`).focus();});
