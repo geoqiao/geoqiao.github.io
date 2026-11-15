@@ -34,7 +34,7 @@ function openPalette(){
  if(searchPalette.open)return;
  paletteQuery.value='';paletteType.value='all';searchPalette.classList.remove('show-preview');document.getElementById('palette-preview-toggle').setAttribute('aria-expanded','false');drawPalette();searchPalette.showModal();
 }
-function openPaletteResult(){const item=paletteMatches[paletteSelected];if(!item)return;searchPalette.close();item.open();}
+function openPaletteResult(){const item=paletteMatches[paletteSelected];if(!item)return;searchPalette.close();if(item.type==='App'&&item.title!=='Obsidian'&&innerWidth<=760&&readingWindow.open)readingWindow.querySelector('[data-window-min="reader"]').click();item.open();}
 paletteQuery.addEventListener('input',drawPalette);paletteType.addEventListener('change',drawPalette);
 paletteResults.addEventListener('click',e=>{const row=e.target.closest('[data-palette-result]');if(!row)return;paletteSelected=Number(row.dataset.paletteResult);palettePreview();paletteQuery.focus({preventScroll:true});});
 paletteResults.addEventListener('dblclick',openPaletteResult);
