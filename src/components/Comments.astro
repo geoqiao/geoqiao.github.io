@@ -10,7 +10,7 @@ interface Props {
 const { issueNumber } = Astro.props;
 ---
 <section class="comments-section" aria-labelledby="comments-title">
-  <div class="section-heading"><h2 id="comments-title">Conversation</h2><a href={`https://github.com/${site.repo}/issues/${issueNumber}`}>GitHub</a></div>
+  <div class="section-heading"><h2 id="comments-title">Conversation</h2><a href={`https://github.com/${site.repo}/issues/${issueNumber}`}>GitHub ↗</a></div>
   <p class="muted">Have something to add? Join the conversation on this Issue.</p>
   <div id="comments-container" data-issue-number={issueNumber} data-comments-repo={site.comments.repo} data-source-repo={site.repo} data-comments-theme={commentsTheme} data-comments-theme-mode={commentsThemeMode} data-blog-theme-default="light">
     <p class="comments-loading" role="status">Loading comments…</p>
