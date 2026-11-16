@@ -144,6 +144,27 @@ class GeoThemeBrowserTests(unittest.TestCase):
             expect(page.locator("main")).to_be_visible()
             self.assertEqual(errors, [])
 
+    def test_manual_toggle_back_to_system_resumes_following(self):
+        for initial in ("light", "dark"):
+            other = "dark" if initial == "light" else "light"
+            with self.subTest(initial=initial), self.page(color_scheme=initial) as page:
+                toggle = page.get_by_role("button", name="Dark mode", exact=True)
+                toggle.click()
+                expect(page.locator("html")).to_have_attribute("data-theme", other)
+                self.assertEqual(page.evaluate("localStorage.getItem('geo-theme')"), other)
+                # A system change alone must preserve the explicit override.
+                page.emulate_media(color_scheme=other)
+                page.emulate_media(color_scheme=initial)
+                expect(page.locator("html")).to_have_attribute("data-theme", other)
+                toggle.click()
+                self.assertIsNone(page.evaluate("localStorage.getItem('geo-theme')"))
+                page.emulate_media(color_scheme=other)
+                expect(page.locator("html")).to_have_attribute("data-theme", other)
+                page.reload()
+                expect(page.locator("html")).to_have_attribute("data-theme", other)
+                page.emulate_media(color_scheme=initial)
+                expect(page.locator("html")).to_have_attribute("data-theme", initial)
+
     def test_search_focus_across_navigation_breakpoint(self):
         with self.page() as page:
             page.goto(self.origin + "/blog/")
