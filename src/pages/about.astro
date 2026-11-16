@@ -25,7 +25,7 @@ const jsonLd = {
   <div class="post-content about-story" set:html={body} />
   {featuredProjects.length > 0 && (
     <section class="about-works" aria-labelledby="projects-title">
-      <div class="section-heading"><h2 id="projects-title">Also building</h2><a class="more-projects" href="/projects/">All projects</a></div>
+      <div class="section-heading"><h2 id="projects-title">Also building</h2><a class="more-projects" href="/projects/">All projects <span aria-hidden="true">↗</span></a></div>
       <div class="about-projects">{featuredProjects.map((project) => <ProjectEntry project={project} compact />)}</div>
     </section>
   )}
