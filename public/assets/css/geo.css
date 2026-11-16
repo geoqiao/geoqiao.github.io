@@ -28,10 +28,10 @@
   font-display: swap;
 }
 :root {
-  --canvas: #faf9f6;
-  --paper: #f1efeb;
-  --rail: #f1efeb;
-  --line: #d9d5d0;
+  --canvas: #ffffff;
+  --paper: #f6f6f7;
+  --rail: #f6f6f7;
+  --line: #dedee2;
   --ink: #292725;
   --muted: #6b6863;
   --accent: #a72f6a;

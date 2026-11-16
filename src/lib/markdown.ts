@@ -1,3 +1,5 @@
+import { resolve, sep } from "node:path";
+import { imageSizeFromFile } from "image-size/fromFile";
 import type { Element, ElementContent, Root } from "hast";
 import { toString } from "hast-util-to-string";
 import rehypeRaw from "rehype-raw";
@@ -101,6 +103,38 @@ function linksAndImages() {
   };
 }
 
+/** Reserve space from the repository's immutable attachments, without fetching remote URLs. */
+function imageDimensions() {
+  return async (tree: Root) => {
+    const images: Element[] = [];
+    visit(tree, "element", node => {
+      if (node.tagName === "img" && !(node.properties.width && node.properties.height)) images.push(node);
+    });
+    await Promise.all(images.map(async node => {
+      const src = String(node.properties.src ?? "");
+      const attachment = /^https:\/\/raw\.githubusercontent\.com\/geoqiao\/geoqiao\.github\.io\/[a-f0-9]{40}\/(assets\/(?:issues|charts)\/[^?#]+)$/.exec(src);
+      const publicAsset = src.startsWith("/assets/") && !src.includes("?") && !src.includes("#");
+      if (!attachment && !publicAsset) return;
+      const root = resolve(attachment ? "assets" : "public");
+      const relative = attachment ? attachment[1].slice("assets/".length) : src.slice(1);
+      const file = resolve(root, decodeURIComponent(relative));
+      if (!file.startsWith(root + sep)) return;
+      try {
+        const size = await imageSizeFromFile(file);
+        const rotated = size.orientation && size.orientation >= 5;
+        const width = rotated ? size.height : size.width;
+        const height = rotated ? size.width : size.height;
+        const givenWidth = Number(node.properties.width);
+        const givenHeight = Number(node.properties.height);
+        node.properties.width = givenWidth > 0 ? givenWidth : givenHeight > 0 ? Math.round(givenHeight * width / height) : width;
+        node.properties.height = givenHeight > 0 ? givenHeight : givenWidth > 0 ? Math.round(givenWidth * height / width) : height;
+      } catch (error) {
+        console.warn(`Cannot read image dimensions for ${src}: ${error}`);
+      }
+    }));
+  };
+}
+
 /** A wide table scrolls inside its own keyboard-focusable region instead of being cut off. */
 function scrollableTables() {
   return (tree: Root) => {
@@ -188,6 +222,7 @@ function createProcessor(drawDiagrams: boolean) {
     .use(taskListText)
     .use(rehypeSanitize, schema)
     .use(linksAndImages)
+    .use(imageDimensions)
     .use(scrollableTables)
     .use(diagrams, { draw: drawDiagrams })
     .use(syntax)
