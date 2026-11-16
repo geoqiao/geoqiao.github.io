@@ -86,3 +86,12 @@ test("a table scrolls inside a focusable region", async () => {
   assert.match(html, /<div class="table-scroll" role="region" tabindex="0" aria-label="Table, scroll horizontally"><table>/);
   assert.match(html, /<td align="right">20<\/td><\/tr>\s*<\/tbody>\s*<\/table><\/div>/);
 });
+
+test("repository images reserve space without changing their URLs or authored sizing", async () => {
+  const src = "https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/2716e271eb7a86ade616ba4bb0e237bd454709e4/assets/issues/73/aa0e2e6f2ff80458.png";
+  const html = await renderMarkdown(`![screenshot](${src})\n\n<img src="/assets/images/avatar.png" width="128">\n\n<img src="/assets/images/avatar.png" width="80" height="60">`);
+  assert.ok(html.includes(`src="${src}"`));
+  assert.match(html, /width="1840" height="1200"/);
+  assert.match(html, /width="128"[^>]*height="128"/);
+  assert.match(html, /width="80" height="60"/);
+});

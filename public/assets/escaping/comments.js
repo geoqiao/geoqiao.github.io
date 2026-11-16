@@ -5,158 +5,88 @@
     if (!container || container.dataset.commentsInitialized === "true") return;
     container.dataset.commentsInitialized = "true";
 
-    var loadingMsg = container.querySelector(".comments-loading");
-    var commentsRepo = container.dataset.commentsRepo;
-    var issueNumber = container.dataset.issueNumber;
-    var sourceRepo = container.dataset.sourceRepo;
-    var commentsTheme = container.dataset.commentsTheme;
-    var commentsThemeMode = container.dataset.commentsThemeMode;
-    var defaultBlogTheme = container.dataset.blogThemeDefault || "light";
+    function loadComments() {
+        var loadingMsg = container.querySelector(".comments-loading");
+        var commentsRepo = container.dataset.commentsRepo;
+        var issueNumber = container.dataset.issueNumber;
+        var sourceRepo = container.dataset.sourceRepo;
+        var settled = false;
+        var timer;
+        var themeObserver;
 
-    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    var isWebKit =
-        /AppleWebKit/.test(navigator.userAgent) &&
-        !/Chrome|CriOS/.test(navigator.userAgent);
-    var LIGHT_THEME = "github-light";
-    var DARK_THEME = "photon-dark";
-
-    function getCurrentBlogTheme() {
-        return (
-            document.documentElement.getAttribute("data-theme") || defaultBlogTheme
-        );
-    }
-
-    function getUtterancesTheme() {
-        if (commentsThemeMode === "auto") {
-            return getCurrentBlogTheme() === "dark" ? DARK_THEME : LIGHT_THEME;
+        function theme() {
+            if (container.dataset.commentsThemeMode !== "auto") return container.dataset.commentsTheme;
+            return document.documentElement.getAttribute("data-theme") === "dark" ? "photon-dark" : "github-light";
         }
-        return commentsTheme;
-    }
 
-    function updateUtterancesTheme() {
-        var iframe = container.querySelector("iframe");
-        if (iframe && iframe.contentWindow) {
-            iframe.contentWindow.postMessage(
-                { type: "set-theme", theme: getUtterancesTheme() },
-                "https://utteranc.es"
-            );
+        function settle(failed) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            if (!loadingMsg) return;
+            if (!failed) {
+                loadingMsg.hidden = true;
+                return;
+            }
+            loadingMsg.textContent = container.dataset.unavailableText || "Comments may not be available. Your network or browser privacy settings may block third-party content.";
+            var link = document.createElement("a");
+            link.href = "https://github.com/" + sourceRepo + "/issues/" + issueNumber;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.textContent = container.dataset.issueLinkText || "View or add comment on GitHub →";
+            loadingMsg.append(document.createElement("br"), link);
+            loadingMsg.className = "comments-error";
         }
-    }
 
-    // Utterances injects a lazy iframe. Safari/WebKit may never load it when
-    // the parent initially has zero height, so remove that attribute both at
-    // insertion time and from subsequently-added descendants.
-    var originalInsertAdjacentHTML = Element.prototype.insertAdjacentHTML;
-    Element.prototype.insertAdjacentHTML = function (position, text) {
-        if (
-            typeof text === "string" &&
-            text.indexOf("<iframe") !== -1 &&
-            text.indexOf('loading="lazy"') !== -1
-        ) {
-            text = text.replace(/loading="lazy"/g, "");
-        }
-        return originalInsertAdjacentHTML.call(this, position, text);
-    };
-
-    var lazyObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            mutation.addedNodes.forEach(function (node) {
-                if (node.nodeType !== 1) return;
-                if (
-                    node.tagName === "IFRAME" &&
-                    node.getAttribute("loading") === "lazy"
-                ) {
-                    node.removeAttribute("loading");
-                }
-                var iframes = node.querySelectorAll
-                    ? node.querySelectorAll('iframe[loading="lazy"]')
-                    : [];
-                for (var i = 0; i < iframes.length; i++) {
-                    iframes[i].removeAttribute("loading");
-                }
-            });
+        // Load only after approaching the comments. Remove iframe lazy loading
+        // inside this container to avoid WebKit's zero-height embed deadlock.
+        var frameObserver = new MutationObserver(function () {
+            var iframe = container.querySelector("iframe");
+            if (!iframe) return;
+            iframe.removeAttribute("loading");
+            frameObserver.disconnect();
         });
-    });
-    lazyObserver.observe(container, { childList: true, subtree: true });
+        frameObserver.observe(container, { childList: true, subtree: true });
 
-    var utterancesScript = document.createElement("script");
-    utterancesScript.src = "https://utteranc.es/client.js";
-    utterancesScript.setAttribute("repo", commentsRepo);
-    utterancesScript.setAttribute("issue-number", issueNumber);
-    utterancesScript.setAttribute("theme", getUtterancesTheme());
-    utterancesScript.async = true;
-
-    var checkInterval;
-    var checkCount = 0;
-    var resizeReceived = false;
-
-    function showError() {
-        if (!loadingMsg) return;
-        loadingMsg.textContent =
-            container.dataset.unavailableText ||
-            "Comments may not be available. Your network or browser privacy settings may block third-party content.";
-        var link = document.createElement("a");
-        link.href =
-            "https://github.com/" + sourceRepo + "/issues/" + issueNumber;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.textContent =
-            container.dataset.issueLinkText || "View or add comment on GitHub →";
-        loadingMsg.appendChild(document.createElement("br"));
-        loadingMsg.appendChild(link);
-        loadingMsg.className = "comments-error";
-    }
-
-    function checkIframe() {
-        checkCount++;
-        var maxChecks = isIOS || isSafari || isWebKit ? 100 : 75;
-        if (checkCount > maxChecks) {
-            clearInterval(checkInterval);
-            showError();
-        }
-    }
-
-    utterancesScript.onload = function () {
-        checkInterval = setInterval(checkIframe, 200);
-        if (commentsThemeMode === "auto") {
-            var themeObserver = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    if (mutation.attributeName === "data-theme") {
-                        updateUtterancesTheme();
-                    }
-                });
+        if (container.dataset.commentsThemeMode === "auto") {
+            themeObserver = new MutationObserver(function () {
+                var iframe = container.querySelector("iframe");
+                if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage({ type: "set-theme", theme: theme() }, "https://utteranc.es");
             });
-            themeObserver.observe(document.documentElement, { attributes: true });
+            themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
         }
-    };
 
-    utterancesScript.onerror = function () {
-        clearInterval(checkInterval);
-        showError();
-    };
+        window.addEventListener("message", function (event) {
+            if (event.origin !== "https://utteranc.es") return;
+            var iframe = container.querySelector("iframe");
+            if (!iframe || event.source !== iframe.contentWindow || !event.data) return;
+            if (event.data.type === "resize") {
+                settle(false);
+                // A slow embed can still recover after the timeout message.
+                if (loadingMsg) loadingMsg.hidden = true;
+            } else if (event.data.type === "error") settle(true);
+        });
 
-    window.addEventListener("message", function (event) {
-        if (event.origin !== "https://utteranc.es") return;
-        var iframe = container.querySelector("iframe");
-        if (!iframe || event.source !== iframe.contentWindow) return;
-        if (!event.data) return;
+        var script = document.createElement("script");
+        script.src = "https://utteranc.es/client.js";
+        script.setAttribute("repo", commentsRepo);
+        script.setAttribute("issue-number", issueNumber);
+        script.setAttribute("theme", theme());
+        script.async = true;
+        script.onerror = function () { settle(true); frameObserver.disconnect(); themeObserver?.disconnect(); };
+        timer = setTimeout(function () { settle(true); }, 20000);
+        container.appendChild(script);
+    }
 
-        if (event.data.type === "resize") {
-            resizeReceived = true;
-            if (loadingMsg) loadingMsg.style.display = "none";
-            clearInterval(checkInterval);
-        } else if (event.data.type === "error") {
-            resizeReceived = true;
-            clearInterval(checkInterval);
-            showError();
-        }
-    });
-
-    container.appendChild(utterancesScript);
-
-    setTimeout(function () {
-        clearInterval(checkInterval);
-        if (!resizeReceived && loadingMsg) showError();
-    }, 20000);
+    if ("IntersectionObserver" in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            if (entries.some(function (entry) { return entry.isIntersecting; })) {
+                observer.disconnect();
+                loadComments();
+            }
+        }, { rootMargin: "300px 0px" });
+        observer.observe(container);
+    } else {
+        loadComments();
+    }
 })();
