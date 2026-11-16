@@ -16,9 +16,13 @@
     if (!choice) setAppearance(system.matches ? "dark" : "light");
   });
   themeToggle.addEventListener("click", () => {
-    choice = root.dataset.theme === "dark" ? "light" : "dark";
-    setAppearance(choice);
-    try { localStorage.setItem("geo-theme", choice); } catch { /* Keep the in-memory choice. */ }
+    const target = root.dataset.theme === "dark" ? "light" : "dark";
+    choice = target === (system.matches ? "dark" : "light") ? null : target;
+    setAppearance(target);
+    try {
+      if (choice) localStorage.setItem("geo-theme", choice);
+      else localStorage.removeItem("geo-theme");
+    } catch { /* Keep the in-memory choice. */ }
   });
   themeToggle.hidden = false;
 
