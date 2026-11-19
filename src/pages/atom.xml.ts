@@ -17,6 +17,7 @@ function attribute(value: string): string {
 /** Every Blog post, newest first, with its full text (RFC 4287). */
 export const GET: APIRoute = async () => {
   const self = absolute("/atom.xml");
+  const icon = site.profile.avatar ? absolute(site.profile.avatar) : null;
   // The feed's time is the latest post update, so an unchanged Blog gives an unchanged feed.
   const updated = posts.map((post) => post.updatedAt).sort().at(-1) ?? new Date().toISOString().replace(/\.\d+Z$/, "Z");
   const entries = await Promise.all(
@@ -36,6 +37,7 @@ export const GET: APIRoute = async () => {
     `<id>${text(site.url)}</id><title>${text(site.title)}</title>` +
     `<link rel="self" type="application/atom+xml" href="${attribute(self)}" />` +
     `<link rel="alternate" type="text/html" href="${attribute(site.url)}" />` +
+    (icon ? `<icon>${text(icon)}</icon>` : "") +
     `<author><name>${text(site.author)}</name></author>` +
     (site.description ? `<subtitle>${text(site.description)}</subtitle>` : "") +
     `<updated>${updated}</updated>${entries.join("")}</feed>`;

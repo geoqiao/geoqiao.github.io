@@ -10,5 +10,9 @@ export const showPoweredBy = true;
 export const commentsTheme = "github-light";
 export const commentsThemeMode: "auto" | "fixed" = "auto";
 
-/** Projects whose deck card uses /assets/images/projects/<slug>.webp as its cover. */
-export const deckCovers = ["pi-tools", "escaping", "md2xarticle", "paseo-stuff"];
+/** Bespoke 4:3 brand cover artworks for homepage deck cards; unlisted projects fall back to project.image. */
+export const deckCovers: Record<string, string> = {
+  escaping: "/assets/images/projects/cover-escaping.svg",
+  md2xarticle: "/assets/images/projects/cover-md2xarticle.svg",
+  "boji-club": "/assets/images/projects/cover-boji-club.svg",
+};

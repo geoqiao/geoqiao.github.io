@@ -20,6 +20,7 @@ interface Props {
 }
 
 const { kind = "page", title = site.title, description = site.description, path, section, jsonLd, titleFont } = Astro.props;
+const homeNavigation = site.navigation.filter((item) => item.url !== "/" && item.url !== "/atom.xml");
 const titleFontHref = titleFont && `/assets/fonts/title/${titleFont}.woff2`;
 const canonical = path ? absolute(path) : null;
 const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
@@ -56,6 +57,7 @@ const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url
   {canonical && <meta name="twitter:url" content={canonical}>}
   {googleSearchConsole && <meta name="google-site-verification" content={googleSearchConsole}>}
   <link rel="icon" href={site.profile.avatar || "/assets/images/favicon.png"}>
+  <link rel="apple-touch-icon" href={site.profile.avatar || "/assets/images/favicon.png"}>
   <link rel="alternate" type="application/atom+xml" title={site.title} href="/atom.xml">
   <link rel="preload" href="/assets/fonts/jetbrains-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
   <script is:inline set:html={appearanceScript}></script>
@@ -84,7 +86,14 @@ const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url
   <a class="skip-link" href="#main-content" lang="en">Skip to main content</a>
   {kind === "home" ? (
     <header class="home-tools" lang="en">
-      <HeaderControls />
+      {homeNavigation.length > 0 && (
+        <nav class="home-nav" aria-label="Main navigation">
+          {homeNavigation.map((item) => (
+            <a href={item.url}>{item.name}</a>
+          ))}
+        </nav>
+      )}
+      <div class="header-controls"><HeaderControls /></div>
     </header>
   ) : (
     <header class="site-header" lang="en">

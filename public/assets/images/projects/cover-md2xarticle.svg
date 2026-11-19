@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="0" x2="720" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1377FA"/>
+      <stop offset="100%" stop-color="#0654C4"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="42%" r="52%">
+      <stop offset="0%" stop-color="#6DB0FF" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#0654C4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="260" y="100" width="280" height="310" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#032A6B" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#halo)"/>
+  <rect x="44" y="44" width="712" height="512" rx="22" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="1.5"/>
+  <g filter="url(#shadow)">
+    <path d="M318 124h112l78 78v178a22 22 0 0 1-22 22H318a22 22 0 0 1-22-22V146a22 22 0 0 1 22-22Z" fill="#FFFFFF"/>
+    <path d="M430 124v56a22 22 0 0 0 22 22h56l-78-78Z" fill="#B8D7FC"/>
+    <path d="M374 238v96M426 238v96M352 268h96M352 308h96" stroke="#096BEA" stroke-width="20" stroke-linecap="round"/>
+  </g>
+  <text x="400" y="468" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="600" letter-spacing="3.5" fill="#FFFFFF" fill-opacity="0.82">MARKDOWN → X ARTICLE</text>
+</svg>

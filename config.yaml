@@ -124,16 +124,6 @@ redirects:
 # （每个项目需要 src/project-pages/<slug>.html）
 # ============================================
 projects:
-  - slug: pi-tools
-    title: pi-tools
-    repository: geoqiao/pi-tools
-    summary: 为 Pi 提供结构化提问与本地 AI 用量报告，支持 Paseo 等 RPC 客户端。
-    image: /assets/images/projects/pi-tools-logo.webp
-    featured: true
-    order: 1
-    fallback_metadata:
-      language: TypeScript
-
   - slug: escaping
     title: escaping
     repository: geoqiao/escaping
@@ -143,7 +133,7 @@ projects:
       - name: 访问网站
         url: https://geoqiao.me/
     featured: true
-    order: 2
+    order: 1
     fallback_metadata:
       language: Python
       topics: [blog]
@@ -157,17 +147,7 @@ projects:
       - name: 打开编辑器
         url: https://md2xarticle.com/
     featured: true
-    order: 3
-
-  - slug: paseo-stuff
-    title: paseo-stuff
-    repository: geoqiao/paseo-stuff
-    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
-    image: /assets/images/projects/paseo-stuff-logo.svg
-    featured: true
-    order: 4
-    fallback_metadata:
-      language: TypeScript
+    order: 2
 
   - slug: boji-club
     title: Boji Club
@@ -178,4 +158,24 @@ projects:
       - name: 访问薄肌俱乐部
         url: https://boji-club.geoqiao.me/
     featured: true
+    order: 3
+
+  - slug: pi-tools
+    title: pi-tools
+    repository: geoqiao/pi-tools
+    summary: 为 Pi 提供结构化提问与本地 AI 用量报告，支持 Paseo 等 RPC 客户端。
+    image: /assets/images/projects/pi-tools-logo.webp
+    featured: false
+    order: 4
+    fallback_metadata:
+      language: TypeScript
+
+  - slug: paseo-stuff
+    title: paseo-stuff
+    repository: geoqiao/paseo-stuff
+    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
+    image: /assets/images/projects/paseo-stuff-logo.svg
+    featured: false
     order: 5
+    fallback_metadata:
+      language: TypeScript

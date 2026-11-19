@@ -6,11 +6,14 @@
   font-display: swap;
 }
 .home { position: relative; isolation: isolate; --stage-width: 1040px; --hand: "Shantell Sans", cursive; }
-.home-tools { display: flex; justify-content: flex-end; gap: 4px; width: min(var(--reading-width), calc(100% - 48px)); height: 44px; margin: 24px auto 0; }
+.home-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(var(--reading-width), calc(100% - 48px)); min-height: 44px; margin: 24px auto 0; }
+.home-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 22px; min-width: 0; }
+.home-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); font-size: .875rem; line-height: 1.5; transition: color 160ms ease; }
+.home-nav a:hover { color: var(--ink); }
 .home-tools :is(.search-toggle, .theme-toggle) { flex: 0 0 44px; width: 44px; height: 44px; margin: 0; padding: 0; color: var(--muted); }
 .home-tools :is(.search-toggle, .theme-toggle):hover { color: var(--accent); background: none; }
 @media (pointer: fine) {
-  .home-tools { align-items: center; gap: 0; }
+  .home-nav a { min-height: 36px; }
   .home-tools :is(.search-toggle, .theme-toggle) { flex-basis: 36px; width: 36px; height: 36px; }
 }
 .home .site-surface { padding-top: 60px; }
@@ -110,6 +113,36 @@
 .deck-card:focus-visible { outline-offset: 5px; }
 .deck-cover { display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 8px; background: var(--feature); }
 .deck-cover img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.deck-cover--logo {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--canvas);
+  border: 1px solid color-mix(in oklab, var(--line) 72%, transparent);
+}
+.deck-cover--logo img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 6px 16px rgb(41 39 37 / .08));
+}
+:root[data-theme="dark"] .deck-cover--logo {
+  background: #212126;
+  border-color: color-mix(in oklab, var(--line) 85%, transparent);
+}
+:root[data-theme="dark"] .deck-cover--logo img {
+  filter: drop-shadow(0 8px 20px rgb(0 0 0 / .38));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .deck-cover--logo {
+    background: #212126;
+    border-color: color-mix(in oklab, var(--line) 85%, transparent);
+  }
+  :root:not([data-theme]) .deck-cover--logo img {
+    filter: drop-shadow(0 8px 20px rgb(0 0 0 / .38));
+  }
+}
 .deck-placeholder { display: grid; height: 100%; place-items: center; font: 400 2rem var(--display); }
 .deck-meta { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 2px 8px; min-height: 60px; padding: 14px 7px 8px; }
 .deck-title { font: 400 1.75rem/1.15 var(--display); letter-spacing: -.025em; overflow-wrap: anywhere; }
@@ -120,8 +153,8 @@
 .home .site-footer { margin-top: 100px; padding-bottom: 44px; }
 
 /* Only the successfully wired desktop controller opts into the fan. A card lifts on hover or keyboard focus and opens on one click. */
-.deck-enhanced .deck-list { display: flex; justify-content: center; gap: 0; padding: 30px 0 32px; }
-.deck-enhanced .deck-slot { flex: 0 0 280px; height: 277px; margin-left: -56px; z-index: var(--order); }
+.deck-enhanced .deck-list { display: flex; justify-content: center; gap: 16px; padding: 30px 0 32px; }
+.deck-enhanced .deck-slot { flex: 0 0 280px; height: 277px; margin-left: 0; z-index: var(--order); }
 .deck-enhanced .deck-slot:first-child { margin-left: 0; }
 .deck-enhanced .deck-card { position: absolute; top: 0; left: 0; width: 100%; transform: translateY(var(--drop)) rotate(var(--tilt)); transition: transform 320ms cubic-bezier(.32, .72, 0, 1), box-shadow 320ms ease; }
 .deck-enhanced .deck-meta { min-height: 62px; }
@@ -164,7 +197,9 @@
   .home .site-footer { margin-top: 64px; }
 }
 @media (max-width: 520px) {
-  .home-tools { margin-top: 14px; }
+  .home-tools { margin-top: 14px; gap: 8px; }
+  .home-nav { gap: 0 14px; }
+  .home-nav a { font-size: .8125rem; }
   .home .site-surface { padding-top: 24px; }
   .home-heading h1 { font-size: 2.75rem; }
   .home-avatar { width: 66px; height: 66px; flex-basis: 66px; }
