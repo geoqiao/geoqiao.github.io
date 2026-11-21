@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 128,
+      "slug": "ai-agent-orchestration-and-division-of-labor",
+      "path": "blog/ai-agent-orchestration-and-division-of-labor.md"
+    },
+    {
       "issue_number": 104,
       "slug": "reflections-on-turning-thirty",
       "path": "blog/reflections-on-turning-thirty.md"
