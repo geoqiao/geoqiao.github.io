@@ -173,3 +173,20 @@ projects:
     order: 5
     fallback_metadata:
       language: TypeScript
+
+  - slug: pixelstand
+    title: PixelStand (JoJo Codex Pet)
+    repository: geoqiao/jojo-codex-pet
+    website: https://pixelstand.geoqiao.me/
+    summary: 非商业开源作品集：横跨 JoJo 第 1–9 部的 36 只 Codex 像素动画宠物图库，一条命令安装。
+    image: /assets/images/projects/pixelstand.svg
+    links:
+      - name: 访问图库
+        url: https://pixelstand.geoqiao.me/
+      - name: GitHub
+        url: https://github.com/geoqiao/jojo-codex-pet
+    featured: false
+    order: 6
+    fallback_metadata:
+      language: TypeScript
+      topics: [codex, pixel-art, astro]
