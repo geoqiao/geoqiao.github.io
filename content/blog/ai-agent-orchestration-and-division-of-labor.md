@@ -7,7 +7,7 @@ description: 给 AI 派活别照搬人类公司的“前端岗+后端岗”。�
 created_date: '2026-11-21'
 update_date: '2026-11-21'
 published_at: '2026-11-21T14:16:42Z'
-updated_at: '2026-11-21T14:16:42Z'
+updated_at: '2026-11-21T14:22:24Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -15,6 +15,12 @@ tags:
   key: ai-workflow
 - name: agent-orchestrator
   key: agent-orchestrator
+- name: orca
+  key: orca
+- name: multi-agent
+  key: multi-agent
+- name: context-engineering
+  key: context-engineering
 ---
 
 > 凡治众如治寡，分数是也。——《孙子兵法·兵势篇》（[原文](https://zh.wikisource.org/zh-hans/孫子兵法)）
