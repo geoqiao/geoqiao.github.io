@@ -33,7 +33,7 @@ interface Config {
   profile?: { bio?: string; avatar?: string; links?: Link[] };
   paths?: { page_size?: number };
   seo?: { google_search_console?: string; social_image?: string; social_image_alt?: string };
-  comments?: { enabled?: boolean; repo?: string };
+  comments?: { enabled?: boolean };
   redirects?: Record<string, string>;
   projects?: ProjectEntry[];
 }
@@ -65,7 +65,6 @@ export const site = {
   },
   comments: {
     enabled: config.comments?.enabled ?? false,
-    repo: config.comments?.repo || config.github.repo,
   },
   pageSize: config.paths?.page_size ?? 10,
 };

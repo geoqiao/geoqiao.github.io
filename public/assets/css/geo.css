@@ -37,6 +37,7 @@
   --muted: #6b6863;
   --accent: #a72f6a;
   --selection: #ead6e0;
+  --comment-author-tint: #f7eaf1;
   --reading-width: 704px;
   --display: Spectral, "Songti SC", Georgia, serif;
   --title: Spectral, "Noto Serif SC", "Songti SC", Georgia, serif;
@@ -53,6 +54,7 @@
   --muted: #a4a1a9;
   --accent: #4faf90;
   --selection: #203d32;
+  --comment-author-tint: #172f27;
   --object-shadow: 0 0 0 1px var(--line);
   --raised-shadow: 0 0 0 1px #69646c, 0 22px 64px #0006;
 }
@@ -67,6 +69,7 @@
     --muted: #a4a1a9;
     --accent: #4faf90;
     --selection: #203d32;
+    --comment-author-tint: #172f27;
     --object-shadow: 0 0 0 1px var(--line);
     --raised-shadow: 0 0 0 1px #69646c, 0 22px 64px #0006;
   }

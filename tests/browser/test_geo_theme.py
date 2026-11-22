@@ -1,5 +1,6 @@
 """Geo's real-browser contract; run after `pnpm build` (see docs/geo.md)."""
 
+import json
 import os
 import re
 import sys
@@ -353,11 +354,9 @@ class GeoThemeBrowserTests(unittest.TestCase):
             page.wait_for_function("document.querySelector('a.preview-shot img').naturalWidth === 1000")
             expect(page.locator("iframe")).to_have_count(0)
 
-    def test_article_code_colors_diagram_contents_and_comments(self):
+    def test_article_code_colors_diagram_and_contents(self):
         for scheme, comment in (("light", "rgb(23, 117, 0)"), ("dark", "rgb(139, 148, 158)")):
             with self.subTest(scheme=scheme), self.page(color_scheme=scheme) as page:
-                # Utterances is a third party; the page must not depend on reaching it.
-                page.route("https://utteranc.es/**", lambda route: route.abort())
                 page.goto(self.origin + "/blog/rye-python-package-manager-guide/")
                 block = page.locator(".code-block").first
                 expect(block.locator(".code-language")).not_to_be_empty()
@@ -369,9 +368,34 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 self.assertIn(comment, colors)
                 expect(page.locator(".diagram svg").first).to_be_visible()
                 expect(page.locator("[data-toc] a").first).to_be_attached()
-                container = page.locator("#comments-container")
-                self.assertRegex(container.get_attribute("data-issue-number"), r"^[0-9]+$")
-                self.assertEqual(container.get_attribute("data-comments-repo"), "geoqiao/geoqiao.github.io")
+    def test_static_comments_and_discuss_anchor_without_javascript(self):
+        snapshot = json.loads((ROOT / "data/issue-comments/index.json").read_text())["issues"]
+        for issue, slug in (
+            (18, "my-vscode-setup-for-python"),
+            (129, "how-gemini-4-neon-uses-gpt"),
+        ):
+            with self.subTest(issue=issue), self.page(java_script_enabled=False) as page:
+                external = []
+                def block_external(route):
+                    external.append(route.request.url)
+                    route.abort()
+                page.route(re.compile(r"^https?://(?!127\.0\.0\.1:)"), block_external)
+                path = self.origin + f"/blog/{slug}/"
+                page.goto(path)
+                page.get_by_role("link", name="Discuss").press("Enter")
+                expect(page).to_have_url(path + "#comments-title")
+                comments = page.locator(".comments-section")
+                expect(comments.get_by_role("heading", name="Comments")).to_be_in_viewport()
+                issue_url = f"https://github.com/geoqiao/geoqiao.github.io/issues/{issue}"
+                expect(comments.get_by_role("link", name="Comment on GitHub")).to_have_attribute("href", issue_url)
+                entries = snapshot[str(issue)]
+                expect(comments.locator(".comment-entry")).to_have_count(len(entries))
+                if not entries:
+                    expect(comments.get_by_text("No comments yet.")).to_be_visible()
+                for date, entry in zip(comments.locator(".comment-date").all(), entries):
+                    expect(date).to_have_attribute("href", entry["url"])
+                expect(comments.locator("iframe")).to_have_count(0)
+                self.assertEqual(external, [])
 
     def test_static_article_contents_navigate_with_scripts_disabled(self):
         path = "/blog/how-gemini-4-neon-uses-gpt/"

@@ -234,7 +234,7 @@ const articleHeadings: Plugin<[], Root> = () => {
     // stripped by the allowlist, as they were before headings became static.
     const used = new Set([
       "top", "main-content", "site-navigation", "site-search", "search-title",
-      "search-query", "search-scope", "comments-title", "comments-container",
+      "search-query", "search-scope", "comments-title",
       ...(file.data.diagramIds as Set<string>),
     ]);
     const headings: ArticleHeading[] = [];

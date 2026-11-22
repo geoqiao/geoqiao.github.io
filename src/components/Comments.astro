@@ -1,20 +1,52 @@
 ---
+import { commentAvatar, renderComment } from "../lib/comments";
 import { site } from "../lib/config";
-import { commentsTheme, commentsThemeMode } from "../site.config";
 
 interface Props {
-  /** The Issue the page was written in; its comments are the page's comments. */
   issueNumber: number;
+  comments?: ReturnType<typeof import("../lib/comments").issueComments>;
 }
 
-const { issueNumber } = Astro.props;
+const { issueNumber, comments } = Astro.props;
+const issueUrl = `https://github.com/${site.repo}/issues/${issueNumber}`;
+const owner = site.repo.split("/")[0].toLowerCase();
+const entries = await Promise.all((comments ?? []).map(async (comment) => ({
+  ...comment,
+  html: await renderComment(comment.body),
+  avatar: commentAvatar(comment.avatarUrl),
+  isAuthor: comment.author.toLowerCase() === owner || comment.authorAssociation === "OWNER",
+})));
 ---
 <section class="comments-section" aria-labelledby="comments-title">
-  <div class="section-heading"><h2 id="comments-title">Conversation</h2><a href={`https://github.com/${site.repo}/issues/${issueNumber}`}>GitHub ↗</a></div>
-  <p class="muted">Have something to add? Join the conversation on this Issue.</p>
-  <div id="comments-container" data-issue-number={issueNumber} data-comments-repo={site.comments.repo} data-source-repo={site.repo} data-comments-theme={commentsTheme} data-comments-theme-mode={commentsThemeMode} data-blog-theme-default="light">
-    <p class="comments-loading" role="status">Loading comments…</p>
+  <div class="comments-header" lang="en">
+    <div class="comments-heading">
+      <h2 id="comments-title" tabindex="-1">Comments</h2>
+      {entries.length > 0 && <span class="comment-count">{entries.length}<span class="visually-hidden"> comments</span></span>}
+    </div>
+    <a class="comments-action" href={issueUrl}>Comment on GitHub <span aria-hidden="true">↗</span></a>
   </div>
-  <noscript><p>Comments require JavaScript. You can also read and reply on GitHub.</p></noscript>
+  {entries.length > 0 ? (
+    <ol class="comment-list" role="list">
+      {entries.map((entry) => (
+        <li class="comment-entry">
+          <span class="comment-avatar" aria-hidden="true">
+            {entry.author.slice(0, 1).toUpperCase()}
+            {entry.avatar && <span class="comment-avatar-image" style={`background-image: url("${entry.avatar}")`}></span>}
+          </span>
+          <div class="comment-content">
+            <div class="comment-meta">
+              <span class="comment-author">
+                <b>{entry.author}</b>
+                {entry.isAuthor && <span class="comment-author-label" lang="en">Author</span>}
+              </span>
+              <a class="comment-date" href={`${issueUrl}#issuecomment-${entry.id}`}><time datetime={entry.createdAt}>{entry.createdAt.slice(0, 10)}</time></a>
+            </div>
+            <div class="comment-body" set:html={entry.html} />
+          </div>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="comments-empty" lang="en">{comments ? "No comments yet." : "See the discussion on GitHub."}</p>
+  )}
 </section>
-<script is:inline src="/assets/escaping/comments.js" defer></script>

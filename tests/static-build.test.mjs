@@ -8,6 +8,7 @@ import { dirname, join } from "node:path";
 import { after, before, test } from "node:test";
 import { parse } from "parse5";
 import { PNG } from "pngjs";
+import { renderComment } from "../src/lib/comments.ts";
 
 let dist;
 const require = createRequire(import.meta.url);
@@ -110,4 +111,43 @@ test("Atom keeps article headings free of generated permalink controls", () => {
   const xml = readFileSync(join(dist, "atom.xml"), "utf8");
   assert.match(xml, /&lt;h[23]&gt;/);
   assert.doesNotMatch(xml, /heading-anchor|&lt;h[1-3][^&]* tabindex=/);
+});
+
+
+function textOf(node) {
+  return node.nodeName === "#text" ? node.value : (node.childNodes ?? []).map(textOf).join("");
+}
+
+test("published articles contain the static comment snapshot and link to their original Issues", async () => {
+  const { issues } = JSON.parse(readFileSync("data/issue-comments/index.json", "utf8"));
+  for (const { issue_number: issue, slug } of manifest.blog) {
+    const file = `blog/${slug}/index.html`;
+    const html = readFileSync(join(dist, file), "utf8");
+    assert.doesNotMatch(html, /utteranc\.es|comments\.js/i, slug);
+    const nodes = page(file);
+    const section = nodes.find((node) => attr(node, "class") === "comments-section");
+    assert.ok(section, slug);
+    assert.ok(nodes.some((node) => attr(node, "href") === "#comments-title"), slug);
+    const descendants = [...elements(section)];
+    const issueUrl = `https://github.com/${manifest.repository}/issues/${issue}`;
+    assert.equal(attr(descendants.find((node) => attr(node, "class") === "comments-action"), "href"), issueUrl);
+    assert.ok(!descendants.some(({ tagName }) => ["iframe", "img", "script"].includes(tagName)), slug);
+    const bodies = descendants.filter((node) => attr(node, "class") === "comment-body");
+    const expected = issues[issue];
+    assert.equal(bodies.length, expected?.length ?? 0, slug);
+    if (!expected?.length) {
+      const empty = descendants.find((node) => attr(node, "class") === "comments-empty");
+      assert.equal(textOf(empty), expected ? "No comments yet." : "See the discussion on GitHub.");
+      continue;
+    }
+    const permalinks = descendants.filter((node) => attr(node, "class") === "comment-date");
+    assert.deepEqual(permalinks.map((link) => attr(link, "href")), expected.map(({ url }) => url));
+    for (const [index, comment] of expected.entries()) {
+      const expectedHtml = await renderComment(comment.body);
+      assert.equal(textOf(bodies[index]), textOf(parse(expectedHtml)), comment.url);
+      assert.ok(html.includes(expectedHtml), comment.url);
+    }
+  }
+  const atom = readFileSync(join(dist, "atom.xml"), "utf8");
+  assert.doesNotMatch(atom, /comments-section|comment-entry|utteranc\.es|comments\.js/i);
 });

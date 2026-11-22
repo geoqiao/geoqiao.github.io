@@ -4,7 +4,9 @@ Status: **active**
 
 The site is an [Astro](https://astro.build/) project with its own design, **[Geo](docs/geo.md)**. Content is written in GitHub Issues; [escaping](https://github.com/geoqiao/escaping) exports the published Issues as Markdown and this repository builds every page from them. Build and preview locally with `bash scripts/preview_geo.sh`, then open <http://localhost:8765>.
 
-这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/content.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建一遍作为检查，通过后把 `content/` 提交回 main。站点部署在 Cloudflare Workers 上：Cloudflare 在 main 每次有新提交时运行 `pnpm build` 和 `npx wrangler deploy`。`content/` 由 workflow 写入，不要手工修改。
+这是站点源码仓库。站点内容来自 GitHub Issues；`config.yaml`、`src/`、`public/`、`.github/workflows/content.yml` 和迁移脚本是源码。workflow 先用 escaping 把已发布的 Issue 导出为 Markdown（`content/`），用 Astro 构建一遍作为检查，通过后把 `content/` 和 `data/issue-comments/` 的改动提交回 main。站点部署在 Cloudflare Workers 上：Cloudflare 在 main 每次有新提交时运行 `pnpm build` 和 `npx wrangler deploy`。`content/` 由 workflow 写入，不要手工修改。
+
+文章评论来自原 GitHub Issue，在 Astro 构建时从 `data/issue-comments/index.json` 读入。评论新增、编辑或删除时，评论工作流只刷新对应的已发布文章，每天再做一次全量校对。手动在仓库根目录运行 `GITHUB_TOKEN="$(gh auth token --hostname github.com)" node scripts/sync-issue-comments.mjs` 可刷新全部，追加 `--issue 18` 可只刷新一篇。这个命令只读取 GitHub。
 
 主要源码：
 

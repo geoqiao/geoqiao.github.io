@@ -38,8 +38,8 @@ class ProductionWorkflowTests(unittest.TestCase):
                 self.assertRegex(uses, r"@[0-9a-f]{40}$")  # Full commit SHAs only.
         by_name = {step["name"]: step for step in steps}
         required = [
-            "Test site migration tooling", "Export the content", "Install site dependencies",
-            "Test the Markdown allowlist", "Build the site", "Commit the content",
+            "Test site migration tooling", "Export the content", "Refresh the comment snapshot", "Install site dependencies",
+            "Test the Markdown and static site", "Build the site", "Commit the content",
             "Report skipped Issues",
         ]
         positions = [list(by_name).index(name) for name in required]
@@ -55,10 +55,10 @@ class ProductionWorkflowTests(unittest.TestCase):
         site = by_name["Build the site"]
         self.assertEqual(site["run"], "pnpm build")
         self.assertEqual(site["env"]["CONTENT_DIR"], "${{ steps.content.outputs.output }}")
-        # Only main commits the content, only when it changed, and only the content folder.
+        # Only main commits the content, only when it changed, and only the exported content and its comment snapshot.
         commit = by_name["Commit the content"]["run"]
         self.assertIn('if [ "$GITHUB_REF" != "refs/heads/main" ]; then', commit)
-        self.assertIn("git add --all content\nif git diff --cached --quiet; then", commit)
+        self.assertIn("git add --all content data/issue-comments\nif git diff --cached --quiet; then", commit)
         self.assertNotIn("--force", commit)
         self.assertFalse(steps[0]["with"]["persist-credentials"])
         # Skipped Issues fail the run only after everything else was committed.
@@ -67,6 +67,29 @@ class ProductionWorkflowTests(unittest.TestCase):
         self.assertIn('if [ -z "$SKIPPED" ]; then exit 0; fi', report["run"])
         self.assertTrue(re.search(r"exit 1\s*$", report["run"]))
         self.assertNotRegex("\n".join(s.get("run", "") for s in steps), r"python3(?:\s|$)")
+
+
+    def test_comment_events_refresh_only_public_blog_comments_and_share_the_write_queue(self):
+        workflow = yaml.safe_load((ROOT / ".github/workflows/sync-comments.yml").read_text())
+        self.assertEqual(set(workflow[True]["issue_comment"]["types"]), {"created", "edited", "deleted"})
+        self.assertIn("schedule", workflow[True])
+        self.assertIn("workflow_dispatch", workflow[True])
+        self.assertEqual(workflow["permissions"], {})
+        self.assertEqual(workflow["concurrency"], self.workflow["concurrency"])
+        self.assertEqual(workflow["concurrency"]["queue"], "max")
+        job = workflow["jobs"]["sync"]
+        self.assertIn("github.event.issue.pull_request == null", job["if"])
+        self.assertIn("refs/heads/main", job["if"])
+        self.assertNotIn("author_association", job["if"])
+        self.assertEqual(job["permissions"], {"contents": "write", "issues": "read"})
+        steps = {step["name"]: step for step in job["steps"]}
+        self.assertEqual(steps["Check out current main"]["with"]["ref"], "main")
+        refresh = steps["Refresh the comment snapshot"]
+        self.assertIn("git add --all data/issue-comments\n", refresh["run"])
+        self.assertIn("git diff --cached --quiet", refresh["run"])
+        validate = steps["Validate the snapshot and static site"]
+        self.assertIn("pnpm test", validate["run"])
+        self.assertEqual(steps["Commit the comment snapshot"]["if"], validate["if"])
 
 
 if __name__ == "__main__":

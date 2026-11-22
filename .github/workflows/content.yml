@@ -6,7 +6,7 @@ on:
     types: [opened, edited, labeled, unlabeled, closed, reopened, deleted, transferred]
   push:
     paths:
-      - ".github/workflows/content.yml"
+      - ".github/workflows/*.yml"
       - "config.yaml"
       - "content-migrations/**"
       - "scripts/**"
@@ -26,7 +26,7 @@ on:
 permissions: {}
 concurrency:
   group: content-${{ github.ref }}
-  cancel-in-progress: false
+  queue: max
 
 jobs:
   build:
@@ -39,8 +39,8 @@ jobs:
       - name: Checkout site repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.ref == 'refs/heads/main' && github.ref || github.sha }}
           persist-credentials: false
-          fetch-depth: 0 # The content commit is rebased when main has moved.
 
       - name: Install uv
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
@@ -70,10 +70,18 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Refresh the comment snapshot
+        env:
+          CONTENT_DIR: ${{ steps.content.outputs.output }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-issue-comments.mjs
+
       - name: Install site dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Test the Markdown allowlist
+      - name: Test the Markdown and static site
+        env:
+          CONTENT_DIR: ${{ steps.content.outputs.output }}
         run: pnpm test
 
       - name: Build the site
@@ -94,7 +102,7 @@ jobs:
             echo "Not main; the content is not committed."
             exit 0
           fi
-          git add --all content
+          git add --all content data/issue-comments
           if git diff --cached --quiet; then
             echo "The content has not changed."
             exit 0
@@ -102,7 +110,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit --quiet --message "content: update from Issues"
-          git pull --quiet --rebase origin main
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
       - name: Report skipped Issues

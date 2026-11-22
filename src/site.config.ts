@@ -6,10 +6,6 @@ export const featuredPosts = [41, 67, 49];
 /** Show the escaping link in the footer. */
 export const showPoweredBy = true;
 
-/** Utterances colors: "auto" follows the site's light/dark mode; "fixed" always uses commentsTheme. */
-export const commentsTheme = "github-light";
-export const commentsThemeMode: "auto" | "fixed" = "auto";
-
 /** Bespoke 4:3 brand cover artworks for homepage deck cards; unlisted projects fall back to project.image. */
 export const deckCovers: Record<string, string> = {
   escaping: "/assets/images/projects/cover-escaping.svg",

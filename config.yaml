@@ -71,7 +71,7 @@ seo:
 
 # ============================================
 # 评论配置
-# repo 留空时回退到 github.repo；配色见 src/site.config.ts
+# 留言入口使用 github.repo 中原文章的 Issue。
 # ============================================
 comments:
   enabled: true

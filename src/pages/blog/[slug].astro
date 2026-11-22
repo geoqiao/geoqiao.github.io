@@ -3,6 +3,7 @@ import ArticleToc from "../../components/ArticleToc.astro";
 import Comments from "../../components/Comments.astro";
 import TagLinks from "../../components/TagLinks.astro";
 import Base from "../../layouts/Base.astro";
+import { issueComments } from "../../lib/comments";
 import { absolute, site } from "../../lib/config";
 import { posts } from "../../lib/content";
 import { renderArticle } from "../../lib/markdown";
@@ -55,7 +56,7 @@ const jsonLd = {
           {older && <a class="article-step" rel="next" href={older.path}><span class="article-step-label">Next<span aria-hidden="true"> →</span></span><span class="article-step-title">{older.title}</span><time datetime={older.createdDate}>{older.createdDate}</time></a>}
         </nav>
       )}
-      {site.comments.enabled && <Comments issueNumber={post.issueNumber} />}
+      {site.comments.enabled && <Comments issueNumber={post.issueNumber} comments={issueComments(post.issueNumber)} />}
     </div>
   </div>
 </article>
