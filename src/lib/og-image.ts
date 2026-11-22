@@ -23,8 +23,7 @@ export async function loadOgAssets(titles: string[]) {
     const bytes = await readFile(resolve(fontsRoot, `noto-serif-sc-${script}-600-normal.woff2`));
     return { name: script, data: await subsetFont(bytes, glyphs, { targetFormat: "sfnt" }), weight: 600 };
   }));
-  const avatar = await readFile(resolve("public/assets/images/avatar.png"));
-  return { fonts, avatar: `data:image/png;base64,${avatar.toString("base64")}` };
+  return { fonts };
 }
 
 type OgAssets = Awaited<ReturnType<typeof loadOgAssets>>;
@@ -48,7 +47,7 @@ function titleSize(title: string) {
   return em <= 15 ? 60 : em <= 28 ? 54 : 48;
 }
 
-export async function renderOgImage({ title }: Pick<Post, "title">, { fonts, avatar }: OgAssets) {
+export async function renderOgImage({ title }: Pick<Post, "title">, { fonts }: OgAssets) {
   const layout = node("div", {
     style: {
       boxSizing: "border-box", width: ogSize.width, height: ogSize.height, display: "flex", padding: 34,
@@ -66,12 +65,9 @@ export async function renderOgImage({ title }: Pick<Post, "title">, { fonts, ava
     style: { display: "flex", width: "100%", fontSize: titleSize(title), lineHeight: 1.32, lineClamp: 3, wordBreak: "break-word" },
   }, title),
   node("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between" } },
-    node("div", { style: { display: "flex", alignItems: "center", gap: 20 } },
-      node("img", { src: avatar, width: 72, height: 72, style: { borderRadius: 16, backgroundColor: "#fff4f8" } }),
-      node("div", { style: { display: "flex", flexDirection: "column", gap: 5 } },
-        node("div", { style: { fontSize: 30 } }, site.author),
-        node("div", { style: { fontSize: 19, color: muted } }, tagline),
-      ),
+    node("div", { style: { display: "flex", flexDirection: "column", lineHeight: 1.2, gap: 5 } },
+      node("div", { style: { fontSize: 30 } }, site.author),
+      node("div", { style: { fontSize: 19, color: muted } }, tagline),
     ),
     node("div", { style: { display: "flex", alignItems: "center", gap: 6, color: "#a72f6a", fontSize: 25 } },
       signature,

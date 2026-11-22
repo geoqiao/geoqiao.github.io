@@ -128,7 +128,8 @@ main { min-height: calc(100svh - 220px); }
 .reading-layout { display: grid; grid-template-columns: minmax(0, var(--reading-width)) var(--toc-width); width: calc(100% + var(--column-gap) + var(--toc-width)); align-items: start; gap: var(--column-gap); }
 .reading-main { grid-column: 1; grid-row: 1; min-width: 0; }
 .reading-margin { grid-column: 2; grid-row: 1; position: sticky; top: 48px; display: flex; flex-direction: column; max-height: calc(100vh - 96px); min-width: 0; }
-.reading-margin nav { overflow-y: auto; scrollbar-width: thin; }
+.reading-margin nav { overflow-y: auto; scrollbar-width: none; }
+.reading-margin nav::-webkit-scrollbar { display: none; }
 .toc-mobile { display: none; }
 .toc { font-size: .875rem; }
 .toc-title { font-weight: 600; margin-bottom: 12px; }
@@ -280,6 +281,7 @@ main { min-height: calc(100svh - 220px); }
   .about-header h1 { font-size: 1.25rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
+  .reading-margin nav { scroll-behavior: smooth; }
   a, button { transition: color .16s ease, background-color .16s ease; }
   /* A light cross-fade between pages. The title of the article just opened (see site.js) glides to the heading. */
   @view-transition { navigation: auto; }

@@ -119,12 +119,12 @@
       }
       current = active;
       // Move only the sidebar's scroll position, never the article or keyboard focus.
-      const link = desktopToc.querySelector('[aria-current="location"]');
-      if (desktopToc.clientHeight && !desktopToc.matches(":focus-within")) {
+      const link = desktopToc?.querySelector('[aria-current="location"]');
+      if (link && desktopToc.clientHeight && !desktopToc.matches(":focus-within")) {
         const viewport = desktopToc.getBoundingClientRect();
         const item = link.getBoundingClientRect();
-        if (item.top < viewport.top) desktopToc.scrollTop += item.top - viewport.top;
-        if (item.bottom > viewport.bottom) desktopToc.scrollTop += item.bottom - viewport.bottom;
+        const offset = item.top < viewport.top ? item.top - viewport.top : Math.max(0, item.bottom - viewport.bottom);
+        desktopToc.scrollTo({ top: desktopToc.scrollTop + offset });
       }
     }
     function scheduleLocation() {
