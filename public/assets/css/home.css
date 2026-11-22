@@ -16,15 +16,15 @@
   .home-nav a { min-height: 36px; }
   .home-tools :is(.search-toggle, .theme-toggle) { flex-basis: 36px; width: 36px; height: 36px; }
 }
-.home .site-surface { padding-top: 60px; }
-.home-heading { margin-bottom: 112px; animation: none; }
+.home .site-surface { padding-top: 48px; }
+.home-heading { margin-bottom: 72px; animation: none; }
 .home-title { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 96px; }
 .home-heading h1 { font: 400 clamp(2.8rem, 4.3vw, 3.75rem)/1.15 var(--display); letter-spacing: -.025em; }
 .home-signature { display: flex; align-items: center; padding: 8px; margin-right: -8px; }
 .home-avatar { width: 88px; height: 88px; flex: 0 0 88px; object-fit: contain; }
 .home-intro {
   width: min(var(--stage-width), calc(100vw - 64px));
-  margin: 104px 0 0;
+  margin: 76px 0 0;
   margin-left: calc((100% - min(var(--stage-width), 100vw - 64px)) / 2);
   color: var(--ink);
   text-align: center;
@@ -82,12 +82,12 @@
   :root:not([data-theme]) .note-projects { --note: #4fa874; }
   :root:not([data-theme]) .note-about { --note: #b087cf; }
 }
-.home-section { margin-top: 64px; animation: none; }
-.home-section > .section-heading { margin-bottom: 22px; }
+.home-section { margin-top: 44px; animation: none; }
+.home-section > .section-heading { margin-bottom: 16px; }
 .home-section > .section-heading h2 { font: 400 1.8rem/1.3 var(--display); letter-spacing: -.015em; }
 .home-section > .section-heading > a { color: var(--accent); font-size: .875rem; }
 .home-writing { list-style: none; padding: 0; margin: 0; }
-.home-writing a { display: flex; align-items: baseline; justify-content: space-between; min-height: 44px; font-size: 1.0625rem; padding-block: 12px; gap: 30px; line-height: 1.8; }
+.home-writing a { display: flex; align-items: baseline; justify-content: space-between; min-height: 44px; font-size: 1.0625rem; padding-block: 9px; gap: 30px; line-height: 1.8; }
 .home-writing a > span { min-width: 0; overflow-wrap: anywhere; transition: color 160ms ease; }
 .home-writing time { flex-shrink: 0; white-space: nowrap; font-size: .6875rem; color: var(--muted); }
 .home-projects { margin-top: 88px; }
@@ -180,9 +180,9 @@
 
 @media (max-width: 999px) {
   .home .site-surface { padding-top: 38px; }
-  .home-heading { margin-bottom: 60px; }
+  .home-heading { margin-bottom: 48px; }
   .home-title { min-height: 80px; }
-  .home-intro { width: 100%; margin: 34px 0 0; text-align: left; font-size: 1.0625rem; }
+  .home-intro { width: 100%; margin: 28px 0 0; text-align: left; font-size: 1.0625rem; }
   .home-intro p + p { margin-top: 12px; }
   .annotation-note, .annotation-arrow { display: none; }
   .home-section { margin-top: 48px; }

@@ -1,0 +1,22 @@
+---
+import type { ArticleHeading } from "../lib/markdown";
+
+interface Props {
+  headings: ArticleHeading[];
+}
+
+const { headings } = Astro.props;
+---
+{headings.length > 0 && [false, true].map((mobile) => {
+  const Container = mobile ? "details" : "aside";
+  return (
+    <Container class:list={["toc", mobile ? "toc-mobile" : "reading-margin"]}>
+      {mobile ? <summary lang="en">On this page</summary> : <p class="toc-title" lang="en">On this page</p>}
+      <nav data-toc aria-label="On this page" tabindex={mobile ? undefined : 0}>
+        {headings.map(({ id, level, text }) => (
+          <a href={`#${encodeURIComponent(id)}`} data-level={level}>{text || id}</a>
+        ))}
+      </nav>
+    </Container>
+  );
+})}

@@ -373,6 +373,42 @@ class GeoThemeBrowserTests(unittest.TestCase):
                 self.assertRegex(container.get_attribute("data-issue-number"), r"^[0-9]+$")
                 self.assertEqual(container.get_attribute("data-comments-repo"), "geoqiao/geoqiao.github.io")
 
+    def test_static_article_contents_navigate_with_scripts_disabled(self):
+        path = "/blog/how-gemini-4-neon-uses-gpt/"
+        for mobile in (False, True):
+            with self.subTest(mobile=mobile), self.page(java_script_enabled=False) as page:
+                if mobile:
+                    page.set_viewport_size({"width": 390, "height": 844})
+                page.goto(self.origin + path)
+                if mobile:
+                    contents = page.locator(".toc-mobile")
+                    expect(contents.locator("summary")).to_be_visible()
+                    expect(contents.locator("nav")).not_to_be_visible()
+                    contents.locator("summary").press("Enter")
+                else:
+                    contents = page.locator(".reading-margin")
+                link = contents.locator("nav a").nth(2)
+                expect(link).to_be_visible()
+                fragment = link.get_attribute("href")
+                link.press("Enter")
+                expect(page).to_have_url(self.origin + path + fragment)
+                heading = page.locator(".post-content :target")
+                expect(heading).to_be_in_viewport()
+                expect(heading.locator(".heading-anchor")).to_have_attribute("href", fragment)
+
+    def test_heading_permalink_copies_the_absolute_fragment(self):
+        with self.page() as page:
+            page.add_init_script("""Object.defineProperty(navigator, "clipboard", {
+                value: { writeText: async (text) => { window.copiedPermalink = text; } },
+            });""")
+            page.goto(self.origin + "/blog/how-gemini-4-neon-uses-gpt/")
+            anchor = page.locator(".heading-anchor").first
+            destination = anchor.evaluate("(link) => link.href")
+            anchor.press("Enter")
+            expect(page).to_have_url(destination)
+            expect(page.locator("[data-heading-status]")).to_have_text("已复制章节链接")
+            self.assertEqual(page.evaluate("window.copiedPermalink"), destination)
+
     def test_old_addresses_move_to_the_article_in_one_step(self):
         # Cloudflare answers from _redirects; the preview server only serves the file.
         with self.page() as page:

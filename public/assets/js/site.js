@@ -100,63 +100,61 @@
 
   const body = document.querySelector(".post-content");
   if (!body) return;
-  const headings = [...body.querySelectorAll("h1, h2, h3")];
-  const toc = document.querySelector("[data-toc]");
-  if (headings.length && toc) {
-    const links = headings.map((heading, index) => {
-      if (!heading.id) {
-        let id = heading.textContent.trim().toLowerCase()
-          .replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "") || `section-${index + 1}`;
-        while (document.getElementById(id)) id += "-section";
-        heading.id = id;
-      }
-      heading.tabIndex = -1;
-      const link = document.createElement("a");
-      link.href = `#${encodeURIComponent(heading.id)}`;
-      link.textContent = heading.textContent;
-      link.dataset.level = heading.tagName.slice(1);
-      toc.appendChild(link);
-      return link;
-    });
-    const margin = document.querySelector(".reading-margin");
-    margin.hidden = false;
-    const details = document.querySelector(".toc");
-    const compact = matchMedia("(max-width: 1160px)");
-    details.open = !compact.matches;
-    compact.addEventListener("change", () => { details.open = !compact.matches; });
-    // Long TOCs scroll with the page, never in a nested or clipped panel.
-    function sizeToc() {
-      margin.classList.toggle("toc-long", details.scrollHeight > innerHeight - 96);
-    }
-    new ResizeObserver(sizeToc).observe(details);
-    window.addEventListener("resize", sizeToc);
-    details.addEventListener("toggle", sizeToc);
-    sizeToc();
+  const headings = [...body.querySelectorAll("h1[id], h2[id], h3[id]")];
+  const lists = [...document.querySelectorAll("[data-toc]")].map((nav) => [...nav.querySelectorAll("a")]);
+  if (headings.length && lists.length) {
+    const desktopToc = document.querySelector(".reading-margin [data-toc]");
+    let current = -1;
     let scheduled = false;
     function updateLocation() {
-      // One scan per animation frame keeps the active heading in sync with scrolling.
+      scheduled = false;
       let active = 0;
       headings.forEach((heading, index) => {
         if (heading.getBoundingClientRect().top <= 160) active = index;
       });
-      links.forEach((link, index) => {
-        if (index === active) link.setAttribute("aria-current", "location");
-        else link.removeAttribute("aria-current");
-      });
-      scheduled = false;
+      if (active === current) return;
+      for (const links of lists) {
+        links[current]?.removeAttribute("aria-current");
+        links[active].setAttribute("aria-current", "location");
+      }
+      current = active;
+      // Move only the sidebar's scroll position, never the article or keyboard focus.
+      const link = desktopToc.querySelector('[aria-current="location"]');
+      if (desktopToc.clientHeight && !desktopToc.matches(":focus-within")) {
+        const viewport = desktopToc.getBoundingClientRect();
+        const item = link.getBoundingClientRect();
+        if (item.top < viewport.top) desktopToc.scrollTop += item.top - viewport.top;
+        if (item.bottom > viewport.bottom) desktopToc.scrollTop += item.bottom - viewport.bottom;
+      }
     }
-    window.addEventListener("scroll", () => {
+    function scheduleLocation() {
       if (!scheduled) {
         scheduled = true;
         requestAnimationFrame(updateLocation);
       }
-    }, { passive: true });
-    updateLocation();
-    if (location.hash) {
-      let target;
-      try { target = headings.find((heading) => heading.id === decodeURIComponent(location.hash.slice(1))); } catch { /* An invalid fragment is not a reading error. */ }
-      window.addEventListener("load", () => { target?.scrollIntoView(); }, { once: true });
     }
+    window.addEventListener("scroll", scheduleLocation, { passive: true });
+    window.addEventListener("resize", scheduleLocation);
+    updateLocation();
+  }
+
+  const headingStatus = document.querySelector("[data-heading-status]");
+  if (headingStatus && navigator.clipboard?.writeText) {
+    body.querySelectorAll(".heading-anchor").forEach((anchor) => {
+      anchor.title = "复制章节链接";
+      anchor.addEventListener("click", async (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        try {
+          await navigator.clipboard.writeText(anchor.href);
+        } catch {
+          return; // The native link still jumps to the heading.
+        }
+        headingStatus.textContent = "已复制章节链接";
+        const mark = anchor.firstElementChild;
+        mark.textContent = "✓";
+        window.setTimeout(() => { mark.textContent = "#"; }, 1500);
+      });
+    });
   }
 
   body.querySelectorAll("pre").forEach((element) => {

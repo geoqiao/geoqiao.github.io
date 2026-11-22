@@ -17,14 +17,18 @@ interface Props {
   jsonLd?: unknown;
   /** An article's subset of Noto Serif SC (see lib/title-font.ts), as its name under /assets/fonts/title/. */
   titleFont?: string;
+  shareCard?: { path: string; width: number; height: number; alt: string };
 }
 
-const { kind = "page", title = site.title, description = site.description, path, section, jsonLd, titleFont } = Astro.props;
+const { kind = "page", title = site.title, description = site.description, path, section, jsonLd, titleFont, shareCard } = Astro.props;
 const homeNavigation = site.navigation.filter((item) => item.url !== "/" && item.url !== "/atom.xml");
 const titleFontHref = titleFont && `/assets/fonts/title/${titleFont}.woff2`;
 const canonical = path ? absolute(path) : null;
-const { socialImage, socialImageAlt, googleSearchConsole } = site.seo;
-const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url).href : null;
+const cardUrl = shareCard && absolute(shareCard.path);
+const socialImage = cardUrl ?? site.seo.socialImage;
+const socialImageAlt = shareCard?.alt ?? site.seo.socialImageAlt;
+const twitterImage = cardUrl ?? (site.profile.avatar ? absolute(site.profile.avatar) : null);
+const { googleSearchConsole } = site.seo;
 ---
 <!DOCTYPE html>
 <html lang={site.language}>
@@ -42,14 +46,16 @@ const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url
   {socialImage && (
     <Fragment>
       <meta property="og:image" content={socialImage}>
+      {shareCard && <meta property="og:image:width" content={String(shareCard.width)}>}
+      {shareCard && <meta property="og:image:height" content={String(shareCard.height)}>}
       {socialImageAlt && <meta property="og:image:alt" content={socialImageAlt}>}
     </Fragment>
   )}
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content={shareCard ? "summary_large_image" : "summary"}>
   {twitterImage && (
     <Fragment>
       <meta name="twitter:image" content={twitterImage}>
-      <meta name="twitter:image:alt" content={`${site.author} 的头像`}>
+      <meta name="twitter:image:alt" content={shareCard?.alt ?? `${site.author} 的头像`}>
     </Fragment>
   )}
   <meta name="twitter:title" content={title}>
@@ -82,7 +88,7 @@ const twitterImage = site.profile.avatar ? new URL(site.profile.avatar, site.url
   <script is:inline src="/assets/js/search.js" data-search-index="/search.json" defer></script>
   {jsonLd && <script is:inline type="application/ld+json" set:html={scriptJson(jsonLd)}></script>}
 </head>
-<body id="top" class={kind === "home" ? "home" : undefined}>
+<body id="top" class:list={[kind === "home" && "home", kind === "post" && "article-view"]}>
   <a class="skip-link" href="#main-content" lang="en">Skip to main content</a>
   {kind === "home" ? (
     <header class="home-tools" lang="en">

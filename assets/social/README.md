@@ -1,13 +1,18 @@
 # Shared social image
 
-`og-flat.png` is the approved 1200×630 Open Graph sharing image for geoqiao.me.
+`og-flat.png` is the default 1200×630 Open Graph sharing image for geoqiao.me.
 It is a site-owned asset, not an escaping package resource or generated page.
 
-X uses a separate `summary` card with the existing 256×256 profile avatar.
+For pages outside the blog articles, X uses a `summary` card with the
+existing 256×256 profile avatar.
 `Base.astro` derives an absolute `twitter:image` URL from `profile.avatar` and
 uses the author name for its alternative text. Open Graph retains
 `seo.social_image` and `seo.social_image_alt`; other platforms choose their own
 layout when displaying that image.
+
+Astro generates an article-specific 1200×630 PNG at `/og/<slug>.png` from the
+article title, local Noto Serif SC fonts and Geo branding. Blog articles point
+Open Graph and their X `summary_large_image` card to that same file.
 
 The image uses a large dark signature on a rose-pink background, with a small
 green terminal stroke. It contains no text. The artwork was generated through

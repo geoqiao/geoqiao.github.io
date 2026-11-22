@@ -2,7 +2,7 @@
 // is the only thing between an Issue and the page. Run with `pnpm test`.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { renderMarkdown } from "../src/lib/markdown.ts";
+import { renderArticle, renderMarkdown } from "../src/lib/markdown.ts";
 
 test("scripts, frames, forms and event handlers do not reach the page", async () => {
   const html = await renderMarkdown(
@@ -94,4 +94,24 @@ test("repository images reserve space without changing their URLs or authored si
   assert.match(html, /width="1840" height="1200"/);
   assert.match(html, /width="128"[^>]*height="128"/);
   assert.match(html, /width="80" height="60"/);
+});
+
+test("article heading IDs match legacy fragments, including repeats and punctuation-only headings", async () => {
+  const markdown = "# Hello!\n\n## Top\n\n## 你好，`GPT`!\n\n### 你好，GPT!\n\n## 🎉";
+  const { html, headings } = await renderArticle(markdown);
+  assert.deepEqual(headings, [
+    { id: "hello", level: 1, text: "Hello!" },
+    { id: "top-section", level: 2, text: "Top" },
+    { id: "你好-gpt", level: 2, text: "你好，GPT!" },
+    { id: "你好-gpt-section", level: 3, text: "你好，GPT!" },
+    { id: "section-5", level: 2, text: "🎉" },
+  ]);
+  assert.match(html, /<h3 id="你好-gpt-section" tabindex="-1">[^<]+<a class="heading-anchor" href="#%E4%BD%A0%E5%A5%BD-gpt-section"/);
+  assert.doesNotMatch(await renderMarkdown(markdown, { feed: true }), /heading-anchor|tabindex=/);
+});
+
+test("static headings do not take an ID used by a rendered diagram", async () => {
+  const { html, headings } = await renderArticle("## Diagram 1 Title\n\n```mermaid\nflowchart TD\nA --> B\n```");
+  assert.match(html, /<title id="diagram-1-title">/);
+  assert.equal(headings[0].id, "diagram-1-title-section");
 });

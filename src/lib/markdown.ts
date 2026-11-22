@@ -2,6 +2,7 @@ import { resolve, sep } from "node:path";
 import { imageSizeFromFile } from "image-size/fromFile";
 import type { Element, ElementContent, Root } from "hast";
 import { toString } from "hast-util-to-string";
+import { parseFragment } from "parse5";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { type Options as Schema } from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
@@ -9,7 +10,7 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { bundledLanguages, codeToHast } from "shiki";
-import { unified } from "unified";
+import { unified, type Plugin } from "unified";
 import { SKIP, visit } from "unist-util-visit";
 import { renderDiagram } from "./diagram.ts";
 import { xcodeLight } from "./xcode-light.ts";
@@ -159,10 +160,11 @@ function languageOf(code: Element): string | undefined {
 }
 
 /** Draw Mermaid fences at build time. A source the renderer cannot draw stays as code. */
-function diagrams({ draw }: { draw: boolean }) {
-  return (tree: Root) => {
+const diagrams: Plugin<[{ draw: boolean }], Root> = ({ draw }) => {
+  return (tree, file) => {
     if (!draw) return;
     let count = 0;
+    const ids = new Set<string>();
     visit(tree, "element", (node, index, parent) => {
       if (node.tagName !== "pre" || !parent || index === undefined) return;
       const code = node.children.find((child): child is Element => child.type === "element" && child.tagName === "code");
@@ -174,11 +176,20 @@ function diagrams({ draw }: { draw: boolean }) {
         console.warn(process.env.GITHUB_ACTIONS ? `\n::warning title=Diagram::Cannot draw the Mermaid diagram that starts "${line}"; it is shown as code` : `Cannot draw the Mermaid diagram that starts "${line}"; it is shown as code`);
         return;
       }
+      const elements = [...parseFragment(html).childNodes];
+      for (const element of elements) {
+        if (!("attrs" in element)) continue;
+        for (const { name, value } of element.attrs) {
+          if (name === "id") ids.add(value);
+        }
+        elements.push(...element.childNodes);
+      }
       parent.children[index] = { type: "raw", value: html } as unknown as ElementContent;
       return SKIP;
     });
+    file.data.diagramIds = ids;
   };
-}
+};
 
 /** Color fenced code at build time. Mermaid and unknown languages stay plain text. */
 function syntax() {
@@ -211,10 +222,55 @@ function syntax() {
   };
 }
 
+export interface ArticleHeading {
+  id: string;
+  level: number;
+  text: string;
+}
+
+const articleHeadings: Plugin<[], Root> = () => {
+  return (tree, file) => {
+    // These IDs are already present in the article shell. Authored IDs are
+    // stripped by the allowlist, as they were before headings became static.
+    const used = new Set([
+      "top", "main-content", "site-navigation", "site-search", "search-title",
+      "search-query", "search-scope", "comments-title", "comments-container",
+      ...(file.data.diagramIds as Set<string>),
+    ]);
+    const headings: ArticleHeading[] = [];
+    visit(tree, "element", (node) => {
+      if (!/^h[1-3]$/.test(node.tagName)) return;
+      const text = toString(node);
+      const level = Number(node.tagName[1]);
+      // Keep the original browser-generated fragments, including repeats
+      // and the counting of H1s in older articles.
+      let id = text.trim().toLowerCase()
+        .replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "") || `section-${headings.length + 1}`;
+      while (used.has(id)) id += "-section";
+      used.add(id);
+      headings.push({ id, level, text: text.trim() });
+      node.properties.id = id;
+      node.properties.tabIndex = -1;
+      if (level === 1) return;
+      node.children.push({
+        type: "element",
+        tagName: "a",
+        properties: {
+          className: ["heading-anchor"],
+          href: `#${encodeURIComponent(id)}`,
+          ariaLabel: `章节链接：${text.trim() || id}`,
+        },
+        children: [{ type: "element", tagName: "span", properties: { ariaHidden: "true" }, children: [{ type: "text", value: "#" }] }],
+      });
+    });
+    file.data.headings = headings;
+  };
+};
+
 // The diagrams' markup is built by diagram.ts after the allowlist has run, so it is written as raw HTML.
 // A feed reader cannot read the page's CSS variables, so the feed keeps each diagram's source as code.
-function createProcessor(drawDiagrams: boolean) {
-  return unified()
+function createProcessor(mode: "page" | "article" | "feed") {
+  const processor = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
@@ -224,13 +280,29 @@ function createProcessor(drawDiagrams: boolean) {
     .use(linksAndImages)
     .use(imageDimensions)
     .use(scrollableTables)
-    .use(diagrams, { draw: drawDiagrams })
+    .use(diagrams, { draw: mode !== "feed" });
+  if (mode === "article") processor.use(articleHeadings);
+  return processor
     .use(syntax)
     .use(rehypeStringify, { allowDangerousHtml: true });
 }
 
-const processors = { page: createProcessor(true), feed: createProcessor(false) };
+const processors = { page: createProcessor("page"), feed: createProcessor("feed") };
+const articleProcessor = createProcessor("article");
 const cache = new Map<string, Promise<string>>();
+const articleCache = new Map<string, Promise<{ html: string; headings: ArticleHeading[] }>>();
+
+export function renderArticle(markdown: string) {
+  let output = articleCache.get(markdown);
+  if (!output) {
+    output = articleProcessor.process(markdown).then((file) => ({
+      html: String(file),
+      headings: file.data.headings as ArticleHeading[],
+    }));
+    articleCache.set(markdown, output);
+  }
+  return output;
+}
 
 /** Sanitized HTML of an Issue body, for a page or (with `feed`) for the Atom feed. */
 export function renderMarkdown(markdown: string, { feed = false } = {}): Promise<string> {
