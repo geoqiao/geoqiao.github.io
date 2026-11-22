@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 129,
+      "slug": "how-gemini-4-neon-uses-gpt",
+      "path": "blog/how-gemini-4-neon-uses-gpt.md"
+    },
+    {
       "issue_number": 128,
       "slug": "ai-agent-orchestration-and-division-of-labor",
       "path": "blog/ai-agent-orchestration-and-division-of-labor.md"
