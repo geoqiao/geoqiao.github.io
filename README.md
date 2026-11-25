@@ -79,6 +79,8 @@ sitemap 和静态资源。构建成功不代替线上检查。
 
 开发目标为当前稳定版 Chrome、Edge、Firefox 和 Safari（含 iOS Safari）。文章与基础导航保持静态可读；搜索等增强交互使用渐进增强，新 API 保留必要的轻量回退。实际验证浏览器随改动记录。
 
+支持 WebMCP 的 Chrome 可以通过 `search_blog_posts` 搜索已发布的博客文章。若要为特定来源启用 Chrome WebMCP Origin Trial，在构建时设置该来源的 `WEBMCP_ORIGIN_TRIAL_TOKEN`。省略变量时，页面省略对应的 meta 标签。
+
 ## Geo 主题
 
 首页展示个人介绍、手写注释、精选文章、最近文章与项目卡片；内页使用左侧导航，手机使用 Menu 展开导航。支持深浅主题、搜索、文章目录和 GitHub Issue 评论。布局与交互见 [Geo 说明](docs/geo.md)。

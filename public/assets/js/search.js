@@ -5,14 +5,17 @@
   const trigger = document.querySelector(".search-toggle");
   if (!script || !dialog || !trigger || typeof dialog.showModal !== "function") return;
 
+  const form = dialog.querySelector("form");
   const query = dialog.querySelector("#search-query");
   const results = dialog.querySelector(".search-results");
   const status = dialog.querySelector(".search-status");
   const error = dialog.querySelector(".search-error");
   let items = null;
   let pending = null;
+  let agentRequest = null;
   let returnFocus = null;
   let composing = false;
+  const resultLimit = 20;
   const normalize = value => value.normalize("NFKC").toLowerCase();
 
   function validItem(item) {
@@ -29,10 +32,10 @@
     } catch { return false; }
   }
 
-  function render() {
-    if (items === null) return;
-    const words = normalize(query.value).trim().split(/\s+/u).filter(Boolean);
-    const ranked = items.map(item => {
+  function find(value, blogOnly = false) {
+    const words = normalize(value).trim().split(/\s+/u).filter(Boolean);
+    return items.map(item => {
+      if (blogOnly && item.type !== "Blog") return null;
       const title = normalize(item.title);
       const tags = normalize(item.tags.join(" "));
       const description = normalize(item.description);
@@ -44,9 +47,12 @@
         else return null;
       }
       return { item, score };
-    }).filter(Boolean).sort((a, b) => b.score - a.score);
+    }).filter(Boolean).sort((a, b) => b.score - a.score).map(({ item }) => item);
+  }
+
+  function render(matches, value, blogOnly = false) {
     results.replaceChildren();
-    for (const { item } of ranked.slice(0, 20)) {
+    for (const item of matches.slice(0, resultLimit)) {
       const li = document.createElement("li");
       const link = document.createElement("a");
       link.href = item.url;
@@ -65,14 +71,24 @@
     }
     results.scrollTop = 0;
     if (!items.length) status.textContent = "No published content to search yet.";
-    else if (!ranked.length) status.textContent = "No results. Try a title, topic or project name.";
-    else if (!words.length) status.textContent = "Browse recent writing, ideas and projects.";
-    else status.textContent = `${ranked.length} result${ranked.length === 1 ? "" : "s"}${ranked.length > 20 ? " · Showing the first 20; refine your search" : ""}.`;
+    else if (!matches.length) status.textContent = blogOnly
+      ? "No results. Try a title, topic or tag."
+      : "No results. Try a title, topic or project name.";
+    else if (!normalize(value).trim()) status.textContent = "Browse recent writing, ideas and projects.";
+    else status.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"}${matches.length > resultLimit ? ` · Showing the first ${resultLimit}; refine your search` : ""}.`;
+  }
+
+  function renderVisitorResults() {
+    if (items !== null) render(find(query.value), query.value);
+  }
+
+  function showLoadError() {
+    status.textContent = "Could not load search. Retry or browse the archives.";
+    error.hidden = false;
   }
 
   function load() {
-    if (items !== null) { render(); return; }
-    if (pending) return;
+    if (pending) return pending;
     error.hidden = true;
     status.textContent = "Loading search…";
     const controller = new AbortController();
@@ -88,15 +104,22 @@
           throw new Error("Invalid search index");
         }
         items = data.items;
-        render();
       } catch {
-        status.textContent = "Could not load search. Retry or browse the archives.";
-        error.hidden = false;
+        // Let each caller report the failure if it still owns the search UI.
       } finally {
         clearTimeout(timer);
         pending = null;
       }
     })();
+    return pending;
+  }
+
+  async function refresh() {
+    if (agentRequest) return;
+    if (items === null) await load();
+    if (agentRequest || !dialog.open) return;
+    if (items === null) showLoadError();
+    else renderVisitorResults();
   }
 
   // iOS keeps the layout viewport under the keyboard, so size the sheet to the visible area.
@@ -106,7 +129,7 @@
   }
   viewport?.addEventListener("resize", fit);
 
-  function open(event) {
+  function showSearchDialog(event) {
     if (!dialog.open) {
       returnFocus = event?.currentTarget === trigger || document.activeElement === document.body
         ? trigger : document.activeElement;
@@ -115,20 +138,82 @@
     }
     fit();
     query.focus();
-    load();
   }
+
+  function open(event) {
+    showSearchDialog(event);
+    refresh();
+  }
+
+  async function searchForAgent(value) {
+    const term = value.trim();
+    const request = {};
+    agentRequest = request;
+    try {
+      if (!normalize(term).trim() || value.length > query.maxLength) {
+        return { query: term, error: "Enter a search term of 1–200 characters." };
+      }
+
+      showSearchDialog();
+      results.replaceChildren();
+      if (items === null) await load();
+      if (items === null) {
+        if (agentRequest === request) showLoadError();
+        return { query: term, error: "Could not load the search index." };
+      }
+
+      const matches = find(term, true);
+      if (agentRequest === request && dialog.open) render(matches, term, true);
+      return {
+        query: term,
+        total: matches.length,
+        results: matches.slice(0, resultLimit).map(({ title, date, tags, description, url }) => ({
+          title, date: typeof date === "string" ? date : null, tags, description, url: new URL(url, location.origin).href,
+        })),
+      };
+    } finally {
+      if (agentRequest === request) agentRequest = null;
+    }
+  }
+
+  const modelContext = document.modelContext;
+  const toolEventTarget = type => `on${type}` in (modelContext ?? {}) ? modelContext : window;
+  const toolName = form.getAttribute("toolname");
+  toolEventTarget("toolactivated").addEventListener("toolactivated", event => {
+    if (event.toolName === toolName && agentRequest && dialog.open) {
+      status.textContent = "Searching blog posts…";
+    }
+  });
+  toolEventTarget("toolcancel").addEventListener("toolcancel", event => {
+    if (event.toolName !== toolName) return;
+    if (agentRequest && dialog.open) status.textContent = "Search canceled.";
+    agentRequest = null;
+  });
 
   trigger.hidden = false;
   trigger.addEventListener("click", open);
   dialog.querySelector(".search-close").addEventListener("click", () => dialog.close());
-  dialog.querySelector(".search-retry").addEventListener("click", () => { load(); query.focus(); });
-  dialog.querySelector("form").addEventListener("submit", event => {
+  dialog.querySelector(".search-retry").addEventListener("click", () => { refresh(); query.focus(); });
+  form.addEventListener("submit", event => {
     event.preventDefault();
+    if (event.agentInvoked) {
+      event.respondWith(searchForAgent(query.value));
+      return;
+    }
     if (!composing) results.querySelector("a")?.click();
   });
   query.addEventListener("compositionstart", () => { composing = true; });
-  query.addEventListener("compositionend", () => { composing = false; render(); });
-  query.addEventListener("input", () => { if (!composing) render(); });
+  function updateVisitorResults() {
+    agentRequest = null;
+    if (composing) return;
+    if (pending) refresh();
+    else renderVisitorResults();
+  }
+  query.addEventListener("compositionend", () => {
+    composing = false;
+    updateVisitorResults();
+  });
+  query.addEventListener("input", updateVisitorResults);
   dialog.addEventListener("click", event => {
     if (event.target !== dialog) return;
     const bounds = dialog.getBoundingClientRect();
@@ -136,6 +221,7 @@
       || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
   dialog.addEventListener("close", () => {
+    agentRequest = null;
     document.documentElement.classList.remove("search-open");
     const target = [returnFocus, document.querySelector(".navigation-toggle"), trigger]
       .find(element => element?.isConnected && element.getClientRects().length);

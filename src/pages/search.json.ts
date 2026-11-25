@@ -7,6 +7,7 @@ export const GET: APIRoute = async () => {
   const items = [
     ...posts.map((post) => ({
       title: post.title,
+      date: post.createdDate,
       description: post.description,
       tags: post.tags.map((tag) => tag.name),
       type: "Blog",

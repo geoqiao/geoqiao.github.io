@@ -8,6 +8,14 @@ html.search-open { overflow: hidden; }
 .search-input-row { display: flex; align-items: center; gap: 10px; padding: 4px 6px 4px 14px; border-radius: 10px; background: var(--feature); color: var(--muted); }
 /* The transparent outline becomes a visible ring in forced-colors mode, where shadows are dropped. */
 .search-input-row:focus-within { outline: 2px solid transparent; box-shadow: 0 0 0 2px var(--accent); color: var(--accent); }
+.search-form:tool-form-active .search-input-row {
+  outline: 1px dashed var(--accent);
+  outline-offset: 3px;
+}
+.search-form :tool-submit-active {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .search-input-row > svg { flex: none; }
 .search-close { flex: none; min-height: 36px; min-width: 44px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--canvas); color: var(--muted); font-size: .75rem; }
 .search-close-text { display: none; }

@@ -29,11 +29,13 @@ const socialImage = cardUrl ?? site.seo.socialImage;
 const socialImageAlt = shareCard?.alt ?? site.seo.socialImageAlt;
 const twitterImage = cardUrl ?? (site.profile.avatar ? absolute(site.profile.avatar) : null);
 const { googleSearchConsole } = site.seo;
+const webMcpOriginTrial = import.meta.env.WEBMCP_ORIGIN_TRIAL_TOKEN?.trim();
 ---
 <!DOCTYPE html>
 <html lang={site.language}>
 <head>
   <meta charset="utf-8">
+  {webMcpOriginTrial && <meta http-equiv="origin-trial" content={webMcpOriginTrial}>}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{title}{title !== site.title && ` · ${site.title}`}</title>

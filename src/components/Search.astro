@@ -1,9 +1,20 @@
 <dialog id="site-search" class="search-dialog" aria-labelledby="search-title" lang="en">
   <h2 id="search-title" class="visually-hidden">Search</h2>
-  <form class="search-form" role="search">
+  <form
+    class="search-form"
+    role="search"
+    {...{
+      toolname: "search_blog_posts",
+      tooldescription: "Search Geo Qiao's blog posts by keyword, topic, or tag and return matching titles, dates, tags, summaries, and URLs.",
+      toolautosubmit: "",
+    }}
+    novalidate
+  >
     <div class="search-input-row">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
-      <input id="search-query" type="search" maxlength="200" placeholder="Search…" aria-label="Search articles and projects" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="search-scope" autofocus>
+      <input id="search-query" name="q" type="search" required maxlength="200"
+        {...{ toolparamdescription: "A term or phrase to match against post titles, summaries, and tags, such as Rye or Gemini." }}
+        placeholder="Search…" aria-label="Search articles and projects" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="search-scope" autofocus>
       <button class="search-close" type="button" aria-label="Close search"><span class="search-close-key" aria-hidden="true">Esc</span><span class="search-close-text" aria-hidden="true">Cancel</span></button>
     </div>
   </form>
