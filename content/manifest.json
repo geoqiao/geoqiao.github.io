@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 132,
+      "slug": "how-i-use-orca",
+      "path": "blog/how-i-use-orca.md"
+    },
+    {
       "issue_number": 131,
       "slug": "what-is-webmcp-for-users-and-creators",
       "path": "blog/what-is-webmcp-for-users-and-creators.md"
