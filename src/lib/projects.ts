@@ -5,6 +5,8 @@ export interface Project {
   title: string;
   repository: string;
   summary: string;
+  homeTitle: string;
+  homeSummary: string;
   /** The project's page on this site. */
   path: string;
   featured: boolean;
@@ -57,6 +59,8 @@ async function load(): Promise<Project[]> {
         title: entry.title,
         repository: entry.repository ?? "",
         summary: entry.summary ?? "",
+        homeTitle: entry.home_title ?? entry.title,
+        homeSummary: entry.home_summary ?? entry.summary ?? "",
         path: `/projects/${entry.slug}/`,
         featured: entry.featured ?? false,
         language: fetched?.language || fallback.language || null,

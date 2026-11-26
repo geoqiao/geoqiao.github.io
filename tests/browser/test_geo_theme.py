@@ -59,73 +59,73 @@ class GeoThemeBrowserTests(unittest.TestCase):
         finally:
             context.close()
 
-    def test_card_lifts_on_hover_and_opens_in_one_step(self):
+    def test_home_section_order_and_project_links(self):
         with self.page() as page:
-            deck = page.locator("[data-project-deck]")
-            expect(deck).to_have_class(re.compile("deck-enhanced"))
-            card = page.locator(".deck-card").last
-            destination = card.get_attribute("href")
+            sections = page.locator("main > header, main > section")
+            self.assertEqual(sections.evaluate_all("""elements => elements.map(element =>
+                element.matches('.home-heading') ? 'Intro' : element.querySelector('h2').textContent
+            )"""), ["Intro", "Projects", "Featured writing", "Recent articles"])
+            projects = page.get_by_role("region", name="Projects")
+            expect(projects.get_by_role("link", name="View all")).to_have_attribute("href", "/projects/")
+            links = projects.locator(".project-grid a")
+            self.assertEqual(links.evaluate_all("links => links.map(link => link.getAttribute('href'))"), [
+                "/projects/escaping/", "/projects/md2xarticle/", "/projects/boji-club/",
+                "/projects/pi-tools/", "/projects/paseo-stuff/", "/projects/pixelstand/",
+            ])
+            expect(page.locator(".project-deck")).to_have_count(0)
+
+    def test_project_hover_and_one_step_navigation(self):
+        with self.page() as page:
+            items = page.locator(".project-grid > li")
+            link = items.last.get_by_role("link")
+            destination = link.get_attribute("href")
             with page.context.expect_page() as popup:
-                card.click(modifiers=["ControlOrMeta"])
+                link.click(modifiers=["ControlOrMeta"])
             popup.value.bring_to_front()
             expect(popup.value).to_have_url(self.origin + destination)
             popup.value.close()
             page.bring_to_front()
+            link.hover()
+            expect(items.last).to_have_css("opacity", "1")
+            expect(items.first).to_have_css("opacity", "0.44")
             page.mouse.move(0, 0)
-            expect(page.locator(".deck-details").last).not_to_be_visible()
-            card.hover()
-            expect(page.locator(".deck-details").last).to_be_visible()
-            card.click()
-            page.wait_for_url(self.origin + destination)
+            expect(items.first).to_have_css("opacity", "1")
+            link.click()
+            expect(page).to_have_url(self.origin + destination)
             expect(page.locator("main")).to_be_visible()
 
-    def test_keyboard_focus_lifts_a_card_and_enter_opens_it(self):
+    def test_keyboard_focus_and_enter_open_project(self):
         with self.page() as page:
-            page.add_script_tag(url=self.origin + "/assets/js/home.js")
-            cards = page.locator(".deck-card")
-            cards.last.focus()
-            page.keyboard.press("Tab")
-            page.keyboard.press("Shift+Tab")
-            expect(cards.last).to_be_focused()
-            expect(page.locator(".deck-details").last).to_be_visible()
-            destination = cards.last.get_attribute("href")
+            projects = page.get_by_role("region", name="Projects")
+            projects.get_by_role("link", name="View all").focus()
+            # WebKit on macOS uses Option-Tab to include links in sequential focus.
+            tab = "Alt+Tab" if sys.platform == "darwin" and os.getenv("GEO_BROWSER") == "webkit" else "Tab"
+            page.keyboard.press(tab)
+            link = projects.locator(".project-grid a").first
+            expect(link).to_be_focused()
+            expect(link).to_have_css("outline-style", "solid")
+            destination = link.get_attribute("href")
             page.keyboard.press("Enter")
-            page.wait_for_url(self.origin + destination)
+            expect(page).to_have_url(self.origin + destination)
 
-    def test_mobile_reduced_motion_and_resize(self):
+    def test_project_layout_resizes_without_horizontal_overflow(self):
         with self.page() as page:
-            cards = page.locator(".deck-card")
-            for width in (390, 768, 999, 1000, 1440, 1920):
-                page.set_viewport_size({"width": width, "height": 1000})
-                self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
-            page.set_viewport_size({"width": 1440, "height": 1000})
-            cards.last.hover()
-            page.set_viewport_size({"width": 390, "height": 844})
-            expect(page.locator("[data-project-deck]")).not_to_have_class(re.compile("deck-enhanced"))
-            self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), 390)
-            destination = cards.first.get_attribute("href")
-            cards.first.click()
-            page.wait_for_url(self.origin + destination)
-        with self.page(reduced_motion="reduce") as page:
-            self.assertEqual(page.locator(".deck-list").evaluate("e => getComputedStyle(e).display"), "grid")
-            self.assertEqual(page.locator(".deck-card").first.evaluate("e => getComputedStyle(e).transform"), "none")
-            expect(page.locator(".deck-details").first).to_be_visible()
-            card = page.locator(".deck-card").first
-            destination = card.get_attribute("href")
-            card.click()
-            page.wait_for_url(self.origin + destination)
+            grid = page.locator(".project-grid")
+            for width, columns in ((390, 1), (500, 2), (768, 3), (999, 3), (1000, 3), (1440, 3), (1920, 3)):
+                with self.subTest(width=width):
+                    page.set_viewport_size({"width": width, "height": 844})
+                    self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), width)
+                    tracks = grid.evaluate("element => getComputedStyle(element).gridTemplateColumns")
+                    self.assertEqual(len(tracks.split()), columns)
 
-    def test_no_script_and_failed_home_script_keep_links(self):
-        for disabled in (True, False):
-            with self.subTest(java_script_disabled=disabled), self.page(java_script_enabled=not disabled) as page:
-                if not disabled:
-                    page.route("**/assets/js/home.js", lambda route: route.abort())
-                    page.reload()
-                card = page.locator(".deck-card").first
-                expect(page.locator(".deck-details").first).to_be_visible()
-                destination = card.get_attribute("href")
-                card.click()
-                page.wait_for_url(self.origin + destination)
+    def test_project_links_work_without_scripts(self):
+        with self.page(java_script_enabled=False, has_touch=True) as page:
+            page.set_viewport_size({"width": 390, "height": 844})
+            link = page.locator(".project-grid a").first
+            expect(link.locator(".project-grid-summary")).to_be_visible()
+            destination = link.get_attribute("href")
+            link.tap()
+            expect(page).to_have_url(self.origin + destination)
 
     def test_home_navigation_search_and_appearance(self):
         with self.page(color_scheme="light") as page:
@@ -293,18 +293,17 @@ class GeoThemeBrowserTests(unittest.TestCase):
                     page.goto(self.origin + "/blog/")
                     self.assertEqual(palette(), [accent, selection])
 
-    def test_runtime_motion_change_turns_the_fan_on_and_off(self):
+    def test_runtime_reduced_motion_keeps_project_focus(self):
         with self.page() as page:
-            deck = page.locator("[data-project-deck]")
-            card = page.locator(".deck-card").last
-            card.focus()
+            link = page.locator(".project-grid a").last
+            arrow = link.locator(".project-grid-arrow")
+            link.focus()
             page.emulate_media(reduced_motion="reduce")
-            expect(deck).not_to_have_class(re.compile("deck-enhanced"))
-            expect(card).to_be_focused()
-            expect(page.locator(".deck-details").last).to_be_visible()
+            expect(link).to_be_focused()
+            expect(arrow).to_have_css("transform", "none")
             page.emulate_media(reduced_motion="no-preference")
-            expect(deck).to_have_class(re.compile("deck-enhanced"))
-            expect(card).to_be_focused()
+            expect(link).to_be_focused()
+            expect(arrow).to_have_css("transform", "matrix(1, 0, 0, 1, 1.5, -1.5)")
 
     def test_product_catalog_pages_and_shared_logo(self):
         with self.page() as page:

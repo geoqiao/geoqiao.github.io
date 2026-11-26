@@ -21,16 +21,14 @@ Every address the site had under escaping's own renderer is kept. `node scripts/
 
 - `src/layouts/Base.astro` and `src/components/HeaderControls.astro`: inner pages use a narrow text navigation list in the left margin, with search and appearance directly below it; the whole rail stays in place while scrolling. Home keeps them at the top right of the reading column. With a mouse, the two controls are 36px and sit side by side as one group; touch keeps 44px targets. At 1080px and below, navigation collapses into a Menu control at the top left; the compact header stays available while scrolling. Without JavaScript, navigation links remain visible in the page.
 - `src/components/Intro.astro`: the personal introduction and three handwritten navigation notes. Decorative notes are hidden from screen readers; destination words remain normal links.
-- `src/pages/index.astro`: identity, featured writing (`featuredPosts` in `src/site.config.ts`), the five newest posts, and the project section.
-- `src/components/ProjectDeck.astro`: real project links with optional desktop previews.
+- `src/pages/index.astro` renders the introduction, project grid, featured writing (`featuredPosts` in `src/site.config.ts`), and five newest posts in that order.
 - `public/assets/css/geo.css`: Geo's shared palette, Spectral and JetBrains Mono typefaces, left navigation, and top controls.
-- `public/assets/css/home.css`: annotation choreography, homepage layout, card fan, and responsive/reduced-motion layouts.
-- `public/assets/js/home.js`: one selected card, switch/dismiss/navigation behavior, measured positioning, and interruptible scroll assistance. It loads only on Home.
+- `public/assets/css/home.css` controls the handwritten annotations, homepage spacing, and responsive project grid.
 - `public/assets/js/appearance.js` and `site.js`: use Geo's own `geo-theme` preference key. `site.js` also handles the compact navigation disclosure, Escape/outside dismissal, and focus when crossing the navigation breakpoint.
 - `src/components/ProjectEntry.astro`: a text-led Projects catalog and a compact, correctly nested project list on About. Project logos are 48px on desktop, 40px on narrow screens, and 32px on About.
 - `src/pages/tags/`: an alphabetical topic index with counts and compact article listings.
 - `public/assets/css/syntax.css`: code colors. Each token carries Xcode's light color and GitHub's dark color; the stylesheet picks one.
-- `public/assets/images/projects/`: local [homepage covers](theme-covers.md) and [project logos](theme-logos.md).
+- `public/assets/images/projects/` holds local [project logos](theme-logos.md) and [historical covers](theme-covers.md).
 
 Dark mode uses a green accent drawn from the green stroke in the profile mark (`#4faf90`) for tags, navigation markers, general links, and focus outlines. Light mode uses its original pink accent (`#a72f6a`) and pale pink selection. Homepage annotation notes, arrows, link highlights, and hover colors keep their blue/green/purple hues in both appearances; dark mode uses lighter shades of them (`#6f9ad6`, `#4fa874`, `#b087cf`) so they stay readable. Mobile retains the colored link highlights while hiding the decorative notes and arrows. The shared palette belongs to `geo.css`; `home.css` owns the annotation colors. Both support system appearance without JavaScript and neutral print colors.
 
@@ -38,9 +36,9 @@ Light appearance uses a white canvas (`#ffffff`) with neutral light-gray panels 
 
 Comments load within 300px of the viewport, with a GitHub link available if the embed fails. WebKit iframe handling is scoped to the comments container. Markdown images backed by immutable repository attachments or public assets receive missing dimensions at build time, preserving authored sizing and source URLs without downloading remote images.
 
-The homepage takes visual inspiration from kieran.build. The annotation SVG paths, animation styles, and card controller were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral, Shantell Sans, JetBrains Mono (5.3.0) and Noto Serif SC (5.3.1) are self-hosted from Fontsource; OFL notices are alongside the font files. Noto Serif SC follows Spectral in an article's own headings only (`.article-heading h1` and `.post-content` h1–h3). It is subset at build time (`src/lib/title-font.ts`, `subset-font`) from Fontsource's `chinese-simplified` 600 file to the characters of each article's headings, written to `/assets/fonts/title/<slug>-<hash>.woff2` (5–22 KB), preloaded and declared in an inline `@font-face` in the page head. There is no font stylesheet and an article without Chinese headings loads nothing. A character outside the font falls back to Songti SC.
+The homepage takes visual inspiration from kieran.build. The annotation SVG paths and animation styles were implemented for Geo. No Kieran imagery or custom source files were copied. Spectral, Shantell Sans, JetBrains Mono (5.3.0) and Noto Serif SC (5.3.1) are self-hosted from Fontsource; OFL notices are alongside the font files. Noto Serif SC follows Spectral in an article's own headings only (`.article-heading h1` and `.post-content` h1–h3). It is subset at build time (`src/lib/title-font.ts`, `subset-font`) from Fontsource's `chinese-simplified` 600 file to the characters of each article's headings, written to `/assets/fonts/title/<slug>-<hash>.woff2` (5–22 KB), preloaded and declared in an inline `@font-face` in the page head. There is no font stylesheet and an article without Chinese headings loads nothing. A character outside the font falls back to Songti SC.
 
-Project content lives under `projects:` in `config.yaml`. `image` supplies the shared Projects/About/product-page logo; paseo-stuff uses the purple `p+` mark. The homepage deck retains its screenshot covers, and opens each product homepage. The Projects catalog retains its layout and links to `/projects/<slug>/`. Assets use `/assets/…` paths.
+Project content lives under `projects:` in `config.yaml`. The homepage grid uses the catalog's order and links. Optional `home_title` and `home_summary` fields supply shorter homepage copy and default to `title` and `summary`. `image` supplies the shared Projects, About, and product-page logo.
 
 Each project has a product page at `/projects/<slug>/`, written from `src/project-pages/<slug>.html`. Every project in `config.yaml` therefore needs its own file there; the build fails without it. The pages are listed in search and the sitemap. md2xarticle is a website-only project with an explicit `slug`. Maintenance, media provenance and compatibility limits are documented in [product homepages](product-homepages.md).
 
@@ -64,11 +62,7 @@ The helper runs `escaping-site export` into `build/content/` (its own export; it
 
 ## Interaction contract
 
-On a wide screen with a fine pointer and normal motion, the deck fans out. A card lifts and shows its summary on hover or keyboard focus, and one click or Enter follows its link. Cmd/Ctrl-click and middle-click keep ordinary link behavior. Otherwise the deck is a plain grid, or a swipe row below 1000px.
-
-Below 1000 CSS pixels, cards use a swipeable row. Wide touch-only screens use a flat grid. Both open projects with one activation. Reduced motion uses a static grid and disables animated annotations, backgrounds, and assisted scrolling. Without JavaScript, or if Home's script fails, full cards and links remain usable. Fewer than three cards also stays a normal grid.
-
-The retreat distance is measured from the complete selected card so its description does not overlap the row behind it. Wheel/touch/manual scroll keys interrupt scrolling; resizing or changing motion preferences closes or repositions the preview as appropriate.
+The homepage grid uses one column below 400px of available space, two from 400px, and three from 560px. On hover-capable devices, hovering a project link dims the other projects while keeping any keyboard-focused link at full opacity. Keyboard focus highlights the active link and shows an outline. Reduced motion disables the transitions and arrow movement. Each project opens with one activation and works with JavaScript disabled.
 
 ## Checks
 
@@ -85,4 +79,4 @@ git diff --check
 
 If browser executables are missing, install them using `uv run --no-project --python 3.14 --with playwright==1.62.0 playwright install chromium webkit`.
 
-The browser suite exercises the real generated site: article code colors, diagrams, contents and comment binding, an old-address page, selection and navigation, card lift on hover and keyboard focus, repeated initialization, responsive navigation and focus, control alignment, runtime motion changes, no-JavaScript/failed-script fallback, search, and persisted appearance. It also checks the distinct light/dark palettes with and without scripts. Visually inspect annotation placement, covers, both color schemes, long article pages, and intermediate widths when changing the design. Browser checks are separate from the existing dependency-light production unittest discovery.
+The browser suite exercises the generated site's project grid, article code colors, diagrams, contents and comment binding, an old-address page, responsive navigation and focus, control alignment, runtime motion changes, search, and persisted appearance. It also checks the distinct light and dark palettes with and without scripts. Visually inspect annotation placement, the project grid, both color schemes, long article pages, and intermediate widths when changing the design. Browser checks run separately from the Python unit tests.

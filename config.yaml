@@ -122,6 +122,7 @@ projects:
     title: escaping
     repository: geoqiao/escaping
     summary: 把 GitHub Issues 变成个人网站。你正在读的这个博客，也由它驱动。
+    home_summary: 用 GitHub Issues 驱动的静态站。
     image: /assets/images/projects/escaping-logo.webp
     links:
       - name: 访问网站
@@ -136,6 +137,7 @@ projects:
     title: md2xarticle
     website: https://md2xarticle.com/
     summary: 把 Markdown 变成 X 长文，处理本地图片、表格与 Mermaid 图表。
+    home_summary: 把 Markdown 转为 X 长文与图表。
     image: /assets/images/projects/md2xarticle.svg
     links:
       - name: 打开编辑器
@@ -147,6 +149,7 @@ projects:
     title: Boji Club
     website: https://boji-club.geoqiao.me/
     summary: 薄肌俱乐部，把训练经验和常见问题整理成可搜索的健身知识库。
+    home_summary: 训练经验与薄肌健身知识库。
     image: /assets/images/projects/boji-club.svg
     links:
       - name: 访问薄肌俱乐部
@@ -158,6 +161,7 @@ projects:
     title: pi-tools
     repository: geoqiao/pi-tools
     summary: 为 Pi 提供结构化提问与本地 AI 用量报告，支持 Paseo 等 RPC 客户端。
+    home_summary: Pi 的结构化提问与本地用量报告。
     image: /assets/images/projects/pi-tools-logo.webp
     featured: false
     order: 4
@@ -168,6 +172,7 @@ projects:
     title: paseo-stuff
     repository: geoqiao/paseo-stuff
     summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
+    home_summary: Paseo 排版与 DeepSeek 插件。
     image: /assets/images/projects/paseo-stuff-logo.svg
     featured: false
     order: 5
@@ -179,6 +184,8 @@ projects:
     repository: geoqiao/jojo-codex-pet
     website: https://pixelstand.geoqiao.me/
     summary: 非商业开源作品集：横跨 JoJo 第 1–9 部的 36 只 Codex 像素动画宠物图库，一条命令安装。
+    home_title: PixelStand
+    home_summary: 36 只 JoJo 像素动画宠物图库。
     image: /assets/images/projects/pixelstand.svg
     links:
       - name: 访问图库

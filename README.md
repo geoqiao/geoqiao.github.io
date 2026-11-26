@@ -83,6 +83,6 @@ sitemap 和静态资源。构建成功不代替线上检查。
 
 ## Geo 主题
 
-首页展示个人介绍、手写注释、精选文章、最近文章与项目卡片；内页使用左侧导航，手机使用 Menu 展开导航。支持深浅主题、搜索、文章目录和 GitHub Issue 评论。布局与交互见 [Geo 说明](docs/geo.md)。
+首页依次展示带手写注释的个人介绍、项目网格、精选文章和最近文章。内页使用左侧导航，手机使用 Menu 展开导航。支持深浅主题、搜索、文章目录和 GitHub Issue 评论。布局与交互见 [Geo 说明](docs/geo.md)。
 
 项目目录保留 Boji Club，页脚提供 GitHub、Twitter/X、视频号、抖音和 RSS。视频号 `/channels/` 展示官方作品二维码，进入作品后可点头像查看主页；二维码来源见 [来源记录](public/assets/images/weixin-video-qr-source.md)。

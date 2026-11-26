@@ -90,78 +90,84 @@
 .home-writing a { display: flex; align-items: baseline; justify-content: space-between; min-height: 44px; font-size: 1.0625rem; padding-block: 9px; gap: 30px; line-height: 1.8; }
 .home-writing a > span { min-width: 0; overflow-wrap: anywhere; transition: color 160ms ease; }
 .home-writing time { flex-shrink: 0; white-space: nowrap; font-size: .6875rem; color: var(--muted); }
-.home-projects { margin-top: 88px; }
-.project-deck {
-  position: relative;
-  width: min(var(--stage-width), calc(100vw - 64px));
-  margin-left: calc((100% - min(var(--stage-width), 100vw - 64px)) / 2);
-  padding-top: 16px;
-}
-.deck-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; list-style: none; padding: 0; margin: 0; }
-.deck-slot { position: relative; min-width: 0; }
-.deck-card {
-  display: block;
-  padding: 9px;
-  border-radius: 16px;
-  background: var(--paper);
-  color: var(--ink);
-  box-shadow: var(--object-shadow);
-  transform-origin: center top;
-  -webkit-tap-highlight-color: transparent;
-}
-.deck-card:hover { color: var(--ink); }
-.deck-card:focus-visible { outline-offset: 5px; }
-.deck-cover { display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 8px; background: var(--feature); }
-.deck-cover img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-.deck-cover--logo {
+.home-projects { container: home-projects / inline-size; }
+.home-projects > .section-heading { margin-bottom: 18px; }
+.home-projects + .home-section { margin-top: 56px; }
+.project-grid {
   display: grid;
-  place-items: center;
-  padding: 24px;
-  background: var(--canvas);
-  border: 1px solid color-mix(in oklab, var(--line) 72%, transparent);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px 24px;
+  list-style: none;
+  padding: 2px 0 0;
+  margin: 0;
 }
-.deck-cover--logo img {
-  width: 84px;
-  height: 84px;
-  object-fit: contain;
-  object-position: center;
-  filter: drop-shadow(0 6px 16px rgb(41 39 37 / .08));
+.project-grid > li { transition: opacity 160ms ease; }
+@media (hover: hover) {
+  .project-grid:has(> li > a:hover) > li:not(:hover, :focus-within) { opacity: .44; }
 }
-:root[data-theme="dark"] .deck-cover--logo {
-  background: #212126;
-  border-color: color-mix(in oklab, var(--line) 85%, transparent);
+.project-grid a {
+  display: block;
+  padding-block: 2px;
+  border-radius: 2px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
 }
-:root[data-theme="dark"] .deck-cover--logo img {
-  filter: drop-shadow(0 8px 20px rgb(0 0 0 / .38));
+.project-grid a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .deck-cover--logo {
-    background: #212126;
-    border-color: color-mix(in oklab, var(--line) 85%, transparent);
+.project-grid-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font: 500 .96875rem/1.45 var(--sans);
+  letter-spacing: -.008em;
+}
+.project-grid-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--ink) 22%, transparent);
+  text-underline-offset: 4px;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+.project-grid-arrow {
+  display: inline-block;
+  font-size: .78em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--muted) 62%, transparent);
+  transition: transform 160ms cubic-bezier(.23, 1, .32, 1), color 160ms ease;
+}
+.project-grid a:is(:hover, :focus-visible) .project-grid-name {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+.project-grid a:is(:hover, :focus-visible) .project-grid-arrow { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .project-grid a:is(:hover, :focus-visible) .project-grid-arrow { transform: translate(1.5px, -1.5px); }
+}
+.project-grid-summary {
+  display: block;
+  margin-top: 5px;
+  font-size: .84375rem;
+  line-height: 1.58;
+  color: var(--muted);
+}
+@container home-projects (inline-size >= 400px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
   }
-  :root:not([data-theme]) .deck-cover--logo img {
-    filter: drop-shadow(0 8px 20px rgb(0 0 0 / .38));
+}
+@container home-projects (inline-size >= 560px) {
+  .project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px clamp(20px, 4cqi, 32px);
   }
 }
-.deck-placeholder { display: grid; height: 100%; place-items: center; font: 400 2rem var(--display); }
-.deck-meta { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 2px 8px; min-height: 60px; padding: 14px 7px 8px; }
-.deck-title { font: 400 1.75rem/1.15 var(--display); letter-spacing: -.025em; overflow-wrap: anywhere; }
-.deck-language { font: .6rem/1.4 var(--mono); color: var(--accent); }
-.deck-details { display: block; padding: 4px 8px 12px; }
-.deck-summary { display: block; font-size: .8125rem; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
-.deck-open { display: block; margin-top: 14px; font: .8125rem/1.5 var(--sans); color: var(--accent); }
-.home .site-footer { margin-top: 100px; padding-bottom: 44px; }
-
-/* Only the successfully wired desktop controller opts into the fan. A card lifts on hover or keyboard focus and opens on one click. */
-.deck-enhanced .deck-list { display: flex; justify-content: center; gap: 16px; padding: 30px 0 32px; }
-.deck-enhanced .deck-slot { flex: 0 0 280px; height: 277px; margin-left: 0; z-index: var(--order); }
-.deck-enhanced .deck-slot:first-child { margin-left: 0; }
-.deck-enhanced .deck-card { position: absolute; top: 0; left: 0; width: 100%; transform: translateY(var(--drop)) rotate(var(--tilt)); transition: transform 320ms cubic-bezier(.32, .72, 0, 1), box-shadow 320ms ease; }
-.deck-enhanced .deck-meta { min-height: 62px; }
-.deck-enhanced .deck-slot:is(:hover, :focus-within) { z-index: 8; }
-.deck-enhanced .deck-card:is(:hover, :focus-visible) { transform: translateY(var(--drop)) rotate(var(--tilt)) scale(1.045); box-shadow: var(--raised-shadow); }
-.deck-enhanced .deck-details { display: none; }
-.deck-enhanced .deck-card:is(:hover, :focus-visible) .deck-details { display: block; animation: geo-detail 240ms 120ms both; }
+@media (pointer: coarse) {
+  .project-grid a { padding-block: 4px; }
+}
+.home .site-footer { margin-top: 84px; padding-bottom: 44px; }
 
 @media (prefers-reduced-motion: no-preference) {
   .home-title { animation: geo-arrive 450ms both; }
@@ -176,7 +182,6 @@
 @keyframes geo-draw { 0%, 24% { stroke-dashoffset: 110; opacity: 0; } 28% { opacity: 1; } 65%, 100% { stroke-dashoffset: 0; opacity: 1; } }
 @keyframes geo-note { 0%, 65% { opacity: 0; } 90%, 100% { opacity: 1; } }
 @keyframes geo-wiggle { 0%, 100% { rotate: 0deg; } 25% { rotate: 1.2deg; } 75% { rotate: -1.2deg; } }
-@keyframes geo-detail { from { opacity: 0; } to { opacity: 1; } }
 
 @media (max-width: 999px) {
   .home .site-surface { padding-top: 38px; }
@@ -189,11 +194,8 @@
   .home-section > .section-heading h2 { font-size: 1.6rem; }
   .home-writing a { font-size: 1rem; gap: 20px; }
   .home-writing time { font-size: .625rem; }
-  .project-deck { width: 100%; margin-left: 0; padding-top: 4px; }
-  .deck-list { display: flex; gap: 18px; overflow-x: auto; padding: 3px 3px 20px; scroll-snap-type: x mandatory; scroll-padding-inline: 3px; scrollbar-width: thin; }
-  .deck-slot { flex: 0 0 min(78vw, 360px); scroll-snap-align: start; }
-  .deck-title { font-size: 1.8rem; }
-  .home-projects { margin-top: 64px; }
+  .home-projects { margin-top: 40px; }
+  .home-projects + .home-section { margin-top: 48px; }
   .home .site-footer { margin-top: 64px; }
 }
 @media (max-width: 520px) {
@@ -210,18 +212,9 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .home *, .home *::before, .home *::after { animation: none !important; transition: none !important; }
-  .deck-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; overflow: visible; scroll-snap-type: none; }
-  .deck-card { transform: none; }
-  .deck-slot { min-width: 0; }
 }
-@media (prefers-reduced-motion: reduce) and (max-width: 600px) { .deck-list { grid-template-columns: 1fr; } }
 @media print {
   .annotation-note, .annotation-arrow { display: none; }
   .home-heading { margin-bottom: 32px; }
-  .home-intro, .project-deck { width: 100%; margin-left: 0; }
-  .home-intro { margin-top: 24px; text-align: left; }
-  .deck-enhanced .deck-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .deck-enhanced .deck-slot { margin: 0; height: auto; }
-  .deck-enhanced .deck-slot .deck-card { position: static; transform: none; box-shadow: none; border: 1px solid var(--line); break-inside: avoid; }
-  .deck-enhanced .deck-details { display: block; }
+  .home-intro { width: 100%; margin: 24px 0 0; text-align: left; }
 }

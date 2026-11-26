@@ -1,6 +1,5 @@
 ---
 import Intro from "../components/Intro.astro";
-import ProjectDeck from "../components/ProjectDeck.astro";
 import Base from "../layouts/Base.astro";
 import { site } from "../lib/config";
 import { posts, type Post } from "../lib/content";
@@ -12,7 +11,7 @@ const featured = featuredPosts.flatMap((number) => {
   if (!post) console.warn(`featuredPosts: Issue #${number} is not a published Blog post; it is left out`);
   return post ? [post] : [];
 });
-const featuredProjects = (await getProjects()).filter((project) => project.featured);
+const projects = await getProjects();
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -33,6 +32,26 @@ const lists: { id: string; title: string; posts: Post[]; all?: boolean }[] = [
   </div>
   <Intro />
 </header>
+{projects.length > 0 && (
+  <section class="home-section home-projects" aria-labelledby="projects-title">
+    <div class="section-heading">
+      <h2 id="projects-title">Projects</h2>
+      <a href="/projects/">View all <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="project-grid" role="list">
+      {projects.map((project) => (
+        <li>
+          <a href={project.path}>
+            <span class="project-grid-title">
+              <span class="project-grid-name">{project.homeTitle}</span><span class="project-grid-arrow" aria-hidden="true">↗</span>
+            </span>
+            {project.homeSummary && <span class="project-grid-summary">{project.homeSummary}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
 {lists.map((list) => (
   <section class="home-section" aria-labelledby={list.id}>
     <div class="section-heading"><h2 id={list.id}>{list.title}</h2>{list.all && <a href="/blog/">View all <span aria-hidden="true">→</span></a>}</div>
@@ -47,10 +66,4 @@ const lists: { id: string; title: string; posts: Post[]; all?: boolean }[] = [
     )}
   </section>
 ))}
-{featuredProjects.length > 0 && (
-  <section class="home-section home-projects" aria-labelledby="projects-title">
-    <div class="section-heading"><h2 id="projects-title">Projects</h2><a href="/projects/">All projects <span aria-hidden="true">→</span></a></div>
-    <ProjectDeck projects={featuredProjects} />
-  </section>
-)}
 </Base>

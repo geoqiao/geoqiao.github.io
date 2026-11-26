@@ -13,6 +13,8 @@ export interface ProjectEntry {
   repository?: string;
   website?: string;
   summary?: string;
+  home_title?: string;
+  home_summary?: string;
   image?: string;
   featured?: boolean;
   order?: number;
