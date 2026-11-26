@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 130,
+      "slug": "boss-model-vs-worker-model-instruction-following",
+      "path": "blog/boss-model-vs-worker-model-instruction-following.md"
+    },
+    {
       "issue_number": 129,
       "slug": "how-gemini-4-neon-uses-gpt",
       "path": "blog/how-gemini-4-neon-uses-gpt.md"
