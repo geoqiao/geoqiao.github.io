@@ -7,7 +7,7 @@ description: 从自己同时盯多个 Agent 窗口，到只跟一个总管 Bot �
 created_date: '2026-11-27'
 update_date: '2026-11-27'
 published_at: '2026-11-26T16:27:23Z'
-updated_at: '2026-11-26T16:27:43Z'
+updated_at: '2026-11-26T16:30:40Z'
 tags:
 - name: ai-agent
   key: ai-agent
@@ -37,7 +37,7 @@ tags:
 - **Needs you**：卡在需要我拍板、审稿、授权推送或人工验证的地方，直接给出几个快捷按钮，点一下就继续推进；
 - **Waiting / Planned**：等外部条件或排在后面的事，不用靠脑子记。
 
-![Orca 主对话与右侧 Items 审批面板](https://github.com/user-attachments/assets/c0d6d1ae-034e-4226-bdd2-689a44f63238)
+![Orca 主对话与右侧 Items 审批面板](https://github.com/user-attachments/assets/8d838764-6e31-494b-b7cf-3a5c559cc811)
 
 ### 2. 后台静默 Worker + Worktree 隔离
 
