@@ -14,7 +14,7 @@ site:
   title: Geo Qiao
   url: https://geoqiao.me/
   author: Geo Qiao
-  description: "金融行业的贷后策略分析师，记录 AI 工作流、Python 实践与个人项目。"
+  description: "金融行业的贷后策略分析师，在做大模型催收 Agent（Voicebot & Chatbot 编排），也记录 AI coding 工作流与个人项目。"
   language: zh-CN
   navigation:
     items:
@@ -36,7 +36,7 @@ site:
 # 头像与站点级链接；详细 About 叙述属于 About Issue Content
 # ============================================
 profile:
-  bio: Post-loan strategy analyst by day. Usually tinkering with Python, TypeScript, or AI coding workflows.
+  bio: Post-loan strategy analyst building LLM collections agents (Voicebot & Chatbot orchestration). Usually tinkering with Python, TypeScript, and AI coding workflows.
   avatar: /assets/images/avatar.png
   links:
     - name: GitHub
