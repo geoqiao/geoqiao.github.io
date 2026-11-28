@@ -7,7 +7,7 @@ description: 8 月我用 Pi + Herdr + Neovim 在终端里搭了一套 Codex Desk
 created_date: '2026-10-01'
 update_date: '2026-10-01'
 published_at: '2026-10-01T16:31:12Z'
-updated_at: '2026-10-12T15:26:43Z'
+updated_at: '2026-11-28T08:58:34Z'
 tags:
 - name: ai-workflow
   key: ai-workflow
@@ -58,7 +58,7 @@ flowchart LR
 
 ## 1. 工作台：Paseo 接手了 Herdr 和 Neovim
 
-[Paseo](https://paseo.sh/) 把项目、文件和多个 Agent 放进一个窗口，手机上也能接着干活。8 月要靠 Herdr 的 pane 布局和 `pi-nvim` 自己拼出来的工作台，现在是现成的。选它的过程写在[这篇对比](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/)里，日常用法写在[codex 旧王死，Paseo 新王立](https://geoqiao.me/blog/how-i-use-paseo/)里。
+[Paseo](https://paseo.sh/) 把项目、文件和多个 Agent 放进一个窗口，手机上也能接着干活。8 月要靠 Herdr 的 pane 布局和 `pi-nvim` 自己拼出来的工作台，现在是现成的。第一次上手可以看 [Paseo 完整安装与使用教程](https://geoqiao.me/blog/paseo-guide/)，选它的过程写在 [6 款 AI Agent Orchestrator 对比](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/) 里，日常分工与手机验收写在 [Paseo 多 Agent 分工与手机远程实战](https://geoqiao.me/blog/how-i-use-paseo/) 里。
 
 ## 2. 模型：主力从 GPT 换成了 Claude
 
@@ -121,7 +121,7 @@ Claude 订阅是通过 [Magpie](https://usemagpie.ai)（作者 [@yetone](https:/
 | 只读整理 | Claude Sonnet 5.5 · High | 查代码、收集资料、读日志 |
 | 三方建议 | GPT-6 Astra · XHigh | 有实质争议或高风险变更前，独立核验 |
 
-和 [9 月那套](https://geoqiao.me/blog/pi-codex-paseo-workflow/)相比，Luna 完全禁用：Luna Max 吐字慢，经常花几十分钟纠结一个简单任务，相比 Sonnet 5.5 基本处于不可用的状态。
+和 [9 月的 Pi + Codex + Paseo 工作流配置](https://geoqiao.me/blog/pi-codex-paseo-workflow/) 相比，Luna 完全禁用：Luna Max 吐字慢，经常花几十分钟纠结一个简单任务，相比 Sonnet 5.5 基本处于不可用的状态。
 
 主模型不可用时，先换 GPT-6.1 Sol。只读整理和三方建议这两档还能再退到 OpenCode 的免费模型，但私有代码和内部文档只交给零保留、不用于训练的那几个。
 
@@ -152,8 +152,8 @@ Goal 我最近很少用了。模型能力越来越强，长 Goal 跑起来还容
 
 | 装什么 | 怎么装 |
 | --- | --- |
-| [Paseo](https://paseo.sh/) 桌面端 | 从 [paseo.sh/download](https://paseo.sh/download) 下载，打开后 daemon 自动启动 |
-| Paseo 手机端 | 桌面端 **Settings → 你的 host → Pair Device** 扫码配对 |
+| [Paseo](https://paseo.sh/) 桌面端 | 从 [paseo.sh/download](https://paseo.sh/download) 下载，打开后 daemon 自动启动（详见 [Paseo 完整安装与手机配对教程](https://geoqiao.me/blog/paseo-guide/)） |
+| Paseo 手机端 | 桌面端 **Settings → 你的主机 → Devices → Relay** 开启中继后扫码配对 |
 | [Pi](https://github.com/earendil-works/pi) | `npm install -g --ignore-scripts @earendil-works/pi-coding-agent` |
 | [Magpie](https://usemagpie.ai) | `curl -fsSL https://usemagpie.ai/install.sh \| sh`，或从官网下载 |
 

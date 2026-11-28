@@ -1,13 +1,13 @@
 ---
 issue_number: 49
 type: blog
-title: 我试了 6 款 Agent Orchestrator，这是我的最终选择
+title: 6 款 AI Agent Orchestrator 对比：Paseo、Orca、Codex Desktop、T3 Code 怎么选
 slug: agent-orchestrator-desktop-selection
 description: 如何选择桌面 Agent 管理工具？我按 Pi 支持、GUI、多模型和手机远程接管需求，比较了 Codex Desktop、Orca、T3 Code、Superset、Pigi 与 Paseo，并说明为什么选 Paseo。这是我的试用取舍，不是六款产品的全面评测。
 created_date: '2026-08-09'
 update_date: '2026-08-09'
 published_at: '2026-08-08T19:20:33Z'
-updated_at: '2026-09-10T05:25:55Z'
+updated_at: '2026-11-28T08:58:28Z'
 tags:
 - name: pi
   key: pi
@@ -44,7 +44,7 @@ Pi 足够简单，不会在模型外面堆太多默认行为。我的长期体�
 
 ## 为什么不是 Codex Desktop
 
-<img width="1200" height="760" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/18d6a1c382da5ff8.png" />
+<img width="1200" height="760" alt="Codex Desktop 桌面端任务与代码 Diff 界面截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/18d6a1c382da5ff8.png" />
 
 Codex Desktop 仍然是我心中 Desktop Agent 的体验标杆，但我最终放弃了它：
 
@@ -62,13 +62,13 @@ Codex Desktop 仍然是我心中 Desktop Agent 的体验标杆，但我最终放
 
 ### 2. Orca：功能强，但仍然太像 Terminal
 
-<img width="1200" height="667" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/b8976f5cdb4a11d6.png" />
+<img width="1200" height="667" alt="Orca 2026 年 8 月版多 CLI Agent 与终端工作台界面截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/b8976f5cdb4a11d6.png" />
 
 Orca 支持多种 CLI Agent、worktree、Git、Remote 和 Mobile，功能非常完整。但它仍然是明显的 Terminal-first 产品，而我已经看腻了终端界面，所以没有深度使用。
 
 ### 3. T3 Code：最好看的 UI
 
-<img width="1200" height="805" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/3cd05f13813fd3a2.png" />
+<img width="1200" height="805" alt="T3 Code 桌面端对话与项目界面的 UI 截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/3cd05f13813fd3a2.png" />
 
 T3 Code 是这几款产品中我认为最漂亮的。如果你使用 Claude Code、Codex 或 OpenCode，非常值得尝试。
 
@@ -76,13 +76,13 @@ T3 Code 是这几款产品中我认为最漂亮的。如果你使用 Claude Code
 
 ### 4. Superset：仍然是 Terminal-first
 
-<img width="1200" height="833" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/64365340050e69fc.png" />
+<img width="1200" height="833" alt="Superset 并行 Agent 与终端工作区界面截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/64365340050e69fc.png" />
 
 Superset 支持并行 Agent、worktree、Diff 和 Editor，功能并不弱。但它的核心体验仍然偏 Terminal，我没有继续深度使用。
 
 ### 5. Pigi：最直接的 Pi Desktop GUI
 
-<img width="1200" height="757" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/9e1b9111fefdee3d.png" />
+<img width="1200" height="757" alt="Pigi 读取 Pi 配置后的桌面端对话界面截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/9e1b9111fefdee3d.png" />
 
 Pigi 会直接读取 Pi 的 models、skills 和 settings。它没有重新发明 Pi，只是给 Pi 加上一套干净的桌面界面。
 
@@ -90,7 +90,7 @@ Pigi 会直接读取 Pi 的 models、skills 和 settings。它没有重新发明
 
 ### 6. Paseo：最接近 GUI 版 Pi + Herdr
 
-<img width="1200" height="686" alt="Image" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/bfba57b0fa63164a.png" />
+<img width="1200" height="686" alt="Paseo 桌面端多 Agent 分栏、文件编辑与终端界面截图" src="https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/c034e81a8451f18d771f8f8c3523d6ad127abf35/assets/issues/49/bfba57b0fa63164a.png" />
 
 Paseo 不一定每项都是第一，但它覆盖了我最在意的交集：Pi、subagent、多模型、Remote、Mobile 和多 Server。
 
@@ -146,7 +146,9 @@ Paseo 可以连接多个 Server。我能在同一台手机上分别处理工作�
 
 ## 选择之后
 
-- 想看选择是否真正落地：接着读[我使用 Paseo 一个月后的工作流](https://geoqiao.me/blog/how-i-use-paseo/)，这里记录了多 Agent 分工和手机接续任务的实际用法。
+- 打算亲自装 Paseo 上手：先看 [Paseo 完整安装与使用教程](https://geoqiao.me/blog/paseo-guide/)，覆盖桌面端 / CLI / Docker 安装、Git Worktree 并行与手机扫码配对。
+- 想看选择是否真正落地：接着读 [Paseo 多 Agent 分工与手机远程验收实战](https://geoqiao.me/blog/how-i-use-paseo/)，这里记录了多 Agent 分工和手机接续任务的实际用法。
+- 后续演化（2026-11）：三个月后我重新深度试用了升级后的 Orca，具体体验和两者的最新取舍写在 [Orca 怎么用（附 Orca vs Paseo 对比）](https://geoqiao.me/blog/how-i-use-orca/)。
 - 多模型支持不等于需要买更多订阅：[AI 编程订阅的额度与成本对比](https://geoqiao.me/blog/ai-coding-subscriptions-api-value-comparison/)单独讨论预算与估算口径，可以和本文的桌面工具选择分开考虑。
 
 ## 相关链接

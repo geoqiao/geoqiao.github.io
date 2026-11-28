@@ -1,18 +1,20 @@
 ---
 issue_number: 132
 type: blog
-title: 我如何使用 Orca
+title: Orca 怎么用（附 Orca vs Paseo 对比）：总管 Bot + 静默 Worker 工作流实战
 slug: how-i-use-orca
 description: 从自己同时盯多个 Agent 窗口，到只跟一个总管 Bot 对话：分享我使用 Orca 的极简工作台布局、右侧 Items 审批面板、后台静默 Worker 与定时 Automation 闭环，以及 Orca 与 Paseo 的实际取舍。
 created_date: '2026-11-27'
 update_date: '2026-11-27'
 published_at: '2026-11-26T16:27:23Z'
-updated_at: '2026-11-26T16:30:40Z'
+updated_at: '2026-11-28T08:58:30Z'
 tags:
 - name: ai-agent
   key: ai-agent
 - name: ai-workflow
   key: ai-workflow
+- name: paseo
+  key: paseo
 - name: orca
   key: orca
 - name: gemini
@@ -23,7 +25,7 @@ tags:
 
 > 夫运筹策帷帐之中，决胜于千里之外。——《史记·高祖本纪》（[原文](https://zh.wikisource.org/zh-hans/史記/卷008)）
 
-切到 Orca 试跑了 10 天（11 月 17 日至 26 日），我把手头 7 个项目收进同一个入口，陆续结单了 89 条任务。如果说以前用 [Paseo](https://geoqiao.me/blog/how-i-use-paseo/) 是把多 Agent 窗口摆成顺手的驾驶舱，那用 Orca 最大的变化，是**我不再自己当工头盯着好几个窗口来回切，而是只跟一个总管 Bot 聊天**。
+切到 Orca 试跑了 10 天（11 月 17 日至 26 日），我把手头 7 个项目收进同一个入口，陆续结单了 89 条任务。如果说以前用 [Paseo 多 Agent 工作台](https://geoqiao.me/blog/how-i-use-paseo/)（0→1 上手见 [Paseo 完整安装与使用教程](https://geoqiao.me/blog/paseo-guide/)）是把多 Agent 窗口摆成顺手的驾驶舱，那用 Orca 最大的变化，是**我不再自己当工头盯着好几个窗口来回切，而是只跟一个总管 Bot 聊天**。
 
 > Orca = 一个跨项目总管 Bot + 右侧审批单（Items）+ 后台隐身施工队（Workers）+ 定时闹钟（Automations）
 
@@ -79,7 +81,17 @@ flowchart TD
 
 这两个工具我都喜欢，但侧重点明显不同：
 
+| 对比维度 | Orca | Paseo |
+| --- | --- | --- |
+| **控制感与界面** | 只保留一个总管 Bot 主对话 + 右侧 Items 审批单，后台静默执行 | 像 IDE 一样自由拖动多 Agent 分栏，随时盯终端、看 diff、插手改代码 |
+| **多项目并行** | 强项：跨多个项目统一派活与追踪，不再自己来回切窗口 | 按 Workspace 和多主机分栏管理，更适合单项目深挖或双线并行 |
+| **手机远程控制** | 桌面端总管与审批流为主 | 原生 iOS/Android App + E2EE Relay，离开电脑也能稳定跟进 |
+| **上手与配置成本** | 隔离工作区、Worker 和定时任务都交给 Bot 处理，几乎不碰底层命令 | 需要先装好底层 Agent CLI，进阶可按职责细配 Agent Profile 与社区插件 |
+| **更适合谁** | 手头同时管多个项目、只想说清目标并点审批收口的人 | 经常亲自盯代码、依赖 Pi 生态或重度手机远程操控的人 |
+
 - **更适合 Paseo**：如果你经常需要亲自盯代码、喜欢像 IDE 一样自由拖动多 Agent 分栏，随时看终端输出并随手插手改几行，Paseo 依然非常顺手；
 - **更适合 Orca**：如果你手头同时管着好几个不同项目，已经不想再自己当工头切来切去，而是想把体验收拢成“**说清楚目标 → 点审批按钮 → 看最终验收结果**”，Orca 很值得一试。
 
 Orca Bot 把所有底层复杂度都藏在了幕后——上面提到的隔离工作区、后台 Worker、Items 追踪和定时任务，全都不必自己一个个去配置或操作，全部交给 Bot 就行。这是 Orca 最颠覆的 UX 体验。
+
+如果你想了解 Paseo 的安装配置和社区插件，可以看 [Paseo 完整安装与使用教程](https://geoqiao.me/blog/paseo-guide/)；想看我 8 月为什么从六款桌面工具里先选了 Paseo，可以看 [6 款 AI Agent Orchestrator 对比](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/)。

@@ -1,13 +1,13 @@
 ---
 issue_number: 83
 type: blog
-title: 我的 Pi + Codex + Paseo workflow
+title: Pi + Codex + Paseo 工作流配置（2026-09）：浏览器自动化、Code Mode 与多模型分工
 slug: pi-codex-paseo-workflow
 description: 从浏览器自动化、桌面操作、多 Agent 与远程接管、Pi 原生工具改造、提问与用量分析五项功能出发，用图表介绍我的 Pi + Codex + Paseo 配置。结合此前的实测和使用经历，说明对应工具及选择理由。
 created_date: '2026-09-21'
 update_date: '2026-09-21'
 published_at: '2026-09-21T16:36:44Z'
-updated_at: '2026-09-21T16:43:52Z'
+updated_at: '2026-11-28T08:58:32Z'
 tags:
 - name: ai-workflow
   key: ai-workflow
@@ -18,6 +18,8 @@ tags:
 ---
 
 > 为学日益，为道日损。——《道德经》第四十八章（[原文](https://zh.wikisource.org/zh-hant/道德經_(王弼本))）
+
+> 说明：本文记录 2026 年 9 月的 Codex 主力配置。10 月起主力模型已切至 Claude 并进一步精简到 6 个插件，最新配置见 [Pi Agent 配置清单（2026-10）](https://geoqiao.me/blog/whats-on-my-pi-agent-october-2026/)。
 
 折腾了一圈，我的 Pi Coding Agent 配置终于到了一个舒服的位置，最近半个月用起来很顺手。最开心的是，用这套组合做出了几个小项目，也有人开始用了。数字都很小，但还是很有成就感。
 
@@ -43,7 +45,7 @@ tags:
 
 ## 3. Subagent、GUI 和远程控制： Paseo
 
-[Paseo](https://paseo.sh/) 把项目、文件和多个 Agent 放在一个工作台里，也支持手机接管。[试过六款工具后](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/)，我留下它，因为 **Pi、多模型、GUI、手机和多 Server** 能同时满足我的需要。
+[Paseo](https://paseo.sh/) 把项目、文件和多个 Agent 放在一个工作台里，也支持手机接管（0→1 上手见 [Paseo 完整安装与使用教程](https://geoqiao.me/blog/paseo-guide/)，日常分工与手机验收见 [Paseo 进阶实战](https://geoqiao.me/blog/how-i-use-paseo/)）。在 [6 款 AI Agent Orchestrator 对比](https://geoqiao.me/blog/agent-orchestrator-desktop-selection/) 后，我留下它，因为 **Pi、多模型、GUI、手机和多 Server** 能同时满足我的需要。
 
 ![Paseo 的多 Agent 分栏与文件编辑界面，来自此前的使用记录](https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/312ca83c49e997dbdea0d3a24d458061c52d440b/assets/issues/67/42bb236c6cc366be.png)
 
@@ -60,7 +62,7 @@ tags:
 
 **小任务直接做，值得分工时才调子 Agent。** 在实际使用中， luna Max 承担了我总 token 用量的 25% 左右，节省了很多订阅额度。
 
-![](https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/ba10278d0cc0541e462c0a2a96bd965d6d8f7bb5/assets/issues/83/ac31e56f13593c73.png)
+![Pi 与 Codex 多模型用量统计截图，Luna Max 承担约 25% 总 Token 用量](https://raw.githubusercontent.com/geoqiao/geoqiao.github.io/ba10278d0cc0541e462c0a2a96bd965d6d8f7bb5/assets/issues/83/ac31e56f13593c73.png)
 
 ## 4. Pi 原生工具改造：减少往返，接着做长任务
 
