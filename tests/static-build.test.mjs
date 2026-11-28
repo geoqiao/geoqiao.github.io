@@ -8,7 +8,9 @@ import { dirname, join } from "node:path";
 import { after, before, test } from "node:test";
 import { parse } from "parse5";
 import { PNG } from "pngjs";
+import { parse as parseYaml } from "yaml";
 import { renderComment } from "../src/lib/comments.ts";
+import { buildTagPages } from "../src/lib/tags.ts";
 
 let dist;
 const require = createRequire(import.meta.url);
@@ -44,6 +46,112 @@ function meta(nodes) {
   return new Map(nodes.filter((node) => node.tagName === "meta")
     .map((node) => [attr(node, "property") ?? attr(node, "name"), attr(node, "content")]));
 }
+
+function schema(nodes) {
+  const scripts = nodes.filter((node) => node.tagName === "script" && attr(node, "type") === "application/ld+json");
+  assert.equal(scripts.length, 1);
+  return JSON.parse(textOf(scripts[0]));
+}
+
+const origin = "https://geoqiao.me";
+const author = {
+  "@id": `${origin}/#person`,
+  "@type": "Person",
+  name: "Geo Qiao",
+  url: `${origin}/about/`,
+};
+
+test("home and About share one person identity and declare their primary language", () => {
+  const home = page("index.html");
+  const about = page("about/index.html");
+  const [person, website] = schema(home)["@graph"];
+  const [profilePage, profilePerson] = schema(about)["@graph"];
+  const reference = { "@id": author["@id"] };
+  assert.deepEqual(person, {
+    ...author,
+    image: `${origin}/assets/images/avatar.png`,
+    sameAs: ["https://github.com/geoqiao", "https://twitter.com/geoqiao"],
+  });
+  assert.deepEqual(profilePerson, person);
+  assert.equal(website["@type"], "WebSite");
+  assert.deepEqual(website.author, reference);
+  assert.deepEqual(website.publisher, reference);
+  assert.equal(profilePage["@type"], "ProfilePage");
+  assert.deepEqual(profilePage.mainEntity, reference);
+  for (const [nodes, language, locale] of [[home, "zh-CN", "zh_CN"], [about, "en", "en_US"]]) {
+    assert.equal(attr(nodes.find((node) => node.tagName === "html"), "lang"), language);
+    assert.equal(meta(nodes).get("og:locale"), locale);
+  }
+});
+
+test("all articles connect their byline, social card, canonical URL and breadcrumbs", () => {
+  for (const { slug } of manifest.blog) {
+    const nodes = page(`blog/${slug}/index.html`);
+    const tags = meta(nodes);
+    const url = `${origin}/blog/${slug}/`;
+    const [article, breadcrumbs] = schema(nodes)["@graph"];
+    assert.equal(article["@type"], "BlogPosting", slug);
+    assert.equal(article.image, tags.get("og:image"), slug);
+    assert.deepEqual(article.author, author, slug);
+    assert.equal(article.inLanguage, "zh-CN", slug);
+    assert.deepEqual(article.mainEntityOfPage, { "@type": "WebPage", "@id": url }, slug);
+    assert.equal(breadcrumbs["@type"], "BreadcrumbList", slug);
+    assert.deepEqual(breadcrumbs.itemListElement, [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${origin}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${origin}/blog/` },
+      { "@type": "ListItem", position: 3, name: tags.get("og:title"), item: url },
+    ], slug);
+    const byline = nodes.find((node) => attr(node, "class") === "article-author");
+    assert.equal(byline.tagName, "a", slug);
+    assert.equal(attr(byline, "href"), "/about/", slug);
+    assert.equal(textOf(byline), author.name, slug);
+  }
+});
+
+test("project pages publish software or community schema using configured URLs", () => {
+  const { projects } = parseYaml(readFileSync("config.yaml", "utf8"));
+  for (const { slug, title, summary, repository, website } of projects) {
+    const structured = schema(page(`projects/${slug}/index.html`));
+    assert.equal(structured["@type"], slug === "boji-club" ? "WebSite" : "SoftwareApplication", slug);
+    assert.equal(structured.name, title, slug);
+    assert.equal(structured.description, summary, slug);
+    assert.equal(structured.url, `${origin}/projects/${slug}/`, slug);
+    if (website) assert.ok(structured.sameAs.includes(website), slug);
+    if (repository) assert.ok(structured.sameAs.includes(`https://github.com/${repository}`), slug);
+  }
+});
+
+test("one deterministic tag survives duplicate multi-article sets, while singletons stay noindex", () => {
+  const post = (issueNumber, ...keys) => ({ issueNumber, tags: keys.map((key) => ({ key, name: key })) });
+  const tags = buildTagPages([
+    post(3, "zeta", "alpha", "overlap", "solo", "solo"),
+    post(2, "alpha", "zeta"),
+    post(1, "overlap", "other-singleton"),
+  ]);
+  assert.deepEqual(tags.map(({ key, indexable }) => [key, indexable]), [
+    ["alpha", true], ["other-singleton", false], ["overlap", true], ["solo", false], ["zeta", false],
+  ]);
+  assert.equal(tags.find(({ key }) => key === "solo").posts.length, 1);
+});
+
+test("sitemap uses editorial article dates and matches each tag page's robots directive", () => {
+  const xml = readFileSync(join(dist, "sitemap.xml"), "utf8");
+  const entries = [...xml.matchAll(/<url><loc>([^<]+)<\/loc>(?:<lastmod>([^<]+)<\/lastmod>)?<\/url>/g)];
+  const urls = new Map(entries.map(([, url, date]) => [decodeURI(url), date]));
+  assert.equal(urls.size, entries.length);
+  assert.equal(entries.filter(([, , date]) => date).length, manifest.blog.length);
+  const posts = manifest.blog.map(({ path, slug }) => {
+    const frontmatter = readFileSync(join(process.env.CONTENT_DIR ?? "content", path), "utf8").split("---\n")[1];
+    const data = parseYaml(frontmatter);
+    assert.equal(urls.get(`${origin}/blog/${slug}/`), data.update_date ?? data.created_date, slug);
+    return { issueNumber: data.issue_number, tags: data.tags ?? [] };
+  });
+  for (const tag of buildTagPages(posts)) {
+    const nodes = page(`tags/${tag.key}/index.html`);
+    assert.equal(meta(nodes).get("robots"), tag.indexable ? undefined : "noindex, follow", tag.key);
+    assert.equal(urls.has(`${origin}${tag.path}`), tag.indexable, tag.key);
+  }
+});
 
 test("each published article has a readable 1200×630 PNG and matching social metadata", () => {
   const files = manifest.blog.map(({ slug }) => `${slug}.png`);

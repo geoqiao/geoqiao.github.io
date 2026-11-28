@@ -4,6 +4,8 @@ export interface Project {
   slug: string;
   title: string;
   repository: string;
+  website?: string;
+  schemaType: "SoftwareApplication" | "WebSite";
   summary: string;
   homeTitle: string;
   homeSummary: string;
@@ -58,6 +60,8 @@ async function load(): Promise<Project[]> {
         slug: entry.slug,
         title: entry.title,
         repository: entry.repository ?? "",
+        website: entry.website,
+        schemaType: entry.schema_type ?? "SoftwareApplication",
         summary: entry.summary ?? "",
         homeTitle: entry.home_title ?? entry.title,
         homeSummary: entry.home_summary ?? entry.summary ?? "",

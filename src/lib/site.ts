@@ -1,28 +1,9 @@
 import { redirectMap, site } from "./config";
-import { posts, type Post, type Tag } from "./content";
+import { posts, type Post } from "./content";
 import { getProjects } from "./projects";
+import { buildTagPages, tagPath } from "./tags";
 
-export interface TagPage extends Tag {
-  path: string;
-  posts: Post[];
-}
-
-export function tagPath(tag: Tag): string {
-  return `/tags/${tag.key}/`;
-}
-
-/** Tags by key; the newest post's spelling names the tag. */
-export const tags: TagPage[] = (() => {
-  const grouped = new Map<string, TagPage>();
-  for (const post of posts) {
-    for (const tag of post.tags) {
-      const page = grouped.get(tag.key) ?? { ...tag, path: tagPath(tag), posts: [] };
-      page.posts.push(post);
-      grouped.set(tag.key, page);
-    }
-  }
-  return [...grouped.values()].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
-})();
+export const tags = buildTagPages(posts);
 
 export interface Archive {
   number: number;

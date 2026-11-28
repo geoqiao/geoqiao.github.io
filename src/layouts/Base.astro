@@ -12,6 +12,9 @@ interface Props {
   description?: string;
   /** The page's own path; a page without one (404) is not indexed. */
   path?: string;
+  noindex?: boolean;
+  language?: string;
+  locale?: string;
   /** The navigation item this page belongs to. */
   section?: string;
   jsonLd?: unknown;
@@ -20,7 +23,7 @@ interface Props {
   shareCard?: { path: string; width: number; height: number; alt: string };
 }
 
-const { kind = "page", title = site.title, description = site.description, path, section, jsonLd, titleFont, shareCard } = Astro.props;
+const { kind = "page", title = site.title, description = site.description, path, noindex, language = site.language, locale = "zh_CN", section, jsonLd, titleFont, shareCard } = Astro.props;
 const homeNavigation = site.navigation.filter((item) => item.url !== "/" && item.url !== "/atom.xml");
 const titleFontHref = titleFont && `/assets/fonts/title/${titleFont}.woff2`;
 const canonical = path ? absolute(path) : null;
@@ -32,7 +35,7 @@ const { googleSearchConsole } = site.seo;
 const webMcpOriginTrial = import.meta.env.WEBMCP_ORIGIN_TRIAL_TOKEN?.trim();
 ---
 <!DOCTYPE html>
-<html lang={site.language}>
+<html lang={language}>
 <head>
   <meta charset="utf-8">
   {webMcpOriginTrial && <meta http-equiv="origin-trial" content={webMcpOriginTrial}>}
@@ -40,8 +43,10 @@ const webMcpOriginTrial = import.meta.env.WEBMCP_ORIGIN_TRIAL_TOKEN?.trim();
   <meta name="color-scheme" content="light dark">
   <title>{title}{title !== site.title && ` · ${site.title}`}</title>
   <meta name="description" content={description}>
-  {canonical ? <link rel="canonical" href={canonical}> : <meta name="robots" content="noindex">}
+  {canonical && <link rel="canonical" href={canonical}>}
+  {canonical ? noindex && <meta name="robots" content="noindex, follow"> : <meta name="robots" content="noindex">}
   <meta property="og:site_name" content={site.title}>
+  <meta property="og:locale" content={locale}>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   {canonical && <meta property="og:url" content={canonical}>}

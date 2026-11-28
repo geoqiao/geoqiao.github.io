@@ -12,6 +12,7 @@ export interface ProjectEntry {
   title: string;
   repository?: string;
   website?: string;
+  schema_type?: "SoftwareApplication" | "WebSite";
   summary?: string;
   home_title?: string;
   home_summary?: string;

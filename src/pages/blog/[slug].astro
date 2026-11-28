@@ -8,6 +8,7 @@ import { absolute, site } from "../../lib/config";
 import { posts } from "../../lib/content";
 import { renderArticle } from "../../lib/markdown";
 import { ogCard } from "../../lib/og-card";
+import { person } from "../../lib/person";
 import { titleFont } from "../../lib/title-font";
 
 export function getStaticPaths() {
@@ -26,23 +27,40 @@ if (/<h1[\s>]/.test(body)) {
   // Astro prints the page's path without a line break; an annotation must start its own line.
   console.warn(process.env.GITHUB_ACTIONS ? `\n::warning title=Heading level::${message}` : message);
 }
+const shareCard = ogCard(post);
+const postUrl = absolute(post.path);
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  headline: post.title,
-  description: post.description,
-  url: absolute(post.path),
-  datePublished: post.publishedAt.replace(/Z$/, "+00:00"),
-  dateModified: post.updatedAt.replace(/Z$/, "+00:00"),
-  author: { "@type": "Person", name: site.author },
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      url: postUrl,
+      image: absolute(shareCard.path),
+      datePublished: post.publishedAt.replace(/Z$/, "+00:00"),
+      dateModified: post.updatedAt.replace(/Z$/, "+00:00"),
+      author: person,
+      inLanguage: site.language,
+      mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+        { "@type": "ListItem", position: 2, name: "Blog", item: absolute("/blog/") },
+        { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+      ],
+    },
+  ],
 };
 ---
-<Base kind="post" title={post.title} description={post.description} path={post.path} section="/blog/" jsonLd={jsonLd} titleFont={font?.name} shareCard={ogCard(post)}>
+<Base kind="post" title={post.title} description={post.description} path={post.path} section="/blog/" jsonLd={jsonLd} titleFont={font?.name} shareCard={shareCard}>
 <article class="article-page">
   <header class="article-heading">
     <a class="breadcrumb" href="/blog/">← Blog</a>
     <h1>{post.title}</h1>
-    <div class="article-meta"><span>{site.author}</span><time datetime={post.createdDate}>{post.createdDate}</time>{site.comments.enabled && <a href="#comments-title">Discuss ↓</a>}</div>
+    <div class="article-meta"><a class="article-author" href="/about/" rel="author">{site.author}</a><time datetime={post.createdDate}>{post.createdDate}</time>{site.comments.enabled && <a href="#comments-title">Discuss ↓</a>}</div>
     <TagLinks tags={post.tags} />
   </header>
   <div class="reading-layout">

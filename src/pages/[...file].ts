@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { APIRoute } from "astro";
 import { absolute, site } from "../lib/config";
-import { escapeHtml } from "../lib/html";
+import { escapeHtml, scriptJson } from "../lib/html";
 import { getProjects, type Project } from "../lib/projects";
 import { redirects, type Redirect } from "../lib/site";
 
@@ -21,10 +21,23 @@ function projectPage(project: Project): string {
     "site.title": site.title,
     "site.author": site.author,
   };
-  return template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_match, name: string) => {
+  const html = template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_match, name: string) => {
     if (!(name in values)) throw new Error(`src/project-pages/${project.slug}.html: unknown placeholder ${name}`);
     return escapeHtml(values[name]);
   });
+  const sameAs = [
+    ...(project.website ? [project.website] : []),
+    ...(project.repository ? [`https://github.com/${project.repository}`] : []),
+  ];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": project.schemaType,
+    name: project.title,
+    description: project.summary,
+    url: values["page.url"],
+    sameAs: sameAs.length ? sameAs : undefined,
+  };
+  return html.replace("</head>", () => `<script type="application/ld+json">${scriptJson(jsonLd)}</script></head>`);
 }
 
 /**

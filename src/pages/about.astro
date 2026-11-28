@@ -5,6 +5,7 @@ import Base from "../layouts/Base.astro";
 import { absolute, site } from "../lib/config";
 import { about } from "../lib/content";
 import { renderMarkdown } from "../lib/markdown";
+import { personProfile, personRef } from "../lib/person";
 import { getProjects } from "../lib/projects";
 
 // config.yaml names an About Issue; escaping refuses to export without it.
@@ -13,13 +14,20 @@ const body = await renderMarkdown(about.markdown);
 const featuredProjects = (await getProjects()).filter((project) => project.featured).slice(0, 4);
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.author,
-  url: absolute("/about/"),
-  description: about.description,
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": absolute("/about/"),
+      url: absolute("/about/"),
+      name: about.title,
+      description: about.description,
+      mainEntity: personRef,
+    },
+    personProfile,
+  ],
 };
 ---
-<Base title={about.title} description={about.description} path="/about/" section="/about/" jsonLd={jsonLd}>
+<Base title={about.title} description={about.description} path="/about/" section="/about/" language="en" locale="en_US" jsonLd={jsonLd}>
 <article class="about-page">
   <header class="about-header"><p class="eyebrow muted">About</p><h1>{about.title}</h1></header>
   <div class="post-content about-story" set:html={body} />

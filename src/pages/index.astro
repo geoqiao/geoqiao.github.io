@@ -3,6 +3,7 @@ import Intro from "../components/Intro.astro";
 import Base from "../layouts/Base.astro";
 import { site } from "../lib/config";
 import { posts, type Post } from "../lib/content";
+import { personProfile, personRef } from "../lib/person";
 import { getProjects } from "../lib/projects";
 import { featuredPosts } from "../site.config";
 
@@ -15,8 +16,16 @@ const projects = await getProjects();
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "Person", name: site.author, url: site.url },
-    { "@type": "WebSite", "@id": site.url, name: site.title, url: site.url, description: site.description },
+    personProfile,
+    {
+      "@type": "WebSite",
+      "@id": site.url,
+      name: site.title,
+      url: site.url,
+      description: site.description,
+      author: personRef,
+      publisher: personRef,
+    },
   ],
 };
 const lists: { id: string; title: string; posts: Post[]; all?: boolean }[] = [

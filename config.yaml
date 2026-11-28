@@ -147,6 +147,7 @@ projects:
 
   - slug: boji-club
     title: Boji Club
+    schema_type: WebSite
     website: https://boji-club.geoqiao.me/
     summary: 薄肌俱乐部，把训练经验和常见问题整理成可搜索的健身知识库。
     home_summary: 训练经验与薄肌健身知识库。

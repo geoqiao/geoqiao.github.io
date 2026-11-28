@@ -125,6 +125,7 @@ main { min-height: calc(100svh - 220px); }
 .article-heading h1 { font-size: 2rem; line-height: 1.4; letter-spacing: normal; word-spacing: 0; text-wrap: wrap; overflow-wrap: break-word; margin: 18px 0; }
 .article-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 24px; font-size: .75rem; color: var(--muted); margin-bottom: 10px; }
 .article-meta a { text-decoration: none; }
+.article-meta .article-author { text-decoration: underline; text-underline-offset: .2em; }
 .reading-layout { display: grid; grid-template-columns: minmax(0, var(--reading-width)) var(--toc-width); width: calc(100% + var(--column-gap) + var(--toc-width)); align-items: start; gap: var(--column-gap); }
 .reading-main { grid-column: 1; grid-row: 1; min-width: 0; }
 .reading-margin { grid-column: 2; grid-row: 1; position: sticky; top: 48px; display: flex; flex-direction: column; max-height: calc(100vh - 96px); min-width: 0; }
