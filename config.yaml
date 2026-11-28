@@ -172,7 +172,7 @@ projects:
   - slug: paseo-stuff
     title: paseo-stuff
     repository: geoqiao/paseo-stuff
-    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 与 MaKa 接入。
+    summary: 为 Paseo 添加清晰的工具输出、数学公式排版，以及 DeepSeek 接入。
     home_summary: Paseo 排版与 DeepSeek 插件。
     image: /assets/images/projects/paseo-stuff-logo.svg
     featured: false

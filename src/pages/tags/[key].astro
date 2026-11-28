@@ -7,9 +7,29 @@ export function getStaticPaths() {
   return tags.map((tag) => ({ params: { key: tag.key }, props: { tag } }));
 }
 
+const tagDescriptions: Record<string, string> = {
+  paseo: "Paseo（paseo.sh，开源 AI Coding Agent 工作台）中文教程与一手实战专题：涵盖 0→1 安装、CLI/Docker 部署、手机配对、Relay 加密中继、多模型 Profile 分工及 Paseo vs Orca 对比。",
+  pi: "Pi Coding Agent（earendil-works/pi）实战与配置专题：覆盖 Harness 评测对比、Code Mode 省 Token 实测、Magpie 接入 Claude 订阅、极简插件清单及与 Paseo 配合的完整工作流。",
+  orca: "Orca AI Agent 编排工作台实战专题：从 6 款工具横评到总管 Bot + 右侧 Items 审批 + 后台静默 Worker 与定时 Automations 闭环，附 Orca 与 Paseo 真实取舍对比。",
+};
+
 const { tag } = Astro.props;
+const description = tagDescriptions[tag.key];
 ---
-<Base title={tag.name} path={tag.path} section="/tags/" noindex={!tag.indexable}>
-<div class="page-heading"><a class="breadcrumb" href="/tags/">← Tags</a><h1 class="topic-heading">{tag.name}</h1><p>{tag.posts.length} related {tag.posts.length === 1 ? "article" : "articles"}</p></div>
+<Base title={tag.name} description={description} path={tag.path} section="/tags/" noindex={!tag.indexable}>
+<div class="page-heading">
+  <a class="breadcrumb" href="/tags/">← Tags</a>
+  <h1 class="topic-heading">{tag.name}</h1>
+  {tag.key === "paseo" && (
+    <p>本专题汇总我使用开源 AI 编程工作台 Paseo（<code>paseo.sh</code>）的全部一手记录：第一次上手请先看 <a href="/blog/paseo-guide/">Paseo 完整安装与使用教程</a>，进阶分工、六款编排工具横评、社区插件与 Orca 对比见下方列表。</p>
+  )}
+  {tag.key === "pi" && (
+    <p>Pi 是我长期用作底层底座的极简终端 Coding Agent。本专题收录从 2026 年 8 月终端版到 10 月 Paseo + Claude 极简方案的完整演进、Code Mode 与 MCP 成本实测，以及 <a href="/projects/pi-tools/">pi-tools</a> 开源插件记录。</p>
+  )}
+  {tag.key === "orca" && (
+    <p>本专题记录我从早期试用 Orca 到 2026 年 11 月重测并切入日常多项目调度的真实过程，重点拆解“总管 Bot + 后台 Worker”工作流，以及它和 <a href="/blog/paseo-guide/">Paseo</a> 各自的适用边界。</p>
+  )}
+  <p>{tag.posts.length} related {tag.posts.length === 1 ? "article" : "articles"}</p>
+</div>
 <div class="tag-entries"><EntryList posts={tag.posts} /></div>
 </Base>
