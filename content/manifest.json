@@ -3,6 +3,11 @@
   "repository": "geoqiao/geoqiao.github.io",
   "blog": [
     {
+      "issue_number": 133,
+      "slug": "paseo-guide",
+      "path": "blog/paseo-guide.md"
+    },
+    {
       "issue_number": 132,
       "slug": "how-i-use-orca",
       "path": "blog/how-i-use-orca.md"
